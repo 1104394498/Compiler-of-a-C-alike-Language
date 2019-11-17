@@ -1,0 +1,28 @@
+int func1(int mid1, int mid2) {
+	const int a1 = mid1;
+	const int a2 = 4;
+	const char a3 = mid2;
+
+	int cd2			
+	cd888 = a1 + a2;
+	a1 = 3;
+	cd2 = a1 - a999
+	if (cd2==cd1 return (3;
+	return ('a');
+}
+
+
+void main() {
+	const char a1 = 'a';
+	const char a2 ='b';
+	int a[3];
+	int i;
+	if (1 < 'a') {}
+	a[a1] = 1;
+	func1(a1, a2);
+	for (i=1; i<5 i=i+1) {}
+	do {
+		a[1] = 1;	
+	} (a[1] < 8)
+	return;
+} 
