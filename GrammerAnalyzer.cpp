@@ -38,7 +38,9 @@ using namespace std;
         handle_errors(exception);\
     }
 
-GrammarAnalyzer::GrammarAnalyzer(const string &fin_name, vector<Error> *_allErrors) : allErrors{_allErrors} {
+GrammarAnalyzer::GrammarAnalyzer(const string &fin_name, vector<Error> *_allErrors,
+                                 vector<IntermediateCmd> *_intermediateCodes) : allErrors{_allErrors},
+                                                                                intermediateCodes{_intermediateCodes} {
     ptr_lexicalAnalyzer = new LexicalAnalyzer{fin_name, _allErrors};
 
     // start recursive descent
@@ -174,11 +176,15 @@ void GrammarAnalyzer::constant_statement() {
 }
 
 void GrammarAnalyzer::constant_definition() {
+    IntermediateCmd *cmd;
     if (sym_type == "INTTK") {
         while (true) {
+            cmd = new IntermediateCmd{Assign};
             getsym();
             output_current_sym();
             SYMTYPE_ASSERT("IDENFR");
+
+            cmd->addOperands(sym);
 
             // add into the symbol table
             try {
@@ -215,9 +221,12 @@ void GrammarAnalyzer::constant_definition() {
                     pointer_back(1);
                 }
                 getsym();
-                integer();
+                string integer_str = integer();
+                cmd->addOperands(integer_str);
             }
 
+            intermediateCodes->emplace_back(*cmd);
+            delete cmd;
 
             if (sym_type != "COMMA") {
                 break;
@@ -225,9 +234,11 @@ void GrammarAnalyzer::constant_definition() {
         }
     } else if (sym_type == "CHARTK") {
         while (true) {
+            cmd = new IntermediateCmd{Assign};
             getsym();
             output_current_sym();
             SYMTYPE_ASSERT("IDENFR")
+            cmd->addOperands(sym);
 
             // add into the symbol table
             try {
@@ -251,6 +262,10 @@ void GrammarAnalyzer::constant_definition() {
                     handle_errors(exception);
                 }
             }
+            cmd->addOperands("\'" + sym + "\'");
+
+            intermediateCodes->emplace_back(*cmd);
+            delete cmd;
             // SYMTYPE_ASSERT("CHARCON");
 
             getsym();
@@ -333,6 +348,9 @@ void GrammarAnalyzer::variable_definition() {
 }
 
 void GrammarAnalyzer::main_function() {
+    intermediateCodes->emplace_back(OperatorType::Label);
+    intermediateCodes->back().addOperands("MAIN");  // The label of main function is MAIN
+
     auto *mainFuncInfo = new FuncInfo{voidType, vector<VariableType>{}};
     try {
         // the name "main" belongs to the outer stack in symbolTable
@@ -383,6 +401,8 @@ void GrammarAnalyzer::main_function() {
     */
 
     symbolTable.popStack();
+
+    intermediateCodes->emplace_back(OperatorType::Exit);
 }
 
 void GrammarAnalyzer::function_with_return_value() {
@@ -458,6 +478,15 @@ void GrammarAnalyzer::statement_head(VariableType &returnType, string &funcName)
 
     getsym();
     output_current_sym();
+
+    // intermediate code
+    intermediateCodes->emplace_back(OperatorType::FuncDefStart);
+    if (returnType == intType) {
+        intermediateCodes->back().addOperands("int");
+    } else {
+        intermediateCodes->back().addOperands("char");
+    }
+    intermediateCodes->back().addOperands(funcName);
 }
 
 void GrammarAnalyzer::parameter_table(vector<VariableType> &inputTypes, vector<Item *> *newStack) {
@@ -484,6 +513,15 @@ void GrammarAnalyzer::parameter_table(vector<VariableType> &inputTypes, vector<I
         string variableName = sym;
         //newStack.emplace_back(variable);
         newStack->push_back(new Item{variableName, variableType, nullptr});
+
+        // intermediate codes
+        intermediateCodes->emplace_back(OperatorType::FuncPara);
+        if (variableType == intType) {
+            intermediateCodes->back().addOperands("int");
+        } else {
+            intermediateCodes->back().addOperands("char");
+        }
+        intermediateCodes->back().addOperands(variableName);
 
         getsym();
         if (sym_type == "COMMA") {
@@ -577,7 +615,7 @@ void GrammarAnalyzer::statement(VariableType &returnType) {
                         output_current_sym();
                     } else {
                         VariableType uselessType;   // useless
-                        call_with_returnValue(uselessType);
+                        call_with_returnValue(uselessType, nullptr);
 
                         ASSERT_THROW("SEMICN", ShouldHaveSemicolon)
                         getsym();
@@ -667,6 +705,12 @@ void GrammarAnalyzer::conditional_statement() {
 
 void GrammarAnalyzer::loop_statement() {
     if (sym_type == "WHILETK") {
+        string beginLabel = labelGenerator.getLabel();
+        intermediateCodes->emplace_back(Label);
+        intermediateCodes->back().addOperands(beginLabel);
+
+        string endLabel = labelGenerator.getLabel();
+
         getsym();
         output_current_sym();
 
@@ -675,6 +719,9 @@ void GrammarAnalyzer::loop_statement() {
         output_current_sym();
 
         condition();
+        intermediateCodes->emplace_back(BZ);
+        intermediateCodes->back().addOperands(endLabel);
+
 
         ASSERT_THROW("RPARENT", ShouldHaveRPARENT)
 
@@ -682,7 +729,17 @@ void GrammarAnalyzer::loop_statement() {
         output_current_sym();
         VariableType uselessType;
         statement(uselessType);
+
+        intermediateCodes->emplace_back(Goto);
+        intermediateCodes->back().addOperands(beginLabel);
+
+        intermediateCodes->emplace_back(Label);
+        intermediateCodes->back().addOperands(endLabel);
     } else if (sym_type == "DOTK") {
+        string beginLabel = labelGenerator.getLabel();
+        intermediateCodes->emplace_back(Label);
+        intermediateCodes->back().addOperands(beginLabel);
+
         getsym();
         output_current_sym();
         VariableType uselessType;
@@ -698,16 +755,23 @@ void GrammarAnalyzer::loop_statement() {
 
         condition();
 
+        intermediateCodes->emplace_back(BNZ);
+        intermediateCodes->back().addOperands(beginLabel);
+
         ASSERT_THROW("RPARENT", ShouldHaveRPARENT)
         getsym();
         output_current_sym();
     } else if (sym_type == "FORTK") {
+        string beginLabel = labelGenerator.getLabel();
+        string endLabel = labelGenerator.getLabel();
+
         getsym();
         output_current_sym();
         SYMTYPE_ASSERT("LPARENT")
 
         getsym();
         output_current_sym();
+        string identifier = sym;
         SYMTYPE_ASSERT("IDENFR")
         CHECK_IDENFR_DEFINE
 
@@ -719,21 +783,30 @@ void GrammarAnalyzer::loop_statement() {
         getsym();
         output_current_sym();
         VariableType uselessType;   // useless
-        expression(uselessType);
+        expression(uselessType, identifier);
 
         ASSERT_THROW("SEMICN", ShouldHaveSemicolon)
 
         getsym();
         output_current_sym();
 
+        intermediateCodes->emplace_back(Label);
+        intermediateCodes->back().addOperands(beginLabel);
+
         condition();
 
+        intermediateCodes->emplace_back(BZ);
+        intermediateCodes->back().addOperands(endLabel);
+
         ASSERT_THROW("SEMICN", ShouldHaveSemicolon)
+
+        string identifier1, identifier2;
 
         getsym();
         output_current_sym();
         SYMTYPE_ASSERT("IDENFR")
         CHECK_IDENFR_DEFINE
+        identifier1 = sym;
 
         getsym();
         output_current_sym();
@@ -743,20 +816,36 @@ void GrammarAnalyzer::loop_statement() {
         output_current_sym();
         SYMTYPE_ASSERT("IDENFR")
         CHECK_IDENFR_DEFINE
+        identifier2 = sym;
 
         getsym();
         output_current_sym();
         SYMTYPE_TWO_ASSERT("MINU", "PLUS")
 
+        IntermediateCmd *step_cmd = (sym_type == "PLUS") ? (new IntermediateCmd{Add}) : (new IntermediateCmd{Minus});
+
         getsym();
         output_current_sym();
-        step();
+        string step_str = step();
+
+        step_cmd->addOperands(identifier1);
+        step_cmd->addOperands(identifier2);
+        step_cmd->addOperands(step_str);
 
         ASSERT_THROW("RPARENT", ShouldHaveRPARENT)
 
         getsym();
         output_current_sym();
         statement(uselessType);
+
+        intermediateCodes->emplace_back(*step_cmd);
+        delete step_cmd;
+
+        intermediateCodes->emplace_back(Goto);
+        intermediateCodes->back().addOperands(beginLabel);
+
+        intermediateCodes->emplace_back(Label);
+        intermediateCodes->back().addOperands(endLabel);
     } else {
         handle_errors();
     }
@@ -767,20 +856,51 @@ void GrammarAnalyzer::loop_statement() {
 void GrammarAnalyzer::condition() {
     VariableType conditionType = intType;
     VariableType expressionType;
-    expression(expressionType);
+    IntermediateCmd *cmd;
+
+    string tempVarName1 = tempVarGenerator.getTempVar();
+    expression(expressionType, tempVarName1);
     if (expressionType != intType && expressionType != constInt) {
         conditionType = voidType;   // just make it wrong
     }
 
     if (sym_type == "LSS" || sym_type == "LEQ" || sym_type == "GRE"
         || sym_type == "GEQ" || sym_type == "EQL" || sym_type == "NEQ") {
+
+        // tempVarName1 relational_operator tempVarName2
+        if (sym_type == "LSS")
+            cmd = new IntermediateCmd(IsLess);
+        else if (sym_type == "LEQ")
+            cmd = new IntermediateCmd(IsLeq);
+        else if (sym_type == "GRE")
+            cmd = new IntermediateCmd(IsGreater);
+        else if (sym_type == "GEQ")
+            cmd = new IntermediateCmd(IsGeq);
+        else if (sym_type == "EQL")
+            cmd = new IntermediateCmd(IsEqual);
+        else
+            cmd = new IntermediateCmd(IsNeq);
+
         relational_operator();
 
-        expression(expressionType);
+        string tempVarName2 = tempVarGenerator.getTempVar();
+        expression(expressionType, tempVarName2);
+
+        cmd->addOperands(tempVarName1);
+        cmd->addOperands(tempVarName2);
+
         if (expressionType != intType && expressionType != constInt) {
             conditionType = voidType;   // just make it wrong
         }
+    } else {
+        // tempVarName1 != 0
+        cmd = new IntermediateCmd(IsNeq);
+        cmd->addOperands(tempVarName1);
+        cmd->addOperands("0");
     }
+
+    intermediateCodes->emplace_back(*cmd);
+    delete (cmd);
 
     try {
         if (conditionType != intType) {
@@ -806,6 +926,10 @@ void GrammarAnalyzer::function_without_return_value() {
     //output_current_sym();
     SYMTYPE_ASSERT("IDENFR")
     funcName = sym;
+
+    intermediateCodes->emplace_back(FuncDefStart);
+    intermediateCodes->back().addOperands("void");
+    intermediateCodes->back().addOperands(funcName);
 
     getsym();
     output_current_sym();
@@ -851,6 +975,8 @@ void GrammarAnalyzer::function_without_return_value() {
 
     SYMTYPE_ASSERT("RBRACE")
 
+    intermediateCodes->emplace_back(FuncRetInDef);
+
     result.emplace_back("<无返回值函数定义>");
 
     getsym();
@@ -859,30 +985,40 @@ void GrammarAnalyzer::function_without_return_value() {
     symbolTable.popStack();
 }
 
-void GrammarAnalyzer::integer() {
+string GrammarAnalyzer::integer() {
+    string ret;
     if (sym_type == "MINU" || sym_type == "PLUS") {
+        if (sym_type == "MINU")
+            ret += "-";
         getsym();
         output_current_sym();
     }
-    unsigned_integer();
+    ret += unsigned_integer();
 
     // because in unsigned integer, the next sym has been added into result
     result.insert(result.end() - 1, "<整数>");
+
+    return ret;
 }
 
-void GrammarAnalyzer::unsigned_integer() {
+string GrammarAnalyzer::unsigned_integer() {
+    string ret;
     SYMTYPE_ASSERT("INTCON")
     if (sym.length() > 1 && !(sym[0] >= '1' && sym[0] <= '9')) {
         handle_errors();
     }
+    ret = sym;
 
     result.emplace_back("<无符号整数>");
     getsym();
     output_current_sym();
+
+    return ret;
 }
 
-void GrammarAnalyzer::call_with_returnValue(VariableType &returnType) {
+void GrammarAnalyzer::call_with_returnValue(VariableType &returnType, const string *assignName) {
     SYMTYPE_ASSERT("IDENFR")
+    const string funcName = sym;
     const Item *find_result = symbolTable.searchName(sym);
     try {
         if (find_result == nullptr || find_result->type != functionType) {
@@ -910,6 +1046,17 @@ void GrammarAnalyzer::call_with_returnValue(VariableType &returnType) {
     getsym();
     output_current_sym();
     value_parameter_table(call_parameters_type);
+
+    // intermediate codes
+    intermediateCodes->emplace_back(SaveEnv);
+    intermediateCodes->emplace_back(CallFunc);
+    intermediateCodes->back().addOperands(funcName);
+
+    if (assignName != nullptr) {
+        intermediateCodes->emplace_back(AssignRetValue);
+        intermediateCodes->back().addOperands(*assignName);
+    }
+    intermediateCodes->emplace_back(RestoreEnv);
 
     if (find_result != nullptr && find_result->type == functionType) {
         try {
@@ -945,6 +1092,7 @@ void GrammarAnalyzer::call_with_returnValue(VariableType &returnType) {
 
 void GrammarAnalyzer::call_without_returnValue() {
     SYMTYPE_ASSERT("IDENFR")
+    string funcName = sym;
 
     const Item *find_result = symbolTable.searchName(sym);
     try {
@@ -969,6 +1117,12 @@ void GrammarAnalyzer::call_without_returnValue() {
     getsym();
     output_current_sym();
     value_parameter_table(call_parameters_type);
+
+    // intermediate codes
+    intermediateCodes->emplace_back(SaveEnv);
+    intermediateCodes->emplace_back(CallFunc);
+    intermediateCodes->back().addOperands(funcName);
+    intermediateCodes->emplace_back(RestoreEnv);
 
     if (find_result != nullptr && find_result->type == functionType) {
         try {
@@ -1005,6 +1159,8 @@ void GrammarAnalyzer::call_without_returnValue() {
 void GrammarAnalyzer::read_statement() {
     SYMTYPE_ASSERT("SCANFTK")
 
+    intermediateCodes->emplace_back(Scanf);
+
     getsym();
     output_current_sym();
     SYMTYPE_ASSERT("LPARENT");
@@ -1014,6 +1170,8 @@ void GrammarAnalyzer::read_statement() {
     while (true) {
         SYMTYPE_ASSERT("IDENFR")
         CHECK_IDENFR_DEFINE
+
+        intermediateCodes->back().addOperands(sym);
 
         getsym();
         output_current_sym();
@@ -1038,21 +1196,30 @@ void GrammarAnalyzer::print_statement() {
     output_current_sym();
     SYMTYPE_ASSERT("LPARENT")
 
+    IntermediateCmd cmd{Printf};
+
     getsym();
     output_current_sym();
     if (sym_type == "STRCON") {
+        cmd.addOperands("\"" + sym + "\"");
         mystring();
         if (sym_type == "COMMA") {
             getsym();
             output_current_sym();
             VariableType uselessType;
-            expression(uselessType);
+            string tempVarName = tempVarGenerator.getTempVar();
+            expression(uselessType, tempVarName);
+            cmd.addOperands(tempVarName);
         }
     } else {
         VariableType uselessType;
-        expression(uselessType);
+        string tempVarName = tempVarGenerator.getTempVar();
+        expression(uselessType, tempVarName);
+        cmd.addOperands(tempVarName);
     }
     ASSERT_THROW("RPARENT", ShouldHaveRPARENT)
+
+    intermediateCodes->emplace_back(cmd);
 
     result.emplace_back("<写语句>");
     getsym();
@@ -1067,7 +1234,12 @@ void GrammarAnalyzer::return_statement(VariableType &returnType) {
         output_current_sym();
         getsym();
         output_current_sym();
-        expression(returnType);
+
+        string tempVarName = tempVarGenerator.getTempVar();
+        expression(returnType, tempVarName);
+        intermediateCodes->emplace_back(FuncRetInDef);
+        intermediateCodes->back().addOperands(tempVarName);
+
         ASSERT_THROW("RPARENT", ShouldHaveRPARENT)
         getsym();
     } else {
@@ -1085,31 +1257,61 @@ void GrammarAnalyzer::mystring() {
     output_current_sym();
 }
 
-void GrammarAnalyzer::expression(VariableType &expressionType) {
+void GrammarAnalyzer::expression(VariableType &expressionType, const string &assignVarName) {
+    bool negStart = false;
     if (sym_type == "PLUS" || sym_type == "MINU") {
+        if (sym_type == "MINU") {
+            negStart = true;
+        }
         getsym();
         output_current_sym();
     }
+    string tempVar = tempVarGenerator.getTempVar();
 
-    item(expressionType);
+    item(expressionType, tempVar);
 
+    // intermediate codes
+    if (negStart) {
+        intermediateCodes->emplace_back(Neg);
+        intermediateCodes->back().addOperands(assignVarName);
+        intermediateCodes->back().addOperands(tempVar);
+    } else {
+        intermediateCodes->emplace_back(Assign);
+        intermediateCodes->back().addOperands(assignVarName);
+        intermediateCodes->back().addOperands(tempVar);
+    }
+
+    IntermediateCmd *cmd;
     while (sym_type == "PLUS" || sym_type == "MINU") {
+        cmd = (sym_type == "PLUS") ? (new IntermediateCmd{Add}) : (new IntermediateCmd{Minus});
         getsym();
         output_current_sym();
-        item(expressionType);
+        string newTempVar = tempVarGenerator.getTempVar();
+        item(expressionType, newTempVar);
+
+        // intermediate codes
+        cmd->addOperands(assignVarName);
+        cmd->addOperands(assignVarName);
+        cmd->addOperands(newTempVar);
+        intermediateCodes->emplace_back(*cmd);
+        delete cmd;
+
         expressionType = intType;
     }
 
     result.insert(result.end() - 1, "<表达式>");
 }
 
-void GrammarAnalyzer::step() {
-    unsigned_integer();
+string GrammarAnalyzer::step() {
+    string ret = unsigned_integer();
     result.insert(result.end() - 1, "<步长>");
+    return ret;
 }
 
 void GrammarAnalyzer::assign_statement() {
     SYMTYPE_ASSERT("IDENFR")
+    IntermediateCmd *cmd;
+    string identifierName = sym;
 
     CHECK_IDENFR_DEFINE
 
@@ -1131,7 +1333,12 @@ void GrammarAnalyzer::assign_statement() {
         getsym();
         output_current_sym();
         VariableType subscriptType;
-        expression(subscriptType);
+        string tempVarName = tempVarGenerator.getTempVar();
+        expression(subscriptType, tempVarName);
+        cmd = new IntermediateCmd{ArrayElemAssign};
+        // intermediateCodes->emplace_back(ArrayElemAssign);
+        cmd->addOperands(identifierName);
+        cmd->addOperands(tempVarName);
         try {
             if (subscriptType != intType && subscriptType != constInt) {
                 throw SubscriptNotInt{};
@@ -1144,6 +1351,10 @@ void GrammarAnalyzer::assign_statement() {
 
         getsym();
         output_current_sym();
+    } else {
+        cmd = new IntermediateCmd{Assign};
+        //intermediateCodes->emplace_back(Assign);
+        cmd->addOperands(identifierName);
     }
 
     SYMTYPE_ASSERT("ASSIGN");
@@ -1151,16 +1362,26 @@ void GrammarAnalyzer::assign_statement() {
     getsym();
     output_current_sym();
     VariableType uselessType;
-    expression(uselessType);
+    string tempVarName = tempVarGenerator.getTempVar();
+    expression(uselessType, tempVarName);
+    cmd->addOperands(tempVarName);
+    intermediateCodes->emplace_back(*cmd);
+    delete cmd;
 
     result.insert(result.end() - 1, "<赋值语句>");
 }
 
 void GrammarAnalyzer::value_parameter_table(vector<VariableType> *call_parameters_type) {
+    vector<string> toPushVar;
     if (sym_type != "RPARENT") {
+        string varName;
         while (true) {
             VariableType expressionType;
-            expression(expressionType);
+            varName = tempVarGenerator.getTempVar();
+            expression(expressionType, varName);
+
+            toPushVar.emplace_back(varName);
+
             if (call_parameters_type != nullptr)
                 call_parameters_type->push_back(expressionType);
             if (sym_type != "COMMA") {
@@ -1169,6 +1390,12 @@ void GrammarAnalyzer::value_parameter_table(vector<VariableType> *call_parameter
             getsym();
             output_current_sym();
         }
+    }
+
+    // intermediate codes
+    for (const string &name : toPushVar) {
+        intermediateCodes->emplace_back(CallFuncPush);
+        intermediateCodes->back().addOperands(name);
     }
 
     result.insert(result.end() - 1, "<值参数表>");
@@ -1184,16 +1411,33 @@ void GrammarAnalyzer::relational_operator() {
     }
 }
 
-void GrammarAnalyzer::item(VariableType &itemType) {
+void GrammarAnalyzer::item(VariableType &itemType, const string &assignVarName) {
     int iterTimes = 1;
+    string lastOp;
     while (true) {
-        factor(itemType);
-        if (iterTimes > 1) {
+        string tempVarName = tempVarGenerator.getTempVar();
+        factor(itemType, tempVarName);
+        if (iterTimes == 1) {
+            intermediateCodes->emplace_back(Assign);
+            intermediateCodes->back().addOperands(assignVarName);
+            intermediateCodes->back().addOperands(tempVarName);
+        } else {
+            if (lastOp == "MULT") {
+                intermediateCodes->emplace_back(Mul);
+            } else {
+                intermediateCodes->emplace_back(Div);
+            }
+            intermediateCodes->back().addOperands(assignVarName);
+            intermediateCodes->back().addOperands(assignVarName);
+            intermediateCodes->back().addOperands(tempVarName);
+
             itemType = intType;
         }
 
         if (sym_type != "MULT" && sym_type != "DIV") {
             break;
+        } else {
+            lastOp = sym_type;
         }
         getsym();
         output_current_sym();
@@ -1203,8 +1447,10 @@ void GrammarAnalyzer::item(VariableType &itemType) {
     result.insert(result.end() - 1, "<项>");
 }
 
-void GrammarAnalyzer::factor(VariableType &factorType) {
+void GrammarAnalyzer::factor(VariableType &factorType, const string &assignVarName) {
     if (sym_type == "IDENFR") {
+        string identifierName = sym;
+
         const Item *searched_item = symbolTable.searchName(sym);
         try {
             // Here I assume that int and const int are different, the same with char and const char
@@ -1232,7 +1478,15 @@ void GrammarAnalyzer::factor(VariableType &factorType) {
             getsym();
             output_current_sym();
             VariableType subscriptType;
-            expression(subscriptType);
+
+            string tempVarName = tempVarGenerator.getTempVar();
+            expression(subscriptType, tempVarName);
+
+            // assignVarName = identifierName[tempVarName]
+            intermediateCodes->emplace_back(GetArrayValue);
+            intermediateCodes->back().addOperands(assignVarName);
+            intermediateCodes->back().addOperands(identifierName);
+            intermediateCodes->back().addOperands(tempVarName);
 
             try {
                 if (subscriptType != intType && subscriptType != constInt) {
@@ -1251,23 +1505,53 @@ void GrammarAnalyzer::factor(VariableType &factorType) {
             // because output one more LPARENT
             result.pop_back();
             getsym();
-            call_with_returnValue(factorType);
+
+            // tempVarName = func(...)
+            // assignVarName = tempVarName
+            string tempVarName = tempVarGenerator.getTempVar();
+            call_with_returnValue(factorType, &tempVarName);
+
+            intermediateCodes->emplace_back(Assign);
+            intermediateCodes->back().addOperands(assignVarName);
+            intermediateCodes->back().addOperands(tempVarName);
+
+        } else { // else: only identifier
+            // assignVarName = identifierName
+            intermediateCodes->emplace_back(Assign);
+            intermediateCodes->back().addOperands(assignVarName);
+            intermediateCodes->back().addOperands(identifierName);
         }
-        // else: only identifier
     } else if (sym_type == "LPARENT") {
         getsym();
         output_current_sym();
-        expression(factorType);
+
+        // tempVarName = expression
+        // assignVarName = tempVarName
+        string tempVarName = tempVarGenerator.getTempVar();
+        expression(factorType, tempVarName);
+
+        intermediateCodes->emplace_back(Assign);
+        intermediateCodes->back().addOperands(assignVarName);
+        intermediateCodes->back().addOperands(tempVarName);
+
         ASSERT_THROW("RPARENT", ShouldHaveRPARENT)
         getsym();
         output_current_sym();
     } else if (sym_type == "CHARCON") {
         factorType = charType;
+        intermediateCodes->emplace_back(Assign);
+        intermediateCodes->back().addOperands(assignVarName);
+        intermediateCodes->back().addOperands("\'" + sym + "\'");
+
         getsym();
         output_current_sym();
     } else if (sym_type == "PLUS" || sym_type == "MINU" || sym_type == "INTCON") {
         factorType = intType;
-        integer();
+        string interger_str = integer();
+
+        intermediateCodes->emplace_back(Assign);
+        intermediateCodes->back().addOperands(assignVarName);
+        intermediateCodes->back().addOperands(interger_str);
     } else {
         handle_errors();
     }

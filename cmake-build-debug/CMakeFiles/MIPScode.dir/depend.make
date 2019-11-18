@@ -9,6 +9,7 @@ CMakeFiles/MIPScode.dir/GrammerAnalyzer.cpp.o: ../TypeDefine.h
 
 CMakeFiles/MIPScode.dir/LexicalAnalyzer.cpp.o: ../LexicalAnalyzer.cpp
 CMakeFiles/MIPScode.dir/LexicalAnalyzer.cpp.o: ../LexicalAnalyzer.h
+CMakeFiles/MIPScode.dir/LexicalAnalyzer.cpp.o: ../SymbolTable.h
 CMakeFiles/MIPScode.dir/LexicalAnalyzer.cpp.o: ../TypeDefine.h
 
 CMakeFiles/MIPScode.dir/SymbolTable.cpp.o: ../SymbolTable.cpp

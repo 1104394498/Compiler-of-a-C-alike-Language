@@ -1,0 +1,314 @@
+c1 = 3
+c2 = 99
+c3 = -199
+cint = 0
+c4 = '+'
+c5 = '-'
+c6 = '1'
+c7 = '_'
+c8 = 'a'
+c9 = 'Z'
+int returnFunc1()
+t2 = 1
+t1 = t2
+t0 = t1
+ret t0
+char returnFunc2()
+t4 = 0
+t3 = t4
+i = t3
+Label_0:
+t7 = i
+t6 = t7
+t5 = t6
+t10 = 5
+t9 = t10
+t8 = t9
+t5 < t8
+BZ Label_1
+printf "Hello world\n"
+i = i + 1
+GOTO Label_0
+Label_1:
+t13 = 'A'
+t12 = t13
+t11 = t12
+ret t11
+int returnFunc3()
+para int a
+t16 = a
+t15 = t16
+t14 = t15
+t19 = 1
+t18 = t19
+t17 = t18
+t14 == t17
+t22 = 1
+t21 = t22
+t20 = t21
+ret t20
+t25 = 0
+t24 = t25
+t23 = t24
+ret t23
+char returnFunc4()
+para char b
+t28 = 0
+t27 = t28
+t26 = t27
+w = t26
+Label_2:
+t31 = w
+t30 = t31
+t29 = t30
+t34 = 9
+t33 = t34
+t32 = t33
+t29 < t32
+BZ Label_3
+t37 = w
+t36 = t37
+t35 = t36
+t39 = 1
+t38 = t39
+t35 = t35 + t38
+w = t35
+GOTO Label_2
+Label_3:
+t42 = 1
+t41 = t42
+t40 = t41
+a = t40
+t49 = a
+t48 = t49
+t47 = t48
+push t47
+SaveEnvironment
+call returnFunc3
+t46 = RET
+RestoreEnvironment
+t45 = t46
+t44 = t45
+t43 = t44
+a = t43
+t52 = b
+t51 = t52
+t50 = t51
+ret t50
+int returnFunc5()
+para char a
+t55 = 10
+t54 = t55
+t53 = t54
+A = t53
+Label_4:
+t58 = A
+t57 = t58
+t56 = t57
+t60 = 1
+t59 = t60
+t56 = t56 - t59
+A = t56
+t63 = A
+t62 = t63
+t61 = t62
+t66 = 6
+t65 = t66
+t64 = t65
+t61 < t64
+BNZ Label_4
+t69 = A
+t68 = t69
+t67 = t68
+ret t67
+char returnFunc6()
+para int b
+para int lalaLa
+Label_5:
+t72 = b
+t71 = t72
+t70 = t71
+t75 = 6
+t74 = t75
+t73 = t74
+t70 <= t73
+BZ Label_6
+printf "b is smaller than 6\n"
+t78 = b
+t77 = t78
+t76 = t77
+t80 = 1
+t79 = t80
+t76 = t76 + t79
+b = t76
+GOTO Label_5
+Label_6:
+t83 = lalaLa
+t82 = t83
+t84 = -3
+t82 = t82 / t84
+t81 = t82
+lalaLa = t81
+t87 = 'N'
+t86 = t87
+t85 = t86
+ret t85
+char returnFunc7()
+para int b
+Label_7:
+t90 = b
+t89 = t90
+t88 = t89
+t93 = 6
+t92 = t93
+t91 = t92
+t88 <= t91
+BZ Label_8
+printf "b is smaller than 6\n"
+t96 = b
+t95 = t96
+t94 = t95
+t98 = 1
+t97 = t98
+t94 = t94 + t97
+b = t94
+GOTO Label_7
+Label_8:
+t101 = 'N'
+t100 = t101
+t99 = t100
+ret t99
+void noReturnFunc1()
+scanf a2333
+ret 
+void noReturnFunc2()
+para int A
+para char b
+SaveEnvironment
+call noReturnFunc1
+RestoreEnvironment
+t104 = b
+t103 = t104
+t102 = t103
+printf t102
+ret 
+void noReturnFunc3()
+para char B
+t107 = 2333
+t106 = t107
+t105 = t106
+t110 = 'W'
+t109 = t110
+t108 = t109
+push t105
+push t108
+SaveEnvironment
+call noReturnFunc2
+RestoreEnvironment
+ret 
+MAIN:
+c1_main = 3
+c2_main = 99
+c3_main = -199
+cint_main = 0
+cint_main1 = 0
+c4_main = '+'
+c5_main = '-'
+c6_main = '1'
+c7_main = '_'
+c8_main = 'a'
+c9_main = 'Z'
+t113 = c1_main
+t112 = t113
+t111 = t112
+t116 = 3
+t115 = t116
+t114 = t115
+t111 == t114
+printf "c1_main is 3\n"
+printf "c1_main is not 3\n"
+t119 = 5
+t118 = t119
+t117 = t118
+v1_main = t117
+Label_9:
+t122 = v1_main
+t121 = t122
+t120 = t121
+t125 = 0
+t124 = t125
+t123 = t124
+t120 > t123
+BZ Label_10
+t128 = v1_main
+t127 = t128
+t126 = t127
+t130 = 1
+t129 = t130
+t126 = t126 - t129
+v1_main = t126
+GOTO Label_9
+Label_10:
+t133 = 1
+t132 = t133
+t131 = t132
+t135 = 0
+t134 = t135
+t131 = t131 + t134
+t138 = 'a'
+t137 = t138
+t136 = t137
+V2_main[t131] = t136
+t141 = 3420
+t140 = t141
+t139 -t140
+v3_main = t139
+t144 = 5
+t143 = t144
+t142 = t143
+v1_main = t142
+Label_11:
+printf "v1_main is smaller than 5\n"
+t147 = v1_main
+t146 = t147
+t145 = t146
+t150 = 0
+t149 = t150
+t148 = t149
+t145 > t148
+BNZ Label_11
+t153 = 1000
+t152 = t153
+t151 -t152
+t155 = 1314131
+t154 = t155
+t151 = t151 + t154
+lalala = t151
+scanf V3_main v1_main
+t158 = 5
+t157 = t158
+t156 = t157
+t165 = 2
+t164 = t165
+t163 = t164
+t168 = 5
+t167 = t168
+t166 = t167
+push t163
+push t166
+SaveEnvironment
+call returnFunc6
+t162 = RET
+RestoreEnvironment
+t161 = t162
+t160 = t161
+t159 = t160
+V9_main[t156] = t159
+t171 = 'a'
+t170 = t171
+t169 = t170
+push t169
+SaveEnvironment
+call noReturnFunc3
+RestoreEnvironment
+Exit

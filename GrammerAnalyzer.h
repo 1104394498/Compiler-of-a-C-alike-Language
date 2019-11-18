@@ -13,7 +13,8 @@ using namespace std;
 
 class GrammarAnalyzer {
 public:
-    explicit GrammarAnalyzer(const string &fin_name, vector<Error> *allErrors);
+    explicit GrammarAnalyzer(const string &fin_name, vector<Error> *_allErrors,
+                             vector<IntermediateCmd> *_intermediateCodes);
 
     void print(const string &fout_name);
 
@@ -21,6 +22,8 @@ private:
     int curLine = 1;    // record line NO.
 
     vector<Error> *allErrors;
+
+    vector<IntermediateCmd> *intermediateCodes;
 
     void handle_errors(ErrorException &exception);
 
@@ -43,6 +46,10 @@ private:
     // Symbol Table
     SymbolTable symbolTable{};
 
+    TempVarGenerator tempVarGenerator{&symbolTable};
+
+    LabelGenerator labelGenerator{};
+
     void output_current_sym();
 
     void pointer_back(int times = 1);
@@ -56,18 +63,19 @@ private:
     void variable_statement();
 
     void variable_definition(); // duplicate name definition
-    void main_function();   // add symbol stack, duplicate name definition (for function name), surplus return
+    void
+    main_function();   // add symbol stack, duplicate name definition (for function name), surplus return  // add Label and Exit
     void
     function_with_return_value();  // add symbol stack, duplicate name definition (for function name and input variables' names), lack (dismatch) return
     void
     function_without_return_value();   // add symbol stack, duplicate name definition (for function name and input variables' names), surplus return
-    void integer();
+    string integer();
 
-    void unsigned_integer();
+    string unsigned_integer();
 
-    void statement_head(VariableType &returnType, string &funcName);
+    void statement_head(VariableType &returnType, string &funcName);    // add FuncDefStart
 
-    void parameter_table(vector<VariableType> &inputTypes, vector<Item *> *newStack);
+    void parameter_table(vector<VariableType> &inputTypes, vector<Item *> *newStack);   // add FuncPara
 
     void compound_statement(VariableType &returnType);
 
@@ -81,11 +89,11 @@ private:
 
     void loop_statement();  // undefined name
 
-    void expression(VariableType &expressionType);
+    string step();
 
-    void step();
-
-    void call_with_returnValue(VariableType &returnType);   // undefined name, function variables dismatch
+    // assignName = nullptr means needn't return value
+    void call_with_returnValue(VariableType &returnType,
+                               const string *assignName);   // undefined name, function variables dismatch
 
     void call_without_returnValue();    // undefined name, function variables dismatch
 
@@ -103,9 +111,12 @@ private:
 
     void relational_operator();
 
-    void item(VariableType &itemType);
+    // assign the result to assignVarName (can be optimized)
+    void expression(VariableType &expressionType, const string &assignVarName);
 
-    void factor(VariableType &factorType);
+    void item(VariableType &itemType, const string &assignVarName);
+
+    void factor(VariableType &factorType, const string &assignVarName);
 };
 
 

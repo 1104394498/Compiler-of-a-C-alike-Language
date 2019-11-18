@@ -1,28 +1,153 @@
-int func1(int mid1, int mid2) {
-	const int a1 = mid1;
-	const int a2 = 4;
-	const char a3 = mid2;
+const int c1 = 3, c2 = +99, c3 = -199;
+const int cint = +0;
 
-	int cd2			
-	cd888 = a1 + a2;
-	a1 = 3;
-	cd2 = a1 - a999
-	if (cd2==cd1 return (3;
-	return ('a');
+const char c4 = '+', c5 = '-', c6 = '1', c7 = '_', c8 = 'a';
+const char c9 = 'Z';
+
+int v1;
+int v2[2];
+int v3, v4[4];
+int v5[5], v6;
+int v7, v8;
+int v9[9], v10[10];
+int vint;
+
+char V1;
+char V2[2];
+char V3, V4[4];
+char V5[5], V6;
+char V7, V8;
+char V9[9], V10[10];
+char vchar;
+
+int returnFunc1() {
+	return (1);
 }
 
+char returnFunc2() {
+	int i;
+	for (i = 0; i < 5; i = i + 1) {
+		printf("Hello world\n");
+	}
+	return ('A');
+}
+
+int returnFunc3(int a) {
+	if (a == 1) {
+		return (1);
+	}
+	else {
+		return (0);
+	}
+}
+
+char returnFunc4(char b) {
+
+	int w;
+	int a;
+	w = 0;
+	while (w < 9) {
+		w = w + 1;
+	}
+
+	a = 1;
+	a = returnFunc3(a);
+	return (b);
+}
+
+int returnFunc5(char a) {
+	int A;
+	A = 10;
+	do {
+		A = A - 1;
+	} while (A < 6);
+	return (A);
+}
+
+char returnFunc6(int b, int lalaLa) {
+	while (b <= 6) {
+		printf("b is smaller than 6\n");
+		b = b + 1;
+	}
+	lalaLa = lalaLa / -3;
+	return ('N');
+}
+
+char returnFunc7(int b) {
+	while (b <= 6) {
+		printf("b is smaller than 6\n");
+		b = b + 1;
+	}
+	return ('N');
+}
+
+void noReturnFunc1() {
+	int a2333;
+	scanf(a2333);
+}
+
+void noReturnFunc2(int A, char b) {
+	noReturnFunc1();
+	printf(b);
+}
+
+void noReturnFunc3(char B) {
+	noReturnFunc2(2333, 'W');
+}
 
 void main() {
-	const char a1 = 'a';
-	const char a2 ='b';
-	int a[3];
-	int i;
-	if (1 < 'a') {}
-	a[a1] = 1;
-	func1(a1, a2);
-	for (i=1; i<5 i=i+1) {}
+	const int c1_main = 3, c2_main = +99, c3_main = -199;
+	const int cint_main = +0;
+	const int cint_main1 = 0;
+
+	const char c4_main = '+', c5_main = '-', c6_main = '1', c7_main = '_', c8_main = 'a';
+	const char c9_main = 'Z';
+
+	int v1_main;
+	int v2_main[2];
+	int v3_main, v4_main[4];
+	int v5_main[5], v6_main;
+	int v7_main, v8_main;
+	int v9_main[9], v10_main[10];
+	int vint_main;
+
+	char V1_main;
+	char V2_main[2];
+	char V3_main, V4_main[4];
+	char V5_main[5], V6_main;
+	char V7_main, V8_main;
+	char V9_main[9], V10_main[10];
+	char vchar_main;
+	int lalala;
+
+	if (c1_main == 3) {
+		printf("c1_main is 3\n");
+	}
+	else {
+		printf("c1_main is not 3\n");
+	}
+
+	v1_main = +5;
+	while (v1_main > 0) {
+		v1_main = v1_main - 1;
+	}
+
+	V2_main[1+0] = 'a';
+	v3_main = -3420;
+	v1_main = 5;
 	do {
-		a[1] = 1;	
-	} (a[1] < 8)
+		printf("v1_main is smaller than 5\n");
+	} while (v1_main > 0);
+
+	{
+		lalala = -1000 + +1314131;
+	}
+
+	scanf(V3_main, v1_main);
+
+	V9_main[5] = returnFunc6(2, 5);
+
+	noReturnFunc3('a');
+
 	return;
-} 
+}
