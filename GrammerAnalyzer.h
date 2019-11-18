@@ -18,6 +18,8 @@ public:
 
     void print(const string &fout_name);
 
+    vector<IntermediateCmd> getIntermediateCodes() { return *intermediateCodes; }
+
 private:
     int curLine = 1;    // record line NO.
 
@@ -83,11 +85,11 @@ private:
 
     void statement(VariableType &returnType);   // undefined name
 
-    void conditional_statement();
+    void conditional_statement(VariableType &returnType);
 
     void condition();   // wrong type in condition
 
-    void loop_statement();  // undefined name
+    void loop_statement(VariableType &returnType);  // undefined name
 
     string step();
 

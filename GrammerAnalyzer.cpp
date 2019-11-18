@@ -569,10 +569,10 @@ void GrammarAnalyzer::statement(VariableType &returnType) {
     returnType = voidType;
     if (sym_type == "IFTK") {
         // conditional statement
-        conditional_statement();
+        conditional_statement(returnType);
     } else if (sym_type == "WHILETK" || sym_type == "DOTK" || sym_type == "FORTK") {
         // loop statement
-        loop_statement();
+        loop_statement(returnType);
     } else if (sym_type == "LBRACE") {
         getsym();
         output_current_sym();
@@ -673,7 +673,7 @@ void GrammarAnalyzer::statement(VariableType &returnType) {
     result.insert(result.end() - 1, "<语句>");
 }
 
-void GrammarAnalyzer::conditional_statement() {
+void GrammarAnalyzer::conditional_statement(VariableType &returnType) {
     SYMTYPE_ASSERT("IFTK");
 
     getsym();
@@ -690,20 +690,19 @@ void GrammarAnalyzer::conditional_statement() {
 
     getsym();
     output_current_sym();
-    VariableType uselessType;   // useless
-    statement(uselessType);
+    statement(returnType);
 
     if (sym_type == "ELSETK") {
         getsym();
         output_current_sym();
-        statement(uselessType);
+        statement(returnType);
     }
 
     result.insert(result.end() - 1, "<条件语句>");
 
 }
 
-void GrammarAnalyzer::loop_statement() {
+void GrammarAnalyzer::loop_statement(VariableType &returnType) {
     if (sym_type == "WHILETK") {
         string beginLabel = labelGenerator.getLabel();
         intermediateCodes->emplace_back(Label);
@@ -727,8 +726,7 @@ void GrammarAnalyzer::loop_statement() {
 
         getsym();
         output_current_sym();
-        VariableType uselessType;
-        statement(uselessType);
+        statement(returnType);
 
         intermediateCodes->emplace_back(Goto);
         intermediateCodes->back().addOperands(beginLabel);
@@ -742,8 +740,7 @@ void GrammarAnalyzer::loop_statement() {
 
         getsym();
         output_current_sym();
-        VariableType uselessType;
-        statement(uselessType);
+        statement(returnType);
 
         ASSERT_THROW("WHILETK", LackWhileInDoWhile)
         getsym();
@@ -782,8 +779,7 @@ void GrammarAnalyzer::loop_statement() {
 
         getsym();
         output_current_sym();
-        VariableType uselessType;   // useless
-        expression(uselessType, identifier);
+        expression(returnType, identifier);
 
         ASSERT_THROW("SEMICN", ShouldHaveSemicolon)
 
@@ -836,7 +832,7 @@ void GrammarAnalyzer::loop_statement() {
 
         getsym();
         output_current_sym();
-        statement(uselessType);
+        statement(returnType);
 
         intermediateCodes->emplace_back(*step_cmd);
         delete step_cmd;

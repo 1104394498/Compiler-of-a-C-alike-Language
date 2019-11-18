@@ -12,12 +12,18 @@ CMakeFiles/MIPScode.dir/LexicalAnalyzer.cpp.o
  /Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/LexicalAnalyzer.h
  /Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/SymbolTable.h
  /Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/TypeDefine.h
+CMakeFiles/MIPScode.dir/Optimizer.cpp.o
+ /Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/Optimizer.cpp
+ /Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/Optimizer.h
+ /Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/SymbolTable.h
+ /Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/TypeDefine.h
 CMakeFiles/MIPScode.dir/SymbolTable.cpp.o
  /Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/SymbolTable.cpp
  /Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/SymbolTable.h
 CMakeFiles/MIPScode.dir/main.cpp.o
  /Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/GrammerAnalyzer.h
  /Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/LexicalAnalyzer.h
+ /Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/Optimizer.h
  /Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/SymbolTable.h
  /Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/TypeDefine.h
  /Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/main.cpp

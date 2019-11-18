@@ -177,6 +177,33 @@ LexicalAnalyzer.cpp.s:
 	$(MAKE) -f CMakeFiles/MIPScode.dir/build.make CMakeFiles/MIPScode.dir/LexicalAnalyzer.cpp.s
 .PHONY : LexicalAnalyzer.cpp.s
 
+Optimizer.o: Optimizer.cpp.o
+
+.PHONY : Optimizer.o
+
+# target to build an object file
+Optimizer.cpp.o:
+	$(MAKE) -f CMakeFiles/MIPScode.dir/build.make CMakeFiles/MIPScode.dir/Optimizer.cpp.o
+.PHONY : Optimizer.cpp.o
+
+Optimizer.i: Optimizer.cpp.i
+
+.PHONY : Optimizer.i
+
+# target to preprocess a source file
+Optimizer.cpp.i:
+	$(MAKE) -f CMakeFiles/MIPScode.dir/build.make CMakeFiles/MIPScode.dir/Optimizer.cpp.i
+.PHONY : Optimizer.cpp.i
+
+Optimizer.s: Optimizer.cpp.s
+
+.PHONY : Optimizer.s
+
+# target to generate assembly for a file
+Optimizer.cpp.s:
+	$(MAKE) -f CMakeFiles/MIPScode.dir/build.make CMakeFiles/MIPScode.dir/Optimizer.cpp.s
+.PHONY : Optimizer.cpp.s
+
 SymbolTable.o: SymbolTable.cpp.o
 
 .PHONY : SymbolTable.o
@@ -246,6 +273,9 @@ help:
 	@echo "... LexicalAnalyzer.o"
 	@echo "... LexicalAnalyzer.i"
 	@echo "... LexicalAnalyzer.s"
+	@echo "... Optimizer.o"
+	@echo "... Optimizer.i"
+	@echo "... Optimizer.s"
 	@echo "... SymbolTable.o"
 	@echo "... SymbolTable.i"
 	@echo "... SymbolTable.s"

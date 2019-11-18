@@ -94,6 +94,12 @@
 		<Unit filename="/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/LexicalAnalyzer.h">
 			<Option target="MIPScode"/>
 		</Unit>
+		<Unit filename="/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/Optimizer.cpp">
+			<Option target="MIPScode"/>
+		</Unit>
+		<Unit filename="/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/Optimizer.h">
+			<Option target="MIPScode"/>
+		</Unit>
 		<Unit filename="/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/SymbolTable.cpp">
 			<Option target="MIPScode"/>
 		</Unit>
