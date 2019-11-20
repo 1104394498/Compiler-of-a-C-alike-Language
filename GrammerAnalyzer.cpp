@@ -179,7 +179,8 @@ void GrammarAnalyzer::constant_definition() {
     IntermediateCmd *cmd;
     if (sym_type == "INTTK") {
         while (true) {
-            cmd = new IntermediateCmd{Assign};
+            cmd = new IntermediateCmd{ConstDef};
+            cmd->addOperands("int");
             getsym();
             output_current_sym();
             SYMTYPE_ASSERT("IDENFR");
@@ -234,7 +235,8 @@ void GrammarAnalyzer::constant_definition() {
         }
     } else if (sym_type == "CHARTK") {
         while (true) {
-            cmd = new IntermediateCmd{Assign};
+            cmd = new IntermediateCmd{ConstDef};
+            cmd->addOperands("char");
             getsym();
             output_current_sym();
             SYMTYPE_ASSERT("IDENFR")
@@ -313,12 +315,14 @@ void GrammarAnalyzer::variable_statement() {
 }
 
 void GrammarAnalyzer::variable_definition() {
-    SYMTYPE_TWO_ASSERT("INTTK", "CHARTK");
+    SYMTYPE_TWO_ASSERT("INTTK", "CHARTK")
     VariableType variableType = (sym_type == "INTTK") ? intType : charType;
+    const string typeOperand = (variableType == intType) ? "int" : "char";
     while (true) {
         getsym();
         output_current_sym();
-        SYMTYPE_ASSERT("IDENFR");
+        SYMTYPE_ASSERT("IDENFR")
+        const string identifierName = sym;
 
         try {
             symbolTable.addName(sym, variableType, nullptr);
@@ -332,15 +336,27 @@ void GrammarAnalyzer::variable_definition() {
         if (sym_type == "LBRACK") {
             getsym();
             output_current_sym();
-            unsigned_integer();
-            ASSERT_THROW("RBRACK", ShouldHaveRBRACK);
+            const string& size = unsigned_integer();
+            ASSERT_THROW("RBRACK", ShouldHaveRBRACK)
+
+            IntermediateCmd cmd{VarArrayStatement};
+            cmd.addOperands(typeOperand);
+            cmd.addOperands(identifierName);
+            cmd.addOperands(size);
+            intermediateCodes->push_back(cmd);
+
             getsym();
             output_current_sym();
             if (sym_type != "COMMA") {
                 break;
             }
-        } else if (sym_type != "COMMA") {
-            break;
+        } else {
+            IntermediateCmd cmd{VarStatement};
+            cmd.addOperands(typeOperand);
+            cmd.addOperands(identifierName);
+            intermediateCodes->push_back(cmd);
+            if (sym_type != "COMMA")
+                break;
         }
     }
 
@@ -348,8 +364,9 @@ void GrammarAnalyzer::variable_definition() {
 }
 
 void GrammarAnalyzer::main_function() {
-    intermediateCodes->emplace_back(OperatorType::Label);
-    intermediateCodes->back().addOperands("MAIN");  // The label of main function is MAIN
+    intermediateCodes->emplace_back(FuncDefStart);
+    intermediateCodes->back().addOperands("void");  // The label of main function is MAIN
+    intermediateCodes->back().addOperands("main");
 
     auto *mainFuncInfo = new FuncInfo{voidType, vector<VariableType>{}};
     try {
@@ -1048,11 +1065,12 @@ void GrammarAnalyzer::call_with_returnValue(VariableType &returnType, const stri
     intermediateCodes->emplace_back(CallFunc);
     intermediateCodes->back().addOperands(funcName);
 
+    intermediateCodes->emplace_back(RestoreEnv);
+
     if (assignName != nullptr) {
         intermediateCodes->emplace_back(AssignRetValue);
         intermediateCodes->back().addOperands(*assignName);
     }
-    intermediateCodes->emplace_back(RestoreEnv);
 
     if (find_result != nullptr && find_result->type == functionType) {
         try {

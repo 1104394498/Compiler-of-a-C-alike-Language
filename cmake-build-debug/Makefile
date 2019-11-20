@@ -177,6 +177,33 @@ LexicalAnalyzer.cpp.s:
 	$(MAKE) -f CMakeFiles/MIPScode.dir/build.make CMakeFiles/MIPScode.dir/LexicalAnalyzer.cpp.s
 .PHONY : LexicalAnalyzer.cpp.s
 
+MipsGenerator.o: MipsGenerator.cpp.o
+
+.PHONY : MipsGenerator.o
+
+# target to build an object file
+MipsGenerator.cpp.o:
+	$(MAKE) -f CMakeFiles/MIPScode.dir/build.make CMakeFiles/MIPScode.dir/MipsGenerator.cpp.o
+.PHONY : MipsGenerator.cpp.o
+
+MipsGenerator.i: MipsGenerator.cpp.i
+
+.PHONY : MipsGenerator.i
+
+# target to preprocess a source file
+MipsGenerator.cpp.i:
+	$(MAKE) -f CMakeFiles/MIPScode.dir/build.make CMakeFiles/MIPScode.dir/MipsGenerator.cpp.i
+.PHONY : MipsGenerator.cpp.i
+
+MipsGenerator.s: MipsGenerator.cpp.s
+
+.PHONY : MipsGenerator.s
+
+# target to generate assembly for a file
+MipsGenerator.cpp.s:
+	$(MAKE) -f CMakeFiles/MIPScode.dir/build.make CMakeFiles/MIPScode.dir/MipsGenerator.cpp.s
+.PHONY : MipsGenerator.cpp.s
+
 Optimizer.o: Optimizer.cpp.o
 
 .PHONY : Optimizer.o
@@ -273,6 +300,9 @@ help:
 	@echo "... LexicalAnalyzer.o"
 	@echo "... LexicalAnalyzer.i"
 	@echo "... LexicalAnalyzer.s"
+	@echo "... MipsGenerator.o"
+	@echo "... MipsGenerator.i"
+	@echo "... MipsGenerator.s"
 	@echo "... Optimizer.o"
 	@echo "... Optimizer.i"
 	@echo "... Optimizer.s"

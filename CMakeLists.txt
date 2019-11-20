@@ -10,4 +10,4 @@ add_executable(MIPScode GrammerAnalyzer.cpp
         LexicalAnalyzer.cpp
         LexicalAnalyzer.h
         main.cpp
-        TypeDefine.h SymbolTable.cpp SymbolTable.h Optimizer.cpp Optimizer.h)
+        TypeDefine.h SymbolTable.cpp SymbolTable.h Optimizer.cpp Optimizer.h MipsGenerator.cpp MipsGenerator.h)

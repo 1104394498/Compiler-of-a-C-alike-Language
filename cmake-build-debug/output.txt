@@ -1,28 +1,24 @@
 INTTK int
-IDENFR returnFunc3
+IDENFR func
 <声明头部>
 LPARENT (
 INTTK int
 IDENFR a
+COMMA ,
+INTTK int
+IDENFR b
+COMMA ,
+CHARTK char
+IDENFR c
+COMMA ,
+CHARTK char
+IDENFR d
+COMMA ,
+INTTK int
+IDENFR f
 <参数表>
 RPARENT )
 LBRACE {
-IFTK if
-LPARENT (
-IDENFR a
-<因子>
-<项>
-<表达式>
-EQL ==
-INTCON 1
-<无符号整数>
-<整数>
-<因子>
-<项>
-<表达式>
-<条件>
-RPARENT )
-LBRACE {
 RETURNTK return
 LPARENT (
 INTCON 1
@@ -34,28 +30,6 @@ INTCON 1
 RPARENT )
 <返回语句>
 SEMICN ;
-<语句>
-<语句列>
-RBRACE }
-<语句>
-ELSETK else
-LBRACE {
-RETURNTK return
-LPARENT (
-INTCON 0
-<无符号整数>
-<整数>
-<因子>
-<项>
-<表达式>
-RPARENT )
-<返回语句>
-SEMICN ;
-<语句>
-<语句列>
-RBRACE }
-<语句>
-<条件语句>
 <语句>
 <语句列>
 <复合语句>
@@ -66,8 +40,79 @@ MAINTK main
 LPARENT (
 RPARENT )
 LBRACE {
-RETURNTK return
-<返回语句>
+INTTK int
+IDENFR b
+COMMA ,
+IDENFR a
+<变量定义>
+SEMICN ;
+CHARTK char
+IDENFR cd
+<变量定义>
+SEMICN ;
+<变量说明>
+SCANFTK scanf
+LPARENT (
+IDENFR a
+COMMA ,
+IDENFR b
+COMMA ,
+IDENFR cd
+RPARENT )
+<读语句>
+SEMICN ;
+<语句>
+IDENFR a
+ASSIGN =
+IDENFR func
+LPARENT (
+INTCON 1
+<无符号整数>
+<整数>
+<因子>
+<项>
+<表达式>
+COMMA ,
+INTCON 2
+<无符号整数>
+<整数>
+<因子>
+<项>
+<表达式>
+COMMA ,
+CHARCON a
+<因子>
+<项>
+<表达式>
+COMMA ,
+CHARCON b
+<因子>
+<项>
+<表达式>
+COMMA ,
+INTCON 4
+<无符号整数>
+<整数>
+<因子>
+<项>
+<表达式>
+<值参数表>
+RPARENT )
+<有返回值函数调用语句>
+<因子>
+<项>
+<表达式>
+<赋值语句>
+SEMICN ;
+<语句>
+PRINTFTK printf
+LPARENT (
+IDENFR a
+<因子>
+<项>
+<表达式>
+RPARENT )
+<写语句>
 SEMICN ;
 <语句>
 <语句列>

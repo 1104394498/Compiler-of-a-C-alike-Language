@@ -1,6 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/MIPScode.dir/GrammerAnalyzer.cpp.o"
   "CMakeFiles/MIPScode.dir/LexicalAnalyzer.cpp.o"
+  "CMakeFiles/MIPScode.dir/MipsGenerator.cpp.o"
   "CMakeFiles/MIPScode.dir/Optimizer.cpp.o"
   "CMakeFiles/MIPScode.dir/SymbolTable.cpp.o"
   "CMakeFiles/MIPScode.dir/main.cpp.o"

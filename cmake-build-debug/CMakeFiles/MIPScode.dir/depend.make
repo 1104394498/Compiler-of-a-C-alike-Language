@@ -12,6 +12,11 @@ CMakeFiles/MIPScode.dir/LexicalAnalyzer.cpp.o: ../LexicalAnalyzer.h
 CMakeFiles/MIPScode.dir/LexicalAnalyzer.cpp.o: ../SymbolTable.h
 CMakeFiles/MIPScode.dir/LexicalAnalyzer.cpp.o: ../TypeDefine.h
 
+CMakeFiles/MIPScode.dir/MipsGenerator.cpp.o: ../MipsGenerator.cpp
+CMakeFiles/MIPScode.dir/MipsGenerator.cpp.o: ../MipsGenerator.h
+CMakeFiles/MIPScode.dir/MipsGenerator.cpp.o: ../SymbolTable.h
+CMakeFiles/MIPScode.dir/MipsGenerator.cpp.o: ../TypeDefine.h
+
 CMakeFiles/MIPScode.dir/Optimizer.cpp.o: ../Optimizer.cpp
 CMakeFiles/MIPScode.dir/Optimizer.cpp.o: ../Optimizer.h
 CMakeFiles/MIPScode.dir/Optimizer.cpp.o: ../SymbolTable.h
@@ -22,6 +27,7 @@ CMakeFiles/MIPScode.dir/SymbolTable.cpp.o: ../SymbolTable.h
 
 CMakeFiles/MIPScode.dir/main.cpp.o: ../GrammerAnalyzer.h
 CMakeFiles/MIPScode.dir/main.cpp.o: ../LexicalAnalyzer.h
+CMakeFiles/MIPScode.dir/main.cpp.o: ../MipsGenerator.h
 CMakeFiles/MIPScode.dir/main.cpp.o: ../Optimizer.h
 CMakeFiles/MIPScode.dir/main.cpp.o: ../SymbolTable.h
 CMakeFiles/MIPScode.dir/main.cpp.o: ../TypeDefine.h

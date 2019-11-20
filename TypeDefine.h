@@ -50,7 +50,6 @@ enum OperatorType {
     FuncPara,       // para int a
     CallFuncPush,   // push x
     CallFunc,       // call tar
-    RetValueAssign, // i = RET
     FuncRetInDef,   // ret x
     Add,            // t1 = b+c
     Minus,          // t1 = b-c
@@ -75,7 +74,10 @@ enum OperatorType {
     GetArrayValue,  // a = array[i]
     Printf,         // printf
     Scanf,          // scanf
-    ArrayElemAssign // array[i] = a
+    ArrayElemAssign,// array[i] = a
+    ConstDef,       // const int variable, const char variable
+    VarStatement,         // int variable, char variable
+    VarArrayStatement     // int array[10], char array[10]
 };
 
 class IntermediateCmd {
@@ -89,9 +91,9 @@ public:
         operands.push_back(operand);
     }
 
-    OperatorType getOperatorType() { return operatorType; }
+    OperatorType getOperatorType() const { return operatorType; }
 
-    // std::vector<std::string> &getOperands() { return operands; }
+    const vector<string> &getOperands() const { return operands; }
 
     std::string print() {
         std::string cmd;
@@ -111,9 +113,6 @@ public:
         } else if (operatorType == CallFunc) {
             cmd += "call ";
             cmd += operands.at(0);
-        } else if (operatorType == RetValueAssign) {
-            cmd += operands.at(0);
-            cmd += " = RET";
         } else if (operatorType == FuncRetInDef) {
             cmd += "ret ";
             if (!operands.empty())
@@ -204,13 +203,13 @@ public:
             cmd += operands.at(1);
         } else if (operatorType == Printf) {
             cmd += "printf";
-            for (const auto& op : operands) {
+            for (const auto &op : operands) {
                 cmd += " ";
                 cmd += op;
             }
         } else if (operatorType == Scanf) {
             cmd += "scanf";
-            for (const auto& op : operands) {
+            for (const auto &op : operands) {
                 cmd += " ";
                 cmd += op;
             }
@@ -221,6 +220,26 @@ public:
             cmd += "]";
             cmd += " = ";
             cmd += operands.at(2);
+        } else if (operatorType == ConstDef) {
+            cmd += "const ";
+            cmd += operands.at(0);
+            cmd += " ";
+            cmd += operands.at(1);
+            cmd += " = ";
+            cmd += operands.at(2);
+        } else if (operatorType == VarStatement) {
+            cmd += "var ";
+            cmd += operands.at(0);
+            cmd += " ";
+            cmd += operands.at(1);
+        } else if (operatorType == VarArrayStatement) {
+            cmd += "var ";
+            cmd += operands.at(0);
+            cmd += " ";
+            cmd += operands.at(1);
+            cmd += "[";
+            cmd += operands.at(2);
+            cmd += "]";
         }
         return cmd;
     };
@@ -250,6 +269,7 @@ public:
     string getLabel() {
         return "Label_" + to_string(curNO++);
     }
+
 private:
     int curNO = 0;
 };

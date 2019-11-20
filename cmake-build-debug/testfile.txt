@@ -1,12 +1,11 @@
-int returnFunc3(int a) {
-	if (a == 1) {
-		return (1);
-	}
-	else {
-		return (0);
-	}
+int func(int a, int b, char c, char d, int f) {
+	return (1);
 }
 
 void main() {
-	return;
+	int b, a;
+	char cd;
+	scanf(a,b, cd);
+	a = func(1,2,'a', 'b', 4);
+	printf(a);
 }
