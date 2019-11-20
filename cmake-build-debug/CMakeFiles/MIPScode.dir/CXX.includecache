@@ -6,9 +6,25 @@
 
 #IncludeRegexTransform: 
 
-/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/MipsGenerator.cpp
-MipsGenerator.h
-/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/MipsGenerator.h
+/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/GrammerAnalyzer.h
+string
+-
+vector
+-
+set
+-
+LexicalAnalyzer.h
+/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/LexicalAnalyzer.h
+SymbolTable.h
+/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/SymbolTable.h
+
+/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/LexicalAnalyzer.h
+string
+-
+vector
+-
+TypeDefine.h
+/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/TypeDefine.h
 
 /Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/MipsGenerator.h
 TypeDefine.h
@@ -20,6 +36,14 @@ map
 stack
 -
 iostream
+-
+
+/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/Optimizer.h
+TypeDefine.h
+/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/TypeDefine.h
+utility
+-
+vector
 -
 
 /Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/SymbolTable.h
@@ -37,4 +61,20 @@ string
 -
 SymbolTable.h
 /Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/SymbolTable.h
+
+/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/main.cpp
+GrammerAnalyzer.h
+/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/GrammerAnalyzer.h
+vector
+-
+algorithm
+-
+Optimizer.h
+/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/Optimizer.h
+MipsGenerator.h
+/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/MipsGenerator.h
+fstream
+-
+iostream
+-
 

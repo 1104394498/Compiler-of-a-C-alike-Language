@@ -32,10 +32,11 @@ void SymbolTable::pushStack(vector<Item *> *stack) {
     }
 
     table.push_back(stack);
-
+    /*
     if (nameDuplicate) {
         throw DuplicateNameDefinition{};
     }
+     */
 }
 
 void SymbolTable::popStack() {
@@ -75,12 +76,14 @@ const Item* SymbolTable::searchName(const string &name) {
 }
 
 void SymbolTable::addName(const string &name, VariableType type, void *info) {
+    /*
     for (Item *&item : *table.back()) {
         // only check current symbol stack
         if (item->name == name) {
             throw DuplicateNameDefinition{};
         }
     }
+     */
 
     if (type == intType || type == constInt) {
         info = new int;
@@ -117,7 +120,7 @@ void SymbolTable::checkFuncVariable(const string &name, const FuncInfo &funcInfo
         while (iterator2 != (*iterator1)->end()) {
             if (name == (*iterator2)->name) {
                 auto realInfo = *(static_cast<FuncInfo *>((*iterator2)->info));
-                realInfo.check(funcInfo);
+                // realInfo.check(funcInfo);
                 return;
             }
             ++iterator2;

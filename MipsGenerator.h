@@ -10,7 +10,7 @@
 using namespace std;
 
 enum RegisterType {
-    a, t, s, sp, ra, hi, lo, zero, v0
+    a, t, s, sp, ra, hi, lo, zero, v0, v1
 };
 
 class TempRegisterAllocator {
@@ -43,15 +43,17 @@ private:
 public:
     explicit Register(RegisterType _type, int _NO = -1);
 
-    string print();
+    string print() const ;
 
     void useReg() const;
 
     bool operator<(const Register &aRegister) const;
+
+    bool operator==(const Register &aRegister) const;
 };
 
 enum MipsCodeType {
-    dot_text,
+    dot_data, dot_text, dot_word,
     jal, jump, jr,
     add, sub, mul, divide,
     addi, subi, mulo,
@@ -60,7 +62,8 @@ enum MipsCodeType {
     label,
     mov,
     beq, bne, bge, ble, bgt, blt,
-    syscall
+    syscall,
+    la
 };
 
 class MipsCmd {
@@ -71,20 +74,20 @@ private:
 public:
     explicit MipsCmd(MipsCodeType _codeType) : codeType{_codeType} {}
 
-    void addRegister(Register aRegister) {
-        operands.emplace_back(aRegister.print());
+    void addRegister(const Register& aRegister) {
+        operands.push_back(aRegister.print());
         aRegister.useReg();
     }
 
     void addLabel(const string &label) {
-        operands.emplace_back(label);
+        operands.push_back(label);
     }
 
     void addInteger(int i) {
-        operands.emplace_back(to_string(i));
+        operands.push_back(to_string(i));
     }
 
-    string print();
+    string print() const ;
 };
 
 class MipsGenerator {
@@ -92,6 +95,11 @@ public:
     explicit MipsGenerator(const vector<IntermediateCmd> &_intermediateCodes, vector<MipsCmd> *_mipsCodes)
             : intermediateCodes(&_intermediateCodes), mipsCodes{_mipsCodes} {
         generate();
+        printf("la");
+    }
+
+    ~MipsGenerator() {
+        delete functionFile;
     }
 
 
@@ -99,104 +107,69 @@ private:
     struct RunningFile {
         // Assume that input parameter region and $a0 - $a3 have been set before calling the function
         /* Structure of file
-         * ------------------------------------    input_para_start   <--- $sp
+         * ------------------------------------    input_para_start   <--- $sp          HIGH address
          *      input parameter region
          * ------------------------------------    ra_loc
          *      ra region
          * ------------------------------------     temp_para_start
          *      temporary parameter region
-         * ------------------------------------    file_end
+         * ------------------------------------    file_end                             LOW address
          */
 
-        int input_para_start = 0;           // offset of the input parameter region's start from $sp
-        int ra_loc = 0;                     // offset of ra location from $sp
-        int temp_para_start = 4;            // offset of parameter region's start from $sp
-        int file_end = 4;                   // end of the file, pointing to the next position of the last parameter in the file
+        int input_para_start = 0;            // offset of the input parameter region's start from $sp
+        int ra_loc = 0;                      // offset of ra location from $sp
+        int temp_para_start = -4;            // offset of parameter region's start from $sp
+        int file_end = -4;                   // end of the file, pointing to the next position of the last parameter in the file
 
         map<Register, string> registerRecords;
         map<string, int> memoryRecords;     // key: variable name; value: offset from start of the file ($sp)
         map<string, VariableType> variableTypeRecords;  // the name of an array is assumed to have the same type as its elements
+        map<Register, string> savedRegisterRecords; // used for save registers records upon finishing saving environment
     };
 
+    map<string, VariableType> globalNameTypeRecords;   // record the types of global variances, constants and functions
     const vector<IntermediateCmd> *intermediateCodes;
     vector<MipsCmd> *mipsCodes;
     vector<IntermediateCmd> unhandled_push{};
     RunningFile *functionFile = nullptr;
+    VariableType lastRetType = intType;
 
     // get register
-    Register getRegister(const string &varName);
+    // Register getRegister(const string &varName);
 
-    Register getRegister();
+    // Register getRegister();
 
-    /*
-    Printf,         // printf
-    Scanf,          // scanf
-     */
+    vector<Register> getRegisters(const vector<string> &varNames, int requireNum = 0);
+    static Register* findDiffReg(const vector<Register>& ret);
+    void writeRegValueBack(const Register* newReg);
+    void loadValueInReg(const string &varName, Register *newReg);
 
     void generate() {
-        mipsCodes->push_back(MipsCmd{dot_text});
-        MipsCmd jalMain{jump};
-        jalMain.addLabel("main");
-        mipsCodes->push_back(jalMain);
+        // .data
+        mipsCodes->push_back(MipsCmd{dot_data});
 
         int input_para_count = 0;
         IntermediateCmd *lastMidCode = nullptr;
 
         for (const auto &midCode : *intermediateCodes) {
+            // cout << midCode.print() << endl;
             OperatorType operatorType = midCode.getOperatorType();
             if (operatorType == FuncDefStart) {
-                MipsCmd mipsCmd{MipsCodeType::label};
-                mipsCmd.addLabel(midCode.getOperands().at(1));
-                mipsCodes->push_back(mipsCmd);
-                functionFile = new RunningFile{};
+                dealFunDefStart(midCode);
             } else if (operatorType == FuncPara) {
-                const string &varName = midCode.getOperands().at(1);
-                functionFile->ra_loc += 4;
-                functionFile->temp_para_start = functionFile->ra_loc + 4;
-                functionFile->file_end = functionFile->temp_para_start;
-
-                input_para_count++;
-                if (input_para_count <= 4)
-                    functionFile->registerRecords[Register{a, input_para_count - 1}] = varName;
-                functionFile->memoryRecords[varName] = (input_para_count - 1) * 4 + functionFile->input_para_start;
+                dealFunPara(midCode, input_para_count); // 没问题
             } else if (operatorType == CallFuncPush) {
-                unhandled_push.push_back(midCode);  // deal after saving environment
+                unhandled_push.push_back(midCode);  // deal after saving environment    // 没问题
             } else if (operatorType == SaveEnv) {
-                dealSaveEnv();
+                dealSaveEnv();  // 没问题
             } else if (operatorType == CallFunc) {
-                MipsCmd changeSp{addi};
-                changeSp.addRegister(Register{sp});
-                changeSp.addRegister(Register{sp});
-                changeSp.addInteger(functionFile->file_end - functionFile->input_para_start);
-                mipsCodes->push_back(changeSp);
-
-                MipsCmd Jal{jal};
-                Jal.addLabel(midCode.getOperands().at(0));\
-                mipsCodes->push_back(Jal);
+                dealCallFunc(midCode);  // 没问题
             } else if (operatorType == Label) {
-                MipsCmd mipsCmd{MipsCodeType::label};
-                mipsCmd.addLabel(midCode.getOperands().at(0));
-                mipsCodes->push_back(mipsCmd);
+                dealLabel(midCode); // 没问题
             } else if (operatorType == AssignRetValue) {
-                const string &varName = midCode.getOperands().at(0);
-                const Register &r = getRegister(varName);
-                MipsCmd mipsCmd{mov};
-                mipsCmd.addRegister(r);
-                mipsCmd.addRegister(Register{v0});
-                mipsCodes->push_back(mipsCmd);
-                functionFile->variableTypeRecords[varName] =
+                dealAssignRetValue(midCode);
             } else if (operatorType == FuncRetInDef) {
-                // move $ra, [register of return variable]
-                const Register &r = getRegister(midCode.getOperands().at(0));
-                MipsCmd mipsCmd{mov};
-                mipsCmd.addRegister(Register{v0});
-                mipsCmd.addRegister(r);
-                mipsCodes->push_back(mipsCmd);
-
-                MipsCmd Jr{jr};
-                Jr.addRegister(Register{ra});
-                mipsCodes->push_back(Jr);
-                delete functionFile;
+                dealFunRetInDef(midCode);
             } else if (operatorType == RestoreEnv) {
                 dealRestoreEnv();
             } else if (operatorType == Add || operatorType == Minus || operatorType == Mul || operatorType == Div) {
@@ -219,52 +192,15 @@ private:
             } else if (operatorType == Exit) {
                 dealExit();
             } else if (operatorType == ConstDef) {
-                const VariableType constType = (midCode.getOperands().at(0) == "int") ? intType : charType;
-                int num;
-                if (constType == intType)
-                    num = stoi(midCode.getOperands().at(2));
-                else
-                    num = midCode.getOperands().at(1)[0];
-
-                const string &constName = midCode.getOperands().at(1);
-
-                if (functionFile != nullptr) {
-                    const Register &r = getRegister(constName);
-                    MipsCmd liCmd{li};
-                    liCmd.addRegister(r);
-                    liCmd.addInteger(num);
-                    mipsCodes->push_back(liCmd);
-                    // functionFile->registerRecords[r] = constName;
-                    functionFile->variableTypeRecords[constName] = constType;
-                } else {
-                    // global, handle later
-                }
+                dealConstDef(midCode);
             } else if (operatorType == VarStatement) {
-                const VariableType varType = (midCode.getOperands().at(0) == "int") ? intType : charType;
-                const string &varName = midCode.getOperands().at(1);
-                if (functionFile != nullptr) {
-                    functionFile->variableTypeRecords[varName] = varType;
-                    // functionFile->memoryRecords[varName] = functionFile->file_end;
-                    // functionFile->file_end += 4;
-                } else {
-                    // global, handle later
-                }
+                dealVarStatement(midCode);
             } else if (operatorType == VarArrayStatement) {
-                const string &arrayName = midCode.getOperands().at(1);
-                // cout << midCode.getOperands().at(2) << endl;
-                const int size = stoi(midCode.getOperands().at(2));
-                const VariableType arrayType = (midCode.getOperands().at(0) == "int") ? intType : charType;
-                if (functionFile != nullptr) {
-                    functionFile->memoryRecords[arrayName] = functionFile->file_end;
-                    functionFile->file_end += (size * 4);
-                    functionFile->variableTypeRecords[arrayName] = arrayType;
-                } else {
-                    // global, handle later
-                }
+                dealVarArrayStatement(midCode);
             } else if (operatorType == GetArrayValue) {
-                dealGetArrayValue(midCode);
+                dealGetArrayValue(midCode);     // 这里还需要改，让全局变量也不出bug
             } else if (operatorType == ArrayElemAssign) {
-                dealArrayElemAssign(midCode);
+                dealArrayElemAssign(midCode);   // 这里还需要改，让全局变量也不出bug
             } else if (operatorType == Printf) {
                 dealPrintf(midCode);
             } else if (operatorType == Scanf) {
@@ -298,6 +234,24 @@ private:
     void dealPrintf(const IntermediateCmd &midCode);
 
     void dealScanf(const IntermediateCmd &midCode);
+
+    void dealVarArrayStatement(const IntermediateCmd &midCode);
+
+    void dealVarStatement(const IntermediateCmd &midCode);
+
+    void dealConstDef(const IntermediateCmd &midCode);
+
+    void dealFunRetInDef(const IntermediateCmd &midCode);
+
+    void dealFunDefStart(const IntermediateCmd &midCode);
+
+    void dealFunPara(const IntermediateCmd &midCode, int &input_para_count);
+
+    void dealCallFunc(const IntermediateCmd &midCode);
+
+    void dealLabel(const IntermediateCmd &midCode);
+
+    void dealAssignRetValue(const IntermediateCmd &midCode);
 };
 
 

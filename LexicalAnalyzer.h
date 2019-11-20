@@ -12,7 +12,7 @@ using namespace std;
 class LexicalAnalyzer {
 public:
     // Input the file name
-    LexicalAnalyzer(const string &fname, vector<Error> *_allErrors);
+    explicit LexicalAnalyzer(const string &fname, vector<Error> *_allErrors);
 
     // Get current element
     string currentElem(int &line);

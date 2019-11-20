@@ -16,28 +16,6 @@ using namespace std;
         handle_errors();\
     }
 
-#define CHECK_IDENFR_DEFINE\
-    try {\
-            if (symbolTable.searchName(sym) == nullptr) {\
-            throw UndefinedName{};\
-        }\
-    } catch (UndefinedName &exception) {\
-        handle_errors(exception);\
-    }
-
-#define ASSERT_THROW(type, exceptionName)\
-    try {\
-        if (sym_type != type) {\
-            if (ptr_lexicalAnalyzer->getCurPos() == 1)\
-                throw exceptionName{curLine - 1};\
-            else\
-                throw exceptionName{};\
-        }\
-    } catch (exceptionName &exception) {\
-        pointer_back(1);\
-        handle_errors(exception);\
-    }
-
 GrammarAnalyzer::GrammarAnalyzer(const string &fin_name, vector<Error> *_allErrors,
                                  vector<IntermediateCmd> *_intermediateCodes) : allErrors{_allErrors},
                                                                                 intermediateCodes{_intermediateCodes} {
@@ -79,6 +57,7 @@ void GrammarAnalyzer::pointer_back(int times) {
     }
 }
 
+/*
 void GrammarAnalyzer::handle_errors(ErrorException &exception) {
     if (exception.getErrorLine() == -1) {
         allErrors->emplace_back(curLine, exception.getErrorType());
@@ -86,13 +65,8 @@ void GrammarAnalyzer::handle_errors(ErrorException &exception) {
         allErrors->emplace_back(exception.getErrorLine(), exception.getErrorType());
     }
     // skip current line
-    /*
-    int previousLine = curLine;
-    do {
-        getsym();
-    } while (curLine == previousLine);
-     */
 }
+ */
 
 void GrammarAnalyzer::handle_errors() {
     exit(1);
@@ -162,7 +136,7 @@ void GrammarAnalyzer::constant_statement() {
         getsym();
         output_current_sym();
         constant_definition();
-        ASSERT_THROW("SEMICN", ShouldHaveSemicolon)
+        // ASSERT_THROW("SEMICN", ShouldHaveSemicolon)
 
         getsym();
         if (sym_type == "CONSTTK") {
@@ -188,12 +162,15 @@ void GrammarAnalyzer::constant_definition() {
             cmd->addOperands(sym);
 
             // add into the symbol table
+            symbolTable.addName(sym, constInt, nullptr);
+            /*
             try {
                 symbolTable.addName(sym, constInt, nullptr);
             } catch (DuplicateNameDefinition &exception) {
                 // duplicate name definition
                 handle_errors(exception);
             }
+             */
 
             getsym();
             output_current_sym();
@@ -209,12 +186,14 @@ void GrammarAnalyzer::constant_definition() {
                 hasSign = true;
             }
             if (sym_type != "INTCON") {
+                /*
                 try {
                     throw TypeErrorInConstantDefine{};
                 } catch (TypeErrorInConstantDefine &exception) {
                     handle_errors(exception);
                     getsym();
                 }
+                 */
             } else {
                 if (hasSign) {
                     pointer_back(2);
@@ -243,12 +222,15 @@ void GrammarAnalyzer::constant_definition() {
             cmd->addOperands(sym);
 
             // add into the symbol table
+            symbolTable.addName(sym, constChar, nullptr);
+            /*
             try {
                 symbolTable.addName(sym, constChar, nullptr);
             } catch (DuplicateNameDefinition &exception) {
                 // duplicate name definition
                 handle_errors(exception);
             }
+             */
 
             getsym();
             output_current_sym();
@@ -258,11 +240,13 @@ void GrammarAnalyzer::constant_definition() {
 
             // check whether is char constant
             if (sym_type != "CHARCON") {
+                /*
                 try {
                     throw TypeErrorInConstantDefine{};
                 } catch (TypeErrorInConstantDefine &exception) {
                     handle_errors(exception);
                 }
+                 */
             }
             cmd->addOperands("\'" + sym + "\'");
 
@@ -286,7 +270,7 @@ void GrammarAnalyzer::constant_definition() {
 void GrammarAnalyzer::variable_statement() {
     while (true) {
         variable_definition();
-        ASSERT_THROW("SEMICN", ShouldHaveSemicolon)
+        // ASSERT_THROW("SEMICN", ShouldHaveSemicolon)
 
         // judge whether continue reading
         getsym();
@@ -324,20 +308,22 @@ void GrammarAnalyzer::variable_definition() {
         SYMTYPE_ASSERT("IDENFR")
         const string identifierName = sym;
 
+        symbolTable.addName(sym, variableType, nullptr);
+        /*
         try {
             symbolTable.addName(sym, variableType, nullptr);
         } catch (DuplicateNameDefinition &exception) {
             // duplicate name definition
             handle_errors(exception);
-        }
+        }*/
 
         getsym();
         output_current_sym();
         if (sym_type == "LBRACK") {
             getsym();
             output_current_sym();
-            const string& size = unsigned_integer();
-            ASSERT_THROW("RBRACK", ShouldHaveRBRACK)
+            const string &size = unsigned_integer();
+            // ASSERT_THROW("RBRACK", ShouldHaveRBRACK)
 
             IntermediateCmd cmd{VarArrayStatement};
             cmd.addOperands(typeOperand);
@@ -369,12 +355,15 @@ void GrammarAnalyzer::main_function() {
     intermediateCodes->back().addOperands("main");
 
     auto *mainFuncInfo = new FuncInfo{voidType, vector<VariableType>{}};
+    symbolTable.addName("main", functionType, mainFuncInfo);
+    /*
     try {
         // the name "main" belongs to the outer stack in symbolTable
         symbolTable.addName("main", functionType, mainFuncInfo);
     } catch (DuplicateNameDefinition &exception) {
         handle_errors(exception);
     }
+     */
 
 
     symbolTable.pushStack();
@@ -389,7 +378,7 @@ void GrammarAnalyzer::main_function() {
 
     getsym();
     output_current_sym();
-    ASSERT_THROW("RPARENT", ShouldHaveRPARENT)
+    // ASSERT_THROW("RPARENT", ShouldHaveRPARENT)
 
     getsym();
     output_current_sym();
@@ -400,6 +389,7 @@ void GrammarAnalyzer::main_function() {
 
     VariableType returnType;
     compound_statement(returnType);
+    /*
     try {
         if (returnType != voidType) {
             throw SurplusReturn{curLine - 1};     // revise here, assume return statement is always the last statement
@@ -407,6 +397,7 @@ void GrammarAnalyzer::main_function() {
     } catch (SurplusReturn &exception) {
         handle_errors(exception);
     }
+     */
 
     SYMTYPE_ASSERT("RBRACE")
 
@@ -439,20 +430,26 @@ void GrammarAnalyzer::function_with_return_value() {
     parameter_table(inputTypes, newStack);
 
     // first, add the function name and info into the outer stack
+    symbolTable.addName(funcName, functionType, new FuncInfo(returnType, inputTypes));
+    /*
     try {
         symbolTable.addName(funcName, functionType, new FuncInfo(returnType, inputTypes));
     } catch (DuplicateNameDefinition &exception) {
         handle_errors(exception);
     }
+     */
 
     // then add the function's parameters into the new stack
+    symbolTable.pushStack(newStack);
+    /*
     try {
         symbolTable.pushStack(newStack);
     } catch (DuplicateNameDefinition &exception) {
         handle_errors(exception);
     }
+     */
 
-    ASSERT_THROW("RPARENT", ShouldHaveRPARENT)
+    // ASSERT_THROW("RPARENT", ShouldHaveRPARENT)
 
     getsym();
     output_current_sym();
@@ -462,6 +459,7 @@ void GrammarAnalyzer::function_with_return_value() {
     output_current_sym();
     VariableType actualReturnType;
     compound_statement(actualReturnType);
+    /*
     try {
         if (actualReturnType != returnType) {
             throw LackReturn{curLine - 1};  // revise here, assume that return statement is always the last statement
@@ -469,6 +467,7 @@ void GrammarAnalyzer::function_with_return_value() {
     } catch (LackReturn &exception) {
         handle_errors(exception);
     }
+     */
 
 
     SYMTYPE_ASSERT("RBRACE")
@@ -608,7 +607,7 @@ void GrammarAnalyzer::statement(VariableType &returnType) {
             getsym();
             assign_statement();
 
-            ASSERT_THROW("SEMICN", ShouldHaveSemicolon)
+            // ASSERT_THROW("SEMICN", ShouldHaveSemicolon)
             getsym();
             output_current_sym();
         } else {
@@ -617,72 +616,53 @@ void GrammarAnalyzer::statement(VariableType &returnType) {
             getsym();
 
             const Item *find_result = symbolTable.searchName(sym);
-            try {
-                if (find_result == nullptr) {
-                    throw UndefinedName{};
-                } else if (find_result->type != functionType) {
-                    throw UndefinedName{};
+            if (find_result == nullptr) {
+                // throw UndefinedName{};
+            } else if (find_result->type != functionType) {
+                // throw UndefinedName{};
+            } else {
+                const auto *funcInfo = static_cast<const FuncInfo *>(find_result->info);
+                if (funcInfo->getReturnType() == voidType) {
+                    call_without_returnValue();
+
+                    // ASSERT_THROW("SEMICN", ShouldHaveSemicolon)
+                    getsym();
+                    output_current_sym();
                 } else {
-                    const auto *funcInfo = static_cast<const FuncInfo *>(find_result->info);
-                    if (funcInfo->getReturnType() == voidType) {
-                        call_without_returnValue();
+                    VariableType uselessType;   // useless
+                    call_with_returnValue(uselessType, nullptr);
 
-                        ASSERT_THROW("SEMICN", ShouldHaveSemicolon)
-                        getsym();
-                        output_current_sym();
-                    } else {
-                        VariableType uselessType;   // useless
-                        call_with_returnValue(uselessType, nullptr);
-
-                        ASSERT_THROW("SEMICN", ShouldHaveSemicolon)
-                        getsym();
-                        output_current_sym();
-                    }
+                    // ASSERT_THROW("SEMICN", ShouldHaveSemicolon)
+                    getsym();
+                    output_current_sym();
                 }
-            } catch (UndefinedName &exception) {
-                handle_errors(exception);
-                getsym();
-                output_current_sym();
-                SYMTYPE_ASSERT("LPARENT")
-
-                getsym();
-                output_current_sym();
-                value_parameter_table(nullptr);
-
-                ASSERT_THROW("RPARENT", ShouldHaveRPARENT)
-
-                result.emplace_back("<函数名未定义调用语句>");    // maybe there's a problem
-                getsym();
-                output_current_sym();
-                ASSERT_THROW("SEMICN", ShouldHaveSemicolon)
-                getsym();
-                output_current_sym();
             }
+
         }
     } else if (sym_type == "SCANFTK") {
         // read statement
         read_statement();
 
-        ASSERT_THROW("SEMICN", ShouldHaveSemicolon)
+        // ASSERT_THROW("SEMICN", ShouldHaveSemicolon)
         getsym();
         output_current_sym();
     } else if (sym_type == "PRINTFTK") {
         // print statement
         print_statement();
 
-        ASSERT_THROW("SEMICN", ShouldHaveSemicolon)
+        // ASSERT_THROW("SEMICN", ShouldHaveSemicolon)
         getsym();
         output_current_sym();
     } else if (sym_type == "RETURNTK") {
         // return statement
         return_statement(returnType);
 
-        ASSERT_THROW("SEMICN", ShouldHaveSemicolon)
+        // ASSERT_THROW("SEMICN", ShouldHaveSemicolon)
         getsym();
         output_current_sym();
     } else {
         // empty
-        ASSERT_THROW("SEMICN", ShouldHaveSemicolon)
+        // ASSERT_THROW("SEMICN", ShouldHaveSemicolon)
         getsym();
         output_current_sym();
     }
@@ -703,17 +683,36 @@ void GrammarAnalyzer::conditional_statement(VariableType &returnType) {
 
     condition();
 
-    ASSERT_THROW("RPARENT", ShouldHaveRPARENT)
+    string label = labelGenerator.getLabel();
+    string endLabel = labelGenerator.getLabel();
+
+    IntermediateCmd branchCmd{BZ};
+    branchCmd.addOperands(label);
+    intermediateCodes->push_back(branchCmd);
+
+    // ASSERT_THROW("RPARENT", ShouldHaveRPARENT)
 
     getsym();
     output_current_sym();
     statement(returnType);
+
+    IntermediateCmd jumpCmd{Goto};
+    jumpCmd.addOperands(endLabel);
+    intermediateCodes->push_back(jumpCmd);
+
+    IntermediateCmd labelCmd{Label};
+    labelCmd.addOperands(label);
+    intermediateCodes->push_back(labelCmd);
 
     if (sym_type == "ELSETK") {
         getsym();
         output_current_sym();
         statement(returnType);
     }
+
+    IntermediateCmd endLabelCmd{Label};
+    endLabelCmd.addOperands(endLabel);
+    intermediateCodes->push_back(endLabelCmd);
 
     result.insert(result.end() - 1, "<条件语句>");
 
@@ -739,7 +738,7 @@ void GrammarAnalyzer::loop_statement(VariableType &returnType) {
         intermediateCodes->back().addOperands(endLabel);
 
 
-        ASSERT_THROW("RPARENT", ShouldHaveRPARENT)
+        // ASSERT_THROW("RPARENT", ShouldHaveRPARENT)
 
         getsym();
         output_current_sym();
@@ -759,7 +758,7 @@ void GrammarAnalyzer::loop_statement(VariableType &returnType) {
         output_current_sym();
         statement(returnType);
 
-        ASSERT_THROW("WHILETK", LackWhileInDoWhile)
+        // ASSERT_THROW("WHILETK", LackWhileInDoWhile)
         getsym();
         output_current_sym();
         SYMTYPE_ASSERT("LPARENT")
@@ -772,7 +771,7 @@ void GrammarAnalyzer::loop_statement(VariableType &returnType) {
         intermediateCodes->emplace_back(BNZ);
         intermediateCodes->back().addOperands(beginLabel);
 
-        ASSERT_THROW("RPARENT", ShouldHaveRPARENT)
+        // ASSERT_THROW("RPARENT", ShouldHaveRPARENT)
         getsym();
         output_current_sym();
     } else if (sym_type == "FORTK") {
@@ -787,7 +786,7 @@ void GrammarAnalyzer::loop_statement(VariableType &returnType) {
         output_current_sym();
         string identifier = sym;
         SYMTYPE_ASSERT("IDENFR")
-        CHECK_IDENFR_DEFINE
+        // CHECK_IDENFR_DEFINE
 
 
         getsym();
@@ -798,7 +797,7 @@ void GrammarAnalyzer::loop_statement(VariableType &returnType) {
         output_current_sym();
         expression(returnType, identifier);
 
-        ASSERT_THROW("SEMICN", ShouldHaveSemicolon)
+        // ASSERT_THROW("SEMICN", ShouldHaveSemicolon)
 
         getsym();
         output_current_sym();
@@ -811,14 +810,14 @@ void GrammarAnalyzer::loop_statement(VariableType &returnType) {
         intermediateCodes->emplace_back(BZ);
         intermediateCodes->back().addOperands(endLabel);
 
-        ASSERT_THROW("SEMICN", ShouldHaveSemicolon)
+        // ASSERT_THROW("SEMICN", ShouldHaveSemicolon)
 
         string identifier1, identifier2;
 
         getsym();
         output_current_sym();
         SYMTYPE_ASSERT("IDENFR")
-        CHECK_IDENFR_DEFINE
+        // CHECK_IDENFR_DEFINE
         identifier1 = sym;
 
         getsym();
@@ -828,7 +827,7 @@ void GrammarAnalyzer::loop_statement(VariableType &returnType) {
         getsym();
         output_current_sym();
         SYMTYPE_ASSERT("IDENFR")
-        CHECK_IDENFR_DEFINE
+        // CHECK_IDENFR_DEFINE
         identifier2 = sym;
 
         getsym();
@@ -845,7 +844,7 @@ void GrammarAnalyzer::loop_statement(VariableType &returnType) {
         step_cmd->addOperands(identifier2);
         step_cmd->addOperands(step_str);
 
-        ASSERT_THROW("RPARENT", ShouldHaveRPARENT)
+        // ASSERT_THROW("RPARENT", ShouldHaveRPARENT)
 
         getsym();
         output_current_sym();
@@ -914,7 +913,7 @@ void GrammarAnalyzer::condition() {
 
     intermediateCodes->emplace_back(*cmd);
     delete (cmd);
-
+    /*
     try {
         if (conditionType != intType) {
             throw InvalidConditionType{};
@@ -922,6 +921,7 @@ void GrammarAnalyzer::condition() {
     } catch (InvalidConditionType &exception) {
         handle_errors(exception);
     }
+     */
 
     // because expression has add the next word into result
     result.insert(result.end() - 1, "<条件>");
@@ -953,20 +953,26 @@ void GrammarAnalyzer::function_without_return_value() {
     parameter_table(inputTypes, newStack);
 
     // first, add the function name and info into the outer stack
+    symbolTable.addName(funcName, functionType, new FuncInfo(voidType, inputTypes));
+    /*
     try {
         symbolTable.addName(funcName, functionType, new FuncInfo(voidType, inputTypes));
     } catch (DuplicateNameDefinition &exception) {
         handle_errors(exception);
     }
+     */
 
     // then add the function's parameters into the new stack
+    symbolTable.pushStack(newStack);
+    /*
     try {
         symbolTable.pushStack(newStack);
     } catch (DuplicateNameDefinition &exception) {
         handle_errors(exception);
     }
+     */
 
-    ASSERT_THROW("RPARENT", ShouldHaveRPARENT)
+    // ASSERT_THROW("RPARENT", ShouldHaveRPARENT)
 
     getsym();
     output_current_sym();
@@ -976,7 +982,7 @@ void GrammarAnalyzer::function_without_return_value() {
     output_current_sym();
     VariableType returnType;
     compound_statement(returnType);
-
+    /*
     try {
         if (returnType != voidType) {
             throw SurplusReturn{
@@ -985,6 +991,7 @@ void GrammarAnalyzer::function_without_return_value() {
     } catch (SurplusReturn &exception) {
         handle_errors(exception);
     }
+     */
 
     SYMTYPE_ASSERT("RBRACE")
 
@@ -1033,6 +1040,7 @@ void GrammarAnalyzer::call_with_returnValue(VariableType &returnType, const stri
     SYMTYPE_ASSERT("IDENFR")
     const string funcName = sym;
     const Item *find_result = symbolTable.searchName(sym);
+    /*
     try {
         if (find_result == nullptr || find_result->type != functionType) {
             throw UndefinedName{};
@@ -1048,8 +1056,9 @@ void GrammarAnalyzer::call_with_returnValue(VariableType &returnType, const stri
         handle_errors(exception);
         returnType = voidType;
     }
-
-
+     */
+    const auto *funcInfo = static_cast<const FuncInfo *>(find_result->info);
+    returnType = funcInfo->getReturnType();
     getsym();
     output_current_sym();
     SYMTYPE_ASSERT("LPARENT")
@@ -1073,35 +1082,33 @@ void GrammarAnalyzer::call_with_returnValue(VariableType &returnType, const stri
     }
 
     if (find_result != nullptr && find_result->type == functionType) {
-        try {
-            auto funcInputTypes = static_cast<FuncInfo *>(find_result->info)->getInputTypes();
-            if (call_parameters_type->size() != funcInputTypes.size()) {
-                throw WrongFuncVariableNum{};
-            } else {
-                auto iter1 = call_parameters_type->cbegin();
-                auto iter2 = funcInputTypes.cbegin();
-                while (iter1 != call_parameters_type->cend()) {
-                    if (*iter1 != *iter2) {
-                        throw WrongFuncVariableType{};
-                    }
-                    iter1++;
-                    iter2++;
+
+        auto funcInputTypes = static_cast<FuncInfo *>(find_result->info)->getInputTypes();
+        if (call_parameters_type->size() != funcInputTypes.size()) {
+            // throw WrongFuncVariableNum{};
+        } else {
+            auto iter1 = call_parameters_type->cbegin();
+            auto iter2 = funcInputTypes.cbegin();
+            while (iter1 != call_parameters_type->cend()) {
+                if (*iter1 != *iter2) {
+                    // throw WrongFuncVariableType{};
                 }
+                iter1++;
+                iter2++;
             }
-        } catch (WrongFuncVariableNum &exception) {
-            handle_errors(exception);
-        } catch (WrongFuncVariableType &exception) {
-            handle_errors(exception);
         }
     }
 
     delete (call_parameters_type);
 
-    ASSERT_THROW("RPARENT", ShouldHaveRPARENT)
+// ASSERT_THROW("RPARENT", ShouldHaveRPARENT)
 
     result.emplace_back("<有返回值函数调用语句>");
+
     getsym();
+
     output_current_sym();
+
 }
 
 void GrammarAnalyzer::call_without_returnValue() {
@@ -1109,17 +1116,14 @@ void GrammarAnalyzer::call_without_returnValue() {
     string funcName = sym;
 
     const Item *find_result = symbolTable.searchName(sym);
-    try {
-        if (find_result == nullptr || find_result->type != functionType) {
-            throw UndefinedName{};
-        } else {
-            const auto *funcInfo = static_cast<const FuncInfo *>(find_result->info);
-            if (funcInfo->getReturnType() != voidType) {
-                throw UndefinedName{};
-            }
+
+    if (find_result == nullptr || find_result->type != functionType) {
+        // throw UndefinedName{};
+    } else {
+        const auto *funcInfo = static_cast<const FuncInfo *>(find_result->info);
+        if (funcInfo->getReturnType() != voidType) {
+            // throw UndefinedName{};
         }
-    } catch (UndefinedName &exception) {
-        handle_errors(exception);
     }
 
     getsym();
@@ -1139,31 +1143,27 @@ void GrammarAnalyzer::call_without_returnValue() {
     intermediateCodes->emplace_back(RestoreEnv);
 
     if (find_result != nullptr && find_result->type == functionType) {
-        try {
-            auto funcInputTypes = static_cast<FuncInfo *>(find_result->info)->getInputTypes();
-            if (call_parameters_type->size() != funcInputTypes.size()) {
-                throw WrongFuncVariableNum{};
-            } else {
-                auto iter1 = call_parameters_type->cbegin();
-                auto iter2 = funcInputTypes.cbegin();
-                while (iter1 != call_parameters_type->cend()) {
-                    if (*iter1 != *iter2) {
-                        throw WrongFuncVariableType{};
-                    }
-                    iter1++;
-                    iter2++;
+
+        auto funcInputTypes = static_cast<FuncInfo *>(find_result->info)->getInputTypes();
+        if (call_parameters_type->size() != funcInputTypes.size()) {
+            //throw WrongFuncVariableNum{};
+        } else {
+            auto iter1 = call_parameters_type->cbegin();
+            auto iter2 = funcInputTypes.cbegin();
+            while (iter1 != call_parameters_type->cend()) {
+                if (*iter1 != *iter2) {
+                    //throw WrongFuncVariableType{};
                 }
+                iter1++;
+                iter2++;
             }
-        } catch (WrongFuncVariableNum &exception) {
-            handle_errors(exception);
-        } catch (WrongFuncVariableType &exception) {
-            handle_errors(exception);
         }
+
     }
 
     delete (call_parameters_type);
 
-    ASSERT_THROW("RPARENT", ShouldHaveRPARENT)
+    // ASSERT_THROW("RPARENT", ShouldHaveRPARENT)
 
     result.emplace_back("<无返回值函数调用语句>");
     getsym();
@@ -1183,7 +1183,7 @@ void GrammarAnalyzer::read_statement() {
     output_current_sym();
     while (true) {
         SYMTYPE_ASSERT("IDENFR")
-        CHECK_IDENFR_DEFINE
+        // CHECK_IDENFR_DEFINE
 
         intermediateCodes->back().addOperands(sym);
 
@@ -1196,7 +1196,7 @@ void GrammarAnalyzer::read_statement() {
         output_current_sym();
     }
 
-    ASSERT_THROW("RPARENT", ShouldHaveRPARENT)
+    // ASSERT_THROW("RPARENT", ShouldHaveRPARENT)
 
     result.emplace_back("<读语句>");
     getsym();
@@ -1231,7 +1231,7 @@ void GrammarAnalyzer::print_statement() {
         expression(uselessType, tempVarName);
         cmd.addOperands(tempVarName);
     }
-    ASSERT_THROW("RPARENT", ShouldHaveRPARENT)
+    // ASSERT_THROW("RPARENT", ShouldHaveRPARENT)
 
     intermediateCodes->emplace_back(cmd);
 
@@ -1254,7 +1254,7 @@ void GrammarAnalyzer::return_statement(VariableType &returnType) {
         intermediateCodes->emplace_back(FuncRetInDef);
         intermediateCodes->back().addOperands(tempVarName);
 
-        ASSERT_THROW("RPARENT", ShouldHaveRPARENT)
+        // ASSERT_THROW("RPARENT", ShouldHaveRPARENT)
         getsym();
     } else {
         returnType = voidType;
@@ -1327,17 +1327,14 @@ void GrammarAnalyzer::assign_statement() {
     IntermediateCmd *cmd;
     string identifierName = sym;
 
-    CHECK_IDENFR_DEFINE
+    // CHECK_IDENFR_DEFINE
 
     auto *searched_item = symbolTable.searchName(sym);
     if (searched_item != nullptr) {
-        try {
-            if (searched_item->type == constInt || searched_item->type == constChar) {
-                throw ChangeConstantValue{};
-            }
-        } catch (ChangeConstantValue &exception) {
-            handle_errors(exception);
+        if (searched_item->type == constInt || searched_item->type == constChar) {
+            //throw ChangeConstantValue{};
         }
+
     }
 
     getsym();
@@ -1353,15 +1350,12 @@ void GrammarAnalyzer::assign_statement() {
         // intermediateCodes->emplace_back(ArrayElemAssign);
         cmd->addOperands(identifierName);
         cmd->addOperands(tempVarName);
-        try {
-            if (subscriptType != intType && subscriptType != constInt) {
-                throw SubscriptNotInt{};
-            }
-        } catch (SubscriptNotInt &exception) {
-            handle_errors(exception);
+
+        if (subscriptType != intType && subscriptType != constInt) {
+            //throw SubscriptNotInt{};
         }
 
-        ASSERT_THROW("RBRACK", ShouldHaveRBRACK)
+        // ASSERT_THROW("RBRACK", ShouldHaveRBRACK)
 
         getsym();
         output_current_sym();
@@ -1466,24 +1460,21 @@ void GrammarAnalyzer::factor(VariableType &factorType, const string &assignVarNa
         string identifierName = sym;
 
         const Item *searched_item = symbolTable.searchName(sym);
-        try {
-            // Here I assume that int and const int are different, the same with char and const char
-            // No problem
-            if (searched_item == nullptr) {
-                throw UndefinedName{};
-            } else if (searched_item->type == intType || searched_item->type == intArray) {
-                factorType = intType;
-            } else if (searched_item->type == constInt) {
-                factorType = constInt;
-            } else if (searched_item->type == charType || searched_item->type == charArray) {
-                factorType = charType;
-            } else {
-                factorType = constChar;
-            }
-        } catch (UndefinedName &exception) {
-            handle_errors(exception);
-            factorType = voidType;   // random assign
+
+        // Here I assume that int and const int are different, the same with char and const char
+        // No problem
+        if (searched_item == nullptr) {
+            // throw UndefinedName{};
+        } else if (searched_item->type == intType || searched_item->type == intArray) {
+            factorType = intType;
+        } else if (searched_item->type == constInt) {
+            factorType = constInt;
+        } else if (searched_item->type == charType || searched_item->type == charArray) {
+            factorType = charType;
+        } else {
+            factorType = constChar;
         }
+
 
         getsym();
         output_current_sym();
@@ -1502,15 +1493,13 @@ void GrammarAnalyzer::factor(VariableType &factorType, const string &assignVarNa
             intermediateCodes->back().addOperands(identifierName);
             intermediateCodes->back().addOperands(tempVarName);
 
-            try {
-                if (subscriptType != intType && subscriptType != constInt) {
-                    throw SubscriptNotInt{};
-                }
-            } catch (SubscriptNotInt &exception) {
-                handle_errors(exception);
+
+            if (subscriptType != intType && subscriptType != constInt) {
+                //throw SubscriptNotInt{};
             }
 
-            ASSERT_THROW("RBRACK", ShouldHaveRBRACK)
+
+            // ASSERT_THROW("RBRACK", ShouldHaveRBRACK)
             getsym();
             output_current_sym();
         } else if (sym_type == "LPARENT") {
@@ -1548,7 +1537,7 @@ void GrammarAnalyzer::factor(VariableType &factorType, const string &assignVarNa
         intermediateCodes->back().addOperands(assignVarName);
         intermediateCodes->back().addOperands(tempVarName);
 
-        ASSERT_THROW("RPARENT", ShouldHaveRPARENT)
+        // ASSERT_THROW("RPARENT", ShouldHaveRPARENT)
         getsym();
         output_current_sym();
     } else if (sym_type == "CHARCON") {

@@ -27,7 +27,7 @@ private:
 
     vector<IntermediateCmd> *intermediateCodes;
 
-    void handle_errors(ErrorException &exception);
+    // void handle_errors(ErrorException &exception);
 
     static void handle_errors();
 

@@ -95,7 +95,7 @@ public:
 
     const vector<string> &getOperands() const { return operands; }
 
-    std::string print() {
+    std::string print() const {
         std::string cmd;
         if (operatorType == FuncDefStart) {
             cmd += operands.at(0);

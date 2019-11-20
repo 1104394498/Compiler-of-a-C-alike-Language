@@ -1,11 +1,71 @@
-int func(int a, int b, char c, char d, int f) {
-	return (1);
+int a1;int aa[8];int aa1[60];char a;char a2;char aa4[60];char ax[2];char as,cd,jf,akd[50],ad[1];
+void f(){return;}
+int fun1a(){return(23);}
+void f1(){
+	const int aajhhgg = +10;
+	const char a1tcfd = 'j';
+	const int aaajh = +1;
+	const int bbb = -1;
+	const int ccc = +0;
+	const int ddd = -0;
+	const int dfg = 2;
+	const int sfdvfd = 133;
+	const char fvg = '_';
+	const char dfv = 'a';
+	const char dvgfbv = 'Z';
+	const char jfbgfbf = '5';
+	const char dgfbfgfdfdkv = '+';
+	const char dddv = '*';
+	const char jdv = '/';
+	const char dsdo = '_';
 }
-
-void main() {
-	int b, a;
-	char cd;
-	scanf(a,b, cd);
-	a = func(1,2,'a', 'b', 4);
-	printf(a);
+void fu(){}
+void fun1(){}
+int fun1z(int x){return(2);}
+int fun2z(int x,int y){return(2);}
+void fun5(int ag){
+	int s,a,e,f,g,h,k[60],b,c,d,t;
+	f = 1;
+	e = 13;
+	a = 3;
+	c = 23;
+	d = 23;
+	s = 85;
+	t = 3;
+	f = 34;
+	h = 34;
+	if (+a*c/d){;}
+	if (k[1] >= 0){;}
+	if (a+b*c/d-b*s/t){;}
+	if (a+b*c/d >= fun1a()){;}
+	if (a+b*c/d <= fun1a()){;}
+	if (a+b*c/d > fun1a()){;}
+	if (a+b*c/d < fun1a()){;}
+	if (a+b*c/d != fun1a()){;}
+	if (a+b*c/d == fun1a()){;}
+	if (a+b*c/d == fun1a()){;}else{;}
+	{;}
+	while (f >= 0){;}
+	do{;}while (f <= 0)
+	for(a = +c;a <= 9;a = a + 10){;}
+	for(a = +c;a <= 9;a = a - 10){;}
+	fun1z(+a*c);
+	fun2z(-a/d,f);
+	a = c+d-e*f/h;
+	k[a-c] = s-t;
+	scanf(a);
+	scanf(b,c);
+	printf("sfdf",s/t);
+	printf("");
+	printf(s*t);
+}
+void fun6(int a){}
+void fun2(int a,int b,int a1,int b1,int aa,int bb){}
+void fun3(){
+	int a;
+	a = 1;
+}
+void fun4(char a,char b,char a1,char b1,char aa,char bb){}
+void main(){
+	int a1;int aa[8];int aa1[60];char advf;char adfvfd2;char aa4[60];char ax[2];char as,cd,jf,akd[50],ad[1];
 }
