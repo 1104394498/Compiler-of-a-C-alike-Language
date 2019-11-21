@@ -184,7 +184,7 @@ private:
                 mipsCmd.addRegister(r);
                 mipsCmd.addRegister(Register{v0});
                 mipsCodes->push_back(mipsCmd);
-                functionFile->variableTypeRecords[varName] =
+                functionFile->variableTypeRecords[varName] = 
             } else if (operatorType == FuncRetInDef) {
                 // move $ra, [register of return variable]
                 const Register &r = getRegister(midCode.getOperands().at(0));

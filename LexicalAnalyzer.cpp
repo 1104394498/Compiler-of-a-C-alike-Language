@@ -213,6 +213,8 @@ void LexicalAnalyzer::handle_errors(ErrorTypes errorType) {
 // Get current element
 string LexicalAnalyzer::currentElem(int &line) {
     line = curLine;
+    if (result[curLine-1].empty())
+        pointerNext();
     return result[curLine - 1][curPos];
 }
 
@@ -295,7 +297,7 @@ int LexicalAnalyzer::pointerLast() {
 
 int LexicalAnalyzer::pointerNext() {
     // if curPos points to the last element of current line, add curLine
-    if (curPos >= result[curLine - 1].size() - 1) {
+    if (curPos >= (int) result[curLine - 1].size() - 1) {
         curLine++;
         if (curLine > result.size()) {
             return 0;
