@@ -584,7 +584,10 @@ void MipsGenerator::dealAssign(const IntermediateCmd &midCode) {
         assignCmd.addRegister(r1);
         assignCmd.addRegister(r2);
         mipsCodes->push_back(assignCmd);
-        functionFile->variableTypeRecords[operands.at(0)] = functionFile->variableTypeRecords[addNum];
+        if (functionFile->variableTypeRecords.count(addNum) > 0)
+            functionFile->variableTypeRecords[operands.at(0)] = functionFile->variableTypeRecords[addNum];
+        else
+            functionFile->variableTypeRecords[operands.at(0)] = globalNameTypeRecords[addNum];
     }
 }
 
@@ -994,7 +997,12 @@ void MipsGenerator::dealPrintf(const IntermediateCmd &midCode) {
             mipsCodes->push_back(MipsCmd{syscall});
         } else {
             // a (const) variable
-            VariableType variableType = functionFile->variableTypeRecords[op];
+            VariableType variableType;
+            if (functionFile->variableTypeRecords.count(op) > 0)
+                variableType = functionFile->variableTypeRecords[op];
+            else
+                variableType = globalNameTypeRecords[op];
+
             if (variableType == intType) {
                 // an int variable
                 // li $v0, 1
@@ -1037,8 +1045,14 @@ void MipsGenerator::dealPrintf(const IntermediateCmd &midCode) {
 }
 
 void MipsGenerator::dealScanf(const IntermediateCmd &midCode) {
+    VariableType variableType;
     for (const string &op : midCode.getOperands()) {
-        VariableType variableType = functionFile->variableTypeRecords[op];
+        if (functionFile->variableTypeRecords.count(op) > 0) {
+            variableType = functionFile->variableTypeRecords[op];
+        } else {
+            variableType = globalNameTypeRecords[op];
+        }
+
         if (variableType == intType) {
             // li $v0, 5
             MipsCmd liCmd{li};
@@ -1196,7 +1210,7 @@ void MipsGenerator::dealCallFunc(const IntermediateCmd &midCode) {
     MipsCmd Jal{jal};
     Jal.addLabel(midCode.getOperands().at(0));
     mipsCodes->push_back(Jal);
-    lastRetType = globalNameTypeRecords[midCode.getOperands().at(0)];
+    lastRetTypes.push(globalNameTypeRecords[midCode.getOperands().at(0)]);
 }
 
 void MipsGenerator::dealLabel(const IntermediateCmd &midCode) {
@@ -1212,6 +1226,7 @@ void MipsGenerator::dealAssignRetValue(const IntermediateCmd &midCode) {
     mipsCmd.addRegister(r);
     mipsCmd.addRegister(Register{v0});
     mipsCodes->push_back(mipsCmd);
-    functionFile->variableTypeRecords[varName] = lastRetType;
+    functionFile->variableTypeRecords[varName] = lastRetTypes.top();
+    lastRetTypes.pop();
 }
 

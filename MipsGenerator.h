@@ -132,7 +132,7 @@ private:
     vector<MipsCmd> *mipsCodes;
     vector<IntermediateCmd> unhandled_push{};
     RunningFile *functionFile = nullptr;
-    VariableType lastRetType = intType;
+    stack<VariableType> lastRetTypes;
 
     // get register
     // Register getRegister(const string &varName);

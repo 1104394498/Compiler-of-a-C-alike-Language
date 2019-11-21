@@ -13,29 +13,18 @@
   <component name="ChangeListManager">
     <list default="true" id="7c89e8cf-e84f-479e-8418-ae89c16d8757" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrammerAnalyzer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GrammerAnalyzer.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrammerAnalyzer.h" beforeDir="false" afterPath="$PROJECT_DIR$/GrammerAnalyzer.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LexicalAnalyzer.h" beforeDir="false" afterPath="$PROJECT_DIR$/LexicalAnalyzer.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LexicalAnalyzer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/LexicalAnalyzer.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MipsGenerator.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/MipsGenerator.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MipsGenerator.h" beforeDir="false" afterPath="$PROJECT_DIR$/MipsGenerator.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SymbolTable.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/SymbolTable.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SymbolTable.h" beforeDir="false" afterPath="$PROJECT_DIR$/SymbolTable.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TypeDefine.h" beforeDir="false" afterPath="$PROJECT_DIR$/TypeDefine.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/17376108_王慎执_优化前中间代码.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/17376108_王慎执_优化前中间代码.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/17376108_王慎执_优化后中间代码.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/MIPScode.dir/CXX.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/MIPScode.dir/CXX.includecache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/MIPScode.dir/GrammerAnalyzer.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/MIPScode.dir/GrammerAnalyzer.cpp.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/MIPScode.dir/LexicalAnalyzer.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/MIPScode.dir/LexicalAnalyzer.cpp.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/MIPScode.dir/MipsGenerator.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/MIPScode.dir/MipsGenerator.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/MIPScode.dir/Optimizer.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/MIPScode.dir/Optimizer.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/MIPScode.dir/main.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/MIPScode.dir/main.cpp.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/MIPScode" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/MIPScode" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/mips.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/mips.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/output.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/output.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/testfile.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/testfile.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/testfile2.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/归档.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/testfile3.txt" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -123,6 +112,11 @@
           <url>file://$PROJECT_DIR$/MipsGenerator.h</url>
           <line>173</line>
           <option name="timeStamp" value="49" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/MipsGenerator.cpp</url>
+          <line>999</line>
+          <option name="timeStamp" value="55" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
