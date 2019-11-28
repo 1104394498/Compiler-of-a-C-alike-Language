@@ -1,4 +1,4 @@
-# Install script for directory: /Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode
+# Install script for directory: /Users/wsz/Library/Mobile Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -40,5 +40,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/Users/wsz/Library/Mobile Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

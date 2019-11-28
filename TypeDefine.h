@@ -76,7 +76,9 @@ enum OperatorType {
     ArrayElemAssign,// array[i] = a
     ConstDef,       // const int variable, const char variable
     VarStatement,         // int variable, char variable
-    VarArrayStatement     // int array[10], char array[10]
+    VarArrayStatement,     // int array[10], char array[10]
+    LoopSaveRegStatus,      // fix bugs in loop
+    LoopRestoreRegStatus    // fix bugs in loop
 };
 
 class IntermediateCmd {
@@ -239,6 +241,10 @@ public:
             cmd += "[";
             cmd += operands.at(2);
             cmd += "]";
+        } else if (operatorType == LoopSaveRegStatus) {
+            cmd += "LoopSaveRegStatus";
+        } else if (operatorType == LoopRestoreRegStatus) {
+            cmd += "LoopRestoreRegStatus";
         }
         return cmd;
     };

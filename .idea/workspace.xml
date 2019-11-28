@@ -14,18 +14,30 @@
     <list default="true" id="7c89e8cf-e84f-479e-8418-ae89c16d8757" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GrammerAnalyzer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GrammerAnalyzer.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MipsGenerator.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/MipsGenerator.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Optimizer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Optimizer.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Optimizer.h" beforeDir="false" afterPath="$PROJECT_DIR$/Optimizer.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TypeDefine.h" beforeDir="false" afterPath="$PROJECT_DIR$/TypeDefine.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/17376108_王慎执_优化前中间代码.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/17376108_王慎执_优化前中间代码.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeDirectoryInformation.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeDirectoryInformation.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeOutput.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeOutput.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/MIPScode.dir/CXX.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/MIPScode.dir/CXX.includecache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/MIPScode.dir/DependInfo.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/MIPScode.dir/DependInfo.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/MIPScode.dir/GrammerAnalyzer.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/MIPScode.dir/GrammerAnalyzer.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/MIPScode.dir/LexicalAnalyzer.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/MIPScode.dir/LexicalAnalyzer.cpp.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/MIPScode.dir/MipsGenerator.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/MIPScode.dir/MipsGenerator.cpp.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/MIPScode.dir/Optimizer.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/MIPScode.dir/Optimizer.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/MIPScode.dir/SymbolTable.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/MIPScode.dir/SymbolTable.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/MIPScode.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/MIPScode.dir/build.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/MIPScode.dir/depend.internal" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/MIPScode.dir/depend.internal" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/MIPScode.dir/flags.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/MIPScode.dir/flags.make" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/MIPScode.dir/main.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/MIPScode.dir/main.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile2" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TargetDirectories.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TargetDirectories.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-log.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/MIPScode" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/MIPScode" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/mips.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/mips.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/output.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/output.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/testfile.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/testfile.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/MIPScode.cbp" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/MIPScode.cbp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/cmake_install.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/cmake_install.cmake" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -86,7 +98,8 @@
       <workItem from="1574597573173" duration="4716000" />
       <workItem from="1574647276442" duration="9000" />
       <workItem from="1574831526286" duration="2961000" />
-      <workItem from="1574879655288" duration="3367000" />
+      <workItem from="1574879655288" duration="3512000" />
+      <workItem from="1574932586253" duration="792000" />
     </task>
     <servers />
   </component>

@@ -43,10 +43,10 @@ RM = "/Users/wsz/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/1
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = "/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode"
+CMAKE_SOURCE_DIR = "/Users/wsz/Library/Mobile Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode"
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = "/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/cmake-build-debug"
+CMAKE_BINARY_DIR = "/Users/wsz/Library/Mobile Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/cmake-build-debug"
 
 # Include any dependencies generated for this target.
 include CMakeFiles/MIPScode.dir/depend.make
@@ -59,81 +59,81 @@ include CMakeFiles/MIPScode.dir/flags.make
 
 CMakeFiles/MIPScode.dir/GrammerAnalyzer.cpp.o: CMakeFiles/MIPScode.dir/flags.make
 CMakeFiles/MIPScode.dir/GrammerAnalyzer.cpp.o: ../GrammerAnalyzer.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/MIPScode.dir/GrammerAnalyzer.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MIPScode.dir/GrammerAnalyzer.cpp.o -c "/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/GrammerAnalyzer.cpp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/Users/wsz/Library/Mobile Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/MIPScode.dir/GrammerAnalyzer.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MIPScode.dir/GrammerAnalyzer.cpp.o -c "/Users/wsz/Library/Mobile Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/GrammerAnalyzer.cpp"
 
 CMakeFiles/MIPScode.dir/GrammerAnalyzer.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/MIPScode.dir/GrammerAnalyzer.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/GrammerAnalyzer.cpp" > CMakeFiles/MIPScode.dir/GrammerAnalyzer.cpp.i
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/Users/wsz/Library/Mobile Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/GrammerAnalyzer.cpp" > CMakeFiles/MIPScode.dir/GrammerAnalyzer.cpp.i
 
 CMakeFiles/MIPScode.dir/GrammerAnalyzer.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/MIPScode.dir/GrammerAnalyzer.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/GrammerAnalyzer.cpp" -o CMakeFiles/MIPScode.dir/GrammerAnalyzer.cpp.s
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Users/wsz/Library/Mobile Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/GrammerAnalyzer.cpp" -o CMakeFiles/MIPScode.dir/GrammerAnalyzer.cpp.s
 
 CMakeFiles/MIPScode.dir/LexicalAnalyzer.cpp.o: CMakeFiles/MIPScode.dir/flags.make
 CMakeFiles/MIPScode.dir/LexicalAnalyzer.cpp.o: ../LexicalAnalyzer.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/MIPScode.dir/LexicalAnalyzer.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MIPScode.dir/LexicalAnalyzer.cpp.o -c "/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/LexicalAnalyzer.cpp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/Users/wsz/Library/Mobile Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/MIPScode.dir/LexicalAnalyzer.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MIPScode.dir/LexicalAnalyzer.cpp.o -c "/Users/wsz/Library/Mobile Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/LexicalAnalyzer.cpp"
 
 CMakeFiles/MIPScode.dir/LexicalAnalyzer.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/MIPScode.dir/LexicalAnalyzer.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/LexicalAnalyzer.cpp" > CMakeFiles/MIPScode.dir/LexicalAnalyzer.cpp.i
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/Users/wsz/Library/Mobile Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/LexicalAnalyzer.cpp" > CMakeFiles/MIPScode.dir/LexicalAnalyzer.cpp.i
 
 CMakeFiles/MIPScode.dir/LexicalAnalyzer.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/MIPScode.dir/LexicalAnalyzer.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/LexicalAnalyzer.cpp" -o CMakeFiles/MIPScode.dir/LexicalAnalyzer.cpp.s
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Users/wsz/Library/Mobile Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/LexicalAnalyzer.cpp" -o CMakeFiles/MIPScode.dir/LexicalAnalyzer.cpp.s
 
 CMakeFiles/MIPScode.dir/main.cpp.o: CMakeFiles/MIPScode.dir/flags.make
 CMakeFiles/MIPScode.dir/main.cpp.o: ../main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/MIPScode.dir/main.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MIPScode.dir/main.cpp.o -c "/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/main.cpp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/Users/wsz/Library/Mobile Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/MIPScode.dir/main.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MIPScode.dir/main.cpp.o -c "/Users/wsz/Library/Mobile Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/main.cpp"
 
 CMakeFiles/MIPScode.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/MIPScode.dir/main.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/main.cpp" > CMakeFiles/MIPScode.dir/main.cpp.i
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/Users/wsz/Library/Mobile Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/main.cpp" > CMakeFiles/MIPScode.dir/main.cpp.i
 
 CMakeFiles/MIPScode.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/MIPScode.dir/main.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/main.cpp" -o CMakeFiles/MIPScode.dir/main.cpp.s
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Users/wsz/Library/Mobile Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/main.cpp" -o CMakeFiles/MIPScode.dir/main.cpp.s
 
 CMakeFiles/MIPScode.dir/SymbolTable.cpp.o: CMakeFiles/MIPScode.dir/flags.make
 CMakeFiles/MIPScode.dir/SymbolTable.cpp.o: ../SymbolTable.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/MIPScode.dir/SymbolTable.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MIPScode.dir/SymbolTable.cpp.o -c "/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/SymbolTable.cpp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/Users/wsz/Library/Mobile Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/MIPScode.dir/SymbolTable.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MIPScode.dir/SymbolTable.cpp.o -c "/Users/wsz/Library/Mobile Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/SymbolTable.cpp"
 
 CMakeFiles/MIPScode.dir/SymbolTable.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/MIPScode.dir/SymbolTable.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/SymbolTable.cpp" > CMakeFiles/MIPScode.dir/SymbolTable.cpp.i
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/Users/wsz/Library/Mobile Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/SymbolTable.cpp" > CMakeFiles/MIPScode.dir/SymbolTable.cpp.i
 
 CMakeFiles/MIPScode.dir/SymbolTable.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/MIPScode.dir/SymbolTable.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/SymbolTable.cpp" -o CMakeFiles/MIPScode.dir/SymbolTable.cpp.s
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Users/wsz/Library/Mobile Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/SymbolTable.cpp" -o CMakeFiles/MIPScode.dir/SymbolTable.cpp.s
 
 CMakeFiles/MIPScode.dir/Optimizer.cpp.o: CMakeFiles/MIPScode.dir/flags.make
 CMakeFiles/MIPScode.dir/Optimizer.cpp.o: ../Optimizer.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/MIPScode.dir/Optimizer.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MIPScode.dir/Optimizer.cpp.o -c "/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/Optimizer.cpp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/Users/wsz/Library/Mobile Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/MIPScode.dir/Optimizer.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MIPScode.dir/Optimizer.cpp.o -c "/Users/wsz/Library/Mobile Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/Optimizer.cpp"
 
 CMakeFiles/MIPScode.dir/Optimizer.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/MIPScode.dir/Optimizer.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/Optimizer.cpp" > CMakeFiles/MIPScode.dir/Optimizer.cpp.i
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/Users/wsz/Library/Mobile Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/Optimizer.cpp" > CMakeFiles/MIPScode.dir/Optimizer.cpp.i
 
 CMakeFiles/MIPScode.dir/Optimizer.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/MIPScode.dir/Optimizer.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/Optimizer.cpp" -o CMakeFiles/MIPScode.dir/Optimizer.cpp.s
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Users/wsz/Library/Mobile Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/Optimizer.cpp" -o CMakeFiles/MIPScode.dir/Optimizer.cpp.s
 
 CMakeFiles/MIPScode.dir/MipsGenerator.cpp.o: CMakeFiles/MIPScode.dir/flags.make
 CMakeFiles/MIPScode.dir/MipsGenerator.cpp.o: ../MipsGenerator.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/MIPScode.dir/MipsGenerator.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MIPScode.dir/MipsGenerator.cpp.o -c "/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/MipsGenerator.cpp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/Users/wsz/Library/Mobile Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/MIPScode.dir/MipsGenerator.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MIPScode.dir/MipsGenerator.cpp.o -c "/Users/wsz/Library/Mobile Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/MipsGenerator.cpp"
 
 CMakeFiles/MIPScode.dir/MipsGenerator.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/MIPScode.dir/MipsGenerator.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/MipsGenerator.cpp" > CMakeFiles/MIPScode.dir/MipsGenerator.cpp.i
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/Users/wsz/Library/Mobile Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/MipsGenerator.cpp" > CMakeFiles/MIPScode.dir/MipsGenerator.cpp.i
 
 CMakeFiles/MIPScode.dir/MipsGenerator.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/MIPScode.dir/MipsGenerator.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/MipsGenerator.cpp" -o CMakeFiles/MIPScode.dir/MipsGenerator.cpp.s
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Users/wsz/Library/Mobile Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/MipsGenerator.cpp" -o CMakeFiles/MIPScode.dir/MipsGenerator.cpp.s
 
 # Object files for target MIPScode
 MIPScode_OBJECTS = \
@@ -155,7 +155,7 @@ MIPScode: CMakeFiles/MIPScode.dir/Optimizer.cpp.o
 MIPScode: CMakeFiles/MIPScode.dir/MipsGenerator.cpp.o
 MIPScode: CMakeFiles/MIPScode.dir/build.make
 MIPScode: CMakeFiles/MIPScode.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable MIPScode"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="/Users/wsz/Library/Mobile Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable MIPScode"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/MIPScode.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -168,6 +168,6 @@ CMakeFiles/MIPScode.dir/clean:
 .PHONY : CMakeFiles/MIPScode.dir/clean
 
 CMakeFiles/MIPScode.dir/depend:
-	cd "/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/cmake-build-debug" && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" "/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode" "/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode" "/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/cmake-build-debug" "/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/cmake-build-debug" "/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/cmake-build-debug/CMakeFiles/MIPScode.dir/DependInfo.cmake" --color=$(COLOR)
+	cd "/Users/wsz/Library/Mobile Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/cmake-build-debug" && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" "/Users/wsz/Library/Mobile Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode" "/Users/wsz/Library/Mobile Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode" "/Users/wsz/Library/Mobile Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/cmake-build-debug" "/Users/wsz/Library/Mobile Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/cmake-build-debug" "/Users/wsz/Library/Mobile Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/cmake-build-debug/CMakeFiles/MIPScode.dir/DependInfo.cmake" --color=$(COLOR)
 .PHONY : CMakeFiles/MIPScode.dir/depend
 

@@ -6,5 +6,5 @@ CXX_FLAGS = -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/Ma
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I"/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/." 
+CXX_INCLUDES = -I"/Users/wsz/Library/Mobile Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/." 
 

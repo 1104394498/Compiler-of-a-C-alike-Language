@@ -8,43 +8,43 @@
 		<Option virtualFolders="CMake Files\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/cmake-build-debug"/>
+				<Option working_dir="/Users/wsz/Library/Mobile Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j12 -f &quot;/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5.\ 生成MIPS代码/MIPScode/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="/usr/bin/make -j12 -f &quot;/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5.\ 生成MIPS代码/MIPScode/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j12 -f &quot;/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5.\ 生成MIPS代码/MIPScode/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j12 -f &quot;/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5.\ 生成MIPS代码/MIPScode/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j12 -f &quot;/Users/wsz/Library/Mobile\ Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5.\ 生成MIPS代码/MIPScode/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/Users/wsz/Library/Mobile\ Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5.\ 生成MIPS代码/MIPScode/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/Users/wsz/Library/Mobile\ Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5.\ 生成MIPS代码/MIPScode/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/Users/wsz/Library/Mobile\ Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5.\ 生成MIPS代码/MIPScode/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/cmake-build-debug"/>
+				<Option working_dir="/Users/wsz/Library/Mobile Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j12 -f &quot;/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5.\ 生成MIPS代码/MIPScode/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="/usr/bin/make -j12 -f &quot;/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5.\ 生成MIPS代码/MIPScode/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j12 -f &quot;/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5.\ 生成MIPS代码/MIPScode/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j12 -f &quot;/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5.\ 生成MIPS代码/MIPScode/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j12 -f &quot;/Users/wsz/Library/Mobile\ Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5.\ 生成MIPS代码/MIPScode/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/Users/wsz/Library/Mobile\ Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5.\ 生成MIPS代码/MIPScode/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/Users/wsz/Library/Mobile\ Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5.\ 生成MIPS代码/MIPScode/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/Users/wsz/Library/Mobile\ Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5.\ 生成MIPS代码/MIPScode/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="edit_cache">
-				<Option working_dir="/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/cmake-build-debug"/>
+				<Option working_dir="/Users/wsz/Library/Mobile Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j12 -f &quot;/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5.\ 生成MIPS代码/MIPScode/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="/usr/bin/make -j12 -f &quot;/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5.\ 生成MIPS代码/MIPScode/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j12 -f &quot;/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5.\ 生成MIPS代码/MIPScode/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j12 -f &quot;/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5.\ 生成MIPS代码/MIPScode/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j12 -f &quot;/Users/wsz/Library/Mobile\ Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5.\ 生成MIPS代码/MIPScode/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/Users/wsz/Library/Mobile\ Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5.\ 生成MIPS代码/MIPScode/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/Users/wsz/Library/Mobile\ Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5.\ 生成MIPS代码/MIPScode/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/Users/wsz/Library/Mobile\ Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5.\ 生成MIPS代码/MIPScode/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="MIPScode">
-				<Option output="/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/cmake-build-debug/MIPScode" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/cmake-build-debug"/>
+				<Option output="/Users/wsz/Library/Mobile Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/cmake-build-debug/MIPScode" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/wsz/Library/Mobile Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/."/>
+					<Add directory="/Users/wsz/Library/Mobile Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/."/>
 					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
 					<Add directory="/usr/local/include"/>
 					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/11.0.0/include"/>
@@ -53,20 +53,20 @@
 					<Add directory="/Library/Frameworks"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j12 -f &quot;/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5.\ 生成MIPS代码/MIPScode/cmake-build-debug/Makefile&quot;  VERBOSE=1 MIPScode"/>
-					<CompileFile command="/usr/bin/make -j12 -f &quot;/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5.\ 生成MIPS代码/MIPScode/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j12 -f &quot;/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5.\ 生成MIPS代码/MIPScode/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j12 -f &quot;/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5.\ 生成MIPS代码/MIPScode/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j12 -f &quot;/Users/wsz/Library/Mobile\ Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5.\ 生成MIPS代码/MIPScode/cmake-build-debug/Makefile&quot;  VERBOSE=1 MIPScode"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/Users/wsz/Library/Mobile\ Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5.\ 生成MIPS代码/MIPScode/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/Users/wsz/Library/Mobile\ Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5.\ 生成MIPS代码/MIPScode/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/Users/wsz/Library/Mobile\ Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5.\ 生成MIPS代码/MIPScode/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="MIPScode/fast">
-				<Option output="/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/cmake-build-debug/MIPScode" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/cmake-build-debug"/>
+				<Option output="/Users/wsz/Library/Mobile Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/cmake-build-debug/MIPScode" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/wsz/Library/Mobile Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/."/>
+					<Add directory="/Users/wsz/Library/Mobile Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/."/>
 					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
 					<Add directory="/usr/local/include"/>
 					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/11.0.0/include"/>
@@ -75,50 +75,50 @@
 					<Add directory="/Library/Frameworks"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j12 -f &quot;/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5.\ 生成MIPS代码/MIPScode/cmake-build-debug/Makefile&quot;  VERBOSE=1 MIPScode/fast"/>
-					<CompileFile command="/usr/bin/make -j12 -f &quot;/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5.\ 生成MIPS代码/MIPScode/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j12 -f &quot;/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5.\ 生成MIPS代码/MIPScode/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j12 -f &quot;/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5.\ 生成MIPS代码/MIPScode/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j12 -f &quot;/Users/wsz/Library/Mobile\ Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5.\ 生成MIPS代码/MIPScode/cmake-build-debug/Makefile&quot;  VERBOSE=1 MIPScode/fast"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/Users/wsz/Library/Mobile\ Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5.\ 生成MIPS代码/MIPScode/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/Users/wsz/Library/Mobile\ Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5.\ 生成MIPS代码/MIPScode/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/Users/wsz/Library/Mobile\ Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5.\ 生成MIPS代码/MIPScode/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/GrammerAnalyzer.cpp">
+		<Unit filename="/Users/wsz/Library/Mobile Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/GrammerAnalyzer.cpp">
 			<Option target="MIPScode"/>
 		</Unit>
-		<Unit filename="/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/GrammerAnalyzer.h">
+		<Unit filename="/Users/wsz/Library/Mobile Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/GrammerAnalyzer.h">
 			<Option target="MIPScode"/>
 		</Unit>
-		<Unit filename="/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/LexicalAnalyzer.cpp">
+		<Unit filename="/Users/wsz/Library/Mobile Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/LexicalAnalyzer.cpp">
 			<Option target="MIPScode"/>
 		</Unit>
-		<Unit filename="/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/LexicalAnalyzer.h">
+		<Unit filename="/Users/wsz/Library/Mobile Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/LexicalAnalyzer.h">
 			<Option target="MIPScode"/>
 		</Unit>
-		<Unit filename="/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/MipsGenerator.cpp">
+		<Unit filename="/Users/wsz/Library/Mobile Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/MipsGenerator.cpp">
 			<Option target="MIPScode"/>
 		</Unit>
-		<Unit filename="/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/MipsGenerator.h">
+		<Unit filename="/Users/wsz/Library/Mobile Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/MipsGenerator.h">
 			<Option target="MIPScode"/>
 		</Unit>
-		<Unit filename="/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/Optimizer.cpp">
+		<Unit filename="/Users/wsz/Library/Mobile Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/Optimizer.cpp">
 			<Option target="MIPScode"/>
 		</Unit>
-		<Unit filename="/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/Optimizer.h">
+		<Unit filename="/Users/wsz/Library/Mobile Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/Optimizer.h">
 			<Option target="MIPScode"/>
 		</Unit>
-		<Unit filename="/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/SymbolTable.cpp">
+		<Unit filename="/Users/wsz/Library/Mobile Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/SymbolTable.cpp">
 			<Option target="MIPScode"/>
 		</Unit>
-		<Unit filename="/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/SymbolTable.h">
+		<Unit filename="/Users/wsz/Library/Mobile Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/SymbolTable.h">
 			<Option target="MIPScode"/>
 		</Unit>
-		<Unit filename="/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/TypeDefine.h">
+		<Unit filename="/Users/wsz/Library/Mobile Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/TypeDefine.h">
 			<Option target="MIPScode"/>
 		</Unit>
-		<Unit filename="/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/main.cpp">
+		<Unit filename="/Users/wsz/Library/Mobile Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/main.cpp">
 			<Option target="MIPScode"/>
 		</Unit>
-		<Unit filename="/Users/wsz/OneDrive/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/CMakeLists.txt">
+		<Unit filename="/Users/wsz/Library/Mobile Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 	</Project>

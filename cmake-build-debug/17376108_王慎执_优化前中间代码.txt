@@ -82,6 +82,7 @@ t48 = 1
 t47 = t48
 t44 = t44 + t47
 count = t44
+SaveEnvironment
 GOTO Label_0
 Label_1:
 Exit

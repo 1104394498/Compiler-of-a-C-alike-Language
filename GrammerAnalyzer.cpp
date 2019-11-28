@@ -845,7 +845,6 @@ void GrammarAnalyzer::loop_statement(VariableType &returnType) {
         step_cmd->addOperands(step_str);
 
         // ASSERT_THROW("RPARENT", ShouldHaveRPARENT)
-
         getsym();
         output_current_sym();
         statement(returnType);
