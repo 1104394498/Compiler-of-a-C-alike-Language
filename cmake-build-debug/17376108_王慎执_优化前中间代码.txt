@@ -1,9 +1,87 @@
-var int test
-void main()
-printf "Hello World"
-scanf test
-t2 = test
+const int maxIterNum = 5
+var int count
+int func1()
+t2 = 3
 t1 = t2
 t0 = t1
-printf t0
+ret t0
+int func2()
+para int a
+para int b
+para int c
+para int d
+t8 = maxIterNum
+t7 = t8
+t9 = b
+t7 = t7 * t9
+t6 = t7
+t11 = a
+t10 = t11
+t12 = maxIterNum
+t10 = t10 * t12
+t13 = d
+t10 = t10 / t13
+t6 = t6 + t10
+t5 = t6
+t4 = t5
+t14 = c
+t4 = t4 * t14
+t3 = t4
+t16 = a
+t15 = t16
+t17 = d
+t15 = t15 * t17
+t3 = t3 + t15
+ret t3
+void main()
+t20 = 5
+t19 = t20
+t18 = t19
+count = t18
+Label_0:
+t23 = count
+t22 = t23
+t21 = t22
+t26 = 10
+t25 = t26
+t24 = t25
+t21 < t24
+BZ Label_1
+SaveEnvironment
+call func1
+RestoreEnvironment
+t34 = RET
+t33 = t34
+t32 = t33
+t31 = t32
+t37 = count
+t36 = t37
+t35 = t36
+t40 = maxIterNum
+t39 = t40
+t38 = t39
+t43 = count
+t42 = t43
+t41 = t42
+push t31
+push t35
+push t38
+push t41
+SaveEnvironment
+call func2
+RestoreEnvironment
+t30 = RET
+t29 = t30
+t28 = t29
+t27 = t28
+printf t27
+t46 = count
+t45 = t46
+t44 = t45
+t48 = 1
+t47 = t48
+t44 = t44 + t47
+count = t44
+GOTO Label_0
+Label_1:
 Exit

@@ -1,7 +1,18 @@
+const int maxIterNum = 5;
+int count;
 
-int test;
+int func1() {
+    return (3);
+}
+
+int func2(int a, int b, int c, int d) {
+    return ((maxIterNum * b + a * maxIterNum / d) * c + a*d);
+}
+
 void main(){
-    printf("Hello World");
-    scanf(test);
-    printf(test);
+    count = 5;
+    while (count < 10) {
+        printf(func2(func1(), count, maxIterNum, count));
+        count = count + 1;
+    }
 }

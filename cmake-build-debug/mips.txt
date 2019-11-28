@@ -1,41 +1,171 @@
 .data
-test: .word 
+maxIterNum: .word 5
+count: .word 
 .text
 j main
-main:
-li $v0, 11
-li $a0, 72
-syscall
-li $a0, 101
-syscall
-li $a0, 108
-syscall
-li $a0, 108
-syscall
-li $a0, 111
-syscall
-li $a0, 32
-syscall
-li $a0, 87
-syscall
-li $a0, 111
-syscall
-li $a0, 114
-syscall
-li $a0, 108
-syscall
-li $a0, 100
-syscall
-li $v0, 11
-li $a0, 10
-syscall
-li $v0, 5
-syscall
-la $t0, test
-lw $t0, 0($t0)
-move $t0, $v0
+func1:
+li $t0, 3
 move $t1, $t0
 move $t2, $t1
+move $v0, $t2
+jr $ra
+func2:
+la $t4, maxIterNum
+lw $t4, 0($t4)
+move $t3, $t4
+move $t5, $t3
+move $t6, $a1
+mul $t5, $t5, $t6
+move $t7, $t5
+move $t8, $a0
+move $t0, $t8
+move $t1, $t4
+mul $t0, $t0, $t1
+move $t2, $a3
+div $t0, $t0, $t2
+add $t7, $t7, $t0
+sw $t3, -20($sp)
+move $t3, $t7
+sw $t6, -24($sp)
+move $t6, $t3
+sw $t5, -28($sp)
+move $t5, $a2
+mul $t6, $t6, $t5
+sw $t8, -32($sp)
+move $t8, $t6
+la $v1, maxIterNum
+sw $t4, 0($v1)
+move $t4, $a0
+sw $t1, -36($sp)
+move $t1, $t4
+sw $t2, -40($sp)
+move $t2, $a3
+mul $t1, $t1, $t2
+add $t8, $t8, $t1
+move $v0, $t8
+jr $ra
+main:
+li $t0, 5
+move $t7, $t0
+move $t3, $t7
+la $t5, count
+lw $t5, 0($t5)
+move $t5, $t3
+Label_0:
+move $t6, $t5
+move $t4, $t6
+move $t2, $t4
+li $t1, 10
+move $t8, $t1
+sw $t0, -4($sp)
+move $t0, $t8
+bge $t2, $t0, Label_1
+sw $ra, 0($sp)
+sw $t0, -8($sp)
+sw $t1, -12($sp)
+sw $t2, -16($sp)
+sw $t3, -20($sp)
+sw $t4, -24($sp)
+sw $t7, -28($sp)
+la $t7, count
+sw $t5, 0($t7)
+sw $t6, -32($sp)
+sw $t7, -28($sp)
+sw $t8, -36($sp)
+subi $sp, $sp, 40
+jal func1
+addi $sp, $sp, 40
+lw $ra, 0($sp)
+lw $t0, -8($sp)
+lw $t1, -12($sp)
+lw $t2, -16($sp)
+lw $t3, -20($sp)
+lw $t4, -24($sp)
+la $v1, count
+sw $t5, 0($v1)
+la $t5, count
+lw $t5, 0($t5)
+lw $t6, -32($sp)
+lw $t7, -28($sp)
+lw $t8, -36($sp)
+sw $t0, -8($sp)
+move $t0, $v0
+sw $t1, -12($sp)
+move $t1, $t0
+sw $t2, -16($sp)
+move $t2, $t1
+sw $t3, -20($sp)
+move $t3, $t2
+sw $t4, -24($sp)
+move $t4, $t5
+sw $t6, -32($sp)
+move $t6, $t4
+sw $t7, -28($sp)
+move $t7, $t6
+sw $t8, -36($sp)
+sw $t0, -40($sp)
+la $t0, maxIterNum
+lw $t0, 0($t0)
+move $t8, $t0
+sw $t1, -44($sp)
+move $t1, $t8
+sw $t3, -48($sp)
+move $t3, $t1
+sw $t2, -52($sp)
+move $t2, $t5
+sw $t4, -56($sp)
+move $t4, $t2
+sw $t7, -60($sp)
+move $t7, $t4
+sw $ra, 0($sp)
+sw $t6, -64($sp)
+la $t6, maxIterNum
+sw $t0, 0($t6)
+sw $t1, -68($sp)
+sw $t2, -72($sp)
+sw $t3, -76($sp)
+sw $t4, -80($sp)
+sw $t8, -84($sp)
+la $t8, count
+sw $t5, 0($t8)
+sw $t6, -64($sp)
+sw $t7, -88($sp)
+sw $t8, -84($sp)
+la $v1, maxIterNum
+sw $t0, 0($v1)
+lw $t0, -48($sp)
+move $a0, $t0
+sw $t1, -68($sp)
+lw $t1, -60($sp)
+move $a1, $t1
+move $a2, $t3
+move $a3, $t7
+subi $sp, $sp, 92
+jal func2
+addi $sp, $sp, 92
+lw $ra, 0($sp)
+sw $t2, -72($sp)
+la $t2, maxIterNum
+lw $t0, 0($t2)
+lw $t1, -68($sp)
+lw $t2, -72($sp)
+lw $t3, -76($sp)
+lw $t4, -80($sp)
+la $v1, count
+sw $t5, 0($v1)
+la $t5, count
+lw $t5, 0($t5)
+lw $t6, -64($sp)
+lw $t7, -88($sp)
+lw $t8, -84($sp)
+la $v1, maxIterNum
+sw $t0, 0($v1)
+move $t0, $v0
+sw $t1, -68($sp)
+move $t1, $t0
+sw $t2, -72($sp)
+move $t2, $t1
+sw $t3, -76($sp)
 move $t3, $t2
 li $v0, 1
 move $a0, $t3
@@ -43,5 +173,31 @@ syscall
 li $v0, 11
 li $a0, 10
 syscall
+sw $t4, -80($sp)
+move $t4, $t5
+sw $t6, -64($sp)
+move $t6, $t4
+sw $t7, -88($sp)
+move $t7, $t6
+sw $t8, -84($sp)
+li $t8, 1
+sw $t0, -92($sp)
+move $t0, $t8
+add $t7, $t7, $t0
+move $t5, $t7
+sw $ra, 0($sp)
+sw $t0, -96($sp)
+sw $t1, -100($sp)
+sw $t2, -104($sp)
+sw $t3, -108($sp)
+sw $t4, -112($sp)
+sw $t6, -116($sp)
+la $t6, count
+sw $t5, 0($t6)
+sw $t6, -116($sp)
+sw $t7, -120($sp)
+sw $t8, -124($sp)
+j Label_0
+Label_1:
 li $v0, 10
 syscall

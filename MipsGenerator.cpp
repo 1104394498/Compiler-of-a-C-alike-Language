@@ -427,16 +427,34 @@ void MipsGenerator::dealSaveEnv() {
             mipsCmd.addRegister(Register{sp});
             mipsCodes->push_back(mipsCmd);
         } else {
-            // variable hasn't been saved in memory
+            const auto& iter1 = globalNameTypeRecords.find(varName);
+            if (iter1 != globalNameTypeRecords.end()) {
+                // la $tempReg, varName
+                MipsCmd mipsCmd{la};
+                const Register tempReg = getRegisters(vector<string>{}, 1).at(0);
+                mipsCmd.addRegister(tempReg),
+                mipsCmd.addLabel(varName);
+                mipsCodes->push_back(mipsCmd);
 
-            // sw $t, stackEnd($sp)
-            MipsCmd mipsCmd{sw};
-            mipsCmd.addRegister(r);
-            mipsCmd.addInteger(functionFile->file_end);
-            functionFile->memoryRecords[varName] = functionFile->file_end;
-            functionFile->file_end -= 4;
-            mipsCmd.addRegister(Register{sp});
-            mipsCodes->push_back(mipsCmd);
+                // sw r, 0($tempReg)
+                MipsCmd mipsCmd1{sw};
+                mipsCmd1.addRegister(r);
+                mipsCmd1.addInteger(0);
+                mipsCmd1.addRegister(tempReg);
+
+                mipsCodes->push_back(mipsCmd1);
+            } else {
+                // variable hasn't been saved in memory
+
+                // sw $t, stackEnd($sp)
+                MipsCmd mipsCmd{sw};
+                mipsCmd.addRegister(r);
+                mipsCmd.addInteger(functionFile->file_end);
+                functionFile->memoryRecords[varName] = functionFile->file_end;
+                functionFile->file_end -= 4;
+                mipsCmd.addRegister(Register{sp});
+                mipsCodes->push_back(mipsCmd);
+            }
         }
     }
 
@@ -545,13 +563,30 @@ void MipsGenerator::dealRestoreEnv() {
         const Register reg = pair.first;
         const string varName = pair.second;
         // cout << functionFile->memoryRecords.count(varName) << endl;
-        int offset = functionFile->memoryRecords[varName];
-        // lw reg, offset($sp)
-        MipsCmd mipsCmd{lw};
-        mipsCmd.addRegister(reg);
-        mipsCmd.addInteger(offset);
-        mipsCmd.addRegister(Register{sp});
-        mipsCodes->push_back(mipsCmd);
+        if (functionFile->memoryRecords.count(varName) > 0) {
+            int offset = functionFile->memoryRecords[varName];
+            // lw reg, offset($sp)
+            MipsCmd mipsCmd{lw};
+            mipsCmd.addRegister(reg);
+            mipsCmd.addInteger(offset);
+            mipsCmd.addRegister(Register{sp});
+            mipsCodes->push_back(mipsCmd);
+        } else {
+            // la $tempReg, varName
+            MipsCmd mipsCmd{la};
+            const Register tempReg = getRegisters(vector<string>{}, 1).at(0);
+            mipsCmd.addRegister(tempReg),
+            mipsCmd.addLabel(varName);
+            mipsCodes->push_back(mipsCmd);
+
+            // lw reg, 0($tempReg)
+            MipsCmd mipsCmd1{lw};
+            mipsCmd1.addRegister(reg);
+            mipsCmd1.addInteger(0);
+            mipsCmd1.addRegister(tempReg);
+
+            mipsCodes->push_back(mipsCmd1);
+        }
     }
 }
 

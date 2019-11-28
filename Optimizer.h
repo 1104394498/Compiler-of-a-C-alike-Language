@@ -19,6 +19,8 @@ private:
     vector<IntermediateCmd> intermediateCodes;
 
     void optimize();
+
+    void optimize_redundant_assign();
 };
 
 

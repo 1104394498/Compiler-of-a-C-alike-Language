@@ -43,7 +43,6 @@ private:
     char errorType;
 };
 
-
 /***** intermediate code ***********/
 enum OperatorType {
     FuncDefStart,   // int foo()

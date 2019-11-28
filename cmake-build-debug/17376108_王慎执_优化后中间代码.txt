@@ -1,0 +1,44 @@
+const int maxIterNum = 5
+var int count
+int func1()
+t0 = 3
+ret t0
+int func2()
+para int a
+para int b
+t3 = a
+t6 = b
+t3 = t3 + t6
+ret t3
+void main()
+t12 = 2
+t23 = 5
+SaveEnvironment
+call func1
+RestoreEnvironment
+t29 = RET
+t26 = t29
+push t23
+push t26
+SaveEnvironment
+call func2
+RestoreEnvironment
+t22 = RET
+t19 = t22
+t30 = 8
+push t19
+push t30
+SaveEnvironment
+call func2
+RestoreEnvironment
+t18 = RET
+t15 = t18
+push t12
+push t15
+SaveEnvironment
+call func2
+RestoreEnvironment
+t11 = RET
+t8 = t11
+printf t8
+Exit
