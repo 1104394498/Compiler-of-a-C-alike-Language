@@ -78,7 +78,8 @@ enum OperatorType {
     VarStatement,         // int variable, char variable
     VarArrayStatement,     // int array[10], char array[10]
     LoopSaveRegStatus,      // fix bugs in loop
-    LoopRestoreRegStatus    // fix bugs in loop
+    LoopRestoreRegStatus,    // fix bugs in loop
+    DoWhileBNZ      // special BNZ for do-while
 };
 
 class IntermediateCmd {
@@ -245,6 +246,9 @@ public:
             cmd += "LoopSaveRegStatus";
         } else if (operatorType == LoopRestoreRegStatus) {
             cmd += "LoopRestoreRegStatus";
+        } else if (operatorType == DoWhileBNZ) {
+            cmd += "BNZ ";
+            cmd += operands.at(0);
         }
         return cmd;
     };

@@ -57,6 +57,15 @@ string Register::print() const {
         case v1:
             result += "v1";
             break;
+        case k0:
+            result += "k0";
+            break;
+        case k1:
+            result += "k1";
+            break;
+        case fp:
+            result += "fp";
+            break;
     }
     return result;
 }
@@ -75,6 +84,10 @@ void Register::useReg() const {
 
 bool Register::operator==(const Register &aRegister) const {
     return (this->type == aRegister.type) && (this->NO == aRegister.NO);
+}
+
+bool Register::operator!=(const Register &aRegister) const {
+    return !(*this == aRegister);
 }
 
 
@@ -329,7 +342,25 @@ void MipsGenerator::writeRegValueBack(const Register *newReg) {
     }
 }
 
-void MipsGenerator::loadValueInReg(const string &varName, Register *newReg) {
+void MipsGenerator::loadValueInReg(const string &varName, const Register *newReg) {
+    // search registers
+    for (const auto &pair : functionFile->registerRecords) {
+        const Register &r = pair.first;
+        const string &regVarName = pair.second;
+        if (varName == regVarName) {
+            // the value of the variable is in this reg
+            if (r != *newReg) {
+                // move $newReg, $r
+                MipsCmd moveCmd{mov};
+                moveCmd.addRegister(*newReg);
+                moveCmd.addRegister(r);
+                mipsCodes->push_back(moveCmd);
+                functionFile->registerRecords[*newReg] = varName;
+            }
+            return;
+        }
+    }
+
     bool inGlobal = false;
     // not in registers, then search memory
     const auto iter1 = functionFile->memoryRecords.find(varName);
@@ -427,13 +458,13 @@ void MipsGenerator::dealSaveEnv() {
             mipsCmd.addRegister(Register{sp});
             mipsCodes->push_back(mipsCmd);
         } else {
-            const auto& iter1 = globalNameTypeRecords.find(varName);
+            const auto &iter1 = globalNameTypeRecords.find(varName);
             if (iter1 != globalNameTypeRecords.end()) {
                 // la $tempReg, varName
                 MipsCmd mipsCmd{la};
                 const Register tempReg = getRegisters(vector<string>{}, 1).at(0);
                 mipsCmd.addRegister(tempReg),
-                mipsCmd.addLabel(varName);
+                        mipsCmd.addLabel(varName);
                 mipsCodes->push_back(mipsCmd);
 
                 // sw r, 0($tempReg)
@@ -574,9 +605,10 @@ void MipsGenerator::dealRestoreEnv() {
         } else {
             // la $tempReg, varName
             MipsCmd mipsCmd{la};
-            const Register tempReg = getRegisters(vector<string>{}, 1).at(0);
+            // const Register tempReg = getRegisters(vector<string>{}, 1).at(0);
+            Register tempReg{v1};
             mipsCmd.addRegister(tempReg),
-            mipsCmd.addLabel(varName);
+                    mipsCmd.addLabel(varName);
             mipsCodes->push_back(mipsCmd);
 
             // lw reg, 0($tempReg)
@@ -846,6 +878,52 @@ void MipsGenerator::dealBranch(IntermediateCmd *lastMidCode, const IntermediateC
     delete branch;
     delete lastMidCode;
 }
+
+void MipsGenerator::dealDoWhileBNZ(IntermediateCmd *lastMidCode, const IntermediateCmd &midCode) {
+    OperatorType lastCodeType = lastMidCode->getOperatorType();
+    OperatorType operatorType = midCode.getOperatorType();
+    MipsCmd *branch = nullptr;
+
+    if (lastCodeType == IsEqual)
+        // beq $r1, $r2, label
+        branch = new MipsCmd{beq};
+    else if (lastCodeType == IsNeq)
+        branch = new MipsCmd{bne};
+    else if (lastCodeType == IsGeq)
+        branch = new MipsCmd{bge};
+    else if (lastCodeType == IsGreater)
+        branch = new MipsCmd{bgt};
+    else if (lastCodeType == IsLeq)
+        branch = new MipsCmd{ble};
+    else    // lastCodeType == IsLess
+        branch = new MipsCmd{blt};
+
+    const vector<Register> regs = getRegisters(
+            vector<string>{lastMidCode->getOperands().at(0), lastMidCode->getOperands().at(1)});
+
+    // move $k0, $r0
+    MipsCmd moveCmd1{mov};
+    moveCmd1.addRegister(Register{k0});
+    moveCmd1.addRegister(Register{regs.at(0)});
+    mipsCodes->push_back(moveCmd1);
+
+    // move $k1, $r1
+    MipsCmd moveCmd2{mov};
+    moveCmd2.addRegister(Register{k1});
+    moveCmd2.addRegister(Register{regs.at(1)});
+    mipsCodes->push_back(moveCmd2);
+
+    // deal restore reg
+    dealLoopRestoreRegStatus();
+
+    branch->addRegister(Register{k0});
+    branch->addRegister(Register{k1});
+    branch->addLabel(midCode.getOperands().at(0));
+    mipsCodes->push_back(*branch);
+    delete branch;
+    delete lastMidCode;
+}
+
 
 void MipsGenerator::dealExit() {
     // li v0, 10
@@ -1265,3 +1343,20 @@ void MipsGenerator::dealAssignRetValue(const IntermediateCmd &midCode) {
     lastRetTypes.pop();
 }
 
+void MipsGenerator::dealLoopSaveRegStatus() {
+    // functionFile cannot be nullptr
+    storedSavedRegisterRecords = functionFile->registerRecords;
+}
+
+void MipsGenerator::dealLoopRestoreRegStatus() {
+    for (const auto &pair : functionFile->registerRecords) {
+        const Register &r = pair.first;
+        const string &curVarName = pair.second;
+        const string &preVarName = storedSavedRegisterRecords[r];
+        if (curVarName != preVarName) {
+            // change curVar into preVar for $r
+            writeRegValueBack(&r);
+            loadValueInReg(preVarName, &r);
+        }
+    }
+}

@@ -38,6 +38,7 @@ t20 = 5
 t19 = t20
 t18 = t19
 count = t18
+LoopSaveRegStatus
 Label_0:
 t23 = count
 t22 = t23
@@ -82,7 +83,7 @@ t48 = 1
 t47 = t48
 t44 = t44 + t47
 count = t44
-SaveEnvironment
+LoopRestoreRegStatus
 GOTO Label_0
 Label_1:
 Exit

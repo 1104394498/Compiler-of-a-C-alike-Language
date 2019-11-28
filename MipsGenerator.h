@@ -10,7 +10,7 @@
 using namespace std;
 
 enum RegisterType {
-    a, t, s, sp, ra, hi, lo, zero, v0, v1
+    a, t, s, sp, ra, hi, lo, zero, v0, v1, k0, k1, fp
 };
 
 class TempRegisterAllocator {
@@ -43,13 +43,15 @@ private:
 public:
     explicit Register(RegisterType _type, int _NO = -1);
 
-    string print() const ;
+    string print() const;
 
     void useReg() const;
 
     bool operator<(const Register &aRegister) const;
 
     bool operator==(const Register &aRegister) const;
+
+    bool operator!=(const Register &aRegister) const;
 };
 
 enum MipsCodeType {
@@ -74,7 +76,7 @@ private:
 public:
     explicit MipsCmd(MipsCodeType _codeType) : codeType{_codeType} {}
 
-    void addRegister(const Register& aRegister) {
+    void addRegister(const Register &aRegister) {
         operands.push_back(aRegister.print());
         aRegister.useReg();
     }
@@ -87,7 +89,7 @@ public:
         operands.push_back(to_string(i));
     }
 
-    string print() const ;
+    string print() const;
 };
 
 class MipsGenerator {
@@ -134,15 +136,20 @@ private:
     RunningFile *functionFile = nullptr;
     stack<VariableType> lastRetTypes;
 
+    map<Register, string> storedSavedRegisterRecords;
+
     // get register
     // Register getRegister(const string &varName);
 
     // Register getRegister();
 
     vector<Register> getRegisters(const vector<string> &varNames, int requireNum = 0);
-    static Register* findDiffReg(const vector<Register>& ret);
-    void writeRegValueBack(const Register* newReg);
-    void loadValueInReg(const string &varName, Register *newReg);
+
+    static Register *findDiffReg(const vector<Register> &ret);
+
+    void writeRegValueBack(const Register *newReg);
+
+    void loadValueInReg(const string &varName, const Register *newReg);
 
     void generate() {
         // .data
@@ -205,7 +212,14 @@ private:
                 dealPrintf(midCode);
             } else if (operatorType == Scanf) {
                 dealScanf(midCode);
+            } else if (operatorType == DoWhileBNZ) {
+                dealDoWhileBNZ(lastMidCode, midCode);
+            } else if (operatorType == LoopSaveRegStatus) {
+                dealLoopSaveRegStatus();
+            } else if (operatorType == LoopRestoreRegStatus) {
+                dealLoopRestoreRegStatus();
             } else {
+
                 // debug
                 exit(1);
             }
@@ -252,6 +266,12 @@ private:
     void dealLabel(const IntermediateCmd &midCode);
 
     void dealAssignRetValue(const IntermediateCmd &midCode);
+
+    void dealDoWhileBNZ(IntermediateCmd *lastMidCode, const IntermediateCmd &midCode);
+
+    void dealLoopSaveRegStatus();
+
+    void dealLoopRestoreRegStatus();
 };
 
 

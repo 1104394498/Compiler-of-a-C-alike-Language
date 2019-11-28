@@ -720,6 +720,9 @@ void GrammarAnalyzer::conditional_statement(VariableType &returnType) {
 
 void GrammarAnalyzer::loop_statement(VariableType &returnType) {
     if (sym_type == "WHILETK") {
+        // fix loop bugs
+        intermediateCodes->emplace_back(LoopSaveRegStatus);
+
         string beginLabel = labelGenerator.getLabel();
         intermediateCodes->emplace_back(Label);
         intermediateCodes->back().addOperands(beginLabel);
@@ -744,12 +747,18 @@ void GrammarAnalyzer::loop_statement(VariableType &returnType) {
         output_current_sym();
         statement(returnType);
 
+        // fix loop bugs
+        intermediateCodes->emplace_back(LoopRestoreRegStatus);
+
         intermediateCodes->emplace_back(Goto);
         intermediateCodes->back().addOperands(beginLabel);
 
         intermediateCodes->emplace_back(Label);
         intermediateCodes->back().addOperands(endLabel);
     } else if (sym_type == "DOTK") {
+        // fix loop bugs
+        intermediateCodes->emplace_back(LoopSaveRegStatus);
+
         string beginLabel = labelGenerator.getLabel();
         intermediateCodes->emplace_back(Label);
         intermediateCodes->back().addOperands(beginLabel);
@@ -768,7 +777,8 @@ void GrammarAnalyzer::loop_statement(VariableType &returnType) {
 
         condition();
 
-        intermediateCodes->emplace_back(BNZ);
+        // fix loop bugs
+        intermediateCodes->emplace_back(DoWhileBNZ);
         intermediateCodes->back().addOperands(beginLabel);
 
         // ASSERT_THROW("RPARENT", ShouldHaveRPARENT)
@@ -801,6 +811,9 @@ void GrammarAnalyzer::loop_statement(VariableType &returnType) {
 
         getsym();
         output_current_sym();
+
+        // fix loop bugs
+        intermediateCodes->emplace_back(LoopSaveRegStatus);
 
         intermediateCodes->emplace_back(Label);
         intermediateCodes->back().addOperands(beginLabel);
@@ -851,6 +864,9 @@ void GrammarAnalyzer::loop_statement(VariableType &returnType) {
 
         intermediateCodes->emplace_back(*step_cmd);
         delete step_cmd;
+
+        // fix loop bugs
+        intermediateCodes->emplace_back(LoopRestoreRegStatus);
 
         intermediateCodes->emplace_back(Goto);
         intermediateCodes->back().addOperands(beginLabel);

@@ -82,9 +82,7 @@ lw $t2, -16($sp)
 lw $t3, -20($sp)
 lw $t4, -24($sp)
 la $v1, count
-sw $t5, 0($v1)
-la $t5, count
-lw $t5, 0($t5)
+lw $t5, 0($v1)
 lw $t6, -32($sp)
 lw $t7, -28($sp)
 lw $t8, -36($sp)
@@ -144,17 +142,14 @@ subi $sp, $sp, 92
 jal func2
 addi $sp, $sp, 92
 lw $ra, 0($sp)
-sw $t2, -72($sp)
-la $t2, maxIterNum
-lw $t0, 0($t2)
+la $v1, maxIterNum
+lw $t0, 0($v1)
 lw $t1, -68($sp)
 lw $t2, -72($sp)
 lw $t3, -76($sp)
 lw $t4, -80($sp)
 la $v1, count
-sw $t5, 0($v1)
-la $t5, count
-lw $t5, 0($t5)
+lw $t5, 0($v1)
 lw $t6, -64($sp)
 lw $t7, -88($sp)
 lw $t8, -84($sp)
@@ -185,18 +180,21 @@ sw $t0, -92($sp)
 move $t0, $t8
 add $t7, $t7, $t0
 move $t5, $t7
-sw $ra, 0($sp)
 sw $t0, -96($sp)
+lw $t0, -4($sp)
 sw $t1, -100($sp)
 sw $t2, -104($sp)
+move $t2, $t1
 sw $t3, -108($sp)
+lw $t3, -20($sp)
 sw $t4, -112($sp)
+move $t4, $t1
 sw $t6, -116($sp)
-la $t6, count
-sw $t5, 0($t6)
-sw $t6, -116($sp)
+move $t6, $t1
 sw $t7, -120($sp)
+lw $t7, -28($sp)
 sw $t8, -124($sp)
+move $t8, $t1
 j Label_0
 Label_1:
 li $v0, 10
