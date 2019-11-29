@@ -7,7 +7,7 @@
 #include <iostream>
 
 using namespace std;
-bool runOptimize = false;
+bool runOptimize = true;
 
 int main() {
     vector<Error> allErrors;
@@ -37,7 +37,7 @@ int main() {
 
     vector<IntermediateCmd> intermediateCodes_optimized;
     if (runOptimize) {
-        Optimizer optimizer{grammarAnalyzer.getIntermediateCodes()};
+        Optimizer optimizer{grammarAnalyzer.getIntermediateCodes(), grammarAnalyzer.getTempVarGenerator()};
         intermediateCodes_optimized = optimizer.getIntermediateCodes();
         FILE *fp_intermediateCodes_optimized = fopen("17376108_王慎执_优化后中间代码.txt", "w");
         // FILE *fp_intermediateCodes_optimized = fopen("17376108_Shenzhi_Wang_Optimization.txt", "w");

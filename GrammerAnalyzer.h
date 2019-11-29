@@ -20,6 +20,9 @@ public:
 
     vector<IntermediateCmd> getIntermediateCodes() { return *intermediateCodes; }
 
+    TempVarGenerator* getTempVarGenerator() {
+        return &tempVarGenerator;
+    }
 private:
     int curLine = 1;    // record line NO.
 
