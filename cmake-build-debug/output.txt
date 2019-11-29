@@ -1,163 +1,25 @@
-CONSTTK const
+VOIDTK void
+IDENFR swap
+LPARENT (
 INTTK int
-IDENFR maxIterNum
-ASSIGN =
-INTCON 5
-<无符号整数>
-<整数>
-<常量定义>
-SEMICN ;
-<常量说明>
+IDENFR x
+COMMA ,
 INTTK int
-IDENFR count
+IDENFR y
+<参数表>
+RPARENT )
+LBRACE {
+INTTK int
+IDENFR temp
 <变量定义>
 SEMICN ;
 <变量说明>
-INTTK int
-IDENFR func1
-<声明头部>
-LPARENT (
-<参数表>
-RPARENT )
-LBRACE {
-RETURNTK return
-LPARENT (
-INTCON 3
-<无符号整数>
-<整数>
-<因子>
-<项>
-<表达式>
-RPARENT )
-<返回语句>
-SEMICN ;
-<语句>
-<语句列>
-<复合语句>
-RBRACE }
-<有返回值函数定义>
-INTTK int
-IDENFR func2
-<声明头部>
-LPARENT (
-INTTK int
-IDENFR a
-COMMA ,
-INTTK int
-IDENFR b
-COMMA ,
-INTTK int
-IDENFR c
-COMMA ,
-INTTK int
-IDENFR d
-<参数表>
-RPARENT )
-LBRACE {
-RETURNTK return
-LPARENT (
-LPARENT (
-IDENFR maxIterNum
-<因子>
-MULT *
-IDENFR b
-<因子>
-<项>
-PLUS +
-IDENFR a
-<因子>
-MULT *
-IDENFR maxIterNum
-<因子>
-DIV /
-IDENFR d
-<因子>
-<项>
-<表达式>
-RPARENT )
-<因子>
-MULT *
-IDENFR c
-<因子>
-<项>
-PLUS +
-IDENFR a
-<因子>
-MULT *
-IDENFR d
-<因子>
-<项>
-<表达式>
-RPARENT )
-<返回语句>
-SEMICN ;
-<语句>
-<语句列>
-<复合语句>
-RBRACE }
-<有返回值函数定义>
-VOIDTK void
-MAINTK main
-LPARENT (
-RPARENT )
-LBRACE {
-IDENFR count
-ASSIGN =
-INTCON 5
-<无符号整数>
-<整数>
-<因子>
-<项>
-<表达式>
-<赋值语句>
-SEMICN ;
-<语句>
-WHILETK while
-LPARENT (
-IDENFR count
-<因子>
-<项>
-<表达式>
-LSS <
-INTCON 10
-<无符号整数>
-<整数>
-<因子>
-<项>
-<表达式>
-<条件>
-RPARENT )
-LBRACE {
 PRINTFTK printf
 LPARENT (
-IDENFR func2
-LPARENT (
-IDENFR func1
-LPARENT (
-<值参数表>
-RPARENT )
-<有返回值函数调用语句>
-<因子>
-<项>
-<表达式>
+STRCON x = 
+<字符串>
 COMMA ,
-IDENFR count
-<因子>
-<项>
-<表达式>
-COMMA ,
-IDENFR maxIterNum
-<因子>
-<项>
-<表达式>
-COMMA ,
-IDENFR count
-<因子>
-<项>
-<表达式>
-<值参数表>
-RPARENT )
-<有返回值函数调用语句>
+IDENFR x
 <因子>
 <项>
 <表达式>
@@ -165,25 +27,100 @@ RPARENT )
 <写语句>
 SEMICN ;
 <语句>
-IDENFR count
-ASSIGN =
-IDENFR count
+PRINTFTK printf
+LPARENT (
+STRCON y = 
+<字符串>
+COMMA ,
+IDENFR y
 <因子>
 <项>
-PLUS +
-INTCON 1
-<无符号整数>
-<整数>
+<表达式>
+RPARENT )
+<写语句>
+SEMICN ;
+<语句>
+IDENFR temp
+ASSIGN =
+IDENFR x
 <因子>
 <项>
 <表达式>
 <赋值语句>
 SEMICN ;
 <语句>
-<语句列>
-RBRACE }
+IDENFR x
+ASSIGN =
+IDENFR y
+<因子>
+<项>
+<表达式>
+<赋值语句>
+SEMICN ;
 <语句>
-<循环语句>
+IDENFR y
+ASSIGN =
+IDENFR temp
+<因子>
+<项>
+<表达式>
+<赋值语句>
+SEMICN ;
+<语句>
+PRINTFTK printf
+LPARENT (
+STRCON SWAP x = 
+<字符串>
+COMMA ,
+IDENFR x
+<因子>
+<项>
+<表达式>
+RPARENT )
+<写语句>
+SEMICN ;
+<语句>
+PRINTFTK printf
+LPARENT (
+STRCON SWAP y = 
+<字符串>
+COMMA ,
+IDENFR y
+<因子>
+<项>
+<表达式>
+RPARENT )
+<写语句>
+SEMICN ;
+<语句>
+<语句列>
+<复合语句>
+RBRACE }
+<无返回值函数定义>
+VOIDTK void
+MAINTK main
+LPARENT (
+RPARENT )
+LBRACE {
+IDENFR swap
+LPARENT (
+INTCON 5
+<无符号整数>
+<整数>
+<因子>
+<项>
+<表达式>
+COMMA ,
+INTCON 100
+<无符号整数>
+<整数>
+<因子>
+<项>
+<表达式>
+<值参数表>
+RPARENT )
+<无返回值函数调用语句>
+SEMICN ;
 <语句>
 <语句列>
 <复合语句>

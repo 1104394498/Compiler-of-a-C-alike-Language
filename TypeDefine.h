@@ -145,7 +145,7 @@ public:
             cmd += operands.at(2);
         } else if (operatorType == Neg) {
             cmd += operands.at(0);
-            cmd += " -";
+            cmd += " = -";
             cmd += operands.at(1);
         } else if (operatorType == IsEqual) {
             cmd += operands.at(0);

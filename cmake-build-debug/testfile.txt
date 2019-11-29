@@ -1,18 +1,15 @@
-const int maxIterNum = 5;
-int count;
+void swap(int x, int y){
+    int temp;
 
-int func1() {
-    return (3);
+    printf("x = ", x) ;
+    printf("y = ", y) ;
+    temp = x;
+    x=y;
+    y=temp;
+    printf("SWAP x = ", x) ;
+    printf("SWAP y = ", y) ;
 }
 
-int func2(int a, int b, int c, int d) {
-    return ((maxIterNum * b + a * maxIterNum / d) * c + a*d);
-}
-
-void main(){
-    count = 5;
-    while (count < 10) {
-        printf(func2(func1(), count, maxIterNum, count));
-        count = count + 1;
-    }
+void main() {
+    swap(5, 100);
 }

@@ -162,7 +162,7 @@ private:
             // cout << midCode.print() << endl;
             OperatorType operatorType = midCode.getOperatorType();
             if (operatorType == FuncDefStart) {
-                dealFunDefStart(midCode);
+                dealFunDefStart(midCode, input_para_count);
             } else if (operatorType == FuncPara) {
                 dealFunPara(midCode, input_para_count); // 没问题
             } else if (operatorType == CallFuncPush) {
@@ -257,7 +257,7 @@ private:
 
     void dealFunRetInDef(const IntermediateCmd &midCode);
 
-    void dealFunDefStart(const IntermediateCmd &midCode);
+    void dealFunDefStart(const IntermediateCmd &midCode, int &paraCount);
 
     void dealFunPara(const IntermediateCmd &midCode, int &input_para_count);
 

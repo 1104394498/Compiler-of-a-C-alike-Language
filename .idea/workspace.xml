@@ -13,18 +13,16 @@
   <component name="ChangeListManager">
     <list default="true" id="7c89e8cf-e84f-479e-8418-ae89c16d8757" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrammerAnalyzer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GrammerAnalyzer.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MipsGenerator.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/MipsGenerator.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MipsGenerator.h" beforeDir="false" afterPath="$PROJECT_DIR$/MipsGenerator.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TypeDefine.h" beforeDir="false" afterPath="$PROJECT_DIR$/TypeDefine.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/17376108_王慎执_优化前中间代码.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/17376108_王慎执_优化前中间代码.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/MIPScode.dir/CXX.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/MIPScode.dir/CXX.includecache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/MIPScode.dir/GrammerAnalyzer.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/MIPScode.dir/GrammerAnalyzer.cpp.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/MIPScode.dir/MipsGenerator.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/MIPScode.dir/MipsGenerator.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/MIPScode.dir/Optimizer.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/MIPScode.dir/Optimizer.cpp.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/MIPScode.dir/main.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/MIPScode.dir/main.cpp.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/MIPScode" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/MIPScode" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/mips.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/mips.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/output.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/output.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/testfile.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/testfile.txt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -48,6 +46,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="settings.editor.selected.configurable" value="CPPToolchains" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -87,6 +86,8 @@
       <workItem from="1574831526286" duration="2961000" />
       <workItem from="1574879655288" duration="3512000" />
       <workItem from="1574932586253" duration="6406000" />
+      <workItem from="1574994208753" duration="160000" />
+      <workItem from="1574994379973" duration="4834000" />
     </task>
     <servers />
   </component>
@@ -111,8 +112,18 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/MipsGenerator.cpp</url>
-          <line>1351</line>
-          <option name="timeStamp" value="70" />
+          <line>463</line>
+          <option name="timeStamp" value="75" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/MipsGenerator.cpp</url>
+          <line>606</line>
+          <option name="timeStamp" value="76" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/MipsGenerator.cpp</url>
+          <line>660</line>
+          <option name="timeStamp" value="85" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

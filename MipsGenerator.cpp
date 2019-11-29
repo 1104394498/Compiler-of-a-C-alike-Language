@@ -651,10 +651,17 @@ void MipsGenerator::dealAssign(const IntermediateCmd &midCode) {
         assignCmd.addRegister(r1);
         assignCmd.addRegister(r2);
         mipsCodes->push_back(assignCmd);
-        if (functionFile->variableTypeRecords.count(addNum) > 0)
-            functionFile->variableTypeRecords[operands.at(0)] = functionFile->variableTypeRecords[addNum];
-        else
-            functionFile->variableTypeRecords[operands.at(0)] = globalNameTypeRecords[addNum];
+
+        if (globalNameTypeRecords.count(operands.at(0)) == 0) {   // if varName1 is a global variable, we needn't update its value
+            if (functionFile->variableTypeRecords.count(addNum) > 0) {
+                functionFile->variableTypeRecords[operands.at(0)] = functionFile->variableTypeRecords[addNum];
+            } else if (globalNameTypeRecords.count(addNum) > 0) {
+                functionFile->variableTypeRecords[operands.at(0)] = globalNameTypeRecords[addNum];
+            } else {
+                printf("error in dealAssign: addNum type doesn't exist\n");
+                exit(1);
+            }
+        }
     }
 }
 
@@ -810,9 +817,11 @@ void MipsGenerator::dealNeg(const IntermediateCmd &midCode) {
     if (isdigit(varName2[0])) {
         isConst2 = true;
         num2 = stoi(varName2);
+        functionFile->variableTypeRecords[varName1] = intType;
     } else if (varName2[0] == '\'') {
         isConst2 = true;
         num2 = varName2[1];
+        functionFile->variableTypeRecords[varName1] = charType;
     }
 
     if (isConst2) {
@@ -833,6 +842,16 @@ void MipsGenerator::dealNeg(const IntermediateCmd &midCode) {
         subCmd.addRegister(Register{zero});
         subCmd.addRegister(r2);
         mipsCodes->push_back(subCmd);
+        if (globalNameTypeRecords.count(varName1) == 0) {   // if varName1 is a global variable, we needn't update its value
+            if (functionFile->variableTypeRecords.count(varName2) > 0) {
+                functionFile->variableTypeRecords[varName1] = functionFile->variableTypeRecords[varName2];
+            } else if (globalNameTypeRecords.count(varName2) > 0) {
+                functionFile->variableTypeRecords[varName1] = globalNameTypeRecords[varName2];
+            } else {
+                printf("error in dealNeg: varName2 type doesn't exist\n");
+                exit(1);
+            }
+        }
     }
 }
 
@@ -994,6 +1013,18 @@ void MipsGenerator::dealGetArrayValue(const IntermediateCmd &midCode) {
         lwCmd.addRegister(addrReg);
         mipsCodes->push_back(lwCmd);
     }
+
+    //
+    if (globalNameTypeRecords.count(varName) == 0) {   // if varName1 is a global variable, we needn't update its value
+        if (functionFile->variableTypeRecords.count(arrayName) > 0) {
+            functionFile->variableTypeRecords[varName] = functionFile->variableTypeRecords[arrayName];
+        } else if (globalNameTypeRecords.count(arrayName) > 0) {
+            functionFile->variableTypeRecords[varName] = globalNameTypeRecords[arrayName];
+        } else {
+            printf("error in dealGetArrayValue: arrayName type doesn't exist\n");
+            exit(1);
+        }
+    }
 }
 
 void MipsGenerator::dealArrayElemAssign(const IntermediateCmd &midCode) {
@@ -1059,6 +1090,19 @@ void MipsGenerator::dealArrayElemAssign(const IntermediateCmd &midCode) {
 }
 
 void MipsGenerator::dealPrintf(const IntermediateCmd &midCode) {
+    // save $a0 value
+    bool save_a0 = false;
+    if (functionFile->registerRecords.count(Register{a, 0}) > 0) {
+        save_a0 = true;
+    }
+    if (save_a0) {
+        // move $v1, $a0
+        MipsCmd movCmd{mov};
+        movCmd.addRegister(Register{v1});
+        movCmd.addRegister(Register{a, 0});
+        mipsCodes->push_back(movCmd);
+    }
+
     for (const string &op : midCode.getOperands()) {
         if (op[0] == '\"') {
             // a string
@@ -1071,6 +1115,7 @@ void MipsGenerator::dealPrintf(const IntermediateCmd &midCode) {
             for (const char &c : op) {
                 if (c == '\"')
                     continue;
+
                 // li $a0, c
                 MipsCmd liCmd1{li};
                 liCmd1.addRegister(Register{a, 0});
@@ -1131,6 +1176,7 @@ void MipsGenerator::dealPrintf(const IntermediateCmd &midCode) {
                 liCmd.addInteger(11);
                 mipsCodes->push_back(liCmd);
             }
+
             // move $a0, $reg
             const Register reg = getRegisters(vector<string>{op}).at(0);
             MipsCmd moveCmd{mov};
@@ -1155,9 +1201,31 @@ void MipsGenerator::dealPrintf(const IntermediateCmd &midCode) {
     mipsCodes->push_back(liCmd1);
     // syscall
     mipsCodes->push_back(MipsCmd{syscall});
+
+    // restore $a0 value
+    if (save_a0) {
+        // move $v1, $a0
+        MipsCmd movCmd{mov};
+        movCmd.addRegister(Register{a, 0});
+        movCmd.addRegister(Register{v1});
+        mipsCodes->push_back(movCmd);
+    }
 }
 
 void MipsGenerator::dealScanf(const IntermediateCmd &midCode) {
+    // save $a0 value
+    bool save_a0 = false;
+    if (functionFile->registerRecords.count(Register{a, 0}) > 0) {
+        save_a0 = true;
+    }
+    if (save_a0) {
+        // move $v1, $a0
+        MipsCmd movCmd{mov};
+        movCmd.addRegister(Register{v1});
+        movCmd.addRegister(Register{a, 0});
+        mipsCodes->push_back(movCmd);
+    }
+
     VariableType variableType;
     for (const string &op : midCode.getOperands()) {
         if (functionFile->variableTypeRecords.count(op) > 0) {
@@ -1188,6 +1256,15 @@ void MipsGenerator::dealScanf(const IntermediateCmd &midCode) {
         moveCmd.addRegister(reg);
         moveCmd.addRegister(Register{v0});
         mipsCodes->push_back(moveCmd);
+    }
+
+    // restore $a0 value
+    if (save_a0) {
+        // move $v1, $a0
+        MipsCmd movCmd{mov};
+        movCmd.addRegister(Register{a, 0});
+        movCmd.addRegister(Register{v1});
+        mipsCodes->push_back(movCmd);
     }
 }
 
@@ -1272,7 +1349,7 @@ void MipsGenerator::dealFunRetInDef(const IntermediateCmd &midCode) {
     //functionFile = nullptr;
 }
 
-void MipsGenerator::dealFunDefStart(const IntermediateCmd &midCode) {
+void MipsGenerator::dealFunDefStart(const IntermediateCmd &midCode, int& paraCount) {
     static bool defFirst = true;
     if (defFirst) {
         mipsCodes->push_back(MipsCmd{dot_text});
@@ -1283,6 +1360,8 @@ void MipsGenerator::dealFunDefStart(const IntermediateCmd &midCode) {
         mipsCodes->push_back(jalMain);
         defFirst = false;
     }
+
+    paraCount = 0;
 
     const string funcName = midCode.getOperands().at(1);
 
@@ -1311,6 +1390,12 @@ void MipsGenerator::dealFunPara(const IntermediateCmd &midCode, int &input_para_
     if (input_para_count <= 4)
         functionFile->registerRecords[Register{a, input_para_count - 1}] = varName;
     functionFile->memoryRecords[varName] = -(input_para_count - 1) * 4 + functionFile->input_para_start;
+    if (midCode.getOperands().at(0) == "int") {
+        functionFile->variableTypeRecords[varName] = intType;
+    } else {
+        functionFile->variableTypeRecords[varName] = charType;
+    }
+
 }
 
 void MipsGenerator::dealCallFunc(const IntermediateCmd &midCode) {
