@@ -1734,6 +1734,24 @@ void MipsGenerator::dealFunRetInDef(const IntermediateCmd &midCode) {
 
     }
 
+    for (auto &pair : functionFile->registerRecords) {
+        const Register &reg = pair.first;
+        const string &varName = pair.second;
+        if (!functionFile->variableTypeRecords.count(varName) && globalNameTypeRecords.count(varName)) {
+            // la $v1, varName
+            MipsCmd laCmd{la};
+            laCmd.addRegister(Register(v1));
+            laCmd.addLabel(varName);
+            mipsCodes->push_back(laCmd);
+            // sw $reg, 0($v1)
+            MipsCmd swCmd{sw};
+            swCmd.addRegister(reg);
+            swCmd.addInteger(0);
+            swCmd.addRegister(Register(v1));
+            mipsCodes->push_back(swCmd);
+        }
+    }
+
     MipsCmd Jr{jr};
     Jr.addRegister(Register{ra});
     mipsCodes->push_back(Jr);
