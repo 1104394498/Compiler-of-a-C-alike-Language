@@ -698,8 +698,6 @@ void GrammarAnalyzer::conditional_statement(VariableType &returnType) {
     output_current_sym();
     statement(returnType);
 
-    intermediateCodes->emplace_back(IfEnd);
-
     IntermediateCmd jumpCmd{Goto};
     jumpCmd.addOperands(endLabel);
     intermediateCodes->push_back(jumpCmd);
@@ -708,15 +706,17 @@ void GrammarAnalyzer::conditional_statement(VariableType &returnType) {
     labelCmd.addOperands(label);
     intermediateCodes->push_back(labelCmd);
 
-    intermediateCodes->emplace_back(ElseBegin);
-
     if (sym_type == "ELSETK") {
+        intermediateCodes->emplace_back(ElseBegin);
+
         getsym();
         output_current_sym();
         statement(returnType);
-    }
 
-    intermediateCodes->emplace_back(ElseEnd);
+        intermediateCodes->emplace_back(ElseEnd);
+    } else {
+        intermediateCodes->emplace_back(IfEnd);
+    }
 
     IntermediateCmd endLabelCmd{Label};
     endLabelCmd.addOperands(endLabel);

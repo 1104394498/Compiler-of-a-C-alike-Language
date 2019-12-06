@@ -20,7 +20,7 @@ private:
 public:
     explicit Register(RegisterType _type, int _NO = -1);
 
-    Register(const Register& r) {
+    Register(const Register &r) {
         type = r.type;
         NO = r.NO;
     }
@@ -237,14 +237,32 @@ private:
                 dealDoWhileBNZ(lastMidCode, midCode);
             } else if (operatorType == LoopSaveRegStatus || operatorType == IfBegin) {
                 dealSaveRegStatus();
-            } else if (operatorType == LoopRestoreRegStatus || operatorType == IfEnd) {
+            } else if (operatorType == LoopRestoreRegStatus) {
                 dealRestoreRegStatus();
             } else if (operatorType == LoopEnd) {
+                //
+                //functionFile->registerRecords = storedSavedRegisterRecords.top();
                 storedSavedRegisterRecords.pop();
             } else if (operatorType == ElseBegin) {
-                functionFile->registerRecords = storedSavedRegisterRecords.top();
+                // pop the register status in if begin
+                auto ifBeginRegStatus = storedSavedRegisterRecords.top();
+                storedSavedRegisterRecords.pop();
+                // push the register status in if end
+                storedSavedRegisterRecords.push(functionFile->registerRecords);
+                // change the register status to the same as if begin
+                functionFile->registerRecords = ifBeginRegStatus;
             } else if (operatorType == ElseEnd) {
+                // restore the register status to the same as if end
                 dealRestoreRegStatus();
+                // pop if end register status
+                auto ifEndRegStatus = storedSavedRegisterRecords.top();
+                storedSavedRegisterRecords.pop();
+                // change the register status to the same as if end
+                functionFile->registerRecords = ifEndRegStatus;
+            } else if (operatorType == IfEnd) {
+                dealRestoreRegStatus();
+                //
+                //functionFile->registerRecords = storedSavedRegisterRecords.top();
                 storedSavedRegisterRecords.pop();
             } else {
                 // debug
