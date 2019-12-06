@@ -1,5 +1,4 @@
 #include "MipsGenerator.h"
-#include <set>
 
 void TempRegisterAllocator::useRegister(const Register &r) {
     auto iterator = supplyLine.begin();
@@ -110,8 +109,6 @@ string MipsCmd::print() const {
                     ret += ":";
                     ret += operands.at(2);  // byte number
                 }
-            } else {
-                ret += "0";
             }
             break;
         case dot_asciiz:
@@ -522,9 +519,7 @@ void MipsGenerator::dealSaveEnv() {
     functionFile->savedRegisterRecords = functionFile->registerRecords;
 
     // deal with unhandled_push
-
     int para_num = 0;
-    set<Register> revised_a_regs;
     for (const auto &midCmd : unhandled_push) {
         if (debug_info) {
             MipsCmd commentCmd{comment};
@@ -542,7 +537,6 @@ void MipsGenerator::dealSaveEnv() {
                 mipsCmd.addRegister(Register{a, para_num});
                 mipsCmd.addInteger(c);
                 mipsCodes->push_back(mipsCmd);
-                revised_a_regs.emplace(a, para_num);
             } else if (isdigit(operand[0])) {
                 // a integer
                 int num = stoi(operand);
@@ -550,27 +544,13 @@ void MipsGenerator::dealSaveEnv() {
                 mipsCmd.addRegister(Register{a, para_num});
                 mipsCmd.addInteger(num);
                 mipsCodes->push_back(mipsCmd);
-                revised_a_regs.emplace(a, para_num);
             } else {
                 // a variable
+                MipsCmd mipsCmd{mov};
+                mipsCmd.addRegister(Register{a, para_num});
                 const Register reg = getRegisters(vector<string>{operand}).at(0);
-                if (revised_a_regs.count(reg) > 0) {
-                    // Because $a_ containing a value are all saved in memory
-                    int offset = functionFile->memoryRecords[operand];
-                    // lw $a_{para_num}, offset($sp)
-                    MipsCmd lwCmd{lw};
-                    lwCmd.addRegister(Register(a, para_num));
-                    lwCmd.addInteger(offset);
-                    lwCmd.addRegister(Register(sp));
-                    mipsCodes->push_back(lwCmd);
-                } else {
-                    MipsCmd mipsCmd{mov};
-                    mipsCmd.addRegister(Register{a, para_num});
-                    mipsCmd.addRegister(reg);
-                    mipsCodes->push_back(mipsCmd);
-                }
-                if (reg != Register{a, para_num})
-                    revised_a_regs.emplace(a, para_num);
+                mipsCmd.addRegister(reg);
+                mipsCodes->push_back(mipsCmd);
             }
         } else {
             // store in memory
@@ -607,29 +587,13 @@ void MipsGenerator::dealSaveEnv() {
                 mipsCodes->push_back(mipsCmd1);
             } else {
                 // a variable
+                // sw reg, offset($sp)
                 const Register reg = getRegisters(vector<string>{operand}).at(0);
-                if (revised_a_regs.count(reg) > 0) {
-                    // lw $v1, bias($sp)
-                    int bias = functionFile->memoryRecords[operand];
-                    MipsCmd lwCmd{lw};
-                    lwCmd.addRegister(Register(v1));
-                    lwCmd.addInteger(bias);
-                    lwCmd.addRegister(Register(sp));
-                    mipsCodes->push_back(lwCmd);
-                    // sw $v1, offset($sp)
-                    MipsCmd swCmd{sw};
-                    swCmd.addRegister(Register{v1});
-                    swCmd.addInteger(offset);
-                    swCmd.addRegister(Register{sp});
-                    mipsCodes->push_back(swCmd);
-                } else {
-                    // sw reg, offset($sp)
-                    MipsCmd mipsCmd{sw};
-                    mipsCmd.addRegister(reg);
-                    mipsCmd.addInteger(offset);
-                    mipsCmd.addRegister(Register{sp});
-                    mipsCodes->push_back(mipsCmd);
-                }
+                MipsCmd mipsCmd{sw};
+                mipsCmd.addRegister(reg);
+                mipsCmd.addInteger(offset);
+                mipsCmd.addRegister(Register{sp});
+                mipsCodes->push_back(mipsCmd);
             }
         }
         para_num++;
@@ -700,8 +664,7 @@ void MipsGenerator::dealAssign(const IntermediateCmd &midCode) {
         liCmd.addRegister(r1);
         liCmd.addInteger(num);
         mipsCodes->push_back(liCmd);
-        if (functionFile->variableTypeRecords.count(operands.at(0)) == 0)
-            functionFile->variableTypeRecords[operands.at(0)] = intType;
+        functionFile->variableTypeRecords[operands.at(0)] = intType;
         // cout << liCmd.print() << endl;
     } else if (addNum[0] == '\'') {
         const Register r1 = getRegisters(vector<string>{operands.at(0)}).at(0);
@@ -710,8 +673,7 @@ void MipsGenerator::dealAssign(const IntermediateCmd &midCode) {
         liCmd.addRegister(r1);
         liCmd.addInteger(c);
         mipsCodes->push_back(liCmd);
-        if (functionFile->variableTypeRecords.count(operands.at(0)) == 0)
-            functionFile->variableTypeRecords[operands.at(0)] = charType;
+        functionFile->variableTypeRecords[operands.at(0)] = charType;
     } else {
         const vector<Register> regs = getRegisters(vector<string>{operands.at(0), addNum});
         const Register r1 = regs.at(0);
@@ -721,8 +683,8 @@ void MipsGenerator::dealAssign(const IntermediateCmd &midCode) {
         assignCmd.addRegister(r2);
         mipsCodes->push_back(assignCmd);
 
-        if (globalNameTypeRecords.count(operands.at(0)) == 0) {
-            // if varName1 is a global variable, we needn't update its value
+        if (globalNameTypeRecords.count(operands.at(0)) ==
+            0) {   // if varName1 is a global variable, we needn't update its value
             if (functionFile->variableTypeRecords.count(addNum) > 0) {
                 functionFile->variableTypeRecords[operands.at(0)] = functionFile->variableTypeRecords[addNum];
             } else if (globalNameTypeRecords.count(addNum) > 0) {
@@ -971,47 +933,17 @@ void MipsGenerator::dealBranch(IntermediateCmd *lastMidCode, const IntermediateC
             liCmd.addRegister(regs[0]);
             liCmd.addInteger(atoi(op0.c_str()));
             mipsCodes->push_back(liCmd);
-        } else if (op0[0] == '\'') {
-            regs = getRegisters(vector<string>{}, 1);
-            MipsCmd liCmd{li};
-            liCmd.addRegister(regs[0]);
-            liCmd.addInteger(op0[1]);
-            mipsCodes->push_back(liCmd);
         } else {
             regs = getRegisters(vector<string>{op0});
         }
         branch->addRegister(regs[0]);
         branch->addInteger(atoi(op1.c_str()));
-    } else if (op1[0] == '\'') {
-        if (isdigit(op0[0])) {
-            regs = getRegisters(vector<string>{}, 1);
-            MipsCmd liCmd{li};
-            liCmd.addRegister(regs[0]);
-            liCmd.addInteger(atoi(op0.c_str()));
-            mipsCodes->push_back(liCmd);
-        } else if (op0[0] == '\'') {
-            regs = getRegisters(vector<string>{}, 1);
-            MipsCmd liCmd{li};
-            liCmd.addRegister(regs[0]);
-            liCmd.addInteger(op0[1]);
-            mipsCodes->push_back(liCmd);
-        } else {
-            regs = getRegisters(vector<string>{op0});
-        }
-        branch->addRegister(regs[0]);
-        branch->addInteger(op1[1]);
     } else {
         if (isdigit(op0[0])) {
             regs = getRegisters(vector<string>{op1}, 1);
             MipsCmd liCmd{li};
             liCmd.addRegister(regs[1]);
             liCmd.addInteger(atoi(op0.c_str()));
-            mipsCodes->push_back(liCmd);
-        } else if (op0[0] == '\'') {
-            regs = getRegisters(vector<string>{op1}, 1);
-            MipsCmd liCmd{li};
-            liCmd.addRegister(regs[1]);
-            liCmd.addInteger(op0[1]);
             mipsCodes->push_back(liCmd);
         } else {
             regs = getRegisters(vector<string>{op1, op0});
@@ -1267,22 +1199,9 @@ void MipsGenerator::dealArrayElemAssign(const IntermediateCmd &midCode) {
 
     if (isdigit(midCode.getOperands().at(1)[0])) {
         vector<Register> regs;
-        int varNum = 0;
-        if (isdigit(varName[0])) {
-            // var is an integer
-            varNum = stoi(varName);
-            regs = getRegisters(vector<string>{}, 1);
-        } else if (varName[0] == '\'') {
-            // var is a char
-            varNum = varName[1];
-            regs = getRegisters(vector<string>{}, 1);
-        } else {
-            // var is a variable
-            regs = getRegisters(vector<string>{varName}, 1);
-        }
+        regs = getRegisters(vector<string>{varName}, 1);
 
-
-        const Register addrReg = regs.back();
+        const Register addrReg = regs.at(1);
 
         if (functionFile->memoryRecords.count(arrayName) > 0) {
             // addi $addrReg, $sp, offset
@@ -1295,29 +1214,13 @@ void MipsGenerator::dealArrayElemAssign(const IntermediateCmd &midCode) {
 
             const int pos = -stoi(midCode.getOperands().at(1)) * 4;
 
-            if (regs.size() == 2) {
-                // sw $r, pos($addrReg)
-                const Register r = regs.at(0);
-                MipsCmd swCmd{sw};
-                swCmd.addRegister(r);
-                swCmd.addInteger(pos);
-                swCmd.addRegister(addrReg);
-                mipsCodes->push_back(swCmd);
-            } else {
-                // var is an integer or char
-                // li $v1, varNum
-                MipsCmd liCmd{li};
-                liCmd.addRegister(Register{v1});
-                liCmd.addInteger(varNum);
-                mipsCodes->push_back(liCmd);
-                // sw $v1, pos($addrReg)
-                MipsCmd swCmd{sw};
-                swCmd.addRegister(Register(v1));
-                swCmd.addInteger(pos);
-                swCmd.addRegister(addrReg);
-                mipsCodes->push_back(swCmd);
-            }
-
+            // sw $r, pos($addrReg)
+            const Register r = regs.at(0);
+            MipsCmd swCmd{sw};
+            swCmd.addRegister(r);
+            swCmd.addInteger(pos);
+            swCmd.addRegister(addrReg);
+            mipsCodes->push_back(swCmd);
         } else {
             // global
             // la $addrReg, arrayName
@@ -1327,58 +1230,24 @@ void MipsGenerator::dealArrayElemAssign(const IntermediateCmd &midCode) {
             mipsCodes->push_back(laCmd);
 
             const int pos = stoi(midCode.getOperands().at(1)) * 4;
-            if (regs.size() == 2) {
-                // sw $r, pos($addrReg)
-                const Register r = regs.at(0);
-                MipsCmd swCmd{sw};
-                swCmd.addRegister(r);
-                swCmd.addInteger(pos);
-                swCmd.addRegister(addrReg);
-                mipsCodes->push_back(swCmd);
-            } else {
-                // var is an integer or char
-                // li $v1, varNum
-                MipsCmd liCmd{li};
-                liCmd.addRegister(Register{v1});
-                liCmd.addInteger(varNum);
-                mipsCodes->push_back(liCmd);
-                // sw $v1, pos($addrReg)
-                MipsCmd swCmd{sw};
-                swCmd.addRegister(Register(v1));
-                swCmd.addInteger(pos);
-                swCmd.addRegister(addrReg);
-                mipsCodes->push_back(swCmd);
-            }
+            // sw $r, pos($addrReg)
+            const Register r = regs.at(0);
+            MipsCmd swCmd{sw};
+            swCmd.addRegister(r);
+            swCmd.addInteger(pos);
+            swCmd.addRegister(addrReg);
+            mipsCodes->push_back(swCmd);
         }
     } else {
         // array[n] = k
         // 我把下一句的2改为了1
         const string posVar = midCode.getOperands().at(1);
         vector<Register> regs;
-        int varNum = 0;
-        if (isdigit(varName[0])) {
-            // var is an integer
-            varNum = stoi(varName);
-            regs = getRegisters(vector<string>{posVar}, 2);
-        } else if (varName[0] == '\'') {
-            // var is a char
-            varNum = varName[1];
-            regs = getRegisters(vector<string>{posVar}, 2);
-        } else {
-            // var is a variable
-            regs = getRegisters(vector<string>{posVar, varName}, 2);
-        }
-        Register posReg{v1}, varReg{v1}, addrReg{v1}, offsetReg{v1};
-        if (regs.size() == 4) {
-            posReg = regs.at(0);
-            varReg = regs.at(1);
-            addrReg = regs.at(2);
-            offsetReg = regs.at(3);
-        } else {
-            posReg = regs.at(0);
-            addrReg = regs.at(1);
-            offsetReg = regs.at(2);
-        }
+        regs = getRegisters(vector<string>{posVar, varName}, 2);
+        const Register &posReg = regs.at(0);
+        const Register &varReg = regs.at(1);
+        const Register &addrReg = regs.at(2);
+        const Register &offsetReg = regs.at(3);
 
         if (functionFile->memoryRecords.count(arrayName) > 0) {
             // local
@@ -1401,15 +1270,6 @@ void MipsGenerator::dealArrayElemAssign(const IntermediateCmd &midCode) {
             subCmd.addRegister(addrReg);
             subCmd.addRegister(offsetReg);
             mipsCodes->push_back(subCmd);
-
-            if (regs.size() != 4) {
-                // li $varReg, varNum
-                MipsCmd liCmd{li};
-                liCmd.addRegister(varReg);
-                liCmd.addInteger(varNum);
-                mipsCodes->push_back(liCmd);
-            }
-
             // sw $varReg, 0($addrReg)
             MipsCmd swCmd{sw};
             swCmd.addRegister(varReg);
@@ -1435,15 +1295,6 @@ void MipsGenerator::dealArrayElemAssign(const IntermediateCmd &midCode) {
             addCmd.addRegister(addrReg);
             addCmd.addRegister(offsetReg);
             mipsCodes->push_back(addCmd);
-
-            if (regs.size() != 4) {
-                // li $varReg, varNum
-                MipsCmd liCmd{li};
-                liCmd.addRegister(varReg);
-                liCmd.addInteger(varNum);
-                mipsCodes->push_back(liCmd);
-            }
-
             // sw $varReg, 0($addrReg)
             MipsCmd swCmd{sw};
             swCmd.addRegister(varReg);
@@ -1766,24 +1617,6 @@ void MipsGenerator::dealFunRetInDef(const IntermediateCmd &midCode) {
 
     }
 
-    for (auto &pair : functionFile->registerRecords) {
-        const Register &reg = pair.first;
-        const string &varName = pair.second;
-        if (!functionFile->variableTypeRecords.count(varName) && globalNameTypeRecords.count(varName)) {
-            // la $v1, varName
-            MipsCmd laCmd{la};
-            laCmd.addRegister(Register(v1));
-            laCmd.addLabel(varName);
-            mipsCodes->push_back(laCmd);
-            // sw $reg, 0($v1)
-            MipsCmd swCmd{sw};
-            swCmd.addRegister(reg);
-            swCmd.addInteger(0);
-            swCmd.addRegister(Register(v1));
-            mipsCodes->push_back(swCmd);
-        }
-    }
-
     MipsCmd Jr{jr};
     Jr.addRegister(Register{ra});
     mipsCodes->push_back(Jr);
@@ -1876,22 +1709,17 @@ void MipsGenerator::dealSaveRegStatus() {
 }
 
 void MipsGenerator::dealRestoreRegStatus() {
-    /*
-}
     for (const auto &pair : storedSavedRegisterRecords.top()) {
         const Register r = pair.first;
         const string oldVarName = pair.second;
         if (functionFile->registerRecords.count(r) > 0) {
-            if (functionFile->registerRecords[r] != oldVarName) {
-                writeRegValueBack(&r);
-                loadValueInReg(oldVarName, &r);
-            }
+            writeRegValueBack(&r);
+            loadValueInReg(oldVarName, &r);
         } else {
             loadValueInReg(oldVarName, &r);
             functionFile->registerRecords[r] = oldVarName;
         }
     }
-     */
     /*
     for (const auto &pair : functionFile->registerRecords) {
         const Register &r = pair.first;
@@ -1904,29 +1732,4 @@ void MipsGenerator::dealRestoreRegStatus() {
         }
     }
      */
-    while (true) {
-        bool reachEnd = true;
-        for (auto & registerRecord : functionFile->registerRecords) {
-            const Register &r = registerRecord.first;
-            const string &curVarName = registerRecord.second;
-            if (storedSavedRegisterRecords.top().count(r) == 0) {
-                writeRegValueBack(&r);
-                reachEnd = false;
-                break;
-            } else {
-                const string &preVarName = storedSavedRegisterRecords.top()[r];
-                if (curVarName != preVarName) {
-                    // change curVar into preVar for $r
-                    writeRegValueBack(&r);
-                    loadValueInReg(preVarName, &r);
-                    reachEnd = false;
-                    break;
-                }
-            }
-        }
-
-        if (reachEnd)
-            break;
-    }
-
 }
