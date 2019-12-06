@@ -53,22 +53,22 @@ const_char_4: .word 42
 global_int_array_1: .word 0:5
 
 # var int global_int_1
-global_int_1: .word 
+global_int_1: .word 0
 
 # var char global_char_array_1[5]
 global_char_array_1: .word 0:5
 
 # var char global_char_1
-global_char_1: .word 
+global_char_1: .word 0
 
 # var int global_int_2
-global_int_2: .word 
+global_int_2: .word 0
 
 # var int global_int_array_2[5]
 global_int_array_2: .word 0:5
 
 # var char global_char_2
-global_char_2: .word 
+global_char_2: .word 0
 
 # var char global_char_array_2[5]
 global_char_array_2: .word 0:5

@@ -110,6 +110,8 @@ string MipsCmd::print() const {
                     ret += ":";
                     ret += operands.at(2);  // byte number
                 }
+            } else {
+                ret += "0";
             }
             break;
         case dot_asciiz:
