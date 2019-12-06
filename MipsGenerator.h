@@ -13,35 +13,17 @@ enum RegisterType {
     a, t, s, sp, ra, hi, lo, zero, v0, v1, k0, k1, fp
 };
 
-class TempRegisterAllocator {
-    // Singleton; do round robin
-private:
-    int tempRegisterNum;
-    vector<int> supplyLine;
-
-    explicit TempRegisterAllocator(int _tempRegisterNum = 9) : tempRegisterNum{_tempRegisterNum} {
-        for (int i = 0; i < tempRegisterNum; i++) {
-            supplyLine.push_back(i);
-        }
-    }
-
-public:
-    static TempRegisterAllocator &get_instance() {
-        static TempRegisterAllocator instance{};
-        return instance;
-    }
-
-    void useRegister(int NO);
-
-    int allocateRegister();
-};
-
 class Register {
 private:
     RegisterType type;
     int NO;
 public:
     explicit Register(RegisterType _type, int _NO = -1);
+
+    Register(const Register& r) {
+        type = r.type;
+        NO = r.NO;
+    }
 
     string print() const;
 
@@ -54,8 +36,40 @@ public:
     bool operator!=(const Register &aRegister) const;
 };
 
+
+class TempRegisterAllocator {
+    // Singleton; do round robin
+private:
+    int tempRegisterNum;
+    int sRegisterNum;
+    vector<Register> supplyLine;
+
+    explicit TempRegisterAllocator(int _sRegisterNum = 8, int _tempRegisterNum = 9) : sRegisterNum{_sRegisterNum},
+                                                                                      tempRegisterNum{
+                                                                                              _tempRegisterNum} {
+        for (int i = 0; i < tempRegisterNum; i++) {
+            supplyLine.emplace_back(t, i);
+        }
+        /*
+        for (int i = 0; i < sRegisterNum; i++) {
+            supplyLine.emplace_back(s, i);
+        }
+         */
+    }
+
+public:
+    static TempRegisterAllocator &get_instance() {
+        static TempRegisterAllocator instance{};
+        return instance;
+    }
+
+    void useRegister(const Register &r);
+
+    Register allocateRegister();
+};
+
 enum MipsCodeType {
-    dot_data, dot_text, dot_word,
+    dot_data, dot_text, dot_word, dot_asciiz,
     jal, jump, jr,
     add, sub, mul, divide,
     addi, subi, mulo,
@@ -65,7 +79,9 @@ enum MipsCodeType {
     mov,
     beq, bne, bge, ble, bgt, blt,
     syscall,
-    la
+    la,
+    sll,
+    comment // for debug
 };
 
 class MipsCmd {
@@ -97,7 +113,6 @@ public:
     explicit MipsGenerator(const vector<IntermediateCmd> &_intermediateCodes, vector<MipsCmd> *_mipsCodes)
             : intermediateCodes(&_intermediateCodes), mipsCodes{_mipsCodes} {
         generate();
-        printf("la");
     }
 
     ~MipsGenerator() {
@@ -136,7 +151,7 @@ private:
     RunningFile *functionFile = nullptr;
     stack<VariableType> lastRetTypes;
 
-    map<Register, string> storedSavedRegisterRecords;
+    stack<map<Register, string>> storedSavedRegisterRecords;
 
     // get register
     // Register getRegister(const string &varName);
@@ -160,6 +175,12 @@ private:
 
         for (const auto &midCode : *intermediateCodes) {
             // cout << midCode.print() << endl;
+            if (debug_info && midCode.getOperatorType() != CallFuncPush) {
+                MipsCmd commentCmd{comment};
+                commentCmd.addLabel(midCode.print());
+                mipsCodes->push_back(commentCmd);
+            }
+
             OperatorType operatorType = midCode.getOperatorType();
             if (operatorType == FuncDefStart) {
                 dealFunDefStart(midCode, input_para_count);
@@ -173,7 +194,7 @@ private:
                 dealCallFunc(midCode);  // 没问题
             } else if (operatorType == Label) {
                 dealLabel(midCode); // 没问题
-            } else if (operatorType == AssignRetValue) {
+            } else if (operatorType == AssignRetValue) {    // 要改
                 dealAssignRetValue(midCode);
             } else if (operatorType == FuncRetInDef) {
                 dealFunRetInDef(midCode);
@@ -181,7 +202,7 @@ private:
                 dealRestoreEnv();
             } else if (operatorType == Add || operatorType == Minus || operatorType == Mul || operatorType == Div) {
                 dealArithmetic(operatorType, midCode);
-            } else if (operatorType == Assign) {
+            } else if (operatorType == Assign) {    //要改
                 dealAssign(midCode);
             } else if (operatorType == Goto) {
                 MipsCmd jumpCmd{jump};
@@ -204,7 +225,7 @@ private:
                 dealVarStatement(midCode);
             } else if (operatorType == VarArrayStatement) {
                 dealVarArrayStatement(midCode);
-            } else if (operatorType == GetArrayValue) {
+            } else if (operatorType == GetArrayValue) { //要改
                 dealGetArrayValue(midCode);     // 这里还需要改，让全局变量也不出bug
             } else if (operatorType == ArrayElemAssign) {
                 dealArrayElemAssign(midCode);   // 这里还需要改，让全局变量也不出bug
@@ -214,12 +235,18 @@ private:
                 dealScanf(midCode);
             } else if (operatorType == DoWhileBNZ) {
                 dealDoWhileBNZ(lastMidCode, midCode);
-            } else if (operatorType == LoopSaveRegStatus) {
-                dealLoopSaveRegStatus();
-            } else if (operatorType == LoopRestoreRegStatus) {
-                dealLoopRestoreRegStatus();
+            } else if (operatorType == LoopSaveRegStatus || operatorType == IfBegin) {
+                dealSaveRegStatus();
+            } else if (operatorType == LoopRestoreRegStatus || operatorType == IfEnd) {
+                dealRestoreRegStatus();
+            } else if (operatorType == LoopEnd) {
+                storedSavedRegisterRecords.pop();
+            } else if (operatorType == ElseBegin) {
+                functionFile->registerRecords = storedSavedRegisterRecords.top();
+            } else if (operatorType == ElseEnd) {
+                dealRestoreRegStatus();
+                storedSavedRegisterRecords.pop();
             } else {
-
                 // debug
                 exit(1);
             }
@@ -269,9 +296,9 @@ private:
 
     void dealDoWhileBNZ(IntermediateCmd *lastMidCode, const IntermediateCmd &midCode);
 
-    void dealLoopSaveRegStatus();
+    void dealSaveRegStatus();
 
-    void dealLoopRestoreRegStatus();
+    void dealRestoreRegStatus();
 };
 
 

@@ -683,6 +683,8 @@ void GrammarAnalyzer::conditional_statement(VariableType &returnType) {
 
     condition();
 
+    intermediateCodes->emplace_back(IfBegin);
+
     string label = labelGenerator.getLabel();
     string endLabel = labelGenerator.getLabel();
 
@@ -696,6 +698,8 @@ void GrammarAnalyzer::conditional_statement(VariableType &returnType) {
     output_current_sym();
     statement(returnType);
 
+    intermediateCodes->emplace_back(IfEnd);
+
     IntermediateCmd jumpCmd{Goto};
     jumpCmd.addOperands(endLabel);
     intermediateCodes->push_back(jumpCmd);
@@ -704,11 +708,15 @@ void GrammarAnalyzer::conditional_statement(VariableType &returnType) {
     labelCmd.addOperands(label);
     intermediateCodes->push_back(labelCmd);
 
+    intermediateCodes->emplace_back(ElseBegin);
+
     if (sym_type == "ELSETK") {
         getsym();
         output_current_sym();
         statement(returnType);
     }
+
+    intermediateCodes->emplace_back(ElseEnd);
 
     IntermediateCmd endLabelCmd{Label};
     endLabelCmd.addOperands(endLabel);
@@ -755,6 +763,8 @@ void GrammarAnalyzer::loop_statement(VariableType &returnType) {
 
         intermediateCodes->emplace_back(Label);
         intermediateCodes->back().addOperands(endLabel);
+
+        intermediateCodes->emplace_back(LoopEnd);
     } else if (sym_type == "DOTK") {
         // fix loop bugs
         intermediateCodes->emplace_back(LoopSaveRegStatus);
@@ -780,6 +790,8 @@ void GrammarAnalyzer::loop_statement(VariableType &returnType) {
         // fix loop bugs
         intermediateCodes->emplace_back(DoWhileBNZ);
         intermediateCodes->back().addOperands(beginLabel);
+
+        intermediateCodes->emplace_back(LoopEnd);
 
         // ASSERT_THROW("RPARENT", ShouldHaveRPARENT)
         getsym();
@@ -873,6 +885,8 @@ void GrammarAnalyzer::loop_statement(VariableType &returnType) {
 
         intermediateCodes->emplace_back(Label);
         intermediateCodes->back().addOperands(endLabel);
+
+        intermediateCodes->emplace_back(LoopEnd);
     } else {
         handle_errors();
     }

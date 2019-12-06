@@ -1,0 +1,106 @@
+.data
+PrintString2: .asciiz "OVERFLOW!"
+PrintString1: .asciiz "i = "
+PrintString0: .asciiz "j = "
+MAX_NUM: .word 12
+.text
+j main
+mod:
+div $t0, $a0, $a1
+mul $t0, $t0, $a1
+sub $t1, $a0, $t0
+move $v0, $t1
+jr $ra
+main:
+li $t2, 2
+Label_0:
+la $t3, MAX_NUM
+lw $t3, 0($t3)
+bge $t2, $t3, Label_1
+la $a0, PrintString0
+li $v0, 4
+syscall
+li $v0, 1
+move $a0, $t2
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+subi $t4, $0, 1
+move $t5, $t4
+move $t6, $t2
+li $t7, 1
+Label_2:
+bge $t7, $t2, Label_3
+la $a0, PrintString1
+li $v0, 4
+syscall
+li $v0, 1
+move $a0, $t7
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+div $t8, $t2, $t7
+mul $t0, $t8, $t7
+sw $ra, 0($sp)
+sw $t0, -516($sp)
+sw $t2, -520($sp)
+la $t1, MAX_NUM
+sw $t3, 0($t1)
+sw $t4, -524($sp)
+sw $t5, -528($sp)
+sw $t6, -532($sp)
+sw $t7, -536($sp)
+sw $t8, -540($sp)
+move $a0, $t2
+move $a1, $t7
+subi $sp, $sp, 544
+jal mod
+addi $sp, $sp, 544
+lw $ra, 0($sp)
+lw $t0, -516($sp)
+lw $t2, -520($sp)
+la $v1, MAX_NUM
+lw $t3, 0($v1)
+lw $t4, -524($sp)
+lw $t5, -528($sp)
+lw $t6, -532($sp)
+lw $t7, -536($sp)
+lw $t8, -540($sp)
+move $t1, $v0
+bne $t1, 0, Label_4
+sw $t0, -516($sp)
+addi $t0, $t5, 1
+move $t5, $t0
+sw $t2, -520($sp)
+sub $t2, $t6, $t7
+move $t6, $t2
+blt $t5, 128, Label_6
+la $a0, PrintString2
+li $v0, 4
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+j Label_7
+Label_6:
+Label_7:
+j Label_5
+Label_4:
+Label_5:
+addi $t7, $t7, 1
+sw $t0, -544($sp)
+sw $t1, -548($sp)
+move $t1, $t0
+sw $t2, -552($sp)
+lw $t2, -520($sp)
+sw $t8, -540($sp)
+move $t8, $t0
+j Label_2
+Label_3:
+addi $t2, $t2, 1
+j Label_0
+Label_1:
+li $v0, 10
+syscall

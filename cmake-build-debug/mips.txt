@@ -1,1832 +1,4222 @@
 .data
-MAX_NUM: .word 128
+PrintString24: .asciiz "************************************************"
+PrintString23: .asciiz "Start testing parameter:"
+PrintString22: .asciiz "************************************************"
+PrintString21: .asciiz "Start testing switch:"
+PrintString20: .asciiz "************************************************"
+PrintString19: .asciiz "Start testing if & while:"
+PrintString18: .asciiz "************************************************"
+PrintString17: .asciiz "Start testing assign & exp:"
+PrintString16: .asciiz "************************************************"
+PrintString15: .asciiz "Start testing I/O:"
+PrintString14: .asciiz "************************************************"
+PrintString13: .asciiz "Start testing return:"
+PrintString12: .asciiz "************************************************"
+PrintString11: .asciiz "Start testing global:"
+PrintString10: .asciiz "************************************************"
+PrintString9: .asciiz "Start testing recursion:"
+PrintString8: .asciiz "************************************************"
+PrintString7: .asciiz "OPERATE of func_ret_int_1:"
+PrintString6: .asciiz "INPUT of func_ret_int_1:"
+PrintString5: .asciiz "!@\\n#$^&*()Qqaa123[];',./"
+PrintString4: .asciiz "!@\\n#$^&*()Qqaa123[];',./"
+PrintString3: .asciiz "!@\\n#$^&*()Qqaa123[];',./"
+PrintString2: .asciiz "to"
+PrintString1: .asciiz "from"
+PrintString0: .asciiz "take"
+
+# const int const_int_1 = 12345679
+const_int_1: .word 12345679
+
+# const int const_int_2 = 0
+const_int_2: .word 0
+
+# const int const_int_3 = -0
+const_int_3: .word 0
+
+# const int const_int_4 = -12345679
+const_int_4: .word -12345679
+
+# const char const_char_1 = '9'
+const_char_1: .word 57
+
+# const char const_char_2 = '_'
+const_char_2: .word 95
+
+# const char const_char_3 = '+'
+const_char_3: .word 43
+
+# const char const_char_4 = '*'
+const_char_4: .word 42
+
+# var int global_int_array_1[5]
+global_int_array_1: .word 0:5
+
+# var int global_int_1
+global_int_1: .word 
+
+# var char global_char_array_1[5]
+global_char_array_1: .word 0:5
+
+# var char global_char_1
+global_char_1: .word 
+
+# var int global_int_2
+global_int_2: .word 
+
+# var int global_int_array_2[5]
+global_int_array_2: .word 0:5
+
+# var char global_char_2
+global_char_2: .word 
+
+# var char global_char_array_2[5]
+global_char_array_2: .word 0:5
+
+# var char global_char_array_3[10]
+global_char_array_3: .word 0:10
+
+# void hanoi()
 .text
 j main
-factorial:
-move $t0, $a0
-move $t1, $t0
-move $t2, $t1
-li $t3, 1
-move $t4, $t3
-move $t5, $t4
-bgt $t2, $t5, Label_0
-li $t6, 1
-move $t7, $t6
-move $t8, $t7
-move $v0, $t8
-jr $ra
-j Label_1
-Label_0:
-Label_1:
-sw $t0, -8($sp)
-move $t0, $a0
-sw $t1, -12($sp)
-move $t1, $t0
-sw $t3, -16($sp)
-move $t3, $a0
-sw $t4, -20($sp)
-move $t4, $t3
-sw $t2, -24($sp)
-move $t2, $t4
-sw $t5, -28($sp)
-li $t5, 1
-sw $t6, -32($sp)
-move $t6, $t5
-sub $t2, $t2, $t6
-sw $ra, -4($sp)
+hanoi:
+
+# para int n
+
+# para char from
+
+# para char tmp
+
+# para char to
+
+# n > 0
+
+# 
+
+# BZ Label_0
+ble $a0, 0, Label_0
+
+# t6 = n - 1
+subi $t0, $a0, 1
+
+# SaveEnvironment
+sw $ra, -16($sp)
 sw $a0, 0($sp)
-sw $t0, -36($sp)
-sw $t1, -40($sp)
-sw $t2, -44($sp)
-sw $t3, -48($sp)
-sw $t4, -52($sp)
-sw $t5, -56($sp)
-sw $t6, -60($sp)
-sw $t7, -64($sp)
-sw $t8, -68($sp)
-move $a0, $t2
-subi $sp, $sp, 72
-jal factorial
-addi $sp, $sp, 72
-lw $ra, -4($sp)
+sw $a1, -4($sp)
+sw $a2, -8($sp)
+sw $a3, -12($sp)
+sw $t0, -20($sp)
+
+# push t6
+move $a0, $t0
+
+# push from
+move $a1, $a1
+
+# push to
+move $a2, $a3
+
+# push tmp
+lw $a3, -8($sp)
+
+# call hanoi
+subi $sp, $sp, 24
+jal hanoi
+
+# RestoreEnvironment
+addi $sp, $sp, 24
+lw $ra, -16($sp)
 lw $a0, 0($sp)
-lw $t0, -36($sp)
-lw $t1, -40($sp)
-lw $t2, -44($sp)
-lw $t3, -48($sp)
-lw $t4, -52($sp)
-lw $t5, -56($sp)
-lw $t6, -60($sp)
-lw $t7, -64($sp)
-lw $t8, -68($sp)
-sw $t0, -36($sp)
-move $t0, $v0
-sw $t1, -40($sp)
-move $t1, $t0
-sw $t2, -44($sp)
-lw $t2, -40($sp)
-mul $t2, $t2, $t1
-sw $t3, -48($sp)
-move $t3, $t2
-move $v0, $t3
-jr $ra
-mod:
-move $t4, $a0
-move $t5, $t4
-move $t6, $t5
-move $t7, $a0
-move $t8, $t7
-move $t0, $a1
-div $t8, $t8, $t0
-move $t1, $a1
-mul $t8, $t8, $t1
-sub $t6, $t6, $t8
-move $a0, $t6
-move $t2, $a0
-move $t3, $t2
-sw $t4, -12($sp)
-move $t4, $t3
-move $v0, $t4
-jr $ra
-swap:
-move $t5, $a0
-move $t7, $t5
-move $t0, $t7
+lw $a1, -4($sp)
+lw $a2, -8($sp)
+lw $a3, -12($sp)
+lw $t0, -20($sp)
+
+# printf "take"
+move $v1, $a0
+la $a0, PrintString0
+li $v0, 4
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+move $a0, $v1
+
+# printf n
+move $v1, $a0
+li $v0, 1
+move $a0, $v1
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+move $a0, $v1
+
+# printf "from"
+move $v1, $a0
+la $a0, PrintString1
+li $v0, 4
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+move $a0, $v1
+
+# printf from
 move $v1, $a0
 li $v0, 11
-li $a0, 120
+move $a0, $a1
 syscall
-li $a0, 32
+li $v0, 11
+li $a0, 10
 syscall
-li $a0, 61
+move $a0, $v1
+
+# printf "to"
+move $v1, $a0
+la $a0, PrintString2
+li $v0, 4
 syscall
-li $a0, 32
+li $v0, 11
+li $a0, 10
 syscall
+move $a0, $v1
+
+# printf to
+move $v1, $a0
+li $v0, 11
+move $a0, $a3
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+move $a0, $v1
+
+# t29 = n - 1
+subi $t1, $a0, 1
+
+# SaveEnvironment
+sw $ra, -16($sp)
+sw $a0, 0($sp)
+sw $a1, -4($sp)
+sw $a2, -8($sp)
+sw $a3, -12($sp)
+sw $t0, -20($sp)
+sw $t1, -24($sp)
+
+# push t29
+move $a0, $t1
+
+# push tmp
+move $a1, $a2
+
+# push from
+lw $a2, -4($sp)
+
+# push to
+move $a3, $a3
+
+# call hanoi
+subi $sp, $sp, 28
+jal hanoi
+
+# RestoreEnvironment
+addi $sp, $sp, 28
+lw $ra, -16($sp)
+lw $a0, 0($sp)
+lw $a1, -4($sp)
+lw $a2, -8($sp)
+lw $a3, -12($sp)
+lw $t0, -20($sp)
+lw $t1, -24($sp)
+
+# IfEnd
+sw $a0, 0($sp)
+lw $a0, 0($sp)
+sw $a1, -4($sp)
+lw $a1, -4($sp)
+sw $a2, -8($sp)
+lw $a2, -8($sp)
+sw $a3, -12($sp)
+lw $a3, -12($sp)
+
+# GOTO Label_1
+j Label_1
+
+# Label_0:
+Label_0:
+
+# ElseBegin
+
+# ElseEnd
+sw $a0, 0($sp)
+lw $a0, 0($sp)
+sw $a1, -4($sp)
+lw $a1, -4($sp)
+sw $a2, -8($sp)
+lw $a2, -8($sp)
+sw $a3, -12($sp)
+lw $a3, -12($sp)
+
+# Label_1:
+Label_1:
+
+# ret 
+jr $ra
+
+# int Fibonacci()
+Fibonacci:
+
+# para int n
+
+# n == 0
+
+# 
+
+# BZ Label_2
+bne $a0, 0, Label_2
+
+# ret 0
+li $v0, 0
+jr $ra
+
+# IfEnd
+sw $a0, 0($sp)
+lw $a0, 0($sp)
+
+# GOTO Label_3
+j Label_3
+
+# Label_2:
+Label_2:
+
+# ElseBegin
+
+# ElseEnd
+sw $a0, 0($sp)
+lw $a0, 0($sp)
+
+# Label_3:
+Label_3:
+
+# n == 1
+
+# 
+
+# BZ Label_4
+bne $a0, 1, Label_4
+
+# ret 1
 li $v0, 1
+jr $ra
+
+# IfEnd
+sw $a0, 0($sp)
+lw $a0, 0($sp)
+
+# GOTO Label_5
+j Label_5
+
+# Label_4:
+Label_4:
+
+# ElseBegin
+
+# ElseEnd
+sw $a0, 0($sp)
+lw $a0, 0($sp)
+
+# Label_5:
+Label_5:
+
+# t65 = n - 1
+subi $t2, $a0, 1
+
+# SaveEnvironment
+sw $ra, -4($sp)
+sw $a0, 0($sp)
+sw $t2, -8($sp)
+
+# push t65
+move $a0, $t2
+
+# call Fibonacci
+subi $sp, $sp, 12
+jal Fibonacci
+
+# RestoreEnvironment
+addi $sp, $sp, 12
+lw $ra, -4($sp)
+lw $a0, 0($sp)
+lw $t2, -8($sp)
+
+# t61 = RET
+move $t3, $v0
+
+# t73 = n - 2
+subi $t4, $a0, 2
+
+# SaveEnvironment
+sw $ra, -4($sp)
+sw $a0, 0($sp)
+sw $t2, -8($sp)
+sw $t3, -12($sp)
+sw $t4, -16($sp)
+
+# push t73
+move $a0, $t4
+
+# call Fibonacci
+subi $sp, $sp, 20
+jal Fibonacci
+
+# RestoreEnvironment
+addi $sp, $sp, 20
+lw $ra, -4($sp)
+lw $a0, 0($sp)
+lw $t2, -8($sp)
+lw $t3, -12($sp)
+lw $t4, -16($sp)
+
+# t70 = RET
+move $t5, $v0
+
+# t61 = t61 + t70
+add $t3, $t3, $t5
+
+# ret t61
+move $v0, $t3
+jr $ra
+
+# int fac()
+fac:
+
+# para int n
+
+# n == 1
+
+# 
+
+# BZ Label_6
+bne $a0, 1, Label_6
+
+# ret 1
+li $v0, 1
+jr $ra
+
+# IfEnd
+sw $a0, 0($sp)
+lw $a0, 0($sp)
+
+# GOTO Label_7
+j Label_7
+
+# Label_6:
+Label_6:
+
+# ElseBegin
+
+# ElseEnd
+sw $a0, 0($sp)
+lw $a0, 0($sp)
+
+# Label_7:
+Label_7:
+
+# t88 = n
+move $t6, $a0
+
+# t92 = n - 1
+subi $t7, $a0, 1
+
+# SaveEnvironment
+sw $ra, -4($sp)
+sw $a0, 0($sp)
+sw $t6, -8($sp)
+sw $t7, -12($sp)
+
+# push t92
+move $a0, $t7
+
+# call fac
+subi $sp, $sp, 16
+jal fac
+
+# RestoreEnvironment
+addi $sp, $sp, 16
+lw $ra, -4($sp)
+lw $a0, 0($sp)
+lw $t6, -8($sp)
+lw $t7, -12($sp)
+
+# t90 = RET
+move $t8, $v0
+
+# t87 = t88 * t90
+mul $t0, $t6, $t8
+
+# ret t87
+move $v0, $t0
+jr $ra
+
+# void initGlobalArray()
+initGlobalArray:
+
+# global_int_array_1[0] = 0
+la $t1, global_int_array_1
+li $v1, 0
+sw $v1, 0($t1)
+
+# global_int_array_1[1] = 1
+la $t2, global_int_array_1
+li $v1, 1
+sw $v1, 4($t2)
+
+# t114 = global_int_array_1[0]
+la $t5, global_int_array_1
+lw $t4, 0($t5)
+
+# t119 = global_int_array_1[1]
+la $t7, global_int_array_1
+lw $t3, 4($t7)
+
+# t112 = t114 + t119
+add $t6, $t4, $t3
+
+# global_int_array_1[2] = t112
+la $t8, global_int_array_1
+sw $t6, 8($t8)
+
+# t128 = global_int_array_1[2]
+la $t1, global_int_array_1
+lw $t0, 8($t1)
+
+# t133 = global_int_array_1[1]
+la $t5, global_int_array_1
+lw $t2, 4($t5)
+
+# t126 = t128 + t133
+add $t7, $t0, $t2
+
+# global_int_array_1[3] = t126
+sw $t4, -4($sp)
+la $t4, global_int_array_1
+sw $t7, 12($t4)
+
+# t142 = global_int_array_1[3]
+sw $t3, -8($sp)
+sw $t6, -12($sp)
+la $t6, global_int_array_1
+lw $t3, 12($t6)
+
+# t147 = global_int_array_1[2]
+la $t1, global_int_array_1
+lw $t8, 8($t1)
+
+# t140 = t142 + t147
+add $t5, $t3, $t8
+
+# global_int_array_1[4] = t140
+sw $t0, -16($sp)
+la $t0, global_int_array_1
+sw $t5, 16($t0)
+
+# t156 = global_int_array_1[1]
+sw $t2, -20($sp)
+sw $t7, -24($sp)
+la $t7, global_int_array_1
+lw $t2, 4($t7)
+
+# global_int_array_2[0] = t156
+la $t4, global_int_array_2
+sw $t2, 0($t4)
+
+# t165 = global_int_array_2[0]
+la $t1, global_int_array_2
+lw $t6, 0($t1)
+
+# t169 = global_int_array_1[2]
+sw $t3, -28($sp)
+sw $t8, -32($sp)
+la $t8, global_int_array_1
+lw $t3, 8($t8)
+
+# t163 = t165 * t169
+sw $t5, -36($sp)
+mul $t5, $t6, $t3
+
+# global_int_array_2[1] = t163
+la $t0, global_int_array_2
+sw $t5, 4($t0)
+
+# t178 = global_int_array_2[1]
+sw $t2, -40($sp)
+la $t2, global_int_array_2
+lw $t7, 4($t2)
+
+# t182 = global_int_array_1[3]
+la $t1, global_int_array_1
+lw $t4, 12($t1)
+
+# t176 = t178 * t182
+mul $t8, $t7, $t4
+
+# global_int_array_2[2] = t176
+sw $t6, -44($sp)
+la $t6, global_int_array_2
+sw $t8, 8($t6)
+
+# t191 = global_int_array_2[2]
+sw $t3, -48($sp)
+sw $t5, -52($sp)
+la $t5, global_int_array_2
+lw $t3, 8($t5)
+
+# t195 = global_int_array_1[4]
+la $t2, global_int_array_1
+lw $t0, 16($t2)
+
+# t189 = t191 * t195
+mul $t1, $t3, $t0
+
+# global_int_array_2[3] = t189
+sw $t7, -56($sp)
+la $t7, global_int_array_2
+sw $t1, 12($t7)
+
+# t204 = global_int_array_2[3]
+sw $t4, -60($sp)
+sw $t8, -64($sp)
+la $t8, global_int_array_2
+lw $t4, 12($t8)
+
+# t208 = global_int_array_1[4]
+la $t5, global_int_array_1
+lw $t6, 16($t5)
+
+# t202 = t204 / t208
+div $t4, $t6
+mflo $t2
+
+# global_int_array_2[4] = t202
+sw $t3, -68($sp)
+la $t3, global_int_array_2
+sw $t2, 16($t3)
+
+# global_char_array_1[0] = 'a'
+sw $t0, -72($sp)
+la $t0, global_char_array_1
+li $v1, 97
+sw $v1, 0($t0)
+
+# global_char_array_1[1] = 'A'
+sw $t1, -76($sp)
+la $t1, global_char_array_1
+li $v1, 65
+sw $v1, 4($t1)
+
+# global_char_array_1[2] = 'z'
+la $t7, global_char_array_1
+li $v1, 122
+sw $v1, 8($t7)
+
+# global_char_array_1[3] = 'Z'
+la $t8, global_char_array_1
+li $v1, 90
+sw $v1, 12($t8)
+
+# global_char_array_1[4] = '_'
+la $t5, global_char_array_1
+li $v1, 95
+sw $v1, 16($t5)
+
+# global_char_array_2[0] = '+'
+sw $t4, -80($sp)
+la $t4, global_char_array_2
+li $v1, 43
+sw $v1, 0($t4)
+
+# global_char_array_2[1] = '-'
+sw $t6, -84($sp)
+la $t6, global_char_array_2
+li $v1, 45
+sw $v1, 4($t6)
+
+# global_char_array_2[2] = '*'
+sw $t2, -88($sp)
+la $t2, global_char_array_2
+li $v1, 42
+sw $v1, 8($t2)
+
+# global_char_array_2[3] = '/'
+la $t3, global_char_array_2
+li $v1, 47
+sw $v1, 12($t3)
+
+# global_char_array_2[4] = '6'
+la $t0, global_char_array_2
+li $v1, 54
+sw $v1, 16($t0)
+
+# ret 
+jr $ra
+
+# void assignGlobal()
+assignGlobal:
+
+# para int a
+
+# para char b
+
+# para int c
+
+# para char d
+
+# global_int_1 = a
+la $t1, global_int_1
+lw $t1, 0($t1)
+move $t1, $a0
+
+# global_char_1 = b
+la $t7, global_char_1
+lw $t7, 0($t7)
+move $t7, $a1
+
+# global_int_2 = c
+la $t8, global_int_2
+lw $t8, 0($t8)
+move $t8, $a2
+
+# global_char_2 = d
+la $t5, global_char_2
+lw $t5, 0($t5)
+move $t5, $a3
+
+# ret 
+jr $ra
+
+# void printGlobalConst()
+printGlobalConst:
+
+# printf const_int_1
+li $v0, 1
+la $t4, const_int_1
+lw $t4, 0($t4)
+move $a0, $t4
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+
+# printf const_int_2
+li $v0, 1
+la $t6, const_int_2
+lw $t6, 0($t6)
+move $a0, $t6
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+
+# printf const_int_3
+li $v0, 1
+la $t2, const_int_3
+lw $t2, 0($t2)
+move $a0, $t2
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+
+# printf const_int_4
+li $v0, 1
+la $t3, const_int_4
+lw $t3, 0($t3)
+move $a0, $t3
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+
+# printf const_char_1
+li $v0, 11
+la $t0, const_char_1
+lw $t0, 0($t0)
 move $a0, $t0
 syscall
 li $v0, 11
 li $a0, 10
 syscall
-move $a0, $v1
-move $t1, $a1
-move $t8, $t1
-move $t6, $t8
-move $v1, $a0
+
+# printf const_char_2
 li $v0, 11
-li $a0, 121
-syscall
-li $a0, 32
-syscall
-li $a0, 61
-syscall
-li $a0, 32
-syscall
-li $v0, 1
-move $a0, $t6
+la $t1, const_char_2
+lw $t1, 0($t1)
+move $a0, $t1
 syscall
 li $v0, 11
 li $a0, 10
 syscall
-move $a0, $v1
-move $t2, $a0
-move $t3, $t2
-move $t4, $t3
-sw $t5, -12($sp)
-move $t5, $t4
-sw $t7, -16($sp)
-move $t7, $a1
-sw $t0, -20($sp)
-move $t0, $t7
-sw $t1, -24($sp)
-move $t1, $t0
-move $a0, $t1
-sw $t8, -28($sp)
-move $t8, $t5
-sw $t6, -32($sp)
-move $t6, $t8
-sw $t2, -36($sp)
-move $t2, $t6
-move $a1, $t2
-sw $t3, -40($sp)
-move $t3, $a0
-sw $t4, -44($sp)
-move $t4, $t3
-sw $t7, -48($sp)
-move $t7, $t4
-move $v1, $a0
+
+# printf const_char_3
 li $v0, 11
-li $a0, 83
-syscall
-li $a0, 87
-syscall
-li $a0, 65
-syscall
-li $a0, 80
-syscall
-li $a0, 32
-syscall
-li $a0, 120
-syscall
-li $a0, 32
-syscall
-li $a0, 61
-syscall
-li $a0, 32
-syscall
-li $v0, 1
+la $t7, const_char_3
+lw $t7, 0($t7)
 move $a0, $t7
 syscall
 li $v0, 11
 li $a0, 10
 syscall
-move $a0, $v1
-sw $t0, -52($sp)
-move $t0, $a1
-sw $t1, -56($sp)
-move $t1, $t0
-sw $t5, -60($sp)
-move $t5, $t1
-move $v1, $a0
+
+# printf const_char_4
 li $v0, 11
-li $a0, 83
+la $t8, const_char_4
+lw $t8, 0($t8)
+move $a0, $t8
 syscall
-li $a0, 87
+li $v0, 11
+li $a0, 10
 syscall
-li $a0, 65
-syscall
-li $a0, 80
-syscall
-li $a0, 32
-syscall
-li $a0, 121
-syscall
-li $a0, 32
-syscall
-li $a0, 61
-syscall
-li $a0, 32
-syscall
+
+# ret 
+jr $ra
+
+# void printGlobalVar()
+printGlobalVar:
+
+# printf global_int_1
 li $v0, 1
+la $t5, global_int_1
+lw $t5, 0($t5)
 move $a0, $t5
 syscall
 li $v0, 11
 li $a0, 10
 syscall
-move $a0, $v1
-jr $ra
-full_num:
-move $t8, $a0
-move $t6, $t8
-li $t2, 100
-mul $t6, $t6, $t2
-move $t3, $t6
-move $t4, $a1
-move $t7, $t4
-li $t0, 10
-mul $t7, $t7, $t0
-add $t3, $t3, $t7
-move $t1, $a2
-move $t5, $t1
-add $t3, $t3, $t5
-move $v0, $t3
-jr $ra
-flower_num:
-move $t8, $a0
-move $t2, $t8
-move $t6, $a0
-mul $t2, $t2, $t6
-move $t4, $a0
-mul $t2, $t2, $t4
-move $t0, $t2
-move $t7, $a1
-move $t1, $t7
-move $t5, $a1
-mul $t1, $t1, $t5
-move $t3, $a1
-mul $t1, $t1, $t3
-add $t0, $t0, $t1
-sw $t8, -16($sp)
-move $t8, $a2
-sw $t6, -20($sp)
-move $t6, $t8
-sw $t4, -24($sp)
-move $t4, $a2
-mul $t6, $t6, $t4
-sw $t2, -28($sp)
-move $t2, $a2
-mul $t6, $t6, $t2
-add $t0, $t0, $t6
-move $v0, $t0
-jr $ra
-complete_flower_num:
-li $t7, 2
-move $t5, $t7
-move $t3, $t5
-Label_2:
-move $t1, $t3
-move $t8, $t1
-move $t4, $t8
-la $t6, MAX_NUM
-lw $t6, 0($t6)
-move $t2, $t6
-move $t0, $t2
-sw $t7, -516($sp)
-move $t7, $t0
-bge $t4, $t7, Label_3
-sw $t5, -520($sp)
-li $t5, 1
-sw $t3, -524($sp)
-move $t3, $t5
-sw $t1, -528($sp)
-sub $t1, $0, $t3
-sw $t8, -532($sp)
-move $t8, $t1
-la $v1, MAX_NUM
-sw $t6, 0($v1)
-sw $t2, -536($sp)
-lw $t2, -524($sp)
-move $t6, $t2
-sw $t0, -540($sp)
-move $t0, $t6
-sw $t4, -544($sp)
-move $t4, $t0
-sw $t7, -548($sp)
-move $t7, $t4
-sw $t5, -552($sp)
-li $t5, 1
-sw $t3, -556($sp)
-move $t3, $t5
-sw $t8, -560($sp)
-move $t8, $t3
-Label_4:
-sw $t1, -564($sp)
-move $t1, $t8
-sw $t2, -524($sp)
-move $t2, $t1
-sw $t6, -568($sp)
-move $t6, $t2
-sw $t0, -572($sp)
-sw $t7, -576($sp)
-lw $t7, -524($sp)
-move $t0, $t7
-sw $t4, -580($sp)
-move $t4, $t0
-sw $t5, -584($sp)
-move $t5, $t4
-bge $t6, $t5, Label_5
-sw $t3, -588($sp)
-move $t3, $t7
-sw $t8, -592($sp)
-move $t8, $t3
-sw $t1, -596($sp)
-sw $t2, -600($sp)
-lw $t2, -592($sp)
-move $t1, $t2
-div $t8, $t8, $t1
-sw $t0, -604($sp)
-move $t0, $t8
-sw $t4, -608($sp)
-move $t4, $t0
-sw $t6, -612($sp)
-move $t6, $t4
-sw $t5, -616($sp)
-move $t5, $t2
-mul $t6, $t6, $t5
-sw $t7, -524($sp)
-move $t7, $t6
-sw $t3, -620($sp)
-move $t3, $t7
-sw $t1, -624($sp)
-sw $t8, -628($sp)
-lw $t8, -524($sp)
-move $t1, $t8
-sw $t0, -632($sp)
-move $t0, $t1
-sw $t4, -636($sp)
-move $t4, $t0
-sw $t2, -592($sp)
-sw $t5, -640($sp)
-lw $t5, -592($sp)
-move $t2, $t5
-sw $t6, -644($sp)
-move $t6, $t2
-sw $t3, -648($sp)
-move $t3, $t6
-sw $ra, 0($sp)
-sw $t0, -652($sp)
-sw $t1, -656($sp)
-sw $t2, -660($sp)
-sw $t3, -664($sp)
-sw $t4, -668($sp)
-sw $t5, -592($sp)
-sw $t6, -672($sp)
-sw $t7, -676($sp)
-sw $t8, -524($sp)
+
+# printf global_int_2
+li $v0, 1
+la $t4, global_int_2
+lw $t4, 0($t4)
 move $a0, $t4
-move $a1, $t3
-subi $sp, $sp, 680
-jal mod
-addi $sp, $sp, 680
-lw $ra, 0($sp)
-lw $t0, -652($sp)
-lw $t1, -656($sp)
-lw $t2, -660($sp)
-lw $t3, -664($sp)
-lw $t4, -668($sp)
-lw $t5, -592($sp)
-lw $t6, -672($sp)
-lw $t7, -676($sp)
-lw $t8, -524($sp)
-sw $t0, -652($sp)
-move $t0, $v0
-sw $t1, -656($sp)
-move $t1, $t0
-sw $t2, -660($sp)
-move $t2, $t1
-sw $t3, -664($sp)
-move $t3, $t2
-sw $t4, -668($sp)
-li $t4, 0
-sw $t5, -592($sp)
-move $t5, $t4
-sw $t6, -672($sp)
-move $t6, $t5
-bne $t3, $t6, Label_6
-sw $t7, -676($sp)
-sw $t8, -524($sp)
-lw $t8, -560($sp)
-move $t7, $t8
-sw $t0, -680($sp)
-move $t0, $t7
-sw $t1, -684($sp)
-move $t1, $t0
-sw $t2, -688($sp)
-li $t2, 1
-sw $t4, -692($sp)
-move $t4, $t2
-add $t1, $t1, $t4
-move $t8, $t1
-sw $t5, -696($sp)
-sw $t3, -700($sp)
-lw $t3, -576($sp)
-move $t5, $t3
-sw $t6, -704($sp)
-move $t6, $t5
-sw $t7, -708($sp)
-move $t7, $t6
-sw $t0, -712($sp)
-sw $t2, -716($sp)
-lw $t2, -592($sp)
-move $t0, $t2
-sw $t4, -720($sp)
-move $t4, $t0
-sub $t7, $t7, $t4
-move $t3, $t7
-sw $t8, -560($sp)
-sw $t1, -724($sp)
-lw $t1, -560($sp)
-move $t8, $t1
-sw $t5, -728($sp)
-move $t5, $t8
-sw $t6, -732($sp)
-move $t6, $t5
-sw $t2, -592($sp)
-li $t2, 128
-sw $t0, -736($sp)
-move $t0, $t2
-sw $t4, -740($sp)
-move $t4, $t0
-blt $t6, $t4, Label_8
-li $v0, 11
-li $a0, 79
-syscall
-li $a0, 86
-syscall
-li $a0, 69
-syscall
-li $a0, 82
-syscall
-li $a0, 70
-syscall
-li $a0, 76
-syscall
-li $a0, 79
-syscall
-li $a0, 87
-syscall
-li $a0, 33
 syscall
 li $v0, 11
 li $a0, 10
 syscall
-j Label_9
-Label_8:
-sw $t3, -576($sp)
-move $t3, $t1
-sw $t7, -744($sp)
-move $t7, $t3
-sw $t8, -748($sp)
-move $t8, $t7
-sw $t5, -752($sp)
-sw $t2, -756($sp)
-lw $t2, -592($sp)
-move $t5, $t2
-sw $t0, -760($sp)
-move $t0, $t5
-sw $t6, -764($sp)
-move $t6, $t0
-sw $t4, -768($sp)
-sw $t1, -560($sp)
-li $t4, -4
-mulo $t1, $t6, 4
-add $t4, $t4, $t1
-sw $t6, 0($t4)
-Label_9:
-j Label_7
-Label_6:
-Label_7:
-addi $t2, $t2, 1
-sw $t0, -772($sp)
-lw $t0, -572($sp)
-sw $t1, -560($sp)
-lw $t1, -564($sp)
-sw $t2, -592($sp)
-lw $t2, -524($sp)
-sw $t3, -776($sp)
-lw $t3, -588($sp)
-sw $t4, -768($sp)
-lw $t4, -580($sp)
-sw $t5, -780($sp)
-lw $t5, -584($sp)
-sw $t6, -784($sp)
-lw $t6, -568($sp)
-sw $t7, -788($sp)
-lw $t7, -576($sp)
-sw $t8, -792($sp)
-lw $t8, -592($sp)
-j Label_4
-Label_5:
-sw $t0, -572($sp)
-move $t0, $t7
-sw $t1, -564($sp)
-move $t1, $t0
-sw $t2, -524($sp)
-move $t2, $t1
-sw $t3, -588($sp)
-li $t3, 0
-sw $t4, -580($sp)
-move $t4, $t3
-sw $t5, -584($sp)
-move $t5, $t4
-bne $t2, $t5, Label_10
-sw $t6, -568($sp)
-sw $t8, -592($sp)
-lw $t8, -524($sp)
-move $t6, $t8
-sw $t7, -576($sp)
-move $t7, $t6
-sw $t0, -796($sp)
-move $t0, $t7
+
+# printf global_char_1
 li $v0, 11
-li $a0, 99
-syscall
-li $a0, 111
-syscall
-li $a0, 109
-syscall
-li $a0, 112
-syscall
-li $a0, 108
-syscall
-li $a0, 101
-syscall
-li $a0, 116
-syscall
-li $a0, 101
-syscall
-li $a0, 32
-syscall
-li $a0, 110
-syscall
-li $a0, 117
-syscall
-li $a0, 109
-syscall
-li $a0, 98
-syscall
-li $a0, 101
-syscall
-li $a0, 114
-syscall
-li $a0, 58
-syscall
-li $a0, 32
-syscall
-li $v0, 1
-move $a0, $t0
+la $t6, global_char_1
+lw $t6, 0($t6)
+move $a0, $t6
 syscall
 li $v0, 11
 li $a0, 10
 syscall
-sw $t1, -800($sp)
-li $t1, 0
-sw $t3, -804($sp)
-move $t3, $t1
-sw $t4, -808($sp)
-lw $t4, -592($sp)
-move $t4, $t3
-Label_12:
-sw $t2, -812($sp)
-move $t2, $t4
-sw $t5, -816($sp)
-move $t5, $t2
-sw $t8, -524($sp)
-move $t8, $t5
-sw $t6, -820($sp)
-sw $t7, -824($sp)
-lw $t7, -560($sp)
-move $t6, $t7
-sw $t0, -828($sp)
-move $t0, $t6
-sw $t1, -832($sp)
-move $t1, $t0
-bgt $t8, $t1, Label_13
-sw $t3, -836($sp)
-move $t3, $t4
-sw $t2, -840($sp)
-move $t2, $t3
-sw $t5, -844($sp)
-move $t5, $t2
-sw $t7, -560($sp)
-sw $t6, -848($sp)
-sw $t0, -852($sp)
-li $t6, -4
-mulo $t0, $t5, 4
-add $t6, $t6, $t0
-lw $t7, 0($t6)
-sw $t8, -856($sp)
-move $t8, $t7
-sw $t1, -860($sp)
-move $t1, $t8
+
+# printf global_char_2
 li $v0, 11
-li $a0, 32
-syscall
-li $a0, 32
-syscall
-li $v0, 1
-move $a0, $t1
+la $t2, global_char_2
+lw $t2, 0($t2)
+move $a0, $t2
 syscall
 li $v0, 11
 li $a0, 10
 syscall
-addi $t4, $t4, 1
-sw $t0, -852($sp)
-lw $t0, -828($sp)
-sw $t1, -864($sp)
-lw $t1, -832($sp)
-sw $t2, -868($sp)
-lw $t2, -812($sp)
-sw $t3, -872($sp)
-lw $t3, -836($sp)
-sw $t5, -876($sp)
-lw $t5, -816($sp)
-sw $t6, -848($sp)
-lw $t6, -820($sp)
-sw $t7, -880($sp)
-lw $t7, -824($sp)
-sw $t8, -884($sp)
-lw $t8, -524($sp)
-j Label_12
-Label_13:
-li $v0, 11
-li $a0, 32
-syscall
-li $v0, 11
-li $a0, 10
-syscall
-j Label_11
-Label_10:
-Label_11:
-addi $t8, $t8, 1
-j Label_2
-Label_3:
-li $v0, 11
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $v0, 11
-li $a0, 10
-syscall
-li $v0, 11
-li $a0, 39
-syscall
-li $a0, 119
-syscall
-li $a0, 97
-syscall
-li $a0, 116
-syscall
-li $a0, 101
-syscall
-li $a0, 114
-syscall
-li $a0, 32
-syscall
-li $a0, 102
-syscall
-li $a0, 108
-syscall
-li $a0, 111
-syscall
-li $a0, 119
-syscall
-li $a0, 101
-syscall
-li $a0, 114
-syscall
-li $a0, 39
-syscall
-li $a0, 110
-syscall
-li $a0, 117
-syscall
-li $a0, 109
-syscall
-li $a0, 98
-syscall
-li $a0, 101
-syscall
-li $a0, 114
-syscall
-li $a0, 32
-syscall
-li $a0, 105
-syscall
-li $a0, 115
-syscall
-li $a0, 58
-syscall
-li $v0, 11
-li $a0, 10
-syscall
-sw $t4, -592($sp)
-li $t4, 0
-sw $t0, -828($sp)
-move $t0, $t4
-sw $t1, -832($sp)
-move $t1, $t0
-sw $t2, -812($sp)
-move $t2, $t1
-sw $t3, -836($sp)
-li $t3, 100
-sw $t5, -816($sp)
-move $t5, $t3
-sw $t6, -820($sp)
-lw $t6, -592($sp)
-move $t6, $t5
-Label_14:
-sw $t7, -824($sp)
-move $t7, $t6
-sw $t8, -524($sp)
-move $t8, $t7
-sw $t4, -888($sp)
-move $t4, $t8
-sw $t0, -892($sp)
-li $t0, 100
-sw $t2, -896($sp)
-move $t2, $t0
-sw $t1, -900($sp)
-move $t1, $t2
-sw $t3, -904($sp)
-sw $t5, -908($sp)
-la $t5, MAX_NUM
-lw $t5, 0($t5)
-move $t3, $t5
-sw $t6, -592($sp)
-move $t6, $t3
-add $t1, $t1, $t6
-bge $t4, $t1, Label_15
-sw $t7, -912($sp)
-sw $t8, -916($sp)
-lw $t8, -592($sp)
-move $t7, $t8
-sw $t0, -920($sp)
-move $t0, $t7
-sw $t2, -924($sp)
-li $t2, 100
-div $t0, $t0, $t2
-la $v1, MAX_NUM
-sw $t5, 0($v1)
-move $t5, $t0
-sw $t3, -928($sp)
-lw $t3, -560($sp)
-move $t3, $t5
-sw $t6, -932($sp)
-move $t6, $t8
-sw $t4, -936($sp)
-move $t4, $t6
-sw $t1, -940($sp)
-li $t1, 10
-div $t4, $t4, $t1
-sw $t7, -944($sp)
-move $t7, $t4
-sw $t2, -948($sp)
-li $t2, 10
-sw $t0, -952($sp)
-move $t0, $t2
-sw $t3, -560($sp)
-move $t3, $t0
-sw $ra, 0($sp)
-sw $t0, -956($sp)
-sw $t1, -960($sp)
-sw $t2, -964($sp)
-sw $t3, -968($sp)
-sw $t4, -972($sp)
-sw $t5, -976($sp)
-sw $t6, -980($sp)
-sw $t7, -984($sp)
-sw $t8, -592($sp)
-move $a0, $t7
-move $a1, $t3
-subi $sp, $sp, 988
-jal mod
-addi $sp, $sp, 988
-lw $ra, 0($sp)
-lw $t0, -956($sp)
-lw $t1, -960($sp)
-lw $t2, -964($sp)
-lw $t3, -968($sp)
-lw $t4, -972($sp)
-lw $t5, -976($sp)
-lw $t6, -980($sp)
-lw $t7, -984($sp)
-lw $t8, -592($sp)
-sw $t0, -956($sp)
-move $t0, $v0
-sw $t1, -960($sp)
-move $t1, $t0
-sw $t2, -964($sp)
-move $t2, $t1
-sw $t3, -968($sp)
-move $t3, $t2
-sw $t4, -972($sp)
-lw $t4, -524($sp)
-move $t4, $t3
-sw $t5, -976($sp)
-move $t5, $t8
-sw $t6, -980($sp)
-move $t6, $t5
-sw $t7, -984($sp)
-move $t7, $t6
-sw $t0, -988($sp)
-li $t0, 10
-sw $t1, -992($sp)
-move $t1, $t0
-sw $t2, -996($sp)
-move $t2, $t1
-sw $ra, 0($sp)
-sw $t0, -1000($sp)
-sw $t1, -1004($sp)
-sw $t2, -1008($sp)
-sw $t3, -1012($sp)
-sw $t4, -524($sp)
-sw $t5, -1016($sp)
-sw $t6, -1020($sp)
-sw $t7, -1024($sp)
-sw $t8, -592($sp)
-move $a0, $t7
-move $a1, $t2
-subi $sp, $sp, 1028
-jal mod
-addi $sp, $sp, 1028
-lw $ra, 0($sp)
-lw $t0, -1000($sp)
-lw $t1, -1004($sp)
-lw $t2, -1008($sp)
-lw $t3, -1012($sp)
-lw $t4, -524($sp)
-lw $t5, -1016($sp)
-lw $t6, -1020($sp)
-lw $t7, -1024($sp)
-lw $t8, -592($sp)
-sw $t0, -1000($sp)
-move $t0, $v0
-sw $t1, -1004($sp)
-move $t1, $t0
-sw $t2, -1008($sp)
-move $t2, $t1
-sw $t3, -1012($sp)
-move $t3, $t2
-sw $t4, -524($sp)
-move $t4, $t3
-sw $t5, -1016($sp)
-sw $t6, -1020($sp)
-lw $t6, -560($sp)
-move $t5, $t6
-sw $t7, -1024($sp)
-move $t7, $t5
-sw $t8, -592($sp)
-move $t8, $t7
-sw $t0, -1028($sp)
-sw $t1, -1032($sp)
-lw $t1, -524($sp)
-move $t0, $t1
-sw $t2, -1036($sp)
-move $t2, $t0
-sw $t4, -1040($sp)
-move $t4, $t2
-sw $t3, -1044($sp)
-sw $t6, -560($sp)
-lw $t6, -1040($sp)
-move $t3, $t6
-sw $t5, -1048($sp)
-move $t5, $t3
-sw $t8, -1052($sp)
-move $t8, $t5
-sw $ra, 0($sp)
-sw $t0, -1056($sp)
-sw $t1, -524($sp)
-sw $t2, -1060($sp)
-sw $t3, -1064($sp)
-sw $t4, -1068($sp)
-sw $t5, -1072($sp)
-sw $t6, -1040($sp)
-sw $t7, -1076($sp)
-sw $t8, -1080($sp)
-sw $t0, -1056($sp)
-lw $t0, -1052($sp)
-move $a0, $t0
-move $a1, $t4
-move $a2, $t8
-subi $sp, $sp, 1084
-jal full_num
-addi $sp, $sp, 1084
-lw $ra, 0($sp)
-lw $t0, -1056($sp)
-lw $t1, -524($sp)
-lw $t2, -1060($sp)
-lw $t3, -1064($sp)
-lw $t4, -1068($sp)
-lw $t5, -1072($sp)
-lw $t6, -1040($sp)
-lw $t7, -1076($sp)
-lw $t8, -1080($sp)
-sw $t0, -1056($sp)
-move $t0, $v0
-sw $t1, -524($sp)
-move $t1, $t0
-sw $t2, -1060($sp)
-move $t2, $t1
-sw $t3, -1064($sp)
-move $t3, $t2
-sw $t4, -1068($sp)
-sw $t5, -1072($sp)
-lw $t5, -560($sp)
-move $t4, $t5
-sw $t6, -1040($sp)
-move $t6, $t4
-sw $t7, -1076($sp)
-move $t7, $t6
-sw $t8, -1080($sp)
-sw $t0, -1084($sp)
-lw $t0, -524($sp)
-move $t8, $t0
-sw $t1, -1088($sp)
-move $t1, $t8
-sw $t3, -1092($sp)
-move $t3, $t1
-sw $t2, -1096($sp)
-sw $t5, -560($sp)
-lw $t5, -1040($sp)
-move $t2, $t5
-sw $t4, -1100($sp)
-move $t4, $t2
-sw $t7, -1104($sp)
-move $t7, $t4
-sw $ra, 0($sp)
-sw $t0, -524($sp)
-sw $t1, -1108($sp)
-sw $t2, -1112($sp)
-sw $t3, -1116($sp)
-sw $t4, -1120($sp)
-sw $t5, -1040($sp)
-sw $t6, -1124($sp)
-sw $t7, -1128($sp)
-sw $t8, -1132($sp)
-sw $t0, -524($sp)
-lw $t0, -1104($sp)
-move $a0, $t0
-move $a1, $t3
-move $a2, $t7
-subi $sp, $sp, 1136
-jal flower_num
-addi $sp, $sp, 1136
-lw $ra, 0($sp)
-lw $t0, -524($sp)
-lw $t1, -1108($sp)
-lw $t2, -1112($sp)
-lw $t3, -1116($sp)
-lw $t4, -1120($sp)
-lw $t5, -1040($sp)
-lw $t6, -1124($sp)
-lw $t7, -1128($sp)
-lw $t8, -1132($sp)
-sw $t0, -524($sp)
-move $t0, $v0
-sw $t1, -1108($sp)
-move $t1, $t0
-sw $t2, -1112($sp)
-move $t2, $t1
-sw $t3, -1116($sp)
-move $t3, $t2
-sw $t4, -1120($sp)
-lw $t4, -1092($sp)
-bne $t4, $t3, Label_16
-sw $t5, -1040($sp)
-sw $t6, -1124($sp)
-lw $t6, -896($sp)
-move $t5, $t6
-sw $t7, -1128($sp)
-move $t7, $t5
-sw $t8, -1132($sp)
-move $t8, $t7
-sw $t0, -1136($sp)
-sw $t1, -1140($sp)
-lw $t1, -592($sp)
-move $t0, $t1
-sw $t2, -1144($sp)
-move $t2, $t0
-sw $t4, -1092($sp)
-move $t4, $t2
-sw $t3, -1148($sp)
-sw $t6, -896($sp)
-li $t3, -4
-mulo $t6, $t4, 4
-add $t3, $t3, $t6
-sw $t4, 0($t3)
-sw $t5, -1152($sp)
-move $t5, $t6
-sw $t8, -1156($sp)
-move $t8, $t5
-sw $t7, -1160($sp)
-move $t7, $t8
-sw $t1, -592($sp)
-li $t1, 1
-sw $t0, -1164($sp)
-move $t0, $t1
-add $t7, $t7, $t0
-move $t6, $t7
-j Label_17
-Label_16:
-Label_17:
-sw $t2, -1168($sp)
-lw $t2, -592($sp)
-addi $t2, $t2, 1
-sw $t0, -1172($sp)
-lw $t0, -892($sp)
-sw $t1, -1176($sp)
-lw $t1, -900($sp)
-sw $t2, -592($sp)
-move $t2, $t6
-sw $t3, -1148($sp)
-lw $t3, -904($sp)
-sw $t4, -1180($sp)
-lw $t4, -888($sp)
-sw $t5, -1184($sp)
-lw $t5, -908($sp)
-sw $t6, -896($sp)
-lw $t6, -592($sp)
-sw $t7, -1188($sp)
-lw $t7, -824($sp)
-sw $t8, -1192($sp)
-lw $t8, -524($sp)
-j Label_14
-Label_15:
-sw $t0, -892($sp)
-li $t0, 0
-sw $t1, -900($sp)
-move $t1, $t0
-move $t6, $t1
-Label_18:
-sw $t2, -896($sp)
-move $t2, $t6
-sw $t3, -904($sp)
-move $t3, $t2
-sw $t4, -888($sp)
-move $t4, $t3
-sw $t5, -908($sp)
-sw $t7, -824($sp)
-lw $t7, -896($sp)
-move $t5, $t7
-sw $t8, -524($sp)
-move $t8, $t5
-sw $t0, -1196($sp)
-move $t0, $t8
-bge $t4, $t0, Label_19
-sw $t1, -1200($sp)
-move $t1, $t6
-sw $t2, -1204($sp)
-move $t2, $t1
-sw $t3, -1208($sp)
-move $t3, $t2
-sw $t7, -896($sp)
-sw $t5, -1212($sp)
-sw $t8, -1216($sp)
-li $t5, -4
-mulo $t8, $t3, 4
-add $t5, $t5, $t8
-lw $t7, 0($t5)
-sw $t4, -1220($sp)
-move $t4, $t7
-sw $t0, -1224($sp)
-move $t0, $t4
-li $v0, 11
-li $a0, 32
-syscall
-li $a0, 32
-syscall
-li $v0, 1
-move $a0, $t0
-syscall
-li $v0, 11
-li $a0, 10
-syscall
-addi $t6, $t6, 1
-sw $t0, -1228($sp)
-lw $t0, -1196($sp)
-sw $t1, -1232($sp)
-lw $t1, -1200($sp)
-sw $t2, -1236($sp)
-lw $t2, -896($sp)
-sw $t3, -1240($sp)
-lw $t3, -904($sp)
-sw $t4, -1244($sp)
-lw $t4, -888($sp)
-sw $t5, -1212($sp)
-lw $t5, -908($sp)
-sw $t7, -1248($sp)
-lw $t7, -824($sp)
-sw $t8, -1216($sp)
-lw $t8, -524($sp)
-j Label_18
-Label_19:
-li $v0, 11
-li $a0, 32
-syscall
-li $v0, 11
-li $a0, 10
-syscall
-li $v0, 11
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $a0, 45
-syscall
-li $v0, 11
-li $a0, 10
-syscall
-sw $t6, -592($sp)
-li $t6, 0
-sw $t0, -1196($sp)
-move $t0, $t6
-sw $t1, -1200($sp)
-move $t1, $t0
-sw $t2, -896($sp)
-move $t2, $t1
-sw $t3, -904($sp)
-li $t3, 1
-sw $t4, -888($sp)
-move $t4, $t3
-sw $t5, -908($sp)
-move $t5, $t4
-sw $t7, -824($sp)
-move $t7, $t5
-sw $t8, -524($sp)
-li $t8, 2
-sw $t6, -1252($sp)
-move $t6, $t8
-sw $t0, -1256($sp)
-move $t0, $t6
-Label_20:
-sw $t2, -1260($sp)
-move $t2, $t0
-sw $t1, -1264($sp)
-move $t1, $t2
-sw $t3, -1268($sp)
-move $t3, $t1
-sw $t4, -1272($sp)
-sw $t7, -1276($sp)
-la $t7, MAX_NUM
-lw $t7, 0($t7)
-move $t4, $t7
-sw $t5, -1280($sp)
-move $t5, $t4
-sw $t8, -1284($sp)
-move $t8, $t5
-bgt $t3, $t8, Label_21
-sw $t6, -1288($sp)
-move $t6, $t0
-sw $t2, -1292($sp)
-move $t2, $t6
-sw $t1, -1296($sp)
-li $t1, 2
-div $t2, $t2, $t1
-la $v1, MAX_NUM
-sw $t7, 0($v1)
-move $t7, $t2
-sw $t4, -1300($sp)
-move $t4, $t7
-sw $t5, -1304($sp)
-li $t5, 2
-sw $t3, -1308($sp)
-move $t3, $t5
-sw $t8, -1312($sp)
-lw $t8, -592($sp)
-move $t8, $t3
-Label_22:
-sw $t0, -1316($sp)
-move $t0, $t8
-sw $t6, -1320($sp)
-move $t6, $t0
-sw $t1, -1324($sp)
-move $t1, $t6
-sw $t2, -1328($sp)
-move $t2, $t4
-sw $t7, -1332($sp)
-move $t7, $t2
-sw $t5, -1336($sp)
-move $t5, $t7
-bgt $t1, $t5, Label_23
-sw $t3, -1340($sp)
-sw $t8, -592($sp)
-lw $t8, -1316($sp)
-move $t3, $t8
-sw $t0, -1344($sp)
-move $t0, $t3
-sw $t6, -1348($sp)
-sw $t4, -1352($sp)
-lw $t4, -592($sp)
-move $t6, $t4
-div $t0, $t0, $t6
-sw $t2, -1356($sp)
-move $t2, $t0
-sw $t7, -1360($sp)
-move $t7, $t2
-sw $t1, -1364($sp)
-move $t1, $t7
-sw $t5, -1368($sp)
-move $t5, $t4
-mul $t1, $t1, $t5
-sw $t8, -1316($sp)
-move $t8, $t1
-sw $t3, -1372($sp)
-move $t3, $t8
-sw $t6, -1376($sp)
-sw $t0, -1380($sp)
-lw $t0, -1316($sp)
-move $t6, $t0
-sw $t2, -1384($sp)
-move $t2, $t6
-sw $t7, -1388($sp)
-move $t7, $t2
-sw $t4, -592($sp)
-sw $t5, -1392($sp)
-lw $t5, -592($sp)
-move $t4, $t5
-sw $t1, -1396($sp)
-move $t1, $t4
-sw $t3, -1400($sp)
-move $t3, $t1
-sw $ra, 0($sp)
-sw $t0, -1316($sp)
-sw $t1, -1404($sp)
-sw $t2, -1408($sp)
-sw $t3, -1412($sp)
-sw $t4, -1416($sp)
-sw $t5, -592($sp)
-sw $t6, -1420($sp)
-sw $t7, -1424($sp)
-sw $t8, -1428($sp)
-move $a0, $t7
-move $a1, $t3
-subi $sp, $sp, 1432
-jal mod
-addi $sp, $sp, 1432
-lw $ra, 0($sp)
-lw $t0, -1316($sp)
-lw $t1, -1404($sp)
-lw $t2, -1408($sp)
-lw $t3, -1412($sp)
-lw $t4, -1416($sp)
-lw $t5, -592($sp)
-lw $t6, -1420($sp)
-lw $t7, -1424($sp)
-lw $t8, -1428($sp)
-sw $t0, -1316($sp)
-move $t0, $v0
-sw $t1, -1404($sp)
-move $t1, $t0
-sw $t2, -1408($sp)
-move $t2, $t1
-sw $t3, -1412($sp)
-move $t3, $t2
-sw $t4, -1416($sp)
-li $t4, 0
-sw $t5, -592($sp)
-move $t5, $t4
-sw $t6, -1420($sp)
-move $t6, $t5
-bne $t3, $t6, Label_24
-sw $t7, -1424($sp)
-li $t7, 0
-sw $t8, -1428($sp)
-move $t8, $t7
-sw $t0, -1432($sp)
-move $t0, $t8
-sw $t1, -1436($sp)
-lw $t1, -1276($sp)
-move $t1, $t0
-j Label_25
-Label_24:
-Label_25:
-sw $t2, -1440($sp)
-lw $t2, -592($sp)
-addi $t2, $t2, 1
-sw $t0, -1444($sp)
-lw $t0, -1316($sp)
-sw $t1, -1276($sp)
-lw $t1, -1324($sp)
-sw $t2, -592($sp)
-lw $t2, -1328($sp)
-sw $t3, -1448($sp)
-lw $t3, -1340($sp)
-sw $t4, -1452($sp)
-lw $t4, -1352($sp)
-sw $t5, -1456($sp)
-lw $t5, -1336($sp)
-sw $t6, -1460($sp)
-lw $t6, -1320($sp)
-sw $t7, -1464($sp)
-lw $t7, -1332($sp)
-sw $t8, -1468($sp)
-lw $t8, -592($sp)
-j Label_22
-Label_23:
-sw $t0, -1316($sp)
-sw $t1, -1324($sp)
-lw $t1, -1276($sp)
-move $t0, $t1
-sw $t2, -1328($sp)
-move $t2, $t0
-sw $t3, -1340($sp)
-move $t3, $t2
-sw $t4, -1352($sp)
-li $t4, 1
-sw $t5, -1336($sp)
-move $t5, $t4
-sw $t6, -1320($sp)
-move $t6, $t5
-bne $t3, $t6, Label_26
-sw $t7, -1332($sp)
-sw $t8, -592($sp)
-lw $t8, -1316($sp)
-move $t7, $t8
-sw $t1, -1276($sp)
-move $t1, $t7
-sw $t0, -1472($sp)
-move $t0, $t1
-li $v0, 11
-li $a0, 32
-syscall
-li $v0, 1
-move $a0, $t0
-syscall
-li $v0, 11
-li $a0, 10
-syscall
-sw $t2, -1476($sp)
-sw $t4, -1480($sp)
-lw $t4, -1260($sp)
-move $t2, $t4
-sw $t5, -1484($sp)
-move $t5, $t2
-sw $t3, -1488($sp)
-move $t3, $t5
-sw $t6, -1492($sp)
-li $t6, 1
-sw $t8, -1316($sp)
-move $t8, $t6
-add $t3, $t3, $t8
-move $t4, $t3
-sw $t7, -1496($sp)
-move $t7, $t4
-sw $t1, -1500($sp)
-move $t1, $t7
-sw $t0, -1504($sp)
-li $t0, 10
-div $t1, $t1, $t0
-sw $t2, -1508($sp)
-move $t2, $t1
-sw $t5, -1512($sp)
-move $t5, $t2
-sw $t6, -1516($sp)
-move $t6, $t5
-sw $t8, -1520($sp)
-li $t8, 10
-mul $t6, $t6, $t8
-sw $t3, -1524($sp)
-move $t3, $t6
-sw $t4, -1260($sp)
-lw $t4, -1400($sp)
-move $t4, $t3
-sw $t7, -1528($sp)
-move $t7, $t4
-sw $t0, -1532($sp)
-move $t0, $t7
-sw $t1, -1536($sp)
-move $t1, $t0
-sw $t2, -1540($sp)
-sw $t5, -1544($sp)
-lw $t5, -1260($sp)
-move $t2, $t5
-sw $t8, -1548($sp)
-move $t8, $t2
-sw $t6, -1552($sp)
-move $t6, $t8
-bne $t1, $t6, Label_28
-li $v0, 11
-li $a0, 32
-syscall
-li $v0, 11
-li $a0, 10
-syscall
-j Label_29
-Label_28:
-Label_29:
-j Label_27
-Label_26:
-Label_27:
-sw $t3, -1556($sp)
-li $t3, 1
-sw $t4, -1400($sp)
-move $t4, $t3
-sw $t7, -1560($sp)
-move $t7, $t4
-sw $t0, -1564($sp)
-lw $t0, -1276($sp)
-move $t0, $t7
-sw $t5, -1260($sp)
-lw $t5, -1316($sp)
-addi $t5, $t5, 1
-sw $t0, -1276($sp)
-move $t0, $t5
-sw $t1, -1568($sp)
-lw $t1, -1324($sp)
-sw $t2, -1572($sp)
-lw $t2, -1328($sp)
-sw $t3, -1576($sp)
-lw $t3, -1340($sp)
-sw $t4, -1580($sp)
-lw $t4, -1352($sp)
-sw $t5, -1316($sp)
-lw $t5, -1336($sp)
-sw $t6, -1584($sp)
-lw $t6, -1320($sp)
-sw $t7, -1588($sp)
-lw $t7, -1332($sp)
-sw $t8, -1592($sp)
-lw $t8, -592($sp)
-j Label_20
-Label_21:
-sw $t0, -1316($sp)
-sw $t1, -1324($sp)
-lw $t1, -1260($sp)
-move $t0, $t1
-sw $t2, -1328($sp)
-move $t2, $t0
-sw $t3, -1340($sp)
-move $t3, $t2
-li $v0, 11
-li $a0, 84
-syscall
-li $a0, 104
-syscall
-li $a0, 101
-syscall
-li $a0, 32
-syscall
-li $a0, 116
-syscall
-li $a0, 111
-syscall
-li $a0, 116
-syscall
-li $a0, 97
-syscall
-li $a0, 108
-syscall
-li $a0, 32
-syscall
-li $a0, 105
-syscall
-li $a0, 115
-syscall
-li $a0, 32
-syscall
+
+# ret 
+jr $ra
+
+# void printGlobalArray()
+printGlobalArray:
+
+# t322 = global_int_array_1[0]
+la $t0, global_int_array_1
+lw $t3, 0($t0)
+
+# printf t322
 li $v0, 1
 move $a0, $t3
 syscall
 li $v0, 11
 li $a0, 10
 syscall
+
+# t328 = global_int_array_1[1]
+la $t7, global_int_array_1
+lw $t1, 4($t7)
+
+# printf t328
+li $v0, 1
+move $a0, $t1
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+
+# t334 = global_int_array_1[2]
+la $t5, global_int_array_1
+lw $t8, 8($t5)
+
+# printf t334
+li $v0, 1
+move $a0, $t8
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+
+# t340 = global_int_array_1[3]
+la $t6, global_int_array_1
+lw $t4, 12($t6)
+
+# printf t340
+li $v0, 1
+move $a0, $t4
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+
+# t346 = global_int_array_1[4]
+la $t0, global_int_array_1
+lw $t2, 16($t0)
+
+# printf t346
+li $v0, 1
+move $a0, $t2
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+
+# t352 = global_int_array_2[0]
+sw $t3, -4($sp)
+la $t7, global_int_array_2
+lw $t3, 0($t7)
+
+# printf t352
+li $v0, 1
+move $a0, $t3
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+
+# t358 = global_int_array_2[1]
+sw $t1, -8($sp)
+la $t5, global_int_array_2
+lw $t1, 4($t5)
+
+# printf t358
+li $v0, 1
+move $a0, $t1
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+
+# t364 = global_int_array_2[2]
+sw $t8, -12($sp)
+la $t6, global_int_array_2
+lw $t8, 8($t6)
+
+# printf t364
+li $v0, 1
+move $a0, $t8
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+
+# t370 = global_int_array_2[3]
+sw $t4, -16($sp)
+la $t0, global_int_array_2
+lw $t4, 12($t0)
+
+# printf t370
+li $v0, 1
+move $a0, $t4
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+
+# t376 = global_int_array_2[4]
+sw $t2, -20($sp)
+la $t7, global_int_array_2
+lw $t2, 16($t7)
+
+# printf t376
+li $v0, 1
+move $a0, $t2
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+
+# t382 = global_char_array_1[0]
+sw $t3, -24($sp)
+la $t5, global_char_array_1
+lw $t3, 0($t5)
+
+# printf t382
+li $v0, 11
+move $a0, $t3
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+
+# t388 = global_char_array_1[1]
+sw $t1, -28($sp)
+la $t6, global_char_array_1
+lw $t1, 4($t6)
+
+# printf t388
+li $v0, 11
+move $a0, $t1
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+
+# t394 = global_char_array_1[2]
+sw $t8, -32($sp)
+la $t0, global_char_array_1
+lw $t8, 8($t0)
+
+# printf t394
+li $v0, 11
+move $a0, $t8
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+
+# t400 = global_char_array_1[3]
+sw $t4, -36($sp)
+la $t7, global_char_array_1
+lw $t4, 12($t7)
+
+# printf t400
+li $v0, 11
+move $a0, $t4
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+
+# t406 = global_char_array_1[4]
+sw $t2, -40($sp)
+la $t5, global_char_array_1
+lw $t2, 16($t5)
+
+# printf t406
+li $v0, 11
+move $a0, $t2
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+
+# t412 = global_char_array_2[0]
+sw $t3, -44($sp)
+la $t6, global_char_array_2
+lw $t3, 0($t6)
+
+# printf t412
+li $v0, 11
+move $a0, $t3
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+
+# t418 = global_char_array_2[1]
+sw $t1, -48($sp)
+la $t0, global_char_array_2
+lw $t1, 4($t0)
+
+# printf t418
+li $v0, 11
+move $a0, $t1
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+
+# t424 = global_char_array_2[2]
+sw $t8, -52($sp)
+la $t7, global_char_array_2
+lw $t8, 8($t7)
+
+# printf t424
+li $v0, 11
+move $a0, $t8
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+
+# t430 = global_char_array_2[3]
+sw $t4, -56($sp)
+la $t5, global_char_array_2
+lw $t4, 12($t5)
+
+# printf t430
+li $v0, 11
+move $a0, $t4
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+
+# t436 = global_char_array_2[4]
+sw $t2, -60($sp)
+la $t6, global_char_array_2
+lw $t2, 16($t6)
+
+# printf t436
+li $v0, 11
+move $a0, $t2
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+
+# ret 
 jr $ra
-main:
-li $t4, 5
-move $t5, $t4
-move $t6, $t5
+
+# void testGlobal()
+testGlobal:
+
+# SaveEnvironment
 sw $ra, 0($sp)
-sw $t4, -4($sp)
-sw $t5, -8($sp)
+
+# call initGlobalArray
+subi $sp, $sp, 4
+jal initGlobalArray
+
+# RestoreEnvironment
+addi $sp, $sp, 4
+lw $ra, 0($sp)
+
+# SaveEnvironment
+sw $ra, 0($sp)
+
+# push const_int_1
+la $t3, const_int_1
+lw $t3, 0($t3)
+move $a0, $t3
+
+# push const_char_1
+la $t0, const_char_1
+lw $t0, 0($t0)
+move $a1, $t0
+
+# push const_int_4
+la $t1, const_int_4
+lw $t1, 0($t1)
+move $a2, $t1
+
+# push const_char_4
+la $t7, const_char_4
+lw $t7, 0($t7)
+move $a3, $t7
+
+# call assignGlobal
+subi $sp, $sp, 4
+jal assignGlobal
+
+# RestoreEnvironment
+addi $sp, $sp, 4
+lw $ra, 0($sp)
+
+# SaveEnvironment
+sw $ra, 0($sp)
+
+# call printGlobalConst
+subi $sp, $sp, 4
+jal printGlobalConst
+
+# RestoreEnvironment
+addi $sp, $sp, 4
+lw $ra, 0($sp)
+
+# SaveEnvironment
+sw $ra, 0($sp)
+
+# call printGlobalVar
+subi $sp, $sp, 4
+jal printGlobalVar
+
+# RestoreEnvironment
+addi $sp, $sp, 4
+lw $ra, 0($sp)
+
+# SaveEnvironment
+sw $ra, 0($sp)
+
+# call printGlobalArray
+subi $sp, $sp, 4
+jal printGlobalArray
+
+# RestoreEnvironment
+addi $sp, $sp, 4
+lw $ra, 0($sp)
+
+# ret 
+jr $ra
+
+# int testReturnInt()
+testReturnInt:
+
+# para int a
+
+# t452 = a + 1
+addi $t8, $a0, 1
+
+# ret t452
+move $v0, $t8
+jr $ra
+
+# char testReturnChar()
+testReturnChar:
+
+# para int a
+
+# a == 1
+
+# 
+
+# BZ Label_8
+bne $a0, 1, Label_8
+
+# ret 'a'
+li $v0, 97
+jr $ra
+
+# IfEnd
+sw $a0, 0($sp)
+lw $a0, 0($sp)
+
+# GOTO Label_9
+j Label_9
+
+# Label_8:
+Label_8:
+
+# ElseBegin
+
+# ElseEnd
+sw $a0, 0($sp)
+lw $a0, 0($sp)
+
+# Label_9:
+Label_9:
+
+# a == 2
+
+# 
+
+# BZ Label_10
+bne $a0, 2, Label_10
+
+# ret 'b'
+li $v0, 98
+jr $ra
+
+# IfEnd
+sw $a0, 0($sp)
+lw $a0, 0($sp)
+
+# GOTO Label_11
+j Label_11
+
+# Label_10:
+Label_10:
+
+# ElseBegin
+
+# ElseEnd
+sw $a0, 0($sp)
+lw $a0, 0($sp)
+
+# Label_11:
+Label_11:
+
+# a == 3
+
+# 
+
+# BZ Label_12
+bne $a0, 3, Label_12
+
+# ret 'c'
+li $v0, 99
+jr $ra
+
+# IfEnd
+sw $a0, 0($sp)
+lw $a0, 0($sp)
+
+# GOTO Label_13
+j Label_13
+
+# Label_12:
+Label_12:
+
+# ElseBegin
+
+# ElseEnd
+sw $a0, 0($sp)
+lw $a0, 0($sp)
+
+# Label_13:
+Label_13:
+
+# ret '_'
+li $v0, 95
+jr $ra
+
+# void testReturn()
+testReturn:
+
+# SaveEnvironment
+sw $ra, 0($sp)
+
+# push 3
+li $a0, 3
+
+# call fac
+subi $sp, $sp, 4
+jal fac
+
+# RestoreEnvironment
+addi $sp, $sp, 4
+lw $ra, 0($sp)
+
+# t495 = RET
+move $t5, $v0
+
+# SaveEnvironment
+sw $ra, 0($sp)
+sw $t5, -4($sp)
+
+# push 2
+li $a0, 2
+
+# call fac
+subi $sp, $sp, 8
+jal fac
+
+# RestoreEnvironment
+addi $sp, $sp, 8
+lw $ra, 0($sp)
+lw $t5, -4($sp)
+
+# t502 = RET
+move $t4, $v0
+
+# t495 = t495 + t502
+add $t5, $t5, $t4
+
+# SaveEnvironment
+sw $ra, 0($sp)
+sw $t4, -8($sp)
+sw $t5, -4($sp)
+
+# push t495
+move $a0, $t5
+
+# call Fibonacci
+subi $sp, $sp, 12
+jal Fibonacci
+
+# RestoreEnvironment
+addi $sp, $sp, 12
+lw $ra, 0($sp)
+lw $t4, -8($sp)
+lw $t5, -4($sp)
+
+# t491 = RET
+move $t6, $v0
+
+# SaveEnvironment
+sw $ra, 0($sp)
+sw $t4, -8($sp)
+sw $t5, -4($sp)
 sw $t6, -12($sp)
+
+# push t491
 move $a0, $t6
+
+# call testReturnInt
 subi $sp, $sp, 16
-jal factorial
+jal testReturnInt
+
+# RestoreEnvironment
 addi $sp, $sp, 16
 lw $ra, 0($sp)
-lw $t4, -4($sp)
-lw $t5, -8($sp)
+lw $t4, -8($sp)
+lw $t5, -4($sp)
 lw $t6, -12($sp)
-move $t7, $v0
-move $t8, $t7
-move $t1, $t8
-move $t0, $t1
-move $t2, $t0
-move $t3, $t2
-sw $t4, -4($sp)
-move $t4, $t3
-sw $t5, -8($sp)
-move $t5, $t4
+
+# t487 = RET
+move $t2, $v0
+
+# printf t487
+li $v0, 1
+move $a0, $t2
+syscall
 li $v0, 11
-li $a0, 53
+li $a0, 10
 syscall
-li $a0, 32
+
+# SaveEnvironment
+sw $ra, 0($sp)
+sw $t2, -16($sp)
+sw $t4, -8($sp)
+sw $t5, -4($sp)
+sw $t6, -12($sp)
+
+# push 1
+li $a0, 1
+
+# call testReturnChar
+subi $sp, $sp, 20
+jal testReturnChar
+
+# RestoreEnvironment
+addi $sp, $sp, 20
+lw $ra, 0($sp)
+lw $t2, -16($sp)
+lw $t4, -8($sp)
+lw $t5, -4($sp)
+lw $t6, -12($sp)
+
+# t508 = RET
+move $t3, $v0
+
+# printf t508
+li $v0, 11
+move $a0, $t3
 syscall
-li $a0, 33
+li $v0, 11
+li $a0, 10
 syscall
-li $a0, 61
+
+# SaveEnvironment
+sw $ra, 0($sp)
+sw $t2, -16($sp)
+sw $t3, -20($sp)
+sw $t4, -8($sp)
+sw $t5, -4($sp)
+sw $t6, -12($sp)
+
+# push 2
+li $a0, 2
+
+# call testReturnChar
+subi $sp, $sp, 24
+jal testReturnChar
+
+# RestoreEnvironment
+addi $sp, $sp, 24
+lw $ra, 0($sp)
+lw $t2, -16($sp)
+lw $t3, -20($sp)
+lw $t4, -8($sp)
+lw $t5, -4($sp)
+lw $t6, -12($sp)
+
+# t515 = RET
+move $t0, $v0
+
+# printf t515
+li $v0, 11
+move $a0, $t0
 syscall
-li $a0, 32
+li $v0, 11
+li $a0, 10
 syscall
+
+# SaveEnvironment
+sw $ra, 0($sp)
+sw $t0, -24($sp)
+sw $t2, -16($sp)
+sw $t3, -20($sp)
+sw $t4, -8($sp)
+sw $t5, -4($sp)
+sw $t6, -12($sp)
+
+# push 3
+li $a0, 3
+
+# call testReturnChar
+subi $sp, $sp, 28
+jal testReturnChar
+
+# RestoreEnvironment
+addi $sp, $sp, 28
+lw $ra, 0($sp)
+lw $t0, -24($sp)
+lw $t2, -16($sp)
+lw $t3, -20($sp)
+lw $t4, -8($sp)
+lw $t5, -4($sp)
+lw $t6, -12($sp)
+
+# t522 = RET
+move $t1, $v0
+
+# printf t522
+li $v0, 11
+move $a0, $t1
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+
+# SaveEnvironment
+sw $ra, 0($sp)
+sw $t0, -24($sp)
+sw $t1, -28($sp)
+sw $t2, -16($sp)
+sw $t3, -20($sp)
+sw $t4, -8($sp)
+sw $t5, -4($sp)
+sw $t6, -12($sp)
+
+# push 4
+li $a0, 4
+
+# call testReturnChar
+subi $sp, $sp, 32
+jal testReturnChar
+
+# RestoreEnvironment
+addi $sp, $sp, 32
+lw $ra, 0($sp)
+lw $t0, -24($sp)
+lw $t1, -28($sp)
+lw $t2, -16($sp)
+lw $t3, -20($sp)
+lw $t4, -8($sp)
+lw $t5, -4($sp)
+lw $t6, -12($sp)
+
+# t529 = RET
+move $t7, $v0
+
+# printf t529
+li $v0, 11
+move $a0, $t7
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+
+# ret 
+jr $ra
+
+# void testAssignAndExp()
+testAssignAndExp:
+
+# const int const_int_1 = 1
+la $t8, const_int_1
+lw $t8, 0($t8)
+li $t8, 1
+
+# const int const_int_2 = -1
+la $t0, const_int_2
+lw $t0, 0($t0)
+li $t0, -1
+
+# const int const_int_3 = 0
+la $t1, const_int_3
+lw $t1, 0($t1)
+li $t1, 0
+
+# const char const_char_1 = 'a'
+la $t2, const_char_1
+lw $t2, 0($t2)
+li $t2, 97
+
+# const char const_char_2 = 'A'
+la $t3, const_char_2
+lw $t3, 0($t3)
+li $t3, 65
+
+# const char const_char_3 = 'b'
+la $t4, const_char_3
+lw $t4, 0($t4)
+li $t4, 98
+
+# var int int_temp_1
+
+# var int int_temp_2
+
+# var int int_array[2]
+
+# var int int_temp_3
+
+# var char char_temp_1
+
+# var char char_array[2]
+
+# var char char_temp_2
+
+# t536 = const_int_1
+move $t5, $t8
+
+# SaveEnvironment
+sw $ra, 0($sp)
+la $v1, const_int_2
+sw $t0, 0($v1)
+la $v1, const_int_3
+sw $t1, 0($v1)
+la $v1, const_char_1
+sw $t2, 0($v1)
+la $v1, const_char_2
+sw $t3, 0($v1)
+la $v1, const_char_3
+sw $t4, 0($v1)
+sw $t5, -20($sp)
+la $v1, const_int_1
+sw $t8, 0($v1)
+
+# push 5
+li $a0, 5
+
+# call Fibonacci
+subi $sp, $sp, 24
+jal Fibonacci
+
+# RestoreEnvironment
+addi $sp, $sp, 24
+lw $ra, 0($sp)
+la $v1, const_int_2
+lw $t0, 0($v1)
+la $v1, const_int_3
+lw $t1, 0($v1)
+la $v1, const_char_1
+lw $t2, 0($v1)
+la $v1, const_char_2
+lw $t3, 0($v1)
+la $v1, const_char_3
+lw $t4, 0($v1)
+lw $t5, -20($sp)
+la $v1, const_int_1
+lw $t8, 0($v1)
+
+# t549 = RET
+move $t6, $v0
+
+# SaveEnvironment
+sw $ra, 0($sp)
+la $v1, const_int_2
+sw $t0, 0($v1)
+la $v1, const_int_3
+sw $t1, 0($v1)
+la $v1, const_char_1
+sw $t2, 0($v1)
+la $v1, const_char_2
+sw $t3, 0($v1)
+la $v1, const_char_3
+sw $t4, 0($v1)
+sw $t5, -20($sp)
+sw $t6, -24($sp)
+la $v1, const_int_1
+sw $t8, 0($v1)
+
+# push t549
+move $a0, $t6
+
+# call Fibonacci
+subi $sp, $sp, 28
+jal Fibonacci
+
+# RestoreEnvironment
+addi $sp, $sp, 28
+lw $ra, 0($sp)
+la $v1, const_int_2
+lw $t0, 0($v1)
+la $v1, const_int_3
+lw $t1, 0($v1)
+la $v1, const_char_1
+lw $t2, 0($v1)
+la $v1, const_char_2
+lw $t3, 0($v1)
+la $v1, const_char_3
+lw $t4, 0($v1)
+lw $t5, -20($sp)
+lw $t6, -24($sp)
+la $v1, const_int_1
+lw $t8, 0($v1)
+
+# t545 = RET
+move $t7, $v0
+
+# SaveEnvironment
+sw $ra, 0($sp)
+la $v1, const_int_2
+sw $t0, 0($v1)
+la $v1, const_int_3
+sw $t1, 0($v1)
+la $v1, const_char_1
+sw $t2, 0($v1)
+la $v1, const_char_2
+sw $t3, 0($v1)
+la $v1, const_char_3
+sw $t4, 0($v1)
+sw $t5, -20($sp)
+sw $t6, -24($sp)
+sw $t7, -28($sp)
+la $v1, const_int_1
+sw $t8, 0($v1)
+
+# push t545
+move $a0, $t7
+
+# call Fibonacci
+subi $sp, $sp, 32
+jal Fibonacci
+
+# RestoreEnvironment
+addi $sp, $sp, 32
+lw $ra, 0($sp)
+la $v1, const_int_2
+lw $t0, 0($v1)
+la $v1, const_int_3
+lw $t1, 0($v1)
+la $v1, const_char_1
+lw $t2, 0($v1)
+la $v1, const_char_2
+lw $t3, 0($v1)
+la $v1, const_char_3
+lw $t4, 0($v1)
+lw $t5, -20($sp)
+lw $t6, -24($sp)
+lw $t7, -28($sp)
+la $v1, const_int_1
+lw $t8, 0($v1)
+
+# t541 = RET
+la $v1, const_int_2
+sw $t0, 0($v1)
+move $t0, $v0
+
+# t558 = const_int_2 * const_int_4
+la $v1, const_int_3
+sw $t1, 0($v1)
+la $v1, const_char_1
+sw $t2, 0($v1)
+la $t2, const_int_2
+lw $t2, 0($t2)
+la $v1, const_char_2
+sw $t3, 0($v1)
+la $t3, const_int_4
+lw $t3, 0($t3)
+mul $t1, $t2, $t3
+
+# t556 = const_int_1 / t558
+la $v1, const_char_3
+sw $t4, 0($v1)
+div $t8, $t1
+mflo $t4
+
+# t539 = t541 + t556
+sw $t5, -20($sp)
+add $t5, $t0, $t4
+
+# SaveEnvironment
+sw $ra, 0($sp)
+sw $t0, -32($sp)
+sw $t1, -36($sp)
+la $v1, const_int_2
+sw $t2, 0($v1)
+la $v1, const_int_4
+sw $t3, 0($v1)
+sw $t4, -40($sp)
+sw $t5, -44($sp)
+sw $t6, -24($sp)
+sw $t7, -28($sp)
+la $v1, const_int_1
+sw $t8, 0($v1)
+
+# push 3
+li $a0, 3
+
+# call fac
+subi $sp, $sp, 48
+jal fac
+
+# RestoreEnvironment
+addi $sp, $sp, 48
+lw $ra, 0($sp)
+lw $t0, -32($sp)
+lw $t1, -36($sp)
+la $v1, const_int_2
+lw $t2, 0($v1)
+la $v1, const_int_4
+lw $t3, 0($v1)
+lw $t4, -40($sp)
+lw $t5, -44($sp)
+lw $t6, -24($sp)
+lw $t7, -28($sp)
+la $v1, const_int_1
+lw $t8, 0($v1)
+
+# t563 = RET
+sw $t0, -32($sp)
+move $t0, $v0
+
+# t539 = t539 / t563
+div $t5, $t0
+mflo $t5
+
+# int_temp_1 = t536 + t539
+sw $t1, -36($sp)
+la $v1, const_int_2
+sw $t2, 0($v1)
+lw $t2, -20($sp)
+add $t1, $t2, $t5
+
+# SaveEnvironment
+sw $ra, 0($sp)
+sw $t0, -48($sp)
+sw $t1, -52($sp)
+sw $t2, -20($sp)
+la $v1, const_int_4
+sw $t3, 0($v1)
+sw $t4, -40($sp)
+sw $t5, -44($sp)
+sw $t6, -24($sp)
+sw $t7, -28($sp)
+la $v1, const_int_1
+sw $t8, 0($v1)
+
+# push 3
+li $a0, 3
+
+# call fac
+subi $sp, $sp, 56
+jal fac
+
+# RestoreEnvironment
+addi $sp, $sp, 56
+lw $ra, 0($sp)
+lw $t0, -48($sp)
+lw $t1, -52($sp)
+lw $t2, -20($sp)
+la $v1, const_int_4
+lw $t3, 0($v1)
+lw $t4, -40($sp)
+lw $t5, -44($sp)
+lw $t6, -24($sp)
+lw $t7, -28($sp)
+la $v1, const_int_1
+lw $t8, 0($v1)
+
+# t572 = RET
+sw $t0, -48($sp)
+move $t0, $v0
+
+# SaveEnvironment
+sw $ra, 0($sp)
+sw $t0, -56($sp)
+sw $t1, -52($sp)
+sw $t2, -20($sp)
+la $v1, const_int_4
+sw $t3, 0($v1)
+sw $t4, -40($sp)
+sw $t5, -44($sp)
+sw $t6, -24($sp)
+sw $t7, -28($sp)
+la $v1, const_int_1
+sw $t8, 0($v1)
+
+# push 2
+li $a0, 2
+
+# call fac
+subi $sp, $sp, 60
+jal fac
+
+# RestoreEnvironment
+addi $sp, $sp, 60
+lw $ra, 0($sp)
+lw $t0, -56($sp)
+lw $t1, -52($sp)
+lw $t2, -20($sp)
+la $v1, const_int_4
+lw $t3, 0($v1)
+lw $t4, -40($sp)
+lw $t5, -44($sp)
+lw $t6, -24($sp)
+lw $t7, -28($sp)
+la $v1, const_int_1
+lw $t8, 0($v1)
+
+# t579 = RET
+sw $t0, -56($sp)
+move $t0, $v0
+
+# t572 = t572 + t579
+sw $t1, -52($sp)
+lw $t1, -56($sp)
+add $t1, $t1, $t0
+
+# SaveEnvironment
+sw $ra, 0($sp)
+sw $t0, -60($sp)
+sw $t1, -56($sp)
+sw $t2, -20($sp)
+la $v1, const_int_4
+sw $t3, 0($v1)
+sw $t4, -40($sp)
+sw $t5, -44($sp)
+sw $t6, -24($sp)
+sw $t7, -28($sp)
+la $v1, const_int_1
+sw $t8, 0($v1)
+
+# push t572
+move $a0, $t1
+
+# call fac
+subi $sp, $sp, 64
+jal fac
+
+# RestoreEnvironment
+addi $sp, $sp, 64
+lw $ra, 0($sp)
+lw $t0, -60($sp)
+lw $t1, -56($sp)
+lw $t2, -20($sp)
+la $v1, const_int_4
+lw $t3, 0($v1)
+lw $t4, -40($sp)
+lw $t5, -44($sp)
+lw $t6, -24($sp)
+lw $t7, -28($sp)
+la $v1, const_int_1
+lw $t8, 0($v1)
+
+# int_temp_2 = RET
+sw $t0, -60($sp)
+move $t0, $v0
+
+# t585 = const_int_3
+sw $t1, -56($sp)
+sw $t2, -20($sp)
+la $t2, const_int_3
+lw $t2, 0($t2)
+move $t1, $t2
+
+# SaveEnvironment
+sw $ra, 0($sp)
+sw $t0, -64($sp)
+sw $t1, -68($sp)
+la $v1, const_int_3
+sw $t2, 0($v1)
+la $v1, const_int_4
+sw $t3, 0($v1)
+sw $t4, -40($sp)
+sw $t5, -44($sp)
+sw $t6, -24($sp)
+sw $t7, -28($sp)
+la $v1, const_int_1
+sw $t8, 0($v1)
+
+# push 0
+li $a0, 0
+
+# call testReturnInt
+subi $sp, $sp, 72
+jal testReturnInt
+
+# RestoreEnvironment
+addi $sp, $sp, 72
+lw $ra, 0($sp)
+lw $t0, -64($sp)
+lw $t1, -68($sp)
+la $v1, const_int_3
+lw $t2, 0($v1)
+la $v1, const_int_4
+lw $t3, 0($v1)
+lw $t4, -40($sp)
+lw $t5, -44($sp)
+lw $t6, -24($sp)
+lw $t7, -28($sp)
+la $v1, const_int_1
+lw $t8, 0($v1)
+
+# t588 = RET
+sw $t0, -64($sp)
+move $t0, $v0
+
+# int_array[t585] = t588
+la $v1, const_int_3
+sw $t2, 0($v1)
+la $v1, const_int_4
+sw $t3, 0($v1)
+addi $t2, $sp, -4
+sll $t3, $t1, 2
+sub $t2, $t2, $t3
+sw $t0, 0($t2)
+
+# t595 = const_int_1
+sw $t4, -40($sp)
+move $t4, $t8
+
+# t600 = const_int_2 * const_int_4
+sw $t5, -44($sp)
+sw $t6, -24($sp)
+la $t6, const_int_2
+lw $t6, 0($t6)
+sw $t7, -28($sp)
+la $t7, const_int_4
+lw $t7, 0($t7)
+mul $t5, $t6, $t7
+
+# SaveEnvironment
+sw $ra, 0($sp)
+sw $t0, -72($sp)
+sw $t1, -68($sp)
+sw $t4, -76($sp)
+sw $t5, -80($sp)
+la $v1, const_int_2
+sw $t6, 0($v1)
+la $v1, const_int_4
+sw $t7, 0($v1)
+la $v1, const_int_1
+sw $t8, 0($v1)
+
+# push 0
+li $a0, 0
+
+# call testReturnInt
+subi $sp, $sp, 84
+jal testReturnInt
+
+# RestoreEnvironment
+addi $sp, $sp, 84
+lw $ra, 0($sp)
+lw $t0, -72($sp)
+lw $t1, -68($sp)
+lw $t4, -76($sp)
+lw $t5, -80($sp)
+la $v1, const_int_2
+lw $t6, 0($v1)
+la $v1, const_int_4
+lw $t7, 0($v1)
+la $v1, const_int_1
+lw $t8, 0($v1)
+
+# t604 = RET
+move $t3, $v0
+
+# t604 = t604 * const_int_4
+mul $t3, $t3, $t7
+
+# t598 = t600 + t604
+add $t2, $t5, $t3
+
+# t595 = t595 - t598
+sub $t4, $t4, $t2
+
+# t611 = const_int_1
+sw $t0, -72($sp)
+move $t0, $t8
+
+# SaveEnvironment
+sw $ra, 0($sp)
+sw $t0, -84($sp)
+sw $t1, -68($sp)
+sw $t2, -88($sp)
+sw $t3, -92($sp)
+sw $t4, -76($sp)
+sw $t5, -80($sp)
+la $v1, const_int_2
+sw $t6, 0($v1)
+la $v1, const_int_4
+sw $t7, 0($v1)
+la $v1, const_int_1
+sw $t8, 0($v1)
+
+# push const_int_1
+move $a0, $t8
+
+# call testReturnInt
+subi $sp, $sp, 96
+jal testReturnInt
+
+# RestoreEnvironment
+addi $sp, $sp, 96
+lw $ra, 0($sp)
+lw $t0, -84($sp)
+lw $t1, -68($sp)
+lw $t2, -88($sp)
+lw $t3, -92($sp)
+lw $t4, -76($sp)
+lw $t5, -80($sp)
+la $v1, const_int_2
+lw $t6, 0($v1)
+la $v1, const_int_4
+lw $t7, 0($v1)
+la $v1, const_int_1
+lw $t8, 0($v1)
+
+# t614 = RET
+sw $t0, -84($sp)
+move $t0, $v0
+
+# t611 = t611 + t614
+sw $t1, -68($sp)
+lw $t1, -84($sp)
+add $t1, $t1, $t0
+
+# int_array[t595] = t611
+sw $t2, -88($sp)
+sw $t3, -92($sp)
+addi $t2, $sp, -4
+sll $t3, $t4, 2
+sub $t2, $t2, $t3
+sw $t1, 0($t2)
+
+# t622 = int_array[const_int_3]
+sw $t5, -80($sp)
+la $t5, const_int_3
+lw $t5, 0($t5)
+la $v1, const_int_2
+sw $t6, 0($v1)
+la $v1, const_int_4
+sw $t7, 0($v1)
+la $v1, const_int_1
+sw $t8, 0($v1)
+addi $t7, $sp, -4
+sll $t8, $t5, 2
+sub $t7, $t7, $t8
+lw $t6, 0($t7)
+
+# t620 = t622
+sw $t0, -96($sp)
+move $t0, $t6
+
+# t631 = const_int_1
+sw $t4, -76($sp)
+la $t3, const_int_1
+lw $t3, 0($t3)
+move $t4, $t3
+
+# t636 = const_int_2 * const_int_4
+sw $t1, -84($sp)
+la $t2, const_int_2
+lw $t2, 0($t2)
+la $v1, const_int_3
+sw $t5, 0($v1)
+la $t5, const_int_4
+lw $t5, 0($t5)
+mul $t1, $t2, $t5
+
+# SaveEnvironment
+sw $ra, 0($sp)
+sw $t0, -100($sp)
+sw $t1, -104($sp)
+la $v1, const_int_2
+sw $t2, 0($v1)
+la $v1, const_int_1
+sw $t3, 0($v1)
+sw $t4, -108($sp)
+la $v1, const_int_4
+sw $t5, 0($v1)
+sw $t6, -112($sp)
+
+# push 0
+li $a0, 0
+
+# call testReturnInt
+subi $sp, $sp, 116
+jal testReturnInt
+
+# RestoreEnvironment
+addi $sp, $sp, 116
+lw $ra, 0($sp)
+lw $t0, -100($sp)
+lw $t1, -104($sp)
+la $v1, const_int_2
+lw $t2, 0($v1)
+la $v1, const_int_1
+lw $t3, 0($v1)
+lw $t4, -108($sp)
+la $v1, const_int_4
+lw $t5, 0($v1)
+lw $t6, -112($sp)
+
+# t640 = RET
+move $t8, $v0
+
+# t640 = t640 * const_int_4
+mul $t8, $t8, $t5
+
+# t634 = t636 + t640
+add $t7, $t1, $t8
+
+# t631 = t631 - t634
+sub $t4, $t4, $t7
+
+# t630 = int_array[t631]
+sw $t0, -100($sp)
+la $v1, const_int_2
+sw $t2, 0($v1)
+la $v1, const_int_1
+sw $t3, 0($v1)
+addi $t2, $sp, -4
+sll $t3, $t4, 2
+sub $t2, $t2, $t3
+lw $t0, 0($t2)
+
+# t647 = 'b' - 'a'
+sw $t6, -112($sp)
+li $t6, 1
+
+# t626 = t630 * t647
+la $v1, const_int_4
+sw $t5, 0($v1)
+mul $t5, $t0, $t6
+
+# int_temp_3 = t620 - t626
+sw $t1, -104($sp)
+sw $t8, -116($sp)
+lw $t8, -100($sp)
+sub $t1, $t8, $t5
+
+# t653 = 0
+sw $t7, -120($sp)
+li $t7, 0
+
+# t662 = int_array[0]
+sw $t4, -108($sp)
+addi $t3, $sp, -4
+lw $t4, 0($t3)
+
+# SaveEnvironment
+sw $ra, 0($sp)
+sw $t0, -124($sp)
+sw $t1, -128($sp)
+sw $t4, -132($sp)
+sw $t5, -136($sp)
+sw $t6, -140($sp)
+sw $t7, -144($sp)
+sw $t8, -100($sp)
+
+# push t662
+move $a0, $t4
+
+# call testReturnChar
+subi $sp, $sp, 148
+jal testReturnChar
+
+# RestoreEnvironment
+addi $sp, $sp, 148
+lw $ra, 0($sp)
+lw $t0, -124($sp)
+lw $t1, -128($sp)
+lw $t4, -132($sp)
+lw $t5, -136($sp)
+lw $t6, -140($sp)
+lw $t7, -144($sp)
+lw $t8, -100($sp)
+
+# t656 = RET
+move $t2, $v0
+
+# char_array[t653] = t656
+sw $t0, -124($sp)
+addi $t3, $sp, -12
+sll $t0, $t7, 2
+sub $t3, $t3, $t0
+sw $t2, 0($t3)
+
+# t666 = const_int_1
+sw $t1, -128($sp)
+sw $t4, -132($sp)
+la $t4, const_int_1
+lw $t4, 0($t4)
+move $t1, $t4
+
+# t671 = const_int_2 * const_int_4
+sw $t5, -136($sp)
+sw $t6, -140($sp)
+la $t6, const_int_2
+lw $t6, 0($t6)
+sw $t8, -100($sp)
+la $t8, const_int_4
+lw $t8, 0($t8)
+mul $t5, $t6, $t8
+
+# SaveEnvironment
+sw $ra, 0($sp)
+sw $t1, -148($sp)
+sw $t2, -152($sp)
+la $v1, const_int_1
+sw $t4, 0($v1)
+sw $t5, -156($sp)
+la $v1, const_int_2
+sw $t6, 0($v1)
+sw $t7, -144($sp)
+la $v1, const_int_4
+sw $t8, 0($v1)
+
+# push 0
+li $a0, 0
+
+# call testReturnInt
+subi $sp, $sp, 160
+jal testReturnInt
+
+# RestoreEnvironment
+addi $sp, $sp, 160
+lw $ra, 0($sp)
+lw $t1, -148($sp)
+lw $t2, -152($sp)
+la $v1, const_int_1
+lw $t4, 0($v1)
+lw $t5, -156($sp)
+la $v1, const_int_2
+lw $t6, 0($v1)
+lw $t7, -144($sp)
+la $v1, const_int_4
+lw $t8, 0($v1)
+
+# t675 = RET
+move $t0, $v0
+
+# t675 = t675 * const_int_4
+mul $t0, $t0, $t8
+
+# t669 = t671 + t675
+add $t3, $t5, $t0
+
+# t666 = t666 - t669
+sub $t1, $t1, $t3
+
+# t688 = int_array[1]
+sw $t2, -152($sp)
+la $v1, const_int_1
+sw $t4, 0($v1)
+addi $t4, $sp, -4
+lw $t2, -4($t4)
+
+# t686 = t688 + const_int_1
+la $v1, const_int_2
+sw $t6, 0($v1)
+sw $t7, -144($sp)
+la $t7, const_int_1
+lw $t7, 0($t7)
+add $t6, $t2, $t7
+
+# SaveEnvironment
+sw $ra, 0($sp)
+sw $t0, -160($sp)
+sw $t1, -148($sp)
+sw $t2, -164($sp)
+sw $t3, -168($sp)
+sw $t5, -156($sp)
+sw $t6, -172($sp)
+la $v1, const_int_1
+sw $t7, 0($v1)
+la $v1, const_int_4
+sw $t8, 0($v1)
+
+# push t686
+move $a0, $t6
+
+# call testReturnChar
+subi $sp, $sp, 176
+jal testReturnChar
+
+# RestoreEnvironment
+addi $sp, $sp, 176
+lw $ra, 0($sp)
+lw $t0, -160($sp)
+lw $t1, -148($sp)
+lw $t2, -164($sp)
+lw $t3, -168($sp)
+lw $t5, -156($sp)
+lw $t6, -172($sp)
+la $v1, const_int_1
+lw $t7, 0($v1)
+la $v1, const_int_4
+lw $t8, 0($v1)
+
+# t682 = RET
+move $t4, $v0
+
+# char_array[t666] = t682
+sw $t0, -160($sp)
+sw $t2, -164($sp)
+addi $t0, $sp, -12
+sll $t2, $t1, 2
+sub $t0, $t0, $t2
+sw $t4, 0($t0)
+
+# t696 = char_array[0]
+sw $t3, -168($sp)
+sw $t5, -156($sp)
+addi $t5, $sp, -12
+lw $t3, 0($t5)
+
+# char_temp_1 = t696
+sw $t6, -172($sp)
+move $t6, $t3
+
+# t703 = const_int_1
+la $v1, const_int_1
+sw $t7, 0($v1)
+la $v1, const_int_4
+sw $t8, 0($v1)
+la $t8, const_int_1
+lw $t8, 0($t8)
+move $t7, $t8
+
+# t708 = const_int_2 * const_int_4
+sw $t1, -148($sp)
+la $t2, const_int_2
+lw $t2, 0($t2)
+sw $t4, -176($sp)
+la $t4, const_int_4
+lw $t4, 0($t4)
+mul $t1, $t2, $t4
+
+# SaveEnvironment
+sw $ra, 0($sp)
+sw $t1, -180($sp)
+la $v1, const_int_2
+sw $t2, 0($v1)
+sw $t3, -184($sp)
+la $v1, const_int_4
+sw $t4, 0($v1)
+sw $t6, -188($sp)
+sw $t7, -192($sp)
+la $v1, const_int_1
+sw $t8, 0($v1)
+
+# push 0
+li $a0, 0
+
+# call testReturnInt
+subi $sp, $sp, 196
+jal testReturnInt
+
+# RestoreEnvironment
+addi $sp, $sp, 196
+lw $ra, 0($sp)
+lw $t1, -180($sp)
+la $v1, const_int_2
+lw $t2, 0($v1)
+lw $t3, -184($sp)
+la $v1, const_int_4
+lw $t4, 0($v1)
+lw $t6, -188($sp)
+lw $t7, -192($sp)
+la $v1, const_int_1
+lw $t8, 0($v1)
+
+# t712 = RET
+move $t0, $v0
+
+# t712 = t712 * const_int_4
+mul $t0, $t0, $t4
+
+# t706 = t708 + t712
+add $t5, $t1, $t0
+
+# t703 = t703 - t706
+sub $t7, $t7, $t5
+
+# t702 = char_array[t703]
+la $v1, const_int_2
+sw $t2, 0($v1)
+sw $t3, -184($sp)
+sw $t6, -188($sp)
+addi $t3, $sp, -12
+sll $t6, $t7, 2
+sub $t3, $t3, $t6
+lw $t2, 0($t3)
+
+# char_temp_2 = t702
+la $v1, const_int_1
+sw $t8, 0($v1)
+move $t8, $t2
+
+# printf int_temp_1
+li $v0, 1
+la $v1, const_int_4
+sw $t4, 0($v1)
+lw $t4, -52($sp)
+move $a0, $t4
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+
+# printf int_temp_2
+li $v0, 1
+sw $t1, -180($sp)
+lw $t1, -64($sp)
+move $a0, $t1
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+
+# printf int_temp_3
+li $v0, 1
+sw $t0, -196($sp)
+lw $t0, -128($sp)
+move $a0, $t0
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+
+# t730 = int_array[const_int_3]
+sw $t5, -200($sp)
+la $t5, const_int_3
+lw $t5, 0($t5)
+sw $t7, -192($sp)
+addi $t6, $sp, -4
+sll $t3, $t5, 2
+sub $t6, $t6, $t3
+lw $t7, 0($t6)
+
+# printf t730
+li $v0, 1
+move $a0, $t7
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+
+# t737 = const_int_1
+sw $t8, -204($sp)
+sw $t2, -208($sp)
+la $t2, const_int_1
+lw $t2, 0($t2)
+move $t8, $t2
+
+# t742 = const_int_2 * const_int_4
+sw $t4, -52($sp)
+sw $t1, -64($sp)
+la $t1, const_int_2
+lw $t1, 0($t1)
+sw $t0, -128($sp)
+la $t0, const_int_4
+lw $t0, 0($t0)
+mul $t4, $t1, $t0
+
+# SaveEnvironment
+sw $ra, 0($sp)
+la $v1, const_int_4
+sw $t0, 0($v1)
+la $v1, const_int_2
+sw $t1, 0($v1)
+la $v1, const_int_1
+sw $t2, 0($v1)
+sw $t4, -212($sp)
+la $v1, const_int_3
+sw $t5, 0($v1)
+sw $t7, -216($sp)
+sw $t8, -220($sp)
+
+# push 0
+li $a0, 0
+
+# call testReturnInt
+subi $sp, $sp, 224
+jal testReturnInt
+
+# RestoreEnvironment
+addi $sp, $sp, 224
+lw $ra, 0($sp)
+la $v1, const_int_4
+lw $t0, 0($v1)
+la $v1, const_int_2
+lw $t1, 0($v1)
+la $v1, const_int_1
+lw $t2, 0($v1)
+lw $t4, -212($sp)
+la $v1, const_int_3
+lw $t5, 0($v1)
+lw $t7, -216($sp)
+lw $t8, -220($sp)
+
+# t746 = RET
+move $t3, $v0
+
+# t746 = t746 * const_int_4
+mul $t3, $t3, $t0
+
+# t740 = t742 + t746
+add $t6, $t4, $t3
+
+# t737 = t737 - t740
+sub $t8, $t8, $t6
+
+# t736 = int_array[t737]
+la $v1, const_int_2
+sw $t1, 0($v1)
+la $v1, const_int_1
+sw $t2, 0($v1)
+la $v1, const_int_3
+sw $t5, 0($v1)
+addi $t2, $sp, -4
+sll $t5, $t8, 2
+sub $t2, $t2, $t5
+lw $t1, 0($t2)
+
+# printf t736
+li $v0, 1
+move $a0, $t1
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+
+# printf char_temp_1
+li $v0, 11
+sw $t7, -216($sp)
+lw $t7, -188($sp)
+move $a0, $t7
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+
+# printf char_temp_2
+li $v0, 11
+la $v1, const_int_4
+sw $t0, 0($v1)
+lw $t0, -204($sp)
+move $a0, $t0
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+
+# t761 = char_array[0]
+sw $t4, -212($sp)
+sw $t3, -224($sp)
+addi $t3, $sp, -12
+lw $t4, 0($t3)
+
+# printf t761
+li $v0, 11
+move $a0, $t4
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+
+# t767 = char_array[const_int_1]
+sw $t6, -228($sp)
+la $t6, const_int_1
+lw $t6, 0($t6)
+sw $t8, -220($sp)
+addi $t5, $sp, -12
+sll $t2, $t6, 2
+sub $t5, $t5, $t2
+lw $t8, 0($t5)
+
+# printf t767
+li $v0, 11
+move $a0, $t8
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+
+# t777 = char_array[0]
+sw $t1, -232($sp)
+sw $t7, -188($sp)
+addi $t7, $sp, -12
+lw $t1, 0($t7)
+
+# t782 = char_array[0]
+sw $t0, -204($sp)
+addi $t3, $sp, -12
+lw $t0, 0($t3)
+
+# t781 = t782 * char_temp_2
+sw $t4, -236($sp)
+la $v1, const_int_1
+sw $t6, 0($v1)
+lw $t6, -204($sp)
+mul $t4, $t0, $t6
+
+# t774 = t777 + t781
+add $t2, $t1, $t4
+
+# t771 = char_temp_1 * t774
+sw $t8, -240($sp)
+lw $t8, -188($sp)
+mul $t5, $t8, $t2
+
+# printf t771
 li $v0, 1
 move $a0, $t5
 syscall
 li $v0, 11
 li $a0, 10
 syscall
-sw $t6, -12($sp)
-li $t6, 5
-sw $t7, -16($sp)
-move $t7, $t6
-sw $t8, -20($sp)
-move $t8, $t7
-sw $t1, -24($sp)
-li $t1, 10
+
+# ret 
+jr $ra
+
+# void testIO()
+testIO:
+
+# scanf global_int_1
+li $v0, 5
+syscall
+la $t7, global_int_1
+lw $t7, 0($t7)
+move $t7, $v0
+
+# scanf global_char_1
+li $v0, 12
+syscall
+la $t3, global_char_1
+lw $t3, 0($t3)
+move $t3, $v0
+
+# printf "!@\n#$^&*()Qqaa123[];',./"
+la $a0, PrintString3
+li $v0, 4
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+
+# printf global_int_1
+li $v0, 1
+move $a0, $t7
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+
+# printf global_char_1
+li $v0, 11
+move $a0, $t3
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+
+# scanf global_int_1 global_char_1
+li $v0, 5
+syscall
+move $t7, $v0
+li $v0, 12
+syscall
+move $t3, $v0
+
+# printf "!@\n#$^&*()Qqaa123[];',./" global_int_1
+la $a0, PrintString4
+li $v0, 4
+syscall
+li $v0, 1
+move $a0, $t7
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+
+# printf global_char_1
+li $v0, 11
+move $a0, $t3
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+
+# scanf global_char_1 global_int_1
+li $v0, 12
+syscall
+move $t3, $v0
+li $v0, 5
+syscall
+move $t7, $v0
+
+# printf "!@\n#$^&*()Qqaa123[];',./" global_char_1
+la $a0, PrintString5
+li $v0, 4
+syscall
+li $v0, 11
+move $a0, $t3
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+
+# printf global_int_1
+li $v0, 1
+move $a0, $t7
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+
+# ret 
+jr $ra
+
+# void testIfWhile()
+testIfWhile:
+
+# var int i
+
+# var int j
+
+# var int k
+
+# var char a
+
+# var char b
+
+# var char c
+
+# var char d
+
+# k = 10
+li $t0, 10
+
+# a = '+'
+li $t6, 43
+
+# b = '-'
+li $t1, 45
+
+# c = '*'
+li $t4, 42
+
+# d = '/'
+li $t8, 47
+
+# k > 0
+
+# 
+
+# BZ Label_14
+ble $t0, 0, Label_14
+
+# k <= 10
+
+# 
+
+# BZ Label_16
+bgt $t0, 10, Label_16
+
+# i = 0
+li $t2, 0
+
+# LoopSaveRegStatus
+
+# Label_18:
+Label_18:
+
+# t838 = k / 2
+div $t5, $t0, 2
+
+# i < t838
+
+# BZ Label_19
+bge $t2, $t5, Label_19
+
+# t851 = i / 2
+div $t3, $t2, 2
+
+# t848 = t851 * 2
+mulo $t7, $t3, 2
+
+# t842 = i - t848
+sw $t6, -4($sp)
+sub $t6, $t2, $t7
+
+# t842 == 0
+
+# 
+
+# BZ Label_20
+bne $t6, 0, Label_20
+
+# global_char_array_3[i] = a
+sw $t1, -8($sp)
+lw $t1, -4($sp)
+sw $t4, -12($sp)
+sw $t8, -16($sp)
+la $t4, global_char_array_3
+sll $t8, $t2, 2
+add $t4, $t4, $t8
+sw $t1, 0($t4)
+
+# IfEnd
+sw $t0, -20($sp)
+lw $t0, -20($sp)
+sw $t1, -4($sp)
+lw $t1, -8($sp)
+sw $t2, -24($sp)
+lw $t2, -24($sp)
+sw $t3, -28($sp)
+lw $t3, -28($sp)
+lw $t4, -12($sp)
+sw $t5, -32($sp)
+lw $t5, -32($sp)
+sw $t6, -36($sp)
+lw $t6, -36($sp)
+sw $t7, -40($sp)
+lw $t7, -40($sp)
+lw $t8, -16($sp)
+
+# GOTO Label_21
+j Label_21
+
+# Label_20:
+Label_20:
+
+# ElseBegin
+
+# ElseEnd
+sw $t0, -20($sp)
+lw $t0, -20($sp)
+sw $t1, -8($sp)
+lw $t1, -8($sp)
+sw $t2, -24($sp)
+lw $t2, -24($sp)
+sw $t3, -28($sp)
+lw $t3, -28($sp)
+sw $t4, -12($sp)
+lw $t4, -12($sp)
+sw $t5, -32($sp)
+lw $t5, -32($sp)
+sw $t6, -36($sp)
+lw $t6, -36($sp)
+sw $t7, -40($sp)
+lw $t7, -40($sp)
+sw $t8, -16($sp)
+lw $t8, -16($sp)
+
+# Label_21:
+Label_21:
+
+# t873 = i / 2
+sw $t0, -20($sp)
+div $t0, $t2, 2
+
+# t870 = t873 * 2
+sw $t1, -8($sp)
+mulo $t1, $t0, 2
+
+# t864 = i - t870
+sw $t3, -28($sp)
+sub $t3, $t2, $t1
+
+# t864 == 1
+
+# 
+
+# BZ Label_22
+bne $t3, 1, Label_22
+
+# global_char_array_3[i] = b
+sw $t4, -12($sp)
+lw $t4, -8($sp)
+sw $t5, -32($sp)
+sw $t6, -36($sp)
+la $t5, global_char_array_3
+sll $t6, $t2, 2
+add $t5, $t5, $t6
+sw $t4, 0($t5)
+
+# IfEnd
+sw $t0, -44($sp)
+lw $t0, -44($sp)
+sw $t1, -48($sp)
+lw $t1, -48($sp)
+sw $t2, -24($sp)
+lw $t2, -24($sp)
+sw $t3, -52($sp)
+lw $t3, -52($sp)
+sw $t4, -8($sp)
+lw $t4, -12($sp)
+lw $t5, -32($sp)
+lw $t6, -36($sp)
+sw $t7, -40($sp)
+lw $t7, -40($sp)
+sw $t8, -16($sp)
+lw $t8, -16($sp)
+
+# GOTO Label_23
+j Label_23
+
+# Label_22:
+Label_22:
+
+# ElseBegin
+
+# ElseEnd
+sw $t0, -44($sp)
+lw $t0, -44($sp)
+sw $t1, -48($sp)
+lw $t1, -48($sp)
+sw $t2, -24($sp)
+lw $t2, -24($sp)
+sw $t3, -52($sp)
+lw $t3, -52($sp)
+sw $t4, -12($sp)
+lw $t4, -12($sp)
+sw $t5, -32($sp)
+lw $t5, -32($sp)
+sw $t6, -36($sp)
+lw $t6, -36($sp)
+sw $t7, -40($sp)
+lw $t7, -40($sp)
+sw $t8, -16($sp)
+lw $t8, -16($sp)
+
+# Label_23:
+Label_23:
+
+# t888 = global_char_array_3[i]
+sw $t0, -44($sp)
+sw $t1, -48($sp)
+sw $t3, -52($sp)
+la $t1, global_char_array_3
+sll $t3, $t2, 2
+add $t1, $t1, $t3
+lw $t0, 0($t1)
+
+# printf t888
+li $v0, 11
+move $a0, $t0
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+
+# i = i + 1
+addi $t2, $t2, 1
+
+# LoopRestoreRegStatus
+sw $t0, -56($sp)
+lw $t0, -20($sp)
+lw $t1, -8($sp)
+sw $t2, -24($sp)
+lw $t2, -24($sp)
+sw $t4, -12($sp)
+lw $t4, -12($sp)
+sw $t6, -36($sp)
+lw $t6, -4($sp)
+sw $t8, -16($sp)
+lw $t8, -16($sp)
+
+# GOTO Label_18
+j Label_18
+
+# Label_19:
+Label_19:
+
+# LoopEnd
+
+# LoopSaveRegStatus
+
+# Label_24:
+Label_24:
+
+# i < k
+
+# BZ Label_25
+bge $t2, $t0, Label_25
+
+# t912 = i / 2
+sw $t5, -32($sp)
+div $t5, $t2, 2
+
+# t909 = t912 * 2
+sw $t7, -40($sp)
+mulo $t7, $t5, 2
+
+# t903 = i - t909
+sub $t3, $t2, $t7
+
+# t903 == 0
+
+# 
+
+# BZ Label_26
+bne $t3, 0, Label_26
+
+# global_char_array_3[i] = c
+sw $t1, -8($sp)
+sw $t6, -4($sp)
+la $t1, global_char_array_3
+sll $t6, $t2, 2
+add $t1, $t1, $t6
+sw $t4, 0($t1)
+
+# IfEnd
+sw $t0, -20($sp)
+lw $t0, -20($sp)
+lw $t1, -8($sp)
+sw $t2, -24($sp)
+lw $t2, -24($sp)
+sw $t3, -60($sp)
+lw $t3, -60($sp)
+sw $t4, -12($sp)
+lw $t4, -12($sp)
+sw $t5, -64($sp)
+lw $t5, -64($sp)
+lw $t6, -4($sp)
+sw $t7, -68($sp)
+lw $t7, -68($sp)
+sw $t8, -16($sp)
+lw $t8, -16($sp)
+
+# GOTO Label_27
+j Label_27
+
+# Label_26:
+Label_26:
+
+# ElseBegin
+
+# global_char_array_3[i] = d
+sw $t0, -20($sp)
+sw $t1, -8($sp)
+la $t0, global_char_array_3
+sll $t1, $t2, 2
+add $t0, $t0, $t1
+sw $t8, 0($t0)
+
+# ElseEnd
+lw $t0, -20($sp)
+lw $t1, -8($sp)
+sw $t2, -24($sp)
+lw $t2, -24($sp)
+sw $t3, -60($sp)
+lw $t3, -60($sp)
+sw $t4, -12($sp)
+lw $t4, -12($sp)
+sw $t5, -64($sp)
+lw $t5, -64($sp)
+sw $t6, -4($sp)
+lw $t6, -4($sp)
+sw $t7, -68($sp)
+lw $t7, -68($sp)
+sw $t8, -16($sp)
+lw $t8, -16($sp)
+
+# Label_27:
+Label_27:
+
+# t933 = global_char_array_3[i]
+sw $t0, -20($sp)
+sw $t1, -8($sp)
+sw $t3, -60($sp)
+la $t1, global_char_array_3
+sll $t3, $t2, 2
+add $t1, $t1, $t3
+lw $t0, 0($t1)
+
+# printf t933
+li $v0, 11
+move $a0, $t0
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+
+# i = i + 1
+addi $t2, $t2, 1
+
+# LoopRestoreRegStatus
+sw $t0, -72($sp)
+lw $t0, -20($sp)
+lw $t1, -8($sp)
+sw $t2, -24($sp)
+lw $t2, -24($sp)
+sw $t4, -12($sp)
+lw $t4, -12($sp)
+sw $t5, -64($sp)
+lw $t5, -32($sp)
+sw $t6, -4($sp)
+lw $t6, -4($sp)
+sw $t7, -68($sp)
+lw $t7, -40($sp)
+sw $t8, -16($sp)
+lw $t8, -16($sp)
+
+# GOTO Label_24
+j Label_24
+
+# Label_25:
+Label_25:
+
+# LoopEnd
+
+# IfEnd
+sw $t0, -20($sp)
+lw $t0, -20($sp)
+sw $t1, -8($sp)
+lw $t1, -8($sp)
+sw $t4, -12($sp)
+lw $t4, -12($sp)
+sw $t6, -4($sp)
+lw $t6, -4($sp)
+sw $t8, -16($sp)
+lw $t8, -16($sp)
+
+# GOTO Label_17
+j Label_17
+
+# Label_16:
+Label_16:
+
+# ElseBegin
+
+# ElseEnd
+sw $t0, -20($sp)
+lw $t0, -20($sp)
+sw $t1, -8($sp)
+lw $t1, -8($sp)
+sw $t4, -12($sp)
+lw $t4, -12($sp)
+sw $t6, -4($sp)
+lw $t6, -4($sp)
+sw $t8, -16($sp)
+lw $t8, -16($sp)
+
+# Label_17:
+Label_17:
+
+# IfEnd
+sw $t0, -20($sp)
+lw $t0, -20($sp)
+sw $t1, -8($sp)
+lw $t1, -8($sp)
+sw $t4, -12($sp)
+lw $t4, -12($sp)
+sw $t6, -4($sp)
+lw $t6, -4($sp)
+sw $t8, -16($sp)
+lw $t8, -16($sp)
+
+# GOTO Label_15
+j Label_15
+
+# Label_14:
+Label_14:
+
+# ElseBegin
+
+# ElseEnd
+sw $t0, -20($sp)
+lw $t0, -20($sp)
+sw $t1, -8($sp)
+lw $t1, -8($sp)
+sw $t4, -12($sp)
+lw $t4, -12($sp)
+sw $t6, -4($sp)
+lw $t6, -4($sp)
+sw $t8, -16($sp)
+lw $t8, -16($sp)
+
+# Label_15:
+Label_15:
+
+# ret 
+jr $ra
+
+# void testSwitch()
+testSwitch:
+
+# const int sum = 3
+li $t3, 3
+
+# var int int_1
+
+# var int i
+
+# var char char_1
+
+# i = 0
+li $t2, 0
+
+# int_1 = 0
+li $t5, 0
+
+# LoopSaveRegStatus
+
+# Label_28:
+Label_28:
+
+# i < sum
+
+# BZ Label_29
+bge $t2, $t3, Label_29
+
+# int_1 == 0
+
+# 
+
+# BZ Label_30
+bne $t5, 0, Label_30
+
+# char_1 = 'a'
+li $t7, 97
+
+# printf char_1
+li $v0, 11
+move $a0, $t7
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+
+# IfEnd
+sw $t2, -4($sp)
+lw $t2, -4($sp)
+sw $t3, -8($sp)
+lw $t3, -8($sp)
+sw $t5, -12($sp)
+lw $t5, -12($sp)
+
+# GOTO Label_31
+j Label_31
+
+# Label_30:
+Label_30:
+
+# ElseBegin
+
+# int_1 == 1
+
+# 
+
+# BZ Label_32
+bne $t5, 1, Label_32
+
+# char_1 = 'b'
+li $t0, 98
+
+# printf char_1
+li $v0, 11
+move $a0, $t0
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+
+# IfEnd
+sw $t2, -4($sp)
+lw $t2, -4($sp)
+sw $t3, -8($sp)
+lw $t3, -8($sp)
+sw $t5, -12($sp)
+lw $t5, -12($sp)
+
+# GOTO Label_33
+j Label_33
+
+# Label_32:
+Label_32:
+
+# ElseBegin
+
+# char_1 = const_char_2
+la $t4, const_char_2
+lw $t4, 0($t4)
+move $t1, $t4
+
+# printf char_1
+li $v0, 11
+move $a0, $t1
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+
+# ElseEnd
+sw $t2, -4($sp)
+lw $t2, -4($sp)
+sw $t3, -8($sp)
+lw $t3, -8($sp)
+sw $t5, -12($sp)
+lw $t5, -12($sp)
+
+# Label_33:
+Label_33:
+
+# ElseEnd
+sw $t2, -4($sp)
+lw $t2, -4($sp)
+sw $t3, -8($sp)
+lw $t3, -8($sp)
+sw $t5, -12($sp)
+lw $t5, -12($sp)
+
+# Label_31:
+Label_31:
+
+# char_1 == 'a'
+
+# 
+
+# BZ Label_34
+bne $t1, $t6, Label_34
+
+# int_1 = i + 1
+addi $t5, $t2, 1
+
+# printf int_1
+li $v0, 1
+move $a0, $t5
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+
+# IfEnd
+sw $t1, -16($sp)
+lw $t1, -16($sp)
+sw $t2, -4($sp)
+lw $t2, -4($sp)
+sw $t3, -8($sp)
+lw $t3, -8($sp)
+la $v1, const_char_2
+sw $t4, 0($v1)
+la $t4, const_char_2
+lw $t4, 0($t4)
+sw $t5, -12($sp)
+lw $t5, -12($sp)
+
+# GOTO Label_35
+j Label_35
+
+# Label_34:
+Label_34:
+
+# ElseBegin
+
+# ElseEnd
+sw $t1, -16($sp)
+lw $t1, -16($sp)
+sw $t2, -4($sp)
+lw $t2, -4($sp)
+sw $t3, -8($sp)
+lw $t3, -8($sp)
+la $v1, const_char_2
+sw $t4, 0($v1)
+la $t4, const_char_2
+lw $t4, 0($t4)
+sw $t5, -12($sp)
+lw $t5, -12($sp)
+
+# Label_35:
+Label_35:
+
+# char_1 == 'b'
+
+# 
+
+# BZ Label_36
+bne $t1, $t8, Label_36
+
+# int_1 = sum
+move $t5, $t3
+
+# printf int_1
+li $v0, 1
+move $a0, $t5
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+
+# IfEnd
+sw $t1, -16($sp)
+lw $t1, -16($sp)
+sw $t2, -4($sp)
+lw $t2, -4($sp)
+sw $t3, -8($sp)
+lw $t3, -8($sp)
+la $v1, const_char_2
+sw $t4, 0($v1)
+la $t4, const_char_2
+lw $t4, 0($t4)
+sw $t5, -12($sp)
+lw $t5, -12($sp)
+
+# GOTO Label_37
+j Label_37
+
+# Label_36:
+Label_36:
+
+# ElseBegin
+
+# ElseEnd
+sw $t1, -16($sp)
+lw $t1, -16($sp)
+sw $t2, -4($sp)
+lw $t2, -4($sp)
+sw $t3, -8($sp)
+lw $t3, -8($sp)
+la $v1, const_char_2
+sw $t4, 0($v1)
+la $t4, const_char_2
+lw $t4, 0($t4)
+sw $t5, -12($sp)
+lw $t5, -12($sp)
+
+# Label_37:
+Label_37:
+
+# i = i + 1
+addi $t2, $t2, 1
+
+# LoopRestoreRegStatus
+sw $t2, -4($sp)
+lw $t2, -4($sp)
+sw $t3, -8($sp)
+lw $t3, -8($sp)
+sw $t5, -12($sp)
+lw $t5, -12($sp)
+
+# GOTO Label_28
+j Label_28
+
+# Label_29:
+Label_29:
+
+# LoopEnd
+
+# ret 
+jr $ra
+
+# int func_ret_int_1()
+func_ret_int_1:
+
+# para int i_1
+
+# para int i_2
+
+# para char c_1
+
+# para char c_2
+
+# var int i_temp
+
+# var char c_temp
+
+# printf "INPUT of func_ret_int_1:"
+move $v1, $a0
+la $a0, PrintString6
+li $v0, 4
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+move $a0, $v1
+
+# printf i_1
+move $v1, $a0
+li $v0, 1
+move $a0, $v1
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+move $a0, $v1
+
+# printf i_2
+move $v1, $a0
+li $v0, 1
+move $a0, $a1
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+move $a0, $v1
+
+# printf c_1
+move $v1, $a0
+li $v0, 11
+move $a0, $a2
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+move $a0, $v1
+
+# printf c_2
+move $v1, $a0
+li $v0, 11
+move $a0, $a3
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+move $a0, $v1
+
+# printf "OPERATE of func_ret_int_1:"
+move $v1, $a0
+la $a0, PrintString7
+li $v0, 4
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+move $a0, $v1
+
+# printf i_2
+move $v1, $a0
+li $v0, 1
+move $a0, $a1
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+move $a0, $v1
+
+# printf i_1
+move $v1, $a0
+li $v0, 1
+move $a0, $v1
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+move $a0, $v1
+
+# printf c_2
+move $v1, $a0
+li $v0, 11
+move $a0, $a3
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+move $a0, $v1
+
+# printf c_1
+move $v1, $a0
+li $v0, 11
+move $a0, $a2
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+move $a0, $v1
+
+# ret i_2
+move $v0, $a1
+jr $ra
+
+# void testPara()
+testPara:
+
+# var int i
+
+# var int j
+
+# var char c
+
+# var char d
+
+# SaveEnvironment
+sw $ra, 0($sp)
+
+# push const_int_1
+la $t7, const_int_1
+lw $t7, 0($t7)
+move $a0, $t7
+
+# push const_int_4
+la $t0, const_int_4
+lw $t0, 0($t0)
+move $a1, $t0
+
+# push 'A'
+li $a2, 65
+
+# push 'Z'
+li $a3, 90
+
+# call func_ret_int_1
+subi $sp, $sp, 4
+jal func_ret_int_1
+
+# RestoreEnvironment
+addi $sp, $sp, 4
+lw $ra, 0($sp)
+
+# t1084 = RET
+move $t6, $v0
+
+# printf t1084
+li $v0, 1
+move $a0, $t6
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+
+# ret 
+jr $ra
+
+# void testRecursion()
+testRecursion:
+
+# SaveEnvironment
+sw $ra, 0($sp)
+
+# push 2
+li $a0, 2
+
+# call fac
+subi $sp, $sp, 4
+jal fac
+
+# RestoreEnvironment
+addi $sp, $sp, 4
+lw $ra, 0($sp)
+
+# t1108 = RET
+move $t8, $v0
+
+# SaveEnvironment
+sw $ra, 0($sp)
+sw $t8, -4($sp)
+
+# push 3
+li $a0, 3
+
+# call fac
+subi $sp, $sp, 8
+jal fac
+
+# RestoreEnvironment
+addi $sp, $sp, 8
+lw $ra, 0($sp)
+lw $t8, -4($sp)
+
+# t1114 = RET
+move $t1, $v0
+
+# t1107 = t1108 * t1114
+mul $t4, $t8, $t1
+
+# SaveEnvironment
+sw $ra, 0($sp)
+sw $t1, -8($sp)
+sw $t4, -12($sp)
+sw $t8, -4($sp)
+
+# push t1107
+move $a0, $t4
+
+# call Fibonacci
+subi $sp, $sp, 16
+jal Fibonacci
+
+# RestoreEnvironment
+addi $sp, $sp, 16
+lw $ra, 0($sp)
+lw $t1, -8($sp)
+lw $t4, -12($sp)
+lw $t8, -4($sp)
+
+# t1103 = RET
+move $t2, $v0
+
+# SaveEnvironment
+sw $ra, 0($sp)
+sw $t1, -8($sp)
+sw $t2, -16($sp)
+sw $t4, -12($sp)
+sw $t8, -4($sp)
+
+# push 3
+li $a0, 3
+
+# call Fibonacci
+subi $sp, $sp, 20
+jal Fibonacci
+
+# RestoreEnvironment
+addi $sp, $sp, 20
+lw $ra, 0($sp)
+lw $t1, -8($sp)
+lw $t2, -16($sp)
+lw $t4, -12($sp)
+lw $t8, -4($sp)
+
+# t1122 = RET
+move $t3, $v0
+
+# SaveEnvironment
+sw $ra, 0($sp)
+sw $t1, -8($sp)
+sw $t2, -16($sp)
+sw $t3, -20($sp)
+sw $t4, -12($sp)
+sw $t8, -4($sp)
+
+# push 4
+li $a0, 4
+
+# call Fibonacci
+subi $sp, $sp, 24
+jal Fibonacci
+
+# RestoreEnvironment
+addi $sp, $sp, 24
+lw $ra, 0($sp)
+lw $t1, -8($sp)
+lw $t2, -16($sp)
+lw $t3, -20($sp)
+lw $t4, -12($sp)
+lw $t8, -4($sp)
+
+# t1129 = RET
+move $t5, $v0
+
+# t1122 = t1122 + t1129
+add $t3, $t3, $t5
+
+# SaveEnvironment
+sw $ra, 0($sp)
+sw $t1, -8($sp)
+sw $t2, -16($sp)
+sw $t3, -20($sp)
+sw $t4, -12($sp)
+sw $t5, -24($sp)
+sw $t8, -4($sp)
+
+# push t1122
+move $a0, $t3
+
+# call fac
+subi $sp, $sp, 28
+jal fac
+
+# RestoreEnvironment
+addi $sp, $sp, 28
+lw $ra, 0($sp)
+lw $t1, -8($sp)
+lw $t2, -16($sp)
+lw $t3, -20($sp)
+lw $t4, -12($sp)
+lw $t5, -24($sp)
+lw $t8, -4($sp)
+
+# t1119 = RET
+move $t7, $v0
+
+# t1101 = t1103 - t1119
+sub $t0, $t2, $t7
+
+# SaveEnvironment
+sw $ra, 0($sp)
 sw $t0, -28($sp)
-move $t0, $t1
-sw $t2, -32($sp)
-move $t2, $t0
-sw $ra, 0($sp)
-sw $t0, -36($sp)
-sw $t1, -40($sp)
-sw $t2, -44($sp)
-sw $t3, -48($sp)
-sw $t4, -52($sp)
-sw $t5, -56($sp)
-sw $t6, -60($sp)
-sw $t7, -64($sp)
-sw $t8, -68($sp)
-move $a0, $t8
-move $a1, $t2
-subi $sp, $sp, 72
-jal swap
-addi $sp, $sp, 72
+sw $t1, -8($sp)
+sw $t2, -16($sp)
+sw $t3, -20($sp)
+sw $t4, -12($sp)
+sw $t5, -24($sp)
+sw $t7, -32($sp)
+sw $t8, -4($sp)
+
+# push 2
+li $a0, 2
+
+# call Fibonacci
+subi $sp, $sp, 36
+jal Fibonacci
+
+# RestoreEnvironment
+addi $sp, $sp, 36
 lw $ra, 0($sp)
-lw $t0, -36($sp)
-lw $t1, -40($sp)
-lw $t2, -44($sp)
-lw $t3, -48($sp)
-lw $t4, -52($sp)
-lw $t5, -56($sp)
-lw $t6, -60($sp)
-lw $t7, -64($sp)
-lw $t8, -68($sp)
+lw $t0, -28($sp)
+lw $t1, -8($sp)
+lw $t2, -16($sp)
+lw $t3, -20($sp)
+lw $t4, -12($sp)
+lw $t5, -24($sp)
+lw $t7, -32($sp)
+lw $t8, -4($sp)
+
+# t1137 = RET
+move $t6, $v0
+
+# SaveEnvironment
 sw $ra, 0($sp)
-sw $t0, -36($sp)
-sw $t1, -40($sp)
-sw $t2, -44($sp)
-sw $t3, -48($sp)
-sw $t4, -52($sp)
-sw $t5, -56($sp)
-sw $t6, -60($sp)
-sw $t7, -64($sp)
-sw $t8, -68($sp)
-subi $sp, $sp, 72
-jal complete_flower_num
-addi $sp, $sp, 72
+sw $t0, -28($sp)
+sw $t1, -8($sp)
+sw $t2, -16($sp)
+sw $t3, -20($sp)
+sw $t4, -12($sp)
+sw $t5, -24($sp)
+sw $t6, -36($sp)
+sw $t7, -32($sp)
+sw $t8, -4($sp)
+
+# push 3
+li $a0, 3
+
+# call Fibonacci
+subi $sp, $sp, 40
+jal Fibonacci
+
+# RestoreEnvironment
+addi $sp, $sp, 40
 lw $ra, 0($sp)
-lw $t0, -36($sp)
-lw $t1, -40($sp)
-lw $t2, -44($sp)
-lw $t3, -48($sp)
-lw $t4, -52($sp)
-lw $t5, -56($sp)
-lw $t6, -60($sp)
-lw $t7, -64($sp)
-lw $t8, -68($sp)
+lw $t0, -28($sp)
+lw $t1, -8($sp)
+lw $t2, -16($sp)
+lw $t3, -20($sp)
+lw $t4, -12($sp)
+lw $t5, -24($sp)
+lw $t6, -36($sp)
+lw $t7, -32($sp)
+lw $t8, -4($sp)
+
+# t1144 = RET
+sw $t0, -28($sp)
+move $t0, $v0
+
+# t1137 = t1137 + t1144
+add $t6, $t6, $t0
+
+# SaveEnvironment
+sw $ra, 0($sp)
+sw $t0, -40($sp)
+sw $t1, -8($sp)
+sw $t2, -16($sp)
+sw $t3, -20($sp)
+sw $t4, -12($sp)
+sw $t5, -24($sp)
+sw $t6, -36($sp)
+sw $t7, -32($sp)
+sw $t8, -4($sp)
+
+# push t1137
+move $a0, $t6
+
+# call fac
+subi $sp, $sp, 44
+jal fac
+
+# RestoreEnvironment
+addi $sp, $sp, 44
+lw $ra, 0($sp)
+lw $t0, -40($sp)
+lw $t1, -8($sp)
+lw $t2, -16($sp)
+lw $t3, -20($sp)
+lw $t4, -12($sp)
+lw $t5, -24($sp)
+lw $t6, -36($sp)
+lw $t7, -32($sp)
+lw $t8, -4($sp)
+
+# t1135 = RET
+sw $t0, -40($sp)
+move $t0, $v0
+
+# t1100 = t1101 / t1135
+sw $t1, -8($sp)
+sw $t2, -16($sp)
+lw $t2, -28($sp)
+div $t2, $t0
+mflo $t1
+
+# SaveEnvironment
+sw $ra, 0($sp)
+sw $t0, -44($sp)
+sw $t1, -48($sp)
+sw $t2, -28($sp)
+sw $t3, -20($sp)
+sw $t4, -12($sp)
+sw $t5, -24($sp)
+sw $t6, -36($sp)
+sw $t7, -32($sp)
+sw $t8, -4($sp)
+
+# push t1100
+move $a0, $t1
+
+# push 'a'
+li $a1, 97
+
+# push 'b'
+li $a2, 98
+
+# push 'c'
+li $a3, 99
+
+# call hanoi
+subi $sp, $sp, 52
+jal hanoi
+
+# RestoreEnvironment
+addi $sp, $sp, 52
+lw $ra, 0($sp)
+lw $t0, -44($sp)
+lw $t1, -48($sp)
+lw $t2, -28($sp)
+lw $t3, -20($sp)
+lw $t4, -12($sp)
+lw $t5, -24($sp)
+lw $t6, -36($sp)
+lw $t7, -32($sp)
+lw $t8, -4($sp)
+
+# ret 
+jr $ra
+
+# void main()
+main:
+
+# printf "************************************************"
+la $a0, PrintString8
+li $v0, 4
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+
+# printf "Start testing recursion:"
+la $a0, PrintString9
+li $v0, 4
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+
+# SaveEnvironment
+sw $ra, 0($sp)
+
+# call testRecursion
+subi $sp, $sp, 4
+jal testRecursion
+
+# RestoreEnvironment
+addi $sp, $sp, 4
+lw $ra, 0($sp)
+
+# printf "************************************************"
+la $a0, PrintString10
+li $v0, 4
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+
+# printf "Start testing global:"
+la $a0, PrintString11
+li $v0, 4
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+
+# SaveEnvironment
+sw $ra, 0($sp)
+
+# call testGlobal
+subi $sp, $sp, 4
+jal testGlobal
+
+# RestoreEnvironment
+addi $sp, $sp, 4
+lw $ra, 0($sp)
+
+# printf "************************************************"
+la $a0, PrintString12
+li $v0, 4
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+
+# printf "Start testing return:"
+la $a0, PrintString13
+li $v0, 4
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+
+# SaveEnvironment
+sw $ra, 0($sp)
+
+# call testReturn
+subi $sp, $sp, 4
+jal testReturn
+
+# RestoreEnvironment
+addi $sp, $sp, 4
+lw $ra, 0($sp)
+
+# printf "************************************************"
+la $a0, PrintString14
+li $v0, 4
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+
+# printf "Start testing I/O:"
+la $a0, PrintString15
+li $v0, 4
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+
+# SaveEnvironment
+sw $ra, 0($sp)
+
+# call testIO
+subi $sp, $sp, 4
+jal testIO
+
+# RestoreEnvironment
+addi $sp, $sp, 4
+lw $ra, 0($sp)
+
+# printf "************************************************"
+la $a0, PrintString16
+li $v0, 4
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+
+# printf "Start testing assign & exp:"
+la $a0, PrintString17
+li $v0, 4
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+
+# SaveEnvironment
+sw $ra, 0($sp)
+
+# call testAssignAndExp
+subi $sp, $sp, 4
+jal testAssignAndExp
+
+# RestoreEnvironment
+addi $sp, $sp, 4
+lw $ra, 0($sp)
+
+# printf "************************************************"
+la $a0, PrintString18
+li $v0, 4
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+
+# printf "Start testing if & while:"
+la $a0, PrintString19
+li $v0, 4
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+
+# SaveEnvironment
+sw $ra, 0($sp)
+
+# call testIfWhile
+subi $sp, $sp, 4
+jal testIfWhile
+
+# RestoreEnvironment
+addi $sp, $sp, 4
+lw $ra, 0($sp)
+
+# printf "************************************************"
+la $a0, PrintString20
+li $v0, 4
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+
+# printf "Start testing switch:"
+la $a0, PrintString21
+li $v0, 4
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+
+# SaveEnvironment
+sw $ra, 0($sp)
+
+# call testSwitch
+subi $sp, $sp, 4
+jal testSwitch
+
+# RestoreEnvironment
+addi $sp, $sp, 4
+lw $ra, 0($sp)
+
+# printf "************************************************"
+la $a0, PrintString22
+li $v0, 4
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+
+# printf "Start testing parameter:"
+la $a0, PrintString23
+li $v0, 4
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+
+# SaveEnvironment
+sw $ra, 0($sp)
+
+# call testPara
+subi $sp, $sp, 4
+jal testPara
+
+# RestoreEnvironment
+addi $sp, $sp, 4
+lw $ra, 0($sp)
+
+# printf "************************************************"
+la $a0, PrintString24
+li $v0, 4
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+
+# Exit
 li $v0, 10
 syscall

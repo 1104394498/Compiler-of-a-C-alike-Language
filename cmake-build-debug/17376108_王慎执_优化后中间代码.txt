@@ -1,617 +1,803 @@
-const int MAX_NUM = 128
-int factorial()
+const int const_int_1 = 12345679
+const int const_int_2 = 0
+const int const_int_3 = -0
+const int const_int_4 = -12345679
+const char const_char_1 = '9'
+const char const_char_2 = '_'
+const char const_char_3 = '+'
+const char const_char_4 = '*'
+var int global_int_array_1[5]
+var int global_int_1
+var char global_char_array_1[5]
+var char global_char_1
+var int global_int_2
+var int global_int_array_2[5]
+var char global_char_2
+var char global_char_array_2[5]
+var char global_char_array_3[10]
+void hanoi()
 para int n
-t2 = n
-t1 = t2
-t0 = t1
-t5 = 1
-t4 = t5
-t3 = t4
-t0 <= t3
+para char from
+para char tmp
+para char to
+n > 0
+
 BZ Label_0
-t8 = 1
-t7 = t8
-t6 = t7
-ret t6
+t6 = n - 1
+push t6
+push from
+push to
+push tmp
+SaveEnvironment
+call hanoi
+RestoreEnvironment
+printf "take"
+printf n
+printf "from"
+printf from
+printf "to"
+printf to
+t29 = n - 1
+push t29
+push tmp
+push from
+push to
+SaveEnvironment
+call hanoi
+RestoreEnvironment
+IfEnd
 GOTO Label_1
 Label_0:
+ElseBegin
+ElseEnd
 Label_1:
-t11 = n
-t10 = t11
-t16 = n
-t15 = t16
-t14 = t15
-t18 = 1
-t17 = t18
-t14 = t14 - t17
-push t14
-SaveEnvironment
-call factorial
-RestoreEnvironment
-t13 = RET
-t12 = t13
-t10 = t10 * t12
-t9 = t10
-ret t9
-int mod()
-para int x
-para int y
-t21 = x
-t20 = t21
-t19 = t20
-t23 = x
-t22 = t23
-t24 = y
-t22 = t22 / t24
-t25 = y
-t22 = t22 * t25
-t19 = t19 - t22
-x = t19
-t28 = x
-t27 = t28
-t26 = t27
-ret t26
-void swap()
-para int x
-para int y
-var int temp
-t31 = x
-t30 = t31
-t29 = t30
-printf "x = " t29
-t34 = y
-t33 = t34
-t32 = t33
-printf "y = " t32
-t37 = x
-t36 = t37
-t35 = t36
-temp = t35
-t40 = y
-t39 = t40
-t38 = t39
-x = t38
-t43 = temp
-t42 = t43
-t41 = t42
-y = t41
-t46 = x
-t45 = t46
-t44 = t45
-printf "SWAP x = " t44
-t49 = y
-t48 = t49
-t47 = t48
-printf "SWAP y = " t47
 ret 
-int full_num()
+int Fibonacci()
 para int n
-para int j
-para int a
-t52 = n
-t51 = t52
-t53 = 100
-t51 = t51 * t53
-t50 = t51
-t55 = j
-t54 = t55
-t56 = 10
-t54 = t54 * t56
-t50 = t50 + t54
-t58 = a
-t57 = t58
-t50 = t50 + t57
-ret t50
-int flower_num()
-para int n
-para int j
-para int a
-t61 = n
-t60 = t61
-t62 = n
-t60 = t60 * t62
-t63 = n
-t60 = t60 * t63
-t59 = t60
-t65 = j
-t64 = t65
-t66 = j
-t64 = t64 * t66
-t67 = j
-t64 = t64 * t67
-t59 = t59 + t64
-t69 = a
-t68 = t69
-t70 = a
-t68 = t68 * t70
-t71 = a
-t68 = t68 * t71
-t59 = t59 + t68
-ret t59
-void complete_flower_num()
-var int k[128]
-var int i
-var int j
-var int n
-var int s
-var int x1
-var int y
-var int m
-var int k2
-var int h
-var int leap
-var int x2
-var int a
-var int b
-var int c
-t73 = 2
-t72 = t73
-j = t72
-LoopSaveRegStatus
+n == 0
+
+BZ Label_2
+ret 0
+IfEnd
+GOTO Label_3
 Label_2:
-t76 = j
-t75 = t76
-t74 = t75
-t79 = MAX_NUM
-t78 = t79
-t77 = t78
-t74 < t77
-BZ Label_3
-t82 = 1
-t81 = t82
-t80 = -t81
-n = t80
-t85 = j
-t84 = t85
-t83 = t84
-s = t83
-t87 = 1
-t86 = t87
-i = t86
-LoopSaveRegStatus
+ElseBegin
+ElseEnd
+Label_3:
+n == 1
+
+BZ Label_4
+ret 1
+IfEnd
+GOTO Label_5
 Label_4:
-t90 = i
-t89 = t90
-t88 = t89
-t93 = j
-t92 = t93
-t91 = t92
-t88 < t91
-BZ Label_5
-t99 = j
-t98 = t99
-t100 = i
-t98 = t98 / t100
-t97 = t98
-t96 = t97
-t95 = t96
-t101 = i
-t95 = t95 * t101
-t94 = t95
-x1 = t94
-t108 = j
-t107 = t108
-t106 = t107
-t111 = i
-t110 = t111
-t109 = t110
-push t106
-push t109
+ElseBegin
+ElseEnd
+Label_5:
+t65 = n - 1
+push t65
 SaveEnvironment
-call mod
+call Fibonacci
 RestoreEnvironment
-t105 = RET
-t104 = t105
-t103 = t104
-t102 = t103
-t114 = 0
-t113 = t114
-t112 = t113
-t102 == t112
+t61 = RET
+t73 = n - 2
+push t73
+SaveEnvironment
+call Fibonacci
+RestoreEnvironment
+t70 = RET
+t61 = t61 + t70
+ret t61
+int fac()
+para int n
+n == 1
+
 BZ Label_6
-t117 = n
-t116 = t117
-t115 = t116
-t119 = 1
-t118 = t119
-t115 = t115 + t118
-n = t115
-t122 = s
-t121 = t122
-t120 = t121
-t124 = i
-t123 = t124
-t120 = t120 - t123
-s = t120
-t127 = n
-t126 = t127
-t125 = t126
-t130 = 128
-t129 = t130
-t128 = t129
-t125 >= t128
-BZ Label_8
-printf "OVERFLOW!"
-GOTO Label_9
-Label_8:
-t133 = n
-t132 = t133
-t131 = t132
-t136 = i
-t135 = t136
-t134 = t135
-k[t131] = t134
-Label_9:
+ret 1
+IfEnd
 GOTO Label_7
 Label_6:
+ElseBegin
+ElseEnd
 Label_7:
-i = i + 1
-LoopRestoreRegStatus
-GOTO Label_4
-Label_5:
-t139 = s
-t138 = t139
-t137 = t138
-t142 = 0
-t141 = t142
-t140 = t141
-t137 == t140
+t88 = n
+t92 = n - 1
+push t92
+SaveEnvironment
+call fac
+RestoreEnvironment
+t90 = RET
+t87 = t88 * t90
+ret t87
+void initGlobalArray()
+global_int_array_1[0] = 0
+global_int_array_1[1] = 1
+t114 = global_int_array_1[0]
+t119 = global_int_array_1[1]
+t112 = t114 + t119
+global_int_array_1[2] = t112
+t128 = global_int_array_1[2]
+t133 = global_int_array_1[1]
+t126 = t128 + t133
+global_int_array_1[3] = t126
+t142 = global_int_array_1[3]
+t147 = global_int_array_1[2]
+t140 = t142 + t147
+global_int_array_1[4] = t140
+t156 = global_int_array_1[1]
+global_int_array_2[0] = t156
+t165 = global_int_array_2[0]
+t169 = global_int_array_1[2]
+t163 = t165 * t169
+global_int_array_2[1] = t163
+t178 = global_int_array_2[1]
+t182 = global_int_array_1[3]
+t176 = t178 * t182
+global_int_array_2[2] = t176
+t191 = global_int_array_2[2]
+t195 = global_int_array_1[4]
+t189 = t191 * t195
+global_int_array_2[3] = t189
+t204 = global_int_array_2[3]
+t208 = global_int_array_1[4]
+t202 = t204 / t208
+global_int_array_2[4] = t202
+global_char_array_1[0] = 'a'
+global_char_array_1[1] = 'A'
+global_char_array_1[2] = 'z'
+global_char_array_1[3] = 'Z'
+global_char_array_1[4] = '_'
+global_char_array_2[0] = '+'
+global_char_array_2[1] = '-'
+global_char_array_2[2] = '*'
+global_char_array_2[3] = '/'
+global_char_array_2[4] = '6'
+ret 
+void assignGlobal()
+para int a
+para char b
+para int c
+para char d
+global_int_1 = a
+global_char_1 = b
+global_int_2 = c
+global_char_2 = d
+ret 
+void printGlobalConst()
+printf const_int_1
+printf const_int_2
+printf const_int_3
+printf const_int_4
+printf const_char_1
+printf const_char_2
+printf const_char_3
+printf const_char_4
+ret 
+void printGlobalVar()
+printf global_int_1
+printf global_int_2
+printf global_char_1
+printf global_char_2
+ret 
+void printGlobalArray()
+t322 = global_int_array_1[0]
+printf t322
+t328 = global_int_array_1[1]
+printf t328
+t334 = global_int_array_1[2]
+printf t334
+t340 = global_int_array_1[3]
+printf t340
+t346 = global_int_array_1[4]
+printf t346
+t352 = global_int_array_2[0]
+printf t352
+t358 = global_int_array_2[1]
+printf t358
+t364 = global_int_array_2[2]
+printf t364
+t370 = global_int_array_2[3]
+printf t370
+t376 = global_int_array_2[4]
+printf t376
+t382 = global_char_array_1[0]
+printf t382
+t388 = global_char_array_1[1]
+printf t388
+t394 = global_char_array_1[2]
+printf t394
+t400 = global_char_array_1[3]
+printf t400
+t406 = global_char_array_1[4]
+printf t406
+t412 = global_char_array_2[0]
+printf t412
+t418 = global_char_array_2[1]
+printf t418
+t424 = global_char_array_2[2]
+printf t424
+t430 = global_char_array_2[3]
+printf t430
+t436 = global_char_array_2[4]
+printf t436
+ret 
+void testGlobal()
+SaveEnvironment
+call initGlobalArray
+RestoreEnvironment
+push const_int_1
+push const_char_1
+push const_int_4
+push const_char_4
+SaveEnvironment
+call assignGlobal
+RestoreEnvironment
+SaveEnvironment
+call printGlobalConst
+RestoreEnvironment
+SaveEnvironment
+call printGlobalVar
+RestoreEnvironment
+SaveEnvironment
+call printGlobalArray
+RestoreEnvironment
+ret 
+int testReturnInt()
+para int a
+t452 = a + 1
+ret t452
+char testReturnChar()
+para int a
+a == 1
+
+BZ Label_8
+ret 'a'
+IfEnd
+GOTO Label_9
+Label_8:
+ElseBegin
+ElseEnd
+Label_9:
+a == 2
+
 BZ Label_10
-t145 = j
-t144 = t145
-t143 = t144
-printf "complete number: " t143
-t147 = 0
-t146 = t147
-i = t146
-LoopSaveRegStatus
-Label_12:
-t150 = i
-t149 = t150
-t148 = t149
-t153 = n
-t152 = t153
-t151 = t152
-t148 <= t151
-BZ Label_13
-t159 = i
-t158 = t159
-t157 = t158
-t156 = k[t157]
-t155 = t156
-t154 = t155
-printf "  " t154
-i = i + 1
-LoopRestoreRegStatus
-GOTO Label_12
-Label_13:
-printf " "
+ret 'b'
+IfEnd
 GOTO Label_11
 Label_10:
+ElseBegin
+ElseEnd
 Label_11:
-j = j + 1
-LoopRestoreRegStatus
-GOTO Label_2
-Label_3:
-printf "---------------------------------------------------------------"
-printf "'water flower'number is:"
-t162 = 0
-t161 = t162
-t160 = t161
-y = t160
-t164 = 100
-t163 = t164
-i = t163
-LoopSaveRegStatus
-Label_14:
-t167 = i
-t166 = t167
-t165 = t166
-t170 = 100
-t169 = t170
-t168 = t169
-t172 = MAX_NUM
-t171 = t172
-t168 = t168 + t171
-t165 < t168
-BZ Label_15
-t175 = i
-t174 = t175
-t176 = 100
-t174 = t174 / t176
-t173 = t174
-n = t173
-t183 = i
-t182 = t183
-t184 = 10
-t182 = t182 / t184
-t181 = t182
-t187 = 10
-t186 = t187
-t185 = t186
-push t181
-push t185
+a == 3
+
+BZ Label_12
+ret 'c'
+IfEnd
+GOTO Label_13
+Label_12:
+ElseBegin
+ElseEnd
+Label_13:
+ret '_'
+void testReturn()
+push 3
 SaveEnvironment
-call mod
+call fac
 RestoreEnvironment
-t180 = RET
-t179 = t180
-t178 = t179
-t177 = t178
-j = t177
-t194 = i
-t193 = t194
-t192 = t193
-t197 = 10
-t196 = t197
-t195 = t196
-push t192
-push t195
+t495 = RET
+push 2
 SaveEnvironment
-call mod
+call fac
 RestoreEnvironment
-t191 = RET
-t190 = t191
-t189 = t190
-t188 = t189
-a = t188
-t204 = n
-t203 = t204
-t202 = t203
-t207 = j
-t206 = t207
-t205 = t206
-t210 = a
-t209 = t210
-t208 = t209
-push t202
-push t205
-push t208
+t502 = RET
+t495 = t495 + t502
+push t495
 SaveEnvironment
-call full_num
+call Fibonacci
 RestoreEnvironment
-t201 = RET
-t200 = t201
-t199 = t200
-t198 = t199
-t217 = n
-t216 = t217
-t215 = t216
-t220 = j
-t219 = t220
-t218 = t219
-t223 = a
-t222 = t223
-t221 = t222
-push t215
-push t218
-push t221
+t491 = RET
+push t491
 SaveEnvironment
-call flower_num
+call testReturnInt
 RestoreEnvironment
-t214 = RET
-t213 = t214
-t212 = t213
-t211 = t212
-t198 == t211
+t487 = RET
+printf t487
+push 1
+SaveEnvironment
+call testReturnChar
+RestoreEnvironment
+t508 = RET
+printf t508
+push 2
+SaveEnvironment
+call testReturnChar
+RestoreEnvironment
+t515 = RET
+printf t515
+push 3
+SaveEnvironment
+call testReturnChar
+RestoreEnvironment
+t522 = RET
+printf t522
+push 4
+SaveEnvironment
+call testReturnChar
+RestoreEnvironment
+t529 = RET
+printf t529
+ret 
+void testAssignAndExp()
+const int const_int_1 = 1
+const int const_int_2 = -1
+const int const_int_3 = 0
+const char const_char_1 = 'a'
+const char const_char_2 = 'A'
+const char const_char_3 = 'b'
+var int int_temp_1
+var int int_temp_2
+var int int_array[2]
+var int int_temp_3
+var char char_temp_1
+var char char_array[2]
+var char char_temp_2
+t536 = const_int_1
+push 5
+SaveEnvironment
+call Fibonacci
+RestoreEnvironment
+t549 = RET
+push t549
+SaveEnvironment
+call Fibonacci
+RestoreEnvironment
+t545 = RET
+push t545
+SaveEnvironment
+call Fibonacci
+RestoreEnvironment
+t541 = RET
+t558 = const_int_2 * const_int_4
+t556 = const_int_1 / t558
+t539 = t541 + t556
+push 3
+SaveEnvironment
+call fac
+RestoreEnvironment
+t563 = RET
+t539 = t539 / t563
+int_temp_1 = t536 + t539
+push 3
+SaveEnvironment
+call fac
+RestoreEnvironment
+t572 = RET
+push 2
+SaveEnvironment
+call fac
+RestoreEnvironment
+t579 = RET
+t572 = t572 + t579
+push t572
+SaveEnvironment
+call fac
+RestoreEnvironment
+int_temp_2 = RET
+t585 = const_int_3
+push 0
+SaveEnvironment
+call testReturnInt
+RestoreEnvironment
+t588 = RET
+int_array[t585] = t588
+t595 = const_int_1
+t600 = const_int_2 * const_int_4
+push 0
+SaveEnvironment
+call testReturnInt
+RestoreEnvironment
+t604 = RET
+t604 = t604 * const_int_4
+t598 = t600 + t604
+t595 = t595 - t598
+t611 = const_int_1
+push const_int_1
+SaveEnvironment
+call testReturnInt
+RestoreEnvironment
+t614 = RET
+t611 = t611 + t614
+int_array[t595] = t611
+t622 = int_array[const_int_3]
+t620 = t622
+t631 = const_int_1
+t636 = const_int_2 * const_int_4
+push 0
+SaveEnvironment
+call testReturnInt
+RestoreEnvironment
+t640 = RET
+t640 = t640 * const_int_4
+t634 = t636 + t640
+t631 = t631 - t634
+t630 = int_array[t631]
+t647 = 'b' - 'a'
+t626 = t630 * t647
+int_temp_3 = t620 - t626
+t653 = 0
+t662 = int_array[0]
+push t662
+SaveEnvironment
+call testReturnChar
+RestoreEnvironment
+t656 = RET
+char_array[t653] = t656
+t666 = const_int_1
+t671 = const_int_2 * const_int_4
+push 0
+SaveEnvironment
+call testReturnInt
+RestoreEnvironment
+t675 = RET
+t675 = t675 * const_int_4
+t669 = t671 + t675
+t666 = t666 - t669
+t688 = int_array[1]
+t686 = t688 + const_int_1
+push t686
+SaveEnvironment
+call testReturnChar
+RestoreEnvironment
+t682 = RET
+char_array[t666] = t682
+t696 = char_array[0]
+char_temp_1 = t696
+t703 = const_int_1
+t708 = const_int_2 * const_int_4
+push 0
+SaveEnvironment
+call testReturnInt
+RestoreEnvironment
+t712 = RET
+t712 = t712 * const_int_4
+t706 = t708 + t712
+t703 = t703 - t706
+t702 = char_array[t703]
+char_temp_2 = t702
+printf int_temp_1
+printf int_temp_2
+printf int_temp_3
+t730 = int_array[const_int_3]
+printf t730
+t737 = const_int_1
+t742 = const_int_2 * const_int_4
+push 0
+SaveEnvironment
+call testReturnInt
+RestoreEnvironment
+t746 = RET
+t746 = t746 * const_int_4
+t740 = t742 + t746
+t737 = t737 - t740
+t736 = int_array[t737]
+printf t736
+printf char_temp_1
+printf char_temp_2
+t761 = char_array[0]
+printf t761
+t767 = char_array[const_int_1]
+printf t767
+t777 = char_array[0]
+t782 = char_array[0]
+t781 = t782 * char_temp_2
+t774 = t777 + t781
+t771 = char_temp_1 * t774
+printf t771
+ret 
+void testIO()
+scanf global_int_1
+scanf global_char_1
+printf "!@\n#$^&*()Qqaa123[];',./"
+printf global_int_1
+printf global_char_1
+scanf global_int_1 global_char_1
+printf "!@\n#$^&*()Qqaa123[];',./" global_int_1
+printf global_char_1
+scanf global_char_1 global_int_1
+printf "!@\n#$^&*()Qqaa123[];',./" global_char_1
+printf global_int_1
+ret 
+void testIfWhile()
+var int i
+var int j
+var int k
+var char a
+var char b
+var char c
+var char d
+k = 10
+a = '+'
+b = '-'
+c = '*'
+d = '/'
+k > 0
+
+BZ Label_14
+k <= 10
+
 BZ Label_16
-t226 = y
-t225 = t226
-t224 = t225
-t229 = i
-t228 = t229
-t227 = t228
-k[t224] = t227
-t232 = y
-t231 = t232
-t230 = t231
-t234 = 1
-t233 = t234
-t230 = t230 + t233
-y = t230
-GOTO Label_17
-Label_16:
-Label_17:
-i = i + 1
-LoopRestoreRegStatus
-GOTO Label_14
-Label_15:
-t236 = 0
-t235 = t236
-i = t235
+i = 0
 LoopSaveRegStatus
 Label_18:
-t239 = i
-t238 = t239
-t237 = t238
-t242 = y
-t241 = t242
-t240 = t241
-t237 < t240
+t838 = k / 2
+i < t838
 BZ Label_19
-t248 = i
-t247 = t248
-t246 = t247
-t245 = k[t246]
-t244 = t245
-t243 = t244
-printf "  " t243
+t851 = i / 2
+t848 = t851 * 2
+t842 = i - t848
+t842 == 0
+
+BZ Label_20
+global_char_array_3[i] = a
+IfEnd
+GOTO Label_21
+Label_20:
+ElseBegin
+ElseEnd
+Label_21:
+t873 = i / 2
+t870 = t873 * 2
+t864 = i - t870
+t864 == 1
+
+BZ Label_22
+global_char_array_3[i] = b
+IfEnd
+GOTO Label_23
+Label_22:
+ElseBegin
+ElseEnd
+Label_23:
+t888 = global_char_array_3[i]
+printf t888
 i = i + 1
 LoopRestoreRegStatus
 GOTO Label_18
 Label_19:
-printf " "
-printf "---------------------------------------------------------------"
-t251 = 0
-t250 = t251
-t249 = t250
-h = t249
-t254 = 1
-t253 = t254
-t252 = t253
-leap = t252
-t256 = 2
-t255 = t256
-m = t255
+LoopEnd
 LoopSaveRegStatus
-Label_20:
-t259 = m
-t258 = t259
-t257 = t258
-t262 = MAX_NUM
-t261 = t262
-t260 = t261
-t257 <= t260
-BZ Label_21
-t265 = m
-t264 = t265
-t266 = 2
-t264 = t264 / t266
-t263 = t264
-k2 = t263
-t268 = 2
-t267 = t268
-i = t267
-LoopSaveRegStatus
-Label_22:
-t271 = i
-t270 = t271
-t269 = t270
-t274 = k2
-t273 = t274
-t272 = t273
-t269 <= t272
-BZ Label_23
-t280 = m
-t279 = t280
-t281 = i
-t279 = t279 / t281
-t278 = t279
-t277 = t278
-t276 = t277
-t282 = i
-t276 = t276 * t282
-t275 = t276
-x2 = t275
-t289 = m
-t288 = t289
-t287 = t288
-t292 = i
-t291 = t292
-t290 = t291
-push t287
-push t290
-SaveEnvironment
-call mod
-RestoreEnvironment
-t286 = RET
-t285 = t286
-t284 = t285
-t283 = t284
-t295 = 0
-t294 = t295
-t293 = t294
-t283 == t293
-BZ Label_24
-t298 = 0
-t297 = t298
-t296 = t297
-leap = t296
-GOTO Label_25
 Label_24:
-Label_25:
-i = i + 1
-LoopRestoreRegStatus
-GOTO Label_22
-Label_23:
-t301 = leap
-t300 = t301
-t299 = t300
-t304 = 1
-t303 = t304
-t302 = t303
-t299 == t302
+i < k
+BZ Label_25
+t912 = i / 2
+t909 = t912 * 2
+t903 = i - t909
+t903 == 0
+
 BZ Label_26
-t307 = m
-t306 = t307
-t305 = t306
-printf " " t305
-t310 = h
-t309 = t310
-t308 = t309
-t312 = 1
-t311 = t312
-t308 = t308 + t311
-h = t308
-t318 = h
-t317 = t318
-t319 = 10
-t317 = t317 / t319
-t316 = t317
-t315 = t316
-t314 = t315
-t320 = 10
-t314 = t314 * t320
-t313 = t314
-x2 = t313
-t323 = x2
-t322 = t323
-t321 = t322
-t326 = h
-t325 = t326
-t324 = t325
-t321 == t324
-BZ Label_28
-printf " "
-GOTO Label_29
-Label_28:
-Label_29:
+global_char_array_3[i] = c
+IfEnd
 GOTO Label_27
 Label_26:
+ElseBegin
+global_char_array_3[i] = d
+ElseEnd
 Label_27:
-t329 = 1
-t328 = t329
-t327 = t328
-leap = t327
-m = m + 1
+t933 = global_char_array_3[i]
+printf t933
+i = i + 1
 LoopRestoreRegStatus
-GOTO Label_20
-Label_21:
-t332 = h
-t331 = t332
-t330 = t331
-printf "The total is " t330
+GOTO Label_24
+Label_25:
+LoopEnd
+IfEnd
+GOTO Label_17
+Label_16:
+ElseBegin
+ElseEnd
+Label_17:
+IfEnd
+GOTO Label_15
+Label_14:
+ElseBegin
+ElseEnd
+Label_15:
+ret 
+void testSwitch()
+const int sum = 3
+var int int_1
+var int i
+var char char_1
+i = 0
+int_1 = 0
+LoopSaveRegStatus
+Label_28:
+i < sum
+BZ Label_29
+int_1 == 0
+
+BZ Label_30
+char_1 = 'a'
+printf char_1
+IfEnd
+GOTO Label_31
+Label_30:
+ElseBegin
+int_1 == 1
+
+BZ Label_32
+char_1 = 'b'
+printf char_1
+IfEnd
+GOTO Label_33
+Label_32:
+ElseBegin
+char_1 = const_char_2
+printf char_1
+ElseEnd
+Label_33:
+ElseEnd
+Label_31:
+char_1 == 'a'
+
+BZ Label_34
+int_1 = i + 1
+printf int_1
+IfEnd
+GOTO Label_35
+Label_34:
+ElseBegin
+ElseEnd
+Label_35:
+char_1 == 'b'
+
+BZ Label_36
+int_1 = sum
+printf int_1
+IfEnd
+GOTO Label_37
+Label_36:
+ElseBegin
+ElseEnd
+Label_37:
+i = i + 1
+LoopRestoreRegStatus
+GOTO Label_28
+Label_29:
+LoopEnd
+ret 
+int func_ret_int_1()
+para int i_1
+para int i_2
+para char c_1
+para char c_2
+var int i_temp
+var char c_temp
+printf "INPUT of func_ret_int_1:"
+printf i_1
+printf i_2
+printf c_1
+printf c_2
+printf "OPERATE of func_ret_int_1:"
+printf i_2
+printf i_1
+printf c_2
+printf c_1
+ret i_2
+void testPara()
+var int i
+var int j
+var char c
+var char d
+push const_int_1
+push const_int_4
+push 'A'
+push 'Z'
+SaveEnvironment
+call func_ret_int_1
+RestoreEnvironment
+t1084 = RET
+printf t1084
+ret 
+void testRecursion()
+push 2
+SaveEnvironment
+call fac
+RestoreEnvironment
+t1108 = RET
+push 3
+SaveEnvironment
+call fac
+RestoreEnvironment
+t1114 = RET
+t1107 = t1108 * t1114
+push t1107
+SaveEnvironment
+call Fibonacci
+RestoreEnvironment
+t1103 = RET
+push 3
+SaveEnvironment
+call Fibonacci
+RestoreEnvironment
+t1122 = RET
+push 4
+SaveEnvironment
+call Fibonacci
+RestoreEnvironment
+t1129 = RET
+t1122 = t1122 + t1129
+push t1122
+SaveEnvironment
+call fac
+RestoreEnvironment
+t1119 = RET
+t1101 = t1103 - t1119
+push 2
+SaveEnvironment
+call Fibonacci
+RestoreEnvironment
+t1137 = RET
+push 3
+SaveEnvironment
+call Fibonacci
+RestoreEnvironment
+t1144 = RET
+t1137 = t1137 + t1144
+push t1137
+SaveEnvironment
+call fac
+RestoreEnvironment
+t1135 = RET
+t1100 = t1101 / t1135
+push t1100
+push 'a'
+push 'b'
+push 'c'
+SaveEnvironment
+call hanoi
+RestoreEnvironment
 ret 
 void main()
-var int n
-t339 = 5
-t338 = t339
-t337 = t338
-push t337
+printf "************************************************"
+printf "Start testing recursion:"
 SaveEnvironment
-call factorial
+call testRecursion
 RestoreEnvironment
-t336 = RET
-t335 = t336
-t334 = t335
-t333 = t334
-n = t333
-t342 = n
-t341 = t342
-t340 = t341
-printf "5 != " t340
-t345 = 5
-t344 = t345
-t343 = t344
-t348 = 10
-t347 = t348
-t346 = t347
-push t343
-push t346
+printf "************************************************"
+printf "Start testing global:"
 SaveEnvironment
-call swap
+call testGlobal
 RestoreEnvironment
+printf "************************************************"
+printf "Start testing return:"
 SaveEnvironment
-call complete_flower_num
+call testReturn
 RestoreEnvironment
+printf "************************************************"
+printf "Start testing I/O:"
+SaveEnvironment
+call testIO
+RestoreEnvironment
+printf "************************************************"
+printf "Start testing assign & exp:"
+SaveEnvironment
+call testAssignAndExp
+RestoreEnvironment
+printf "************************************************"
+printf "Start testing if & while:"
+SaveEnvironment
+call testIfWhile
+RestoreEnvironment
+printf "************************************************"
+printf "Start testing switch:"
+SaveEnvironment
+call testSwitch
+RestoreEnvironment
+printf "************************************************"
+printf "Start testing parameter:"
+SaveEnvironment
+call testPara
+RestoreEnvironment
+printf "************************************************"
 Exit

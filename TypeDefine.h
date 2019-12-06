@@ -6,6 +6,9 @@
 #include <vector>
 #include <string>
 #include "SymbolTable.h"
+
+const bool debug_info = true;
+
 /***** Lexical Analysis *****/
 // STATUS in lexical analysis
 enum LexicalAnalysisStatus {
@@ -79,7 +82,12 @@ enum OperatorType {
     VarArrayStatement,     // int array[10], char array[10]
     LoopSaveRegStatus,      // fix bugs in loop
     LoopRestoreRegStatus,    // fix bugs in loop
-    DoWhileBNZ      // special BNZ for do-while
+    DoWhileBNZ,      // special BNZ for do-while
+    LoopEnd,
+    IfBegin,
+    IfEnd,
+    ElseBegin,
+    ElseEnd
 };
 
 class IntermediateCmd {
@@ -249,6 +257,14 @@ public:
         } else if (operatorType == DoWhileBNZ) {
             cmd += "BNZ ";
             cmd += operands.at(0);
+        } else if (operatorType == LoopEnd) {
+            cmd += "LoopEnd";
+        } else if (operatorType == IfEnd) {
+            cmd += "IfEnd";
+        } else if (operatorType == ElseBegin) {
+            cmd += "ElseBegin";
+        } else if (operatorType == ElseEnd) {
+            cmd += "ElseEnd";
         }
         return cmd;
     };

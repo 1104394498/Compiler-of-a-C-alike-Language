@@ -6,19 +6,28 @@
 #include <vector>
 #include <map>
 #include <stack>
+#include <set>
 
 using namespace std;
 
+struct StreamBlock;
+
 struct CodeBlock {
-    CodeBlock() = default;
+    CodeBlock() {
+        pActiveVar = nullptr;
+    }
 
     CodeBlock(const CodeBlock &aCodeBlock) {
         intermediateCodes = aCodeBlock.intermediateCodes;
         nextBlocks = aCodeBlock.nextBlocks;
+        lastBlocks = aCodeBlock.lastBlocks;
+        pActiveVar = nullptr;
     }
 
     vector<IntermediateCmd> intermediateCodes;
     vector<CodeBlock *> nextBlocks; // if nextBlocks is empty, it means that the codeBlock is an end block
+    vector<CodeBlock *> lastBlocks; // if lastBlocks is emtpy, it means that the codeBlock is an beginning block
+    StreamBlock *pActiveVar;
 };
 
 struct Node {
@@ -274,6 +283,17 @@ public:
     }
 };
 
+struct StreamBlock {
+    set<string> in;
+    set<string> out;
+    CodeBlock *pCodeBlock;
+    vector<StreamBlock *> nextBlocks;
+    vector<StreamBlock *> lastBlocks;
+    set<string> kill;    // def in active variable analysis
+    set<string> gen;     // used in active variable analysis
+    set<string> used_in_block;
+};
+
 class Optimizer {
 public:
     explicit Optimizer(vector<IntermediateCmd> _intermediateCodes, TempVarGenerator *_tempVarGenerator)
@@ -281,24 +301,35 @@ public:
         optimize();
     }
 
-    vector<IntermediateCmd> getIntermediateCodes() { return intermediateCodes; }
+    vector<IntermediateCmd> getIntermediateCodes() { return opt_intermediateCodes; }
 
     ~Optimizer() {
         for (CodeBlock *ptr : codeBlocks) {
+            delete ptr;
+        }
+        for (StreamBlock *ptr : activeVars) {
             delete ptr;
         }
     }
 
 private:
     vector<IntermediateCmd> intermediateCodes;
+    vector<IntermediateCmd> opt_intermediateCodes;
+
     vector<CodeBlock *> codeBlocks;
     TempVarGenerator *tempVarGenerator;
+
+    vector<StreamBlock *> activeVars;
 
     void optimize();
 
     void divideCodeBlocks();
 
     void DAG_optimize();
+
+    void activeVarAnalysis();
+
+    void constantPropagation();
 
     void optimize_redundant_assign();
 };
