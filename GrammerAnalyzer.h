@@ -82,11 +82,11 @@ private:
 
     void parameter_table(vector<VariableType> &inputTypes, vector<Item *> *newStack);   // add FuncPara
 
-    void compound_statement(VariableType &returnType);
+    void compound_statement(VariableType &returnType, bool in_main = false);
 
-    void statement_array(VariableType &returnType);
+    void statement_array(VariableType &returnType, bool in_main = false);
 
-    void statement(VariableType &returnType);   // undefined name
+    void statement(VariableType &returnType, bool in_main = false);   // undefined name
 
     void conditional_statement(VariableType &returnType);
 
@@ -110,7 +110,7 @@ private:
 
     void print_statement();
 
-    void return_statement(VariableType &returnType);
+    void return_statement(VariableType &returnType, bool in_main = false);
 
     void mystring();
 

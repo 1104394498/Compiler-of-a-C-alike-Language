@@ -1,7 +1,0 @@
-char a[5];
-void main() {
-  int c;
-  a['b'-'a'] = 'b' + 3 + 'a' - 'a';
-  c = a['c'-'b'];
-  printf("c = ", c);
-}

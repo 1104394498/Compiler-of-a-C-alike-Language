@@ -1,13 +1,15 @@
-var char a[5]
+var int a
+void func()
+a = 1
+PrintfTypeDef intType 
+printf a
+ret 
 void main()
-var int c
-t0 = 'b' - 'a'
-t5 = 'b' + 3
-t5 = t5 + 'a'
-t5 = t5 - 'a'
-a[t0] = t5
-t17 = 'c' - 'b'
-t16 = a[t17]
-PrintfTypeDef strType intType 
-printf "c = " t16
+var int b[4]
+b[3] = 1
+SaveEnvironment
+call func
+RestoreEnvironment
+PrintfTypeDef intType 
+printf a
 Exit

@@ -227,7 +227,7 @@ string MipsCmd::print() const {
             ret += operands.at(0);
             break;
         case mulo:
-            ret += "mulo ";
+            ret += "mul ";      // change mulo to mul
             ret += operands.at(0);
             ret += ", ";
             ret += operands.at(1);
@@ -700,7 +700,8 @@ void MipsGenerator::dealAssign(const IntermediateCmd &midCode) {
         liCmd.addRegister(r1);
         liCmd.addInteger(num);
         mipsCodes->push_back(liCmd);
-        if (functionFile->variableTypeRecords.count(operands.at(0)) == 0)
+        if (functionFile->variableTypeRecords.count(operands.at(0)) == 0 &&
+            globalNameTypeRecords.count(operands.at(0)) == 0)
             functionFile->variableTypeRecords[operands.at(0)] = intType;
         // cout << liCmd.print() << endl;
     } else if (addNum[0] == '\'') {
@@ -710,7 +711,8 @@ void MipsGenerator::dealAssign(const IntermediateCmd &midCode) {
         liCmd.addRegister(r1);
         liCmd.addInteger(c);
         mipsCodes->push_back(liCmd);
-        if (functionFile->variableTypeRecords.count(operands.at(0)) == 0)
+        if (functionFile->variableTypeRecords.count(operands.at(0)) == 0 &&
+            globalNameTypeRecords.count(operands.at(0)) == 0)
             functionFile->variableTypeRecords[operands.at(0)] = charType;
     } else {
         const vector<Register> regs = getRegisters(vector<string>{operands.at(0), addNum});
@@ -1097,10 +1099,12 @@ void MipsGenerator::dealGetArrayValue(const IntermediateCmd &midCode) {
         } else {
             regs = getRegisters(vector<string>{}, 2);
             functionFile->registerRecords[regs.at(0)] = varName;
-            if (functionFile->variableTypeRecords.count(arrayName) > 0) {
-                functionFile->variableTypeRecords[varName] = functionFile->variableTypeRecords[arrayName];
-            } else {
-                functionFile->variableTypeRecords[varName] = globalNameTypeRecords[arrayName];
+            if (globalNameTypeRecords.count(varName) == 0) {
+                if (functionFile->variableTypeRecords.count(arrayName) > 0) {
+                    functionFile->variableTypeRecords[varName] = functionFile->variableTypeRecords[arrayName];
+                } else {
+                    functionFile->variableTypeRecords[varName] = globalNameTypeRecords[arrayName];
+                }
             }
         }
         const Register &addrReg = regs.at(1);
@@ -1159,10 +1163,13 @@ void MipsGenerator::dealGetArrayValue(const IntermediateCmd &midCode) {
         } else {
             regs = getRegisters(vector<string>{midCode.getOperands().at(2)}, 3);
             functionFile->registerRecords[regs.at(1)] = varName;
-            if (functionFile->variableTypeRecords.count(arrayName) > 0) {
-                functionFile->variableTypeRecords[varName] = functionFile->variableTypeRecords[arrayName];
-            } else {
-                functionFile->variableTypeRecords[varName] = globalNameTypeRecords[arrayName];
+
+            if (globalNameTypeRecords.count(varName) == 0) {
+                if (functionFile->variableTypeRecords.count(arrayName) > 0) {
+                    functionFile->variableTypeRecords[varName] = functionFile->variableTypeRecords[arrayName];
+                } else {
+                    functionFile->variableTypeRecords[varName] = globalNameTypeRecords[arrayName];
+                }
             }
         }
 
@@ -1784,7 +1791,6 @@ void MipsGenerator::dealFunRetInDef(const IntermediateCmd &midCode) {
             mipsCmd.addRegister(r);
             mipsCodes->push_back(mipsCmd);
         }
-
     }
 
     for (auto &pair : functionFile->registerRecords) {
@@ -1891,7 +1897,8 @@ void MipsGenerator::dealAssignRetValue(const IntermediateCmd &midCode) {
     mipsCmd.addRegister(r);
     mipsCmd.addRegister(Register{v0});
     mipsCodes->push_back(mipsCmd);
-    functionFile->variableTypeRecords[varName] = lastRetTypes.top();
+    if (functionFile->variableTypeRecords.count(varName) == 0 && globalNameTypeRecords.count(varName) == 0)
+        functionFile->variableTypeRecords[varName] = lastRetTypes.top();
     lastRetTypes.pop();
 }
 
@@ -1932,14 +1939,14 @@ void MipsGenerator::dealRestoreRegStatus() {
     while (true) {
         bool reachEnd = true;
         for (auto &registerRecord : functionFile->registerRecords) {
-            const Register &r = registerRecord.first;
-            const string &curVarName = registerRecord.second;
+            const Register r = registerRecord.first;
+            const string curVarName = registerRecord.second;
             if (storedSavedRegisterRecords.top().count(r) == 0) {
                 writeRegValueBack(&r);
                 reachEnd = false;
                 break;
             } else {
-                const string &preVarName = storedSavedRegisterRecords.top()[r];
+                const string preVarName = storedSavedRegisterRecords.top()[r];
                 if (curVarName != preVarName) {
                     // change curVar into preVar for $r
                     writeRegValueBack(&r);
@@ -1956,7 +1963,7 @@ void MipsGenerator::dealRestoreRegStatus() {
 
     while (true) {
         bool reachEnd = true;
-        for (const auto &pair : storedSavedRegisterRecords.top()) {
+        for (const auto pair : storedSavedRegisterRecords.top()) {
             const Register r = pair.first;
             const string oldVarName = pair.second;
             if (functionFile->registerRecords.count(r) > 0) {

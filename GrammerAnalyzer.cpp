@@ -388,7 +388,7 @@ void GrammarAnalyzer::main_function() {
     output_current_sym();
 
     VariableType returnType;
-    compound_statement(returnType);
+    compound_statement(returnType, true);
     /*
     try {
         if (returnType != voidType) {
@@ -553,7 +553,7 @@ void GrammarAnalyzer::parameter_table(vector<VariableType> &inputTypes, vector<I
     output_current_sym();
 }
 
-void GrammarAnalyzer::compound_statement(VariableType &returnType) {
+void GrammarAnalyzer::compound_statement(VariableType &returnType, bool in_main) {
     returnType = voidType;
     if (sym_type == "CONSTTK") {
         constant_statement();
@@ -563,17 +563,17 @@ void GrammarAnalyzer::compound_statement(VariableType &returnType) {
         variable_statement();
     }
 
-    statement_array(returnType);
+    statement_array(returnType, in_main);
     result.insert(result.end() - 1, "<复合语句>");
 }
 
-void GrammarAnalyzer::statement_array(VariableType &returnType) {
+void GrammarAnalyzer::statement_array(VariableType &returnType, bool in_main) {
     returnType = voidType;
     while (sym_type == "IFTK" || sym_type == "WHILETK" || sym_type == "DOTK" || sym_type == "FORTK"
            || sym_type == "LBRACE" || sym_type == "IDENFR" || sym_type == "SCANFTK" || sym_type == "PRINTFTK" ||
            sym_type == "RETURNTK" || sym_type == "SEMICN") {
         VariableType statementReturnType;
-        statement(statementReturnType);
+        statement(statementReturnType, in_main);
         if (statementReturnType != voidType) {
             returnType = statementReturnType;
         }
@@ -581,7 +581,7 @@ void GrammarAnalyzer::statement_array(VariableType &returnType) {
     result.insert(result.end() - 1, "<语句列>");
 }
 
-void GrammarAnalyzer::statement(VariableType &returnType) {
+void GrammarAnalyzer::statement(VariableType &returnType, bool in_main) {
     returnType = voidType;
     if (sym_type == "IFTK") {
         // conditional statement
@@ -655,7 +655,7 @@ void GrammarAnalyzer::statement(VariableType &returnType) {
         output_current_sym();
     } else if (sym_type == "RETURNTK") {
         // return statement
-        return_statement(returnType);
+        return_statement(returnType, in_main);
 
         // ASSERT_THROW("SEMICN", ShouldHaveSemicolon)
         getsym();
@@ -1287,7 +1287,7 @@ void GrammarAnalyzer::print_statement() {
     }
     // ASSERT_THROW("RPARENT", ShouldHaveRPARENT)
     intermediateCodes->emplace_back(printfTypeDefCmd);
-    
+
     intermediateCodes->emplace_back(cmd);
 
     result.emplace_back("<写语句>");
@@ -1295,7 +1295,7 @@ void GrammarAnalyzer::print_statement() {
     output_current_sym();
 }
 
-void GrammarAnalyzer::return_statement(VariableType &returnType) {
+void GrammarAnalyzer::return_statement(VariableType &returnType, bool in_main) {
     SYMTYPE_ASSERT("RETURNTK")
 
     getsym();
@@ -1313,6 +1313,8 @@ void GrammarAnalyzer::return_statement(VariableType &returnType) {
         getsym();
     } else {
         returnType = voidType;
+        if (!in_main)
+            intermediateCodes->emplace_back(FuncRetInDef);
     }
     result.emplace_back("<返回语句>");
     output_current_sym();
