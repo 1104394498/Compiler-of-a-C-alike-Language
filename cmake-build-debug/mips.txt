@@ -1463,33 +1463,21 @@ jr $ra
 testAssignAndExp:
 
 # const int const_int_1 = 1
-la $t7, const_int_1
-lw $t7, 0($t7)
 li $t7, 1
 
 # const int const_int_2 = -1
-la $t0, const_int_2
-lw $t0, 0($t0)
 li $t0, -1
 
 # const int const_int_3 = 0
-la $t1, const_int_3
-lw $t1, 0($t1)
 li $t1, 0
 
 # const char const_char_1 = 'a'
-la $t2, const_char_1
-lw $t2, 0($t2)
 li $t2, 97
 
 # const char const_char_2 = 'A'
-la $t3, const_char_2
-lw $t3, 0($t3)
 li $t3, 65
 
 # const char const_char_3 = 'b'
-la $t4, const_char_3
-lw $t4, 0($t4)
 li $t4, 98
 
 # var int int_temp_1
@@ -1511,204 +1499,158 @@ move $t5, $t7
 
 # SaveEnvironment
 sw $ra, 0($sp)
-la $v1, const_int_2
-sw $t0, 0($v1)
-la $v1, const_int_3
-sw $t1, 0($v1)
-la $v1, const_char_1
-sw $t2, 0($v1)
-la $v1, const_char_2
-sw $t3, 0($v1)
-la $v1, const_char_3
-sw $t4, 0($v1)
-sw $t5, -20($sp)
-la $v1, const_int_1
-sw $t7, 0($v1)
+sw $t0, -20($sp)
+sw $t1, -24($sp)
+sw $t2, -28($sp)
+sw $t3, -32($sp)
+sw $t4, -36($sp)
+sw $t5, -40($sp)
+sw $t7, -44($sp)
 
 # push 5
 li $a0, 5
 
 # call Fibonacci
-subi $sp, $sp, 24
+subi $sp, $sp, 48
 jal Fibonacci
 
 # RestoreEnvironment
-addi $sp, $sp, 24
+addi $sp, $sp, 48
 lw $ra, 0($sp)
-la $v1, const_int_2
-lw $t0, 0($v1)
-la $v1, const_int_3
-lw $t1, 0($v1)
-la $v1, const_char_1
-lw $t2, 0($v1)
-la $v1, const_char_2
-lw $t3, 0($v1)
-la $v1, const_char_3
-lw $t4, 0($v1)
-lw $t5, -20($sp)
-la $v1, const_int_1
-lw $t7, 0($v1)
+lw $t0, -20($sp)
+lw $t1, -24($sp)
+lw $t2, -28($sp)
+lw $t3, -32($sp)
+lw $t4, -36($sp)
+lw $t5, -40($sp)
+lw $t7, -44($sp)
 
 # t549 = RET
 move $t8, $v0
 
 # SaveEnvironment
 sw $ra, 0($sp)
-la $v1, const_int_2
-sw $t0, 0($v1)
-la $v1, const_int_3
-sw $t1, 0($v1)
-la $v1, const_char_1
-sw $t2, 0($v1)
-la $v1, const_char_2
-sw $t3, 0($v1)
-la $v1, const_char_3
-sw $t4, 0($v1)
-sw $t5, -20($sp)
-la $v1, const_int_1
-sw $t7, 0($v1)
-sw $t8, -24($sp)
+sw $t0, -20($sp)
+sw $t1, -24($sp)
+sw $t2, -28($sp)
+sw $t3, -32($sp)
+sw $t4, -36($sp)
+sw $t5, -40($sp)
+sw $t7, -44($sp)
+sw $t8, -48($sp)
 
 # push t549
 move $a0, $t8
 
 # call Fibonacci
-subi $sp, $sp, 28
+subi $sp, $sp, 52
 jal Fibonacci
 
 # RestoreEnvironment
-addi $sp, $sp, 28
+addi $sp, $sp, 52
 lw $ra, 0($sp)
-la $v1, const_int_2
-lw $t0, 0($v1)
-la $v1, const_int_3
-lw $t1, 0($v1)
-la $v1, const_char_1
-lw $t2, 0($v1)
-la $v1, const_char_2
-lw $t3, 0($v1)
-la $v1, const_char_3
-lw $t4, 0($v1)
-lw $t5, -20($sp)
-la $v1, const_int_1
-lw $t7, 0($v1)
-lw $t8, -24($sp)
+lw $t0, -20($sp)
+lw $t1, -24($sp)
+lw $t2, -28($sp)
+lw $t3, -32($sp)
+lw $t4, -36($sp)
+lw $t5, -40($sp)
+lw $t7, -44($sp)
+lw $t8, -48($sp)
 
 # t545 = RET
 move $t6, $v0
 
 # SaveEnvironment
 sw $ra, 0($sp)
-la $v1, const_int_2
-sw $t0, 0($v1)
-la $v1, const_int_3
-sw $t1, 0($v1)
-la $v1, const_char_1
-sw $t2, 0($v1)
-la $v1, const_char_2
-sw $t3, 0($v1)
-la $v1, const_char_3
-sw $t4, 0($v1)
-sw $t5, -20($sp)
-sw $t6, -28($sp)
-la $v1, const_int_1
-sw $t7, 0($v1)
-sw $t8, -24($sp)
+sw $t0, -20($sp)
+sw $t1, -24($sp)
+sw $t2, -28($sp)
+sw $t3, -32($sp)
+sw $t4, -36($sp)
+sw $t5, -40($sp)
+sw $t6, -52($sp)
+sw $t7, -44($sp)
+sw $t8, -48($sp)
 
 # push t545
 move $a0, $t6
 
 # call Fibonacci
-subi $sp, $sp, 32
+subi $sp, $sp, 56
 jal Fibonacci
 
 # RestoreEnvironment
-addi $sp, $sp, 32
+addi $sp, $sp, 56
 lw $ra, 0($sp)
-la $v1, const_int_2
-lw $t0, 0($v1)
-la $v1, const_int_3
-lw $t1, 0($v1)
-la $v1, const_char_1
-lw $t2, 0($v1)
-la $v1, const_char_2
-lw $t3, 0($v1)
-la $v1, const_char_3
-lw $t4, 0($v1)
-lw $t5, -20($sp)
-lw $t6, -28($sp)
-la $v1, const_int_1
-lw $t7, 0($v1)
-lw $t8, -24($sp)
+lw $t0, -20($sp)
+lw $t1, -24($sp)
+lw $t2, -28($sp)
+lw $t3, -32($sp)
+lw $t4, -36($sp)
+lw $t5, -40($sp)
+lw $t6, -52($sp)
+lw $t7, -44($sp)
+lw $t8, -48($sp)
 
 # t541 = RET
-la $v1, const_int_2
-sw $t0, 0($v1)
+sw $t0, -20($sp)
 move $t0, $v0
 
 # t558 = const_int_2 * const_int_4
-la $v1, const_int_3
-sw $t1, 0($v1)
-la $v1, const_char_1
-sw $t2, 0($v1)
-la $t2, const_int_2
-lw $t2, 0($t2)
-la $v1, const_char_2
-sw $t3, 0($v1)
+sw $t1, -24($sp)
+sw $t2, -28($sp)
+lw $t2, -20($sp)
+sw $t3, -32($sp)
 la $t3, const_int_4
 lw $t3, 0($t3)
 mul $t1, $t2, $t3
 
 # t556 = const_int_1 / t558
-la $v1, const_char_3
-sw $t4, 0($v1)
+sw $t4, -36($sp)
 div $t7, $t1
 mflo $t4
 
 # t539 = t541 + t556
-sw $t5, -20($sp)
+sw $t5, -40($sp)
 add $t5, $t0, $t4
 
 # SaveEnvironment
 sw $ra, 0($sp)
-sw $t0, -32($sp)
-sw $t1, -36($sp)
-la $v1, const_int_2
-sw $t2, 0($v1)
+sw $t0, -56($sp)
+sw $t1, -60($sp)
+sw $t2, -20($sp)
 la $v1, const_int_4
 sw $t3, 0($v1)
-sw $t4, -40($sp)
-sw $t5, -44($sp)
-sw $t6, -28($sp)
-la $v1, const_int_1
-sw $t7, 0($v1)
-sw $t8, -24($sp)
+sw $t4, -64($sp)
+sw $t5, -68($sp)
+sw $t6, -52($sp)
+sw $t7, -44($sp)
+sw $t8, -48($sp)
 
 # push 3
 li $a0, 3
 
 # call fac
-subi $sp, $sp, 48
+subi $sp, $sp, 72
 jal fac
 
 # RestoreEnvironment
-addi $sp, $sp, 48
+addi $sp, $sp, 72
 lw $ra, 0($sp)
-lw $t0, -32($sp)
-lw $t1, -36($sp)
-la $v1, const_int_2
-lw $t2, 0($v1)
+lw $t0, -56($sp)
+lw $t1, -60($sp)
+lw $t2, -20($sp)
 la $v1, const_int_4
 lw $t3, 0($v1)
-lw $t4, -40($sp)
-lw $t5, -44($sp)
-lw $t6, -28($sp)
-la $v1, const_int_1
-lw $t7, 0($v1)
-lw $t8, -24($sp)
+lw $t4, -64($sp)
+lw $t5, -68($sp)
+lw $t6, -52($sp)
+lw $t7, -44($sp)
+lw $t8, -48($sp)
 
 # t563 = RET
-sw $t0, -32($sp)
+sw $t0, -56($sp)
 move $t0, $v0
 
 # t539 = t539 / t563
@@ -1716,189 +1658,176 @@ div $t5, $t0
 mflo $t5
 
 # int_temp_1 = t536 + t539
-sw $t1, -36($sp)
-la $v1, const_int_2
-sw $t2, 0($v1)
-lw $t2, -20($sp)
+sw $t1, -60($sp)
+sw $t2, -20($sp)
+lw $t2, -40($sp)
 add $t1, $t2, $t5
 
 # SaveEnvironment
 sw $ra, 0($sp)
-sw $t0, -48($sp)
-sw $t1, -52($sp)
-sw $t2, -20($sp)
+sw $t0, -72($sp)
+sw $t1, -76($sp)
+sw $t2, -40($sp)
 la $v1, const_int_4
 sw $t3, 0($v1)
-sw $t4, -40($sp)
-sw $t5, -44($sp)
-sw $t6, -28($sp)
-la $v1, const_int_1
-sw $t7, 0($v1)
-sw $t8, -24($sp)
+sw $t4, -64($sp)
+sw $t5, -68($sp)
+sw $t6, -52($sp)
+sw $t7, -44($sp)
+sw $t8, -48($sp)
 
 # push 3
 li $a0, 3
 
 # call fac
-subi $sp, $sp, 56
+subi $sp, $sp, 80
 jal fac
 
 # RestoreEnvironment
-addi $sp, $sp, 56
+addi $sp, $sp, 80
 lw $ra, 0($sp)
-lw $t0, -48($sp)
-lw $t1, -52($sp)
-lw $t2, -20($sp)
+lw $t0, -72($sp)
+lw $t1, -76($sp)
+lw $t2, -40($sp)
 la $v1, const_int_4
 lw $t3, 0($v1)
-lw $t4, -40($sp)
-lw $t5, -44($sp)
-lw $t6, -28($sp)
-la $v1, const_int_1
-lw $t7, 0($v1)
-lw $t8, -24($sp)
+lw $t4, -64($sp)
+lw $t5, -68($sp)
+lw $t6, -52($sp)
+lw $t7, -44($sp)
+lw $t8, -48($sp)
 
 # t572 = RET
-sw $t0, -48($sp)
+sw $t0, -72($sp)
 move $t0, $v0
 
 # SaveEnvironment
 sw $ra, 0($sp)
-sw $t0, -56($sp)
-sw $t1, -52($sp)
-sw $t2, -20($sp)
+sw $t0, -80($sp)
+sw $t1, -76($sp)
+sw $t2, -40($sp)
 la $v1, const_int_4
 sw $t3, 0($v1)
-sw $t4, -40($sp)
-sw $t5, -44($sp)
-sw $t6, -28($sp)
-la $v1, const_int_1
-sw $t7, 0($v1)
-sw $t8, -24($sp)
+sw $t4, -64($sp)
+sw $t5, -68($sp)
+sw $t6, -52($sp)
+sw $t7, -44($sp)
+sw $t8, -48($sp)
 
 # push 2
 li $a0, 2
 
 # call fac
-subi $sp, $sp, 60
+subi $sp, $sp, 84
 jal fac
 
 # RestoreEnvironment
-addi $sp, $sp, 60
+addi $sp, $sp, 84
 lw $ra, 0($sp)
-lw $t0, -56($sp)
-lw $t1, -52($sp)
-lw $t2, -20($sp)
+lw $t0, -80($sp)
+lw $t1, -76($sp)
+lw $t2, -40($sp)
 la $v1, const_int_4
 lw $t3, 0($v1)
-lw $t4, -40($sp)
-lw $t5, -44($sp)
-lw $t6, -28($sp)
-la $v1, const_int_1
-lw $t7, 0($v1)
-lw $t8, -24($sp)
+lw $t4, -64($sp)
+lw $t5, -68($sp)
+lw $t6, -52($sp)
+lw $t7, -44($sp)
+lw $t8, -48($sp)
 
 # t579 = RET
-sw $t0, -56($sp)
+sw $t0, -80($sp)
 move $t0, $v0
 
 # t572 = t572 + t579
-sw $t1, -52($sp)
-lw $t1, -56($sp)
+sw $t1, -76($sp)
+lw $t1, -80($sp)
 add $t1, $t1, $t0
 
 # SaveEnvironment
 sw $ra, 0($sp)
-sw $t0, -60($sp)
-sw $t1, -56($sp)
-sw $t2, -20($sp)
+sw $t0, -84($sp)
+sw $t1, -80($sp)
+sw $t2, -40($sp)
 la $v1, const_int_4
 sw $t3, 0($v1)
-sw $t4, -40($sp)
-sw $t5, -44($sp)
-sw $t6, -28($sp)
-la $v1, const_int_1
-sw $t7, 0($v1)
-sw $t8, -24($sp)
+sw $t4, -64($sp)
+sw $t5, -68($sp)
+sw $t6, -52($sp)
+sw $t7, -44($sp)
+sw $t8, -48($sp)
 
 # push t572
 move $a0, $t1
 
 # call fac
-subi $sp, $sp, 64
+subi $sp, $sp, 88
 jal fac
 
 # RestoreEnvironment
-addi $sp, $sp, 64
+addi $sp, $sp, 88
 lw $ra, 0($sp)
-lw $t0, -60($sp)
-lw $t1, -56($sp)
-lw $t2, -20($sp)
+lw $t0, -84($sp)
+lw $t1, -80($sp)
+lw $t2, -40($sp)
 la $v1, const_int_4
 lw $t3, 0($v1)
-lw $t4, -40($sp)
-lw $t5, -44($sp)
-lw $t6, -28($sp)
-la $v1, const_int_1
-lw $t7, 0($v1)
-lw $t8, -24($sp)
+lw $t4, -64($sp)
+lw $t5, -68($sp)
+lw $t6, -52($sp)
+lw $t7, -44($sp)
+lw $t8, -48($sp)
 
 # int_temp_2 = RET
-sw $t0, -60($sp)
+sw $t0, -84($sp)
 move $t0, $v0
 
 # t585 = const_int_3
-sw $t1, -56($sp)
-sw $t2, -20($sp)
-la $t2, const_int_3
-lw $t2, 0($t2)
+sw $t1, -80($sp)
+sw $t2, -40($sp)
+lw $t2, -24($sp)
 move $t1, $t2
 
 # SaveEnvironment
 sw $ra, 0($sp)
-sw $t0, -64($sp)
-sw $t1, -68($sp)
-la $v1, const_int_3
-sw $t2, 0($v1)
+sw $t0, -88($sp)
+sw $t1, -92($sp)
+sw $t2, -24($sp)
 la $v1, const_int_4
 sw $t3, 0($v1)
-sw $t4, -40($sp)
-sw $t5, -44($sp)
-sw $t6, -28($sp)
-la $v1, const_int_1
-sw $t7, 0($v1)
-sw $t8, -24($sp)
+sw $t4, -64($sp)
+sw $t5, -68($sp)
+sw $t6, -52($sp)
+sw $t7, -44($sp)
+sw $t8, -48($sp)
 
 # push 0
 li $a0, 0
 
 # call testReturnInt
-subi $sp, $sp, 72
+subi $sp, $sp, 96
 jal testReturnInt
 
 # RestoreEnvironment
-addi $sp, $sp, 72
+addi $sp, $sp, 96
 lw $ra, 0($sp)
-lw $t0, -64($sp)
-lw $t1, -68($sp)
-la $v1, const_int_3
-lw $t2, 0($v1)
+lw $t0, -88($sp)
+lw $t1, -92($sp)
+lw $t2, -24($sp)
 la $v1, const_int_4
 lw $t3, 0($v1)
-lw $t4, -40($sp)
-lw $t5, -44($sp)
-lw $t6, -28($sp)
-la $v1, const_int_1
-lw $t7, 0($v1)
-lw $t8, -24($sp)
+lw $t4, -64($sp)
+lw $t5, -68($sp)
+lw $t6, -52($sp)
+lw $t7, -44($sp)
+lw $t8, -48($sp)
 
 # t588 = RET
-sw $t0, -64($sp)
+sw $t0, -88($sp)
 move $t0, $v0
 
 # int_array[t585] = t588
-la $v1, const_int_3
-sw $t2, 0($v1)
+sw $t2, -24($sp)
 la $v1, const_int_4
 sw $t3, 0($v1)
 addi $t2, $sp, -4
@@ -1907,29 +1836,26 @@ sub $t2, $t2, $t3
 sw $t0, 0($t2)
 
 # t595 = const_int_1
-sw $t4, -40($sp)
+sw $t4, -64($sp)
 move $t4, $t7
 
 # t600 = const_int_2 * const_int_4
-sw $t5, -44($sp)
-sw $t6, -28($sp)
-la $t6, const_int_2
-lw $t6, 0($t6)
-sw $t8, -24($sp)
+sw $t5, -68($sp)
+sw $t6, -52($sp)
+lw $t6, -20($sp)
+sw $t8, -48($sp)
 la $t8, const_int_4
 lw $t8, 0($t8)
 mul $t5, $t6, $t8
 
 # SaveEnvironment
 sw $ra, 0($sp)
-sw $t0, -72($sp)
-sw $t1, -68($sp)
-sw $t4, -76($sp)
-sw $t5, -80($sp)
-la $v1, const_int_2
-sw $t6, 0($v1)
-la $v1, const_int_1
-sw $t7, 0($v1)
+sw $t0, -96($sp)
+sw $t1, -92($sp)
+sw $t4, -100($sp)
+sw $t5, -104($sp)
+sw $t6, -20($sp)
+sw $t7, -44($sp)
 la $v1, const_int_4
 sw $t8, 0($v1)
 
@@ -1937,20 +1863,18 @@ sw $t8, 0($v1)
 li $a0, 0
 
 # call testReturnInt
-subi $sp, $sp, 84
+subi $sp, $sp, 108
 jal testReturnInt
 
 # RestoreEnvironment
-addi $sp, $sp, 84
+addi $sp, $sp, 108
 lw $ra, 0($sp)
-lw $t0, -72($sp)
-lw $t1, -68($sp)
-lw $t4, -76($sp)
-lw $t5, -80($sp)
-la $v1, const_int_2
-lw $t6, 0($v1)
-la $v1, const_int_1
-lw $t7, 0($v1)
+lw $t0, -96($sp)
+lw $t1, -92($sp)
+lw $t4, -100($sp)
+lw $t5, -104($sp)
+lw $t6, -20($sp)
+lw $t7, -44($sp)
 la $v1, const_int_4
 lw $t8, 0($v1)
 
@@ -1967,21 +1891,19 @@ add $t2, $t5, $t3
 sub $t4, $t4, $t2
 
 # t611 = const_int_1
-sw $t0, -72($sp)
+sw $t0, -96($sp)
 move $t0, $t7
 
 # SaveEnvironment
 sw $ra, 0($sp)
-sw $t0, -84($sp)
-sw $t1, -68($sp)
-sw $t2, -88($sp)
-sw $t3, -92($sp)
-sw $t4, -76($sp)
-sw $t5, -80($sp)
-la $v1, const_int_2
-sw $t6, 0($v1)
-la $v1, const_int_1
-sw $t7, 0($v1)
+sw $t0, -108($sp)
+sw $t1, -92($sp)
+sw $t2, -112($sp)
+sw $t3, -116($sp)
+sw $t4, -100($sp)
+sw $t5, -104($sp)
+sw $t6, -20($sp)
+sw $t7, -44($sp)
 la $v1, const_int_4
 sw $t8, 0($v1)
 
@@ -1989,50 +1911,45 @@ sw $t8, 0($v1)
 move $a0, $t7
 
 # call testReturnInt
-subi $sp, $sp, 96
+subi $sp, $sp, 120
 jal testReturnInt
 
 # RestoreEnvironment
-addi $sp, $sp, 96
+addi $sp, $sp, 120
 lw $ra, 0($sp)
-lw $t0, -84($sp)
-lw $t1, -68($sp)
-lw $t2, -88($sp)
-lw $t3, -92($sp)
-lw $t4, -76($sp)
-lw $t5, -80($sp)
-la $v1, const_int_2
-lw $t6, 0($v1)
-la $v1, const_int_1
-lw $t7, 0($v1)
+lw $t0, -108($sp)
+lw $t1, -92($sp)
+lw $t2, -112($sp)
+lw $t3, -116($sp)
+lw $t4, -100($sp)
+lw $t5, -104($sp)
+lw $t6, -20($sp)
+lw $t7, -44($sp)
 la $v1, const_int_4
 lw $t8, 0($v1)
 
 # t614 = RET
-sw $t0, -84($sp)
+sw $t0, -108($sp)
 move $t0, $v0
 
 # t611 = t611 + t614
-sw $t1, -68($sp)
-lw $t1, -84($sp)
+sw $t1, -92($sp)
+lw $t1, -108($sp)
 add $t1, $t1, $t0
 
 # int_array[t595] = t611
-sw $t2, -88($sp)
-sw $t3, -92($sp)
+sw $t2, -112($sp)
+sw $t3, -116($sp)
 addi $t2, $sp, -4
 sll $t3, $t4, 2
 sub $t2, $t2, $t3
 sw $t1, 0($t2)
 
 # t622 = int_array[const_int_3]
-sw $t5, -80($sp)
-la $t5, const_int_3
-lw $t5, 0($t5)
-la $v1, const_int_2
-sw $t6, 0($v1)
-la $v1, const_int_1
-sw $t7, 0($v1)
+sw $t5, -104($sp)
+lw $t5, -24($sp)
+sw $t6, -20($sp)
+sw $t7, -44($sp)
 la $v1, const_int_4
 sw $t8, 0($v1)
 addi $t7, $sp, -4
@@ -2041,58 +1958,51 @@ sub $t7, $t7, $t8
 lw $t6, 0($t7)
 
 # t620 = t622
-sw $t0, -96($sp)
+sw $t0, -120($sp)
 move $t0, $t6
 
 # t631 = const_int_1
-sw $t4, -76($sp)
-la $t3, const_int_1
-lw $t3, 0($t3)
+sw $t4, -100($sp)
+lw $t3, -44($sp)
 move $t4, $t3
 
 # t636 = const_int_2 * const_int_4
-sw $t1, -84($sp)
-la $t2, const_int_2
-lw $t2, 0($t2)
-la $v1, const_int_3
-sw $t5, 0($v1)
+sw $t1, -108($sp)
+lw $t2, -20($sp)
+sw $t5, -24($sp)
 la $t5, const_int_4
 lw $t5, 0($t5)
 mul $t1, $t2, $t5
 
 # SaveEnvironment
 sw $ra, 0($sp)
-sw $t0, -100($sp)
-sw $t1, -104($sp)
-la $v1, const_int_2
-sw $t2, 0($v1)
-la $v1, const_int_1
-sw $t3, 0($v1)
-sw $t4, -108($sp)
+sw $t0, -124($sp)
+sw $t1, -128($sp)
+sw $t2, -20($sp)
+sw $t3, -44($sp)
+sw $t4, -132($sp)
 la $v1, const_int_4
 sw $t5, 0($v1)
-sw $t6, -112($sp)
+sw $t6, -136($sp)
 
 # push 0
 li $a0, 0
 
 # call testReturnInt
-subi $sp, $sp, 116
+subi $sp, $sp, 140
 jal testReturnInt
 
 # RestoreEnvironment
-addi $sp, $sp, 116
+addi $sp, $sp, 140
 lw $ra, 0($sp)
-lw $t0, -100($sp)
-lw $t1, -104($sp)
-la $v1, const_int_2
-lw $t2, 0($v1)
-la $v1, const_int_1
-lw $t3, 0($v1)
-lw $t4, -108($sp)
+lw $t0, -124($sp)
+lw $t1, -128($sp)
+lw $t2, -20($sp)
+lw $t3, -44($sp)
+lw $t4, -132($sp)
 la $v1, const_int_4
 lw $t5, 0($v1)
-lw $t6, -112($sp)
+lw $t6, -136($sp)
 
 # t640 = RET
 move $t8, $v0
@@ -2107,18 +2017,16 @@ add $t7, $t1, $t8
 sub $t4, $t4, $t7
 
 # t630 = int_array[t631]
-sw $t0, -100($sp)
-la $v1, const_int_2
-sw $t2, 0($v1)
-la $v1, const_int_1
-sw $t3, 0($v1)
+sw $t0, -124($sp)
+sw $t2, -20($sp)
+sw $t3, -44($sp)
 addi $t2, $sp, -4
 sll $t3, $t4, 2
 sub $t2, $t2, $t3
 lw $t0, 0($t2)
 
 # t647 = 'b' - 'a'
-sw $t6, -112($sp)
+sw $t6, -136($sp)
 li $t6, 1
 
 # t626 = t630 * t647
@@ -2127,85 +2035,81 @@ sw $t5, 0($v1)
 mul $t5, $t0, $t6
 
 # int_temp_3 = t620 - t626
-sw $t1, -104($sp)
-sw $t8, -116($sp)
-lw $t8, -100($sp)
+sw $t1, -128($sp)
+sw $t8, -140($sp)
+lw $t8, -124($sp)
 sub $t1, $t8, $t5
 
 # t653 = 0
-sw $t7, -120($sp)
+sw $t7, -144($sp)
 li $t7, 0
 
 # t662 = int_array[0]
-sw $t4, -108($sp)
+sw $t4, -132($sp)
 addi $t3, $sp, -4
 lw $t4, 0($t3)
 
 # SaveEnvironment
 sw $ra, 0($sp)
-sw $t0, -124($sp)
-sw $t1, -128($sp)
-sw $t4, -132($sp)
-sw $t5, -136($sp)
-sw $t6, -140($sp)
-sw $t7, -144($sp)
-sw $t8, -100($sp)
+sw $t0, -148($sp)
+sw $t1, -152($sp)
+sw $t4, -156($sp)
+sw $t5, -160($sp)
+sw $t6, -164($sp)
+sw $t7, -168($sp)
+sw $t8, -124($sp)
 
 # push t662
 move $a0, $t4
 
 # call testReturnChar
-subi $sp, $sp, 148
+subi $sp, $sp, 172
 jal testReturnChar
 
 # RestoreEnvironment
-addi $sp, $sp, 148
+addi $sp, $sp, 172
 lw $ra, 0($sp)
-lw $t0, -124($sp)
-lw $t1, -128($sp)
-lw $t4, -132($sp)
-lw $t5, -136($sp)
-lw $t6, -140($sp)
-lw $t7, -144($sp)
-lw $t8, -100($sp)
+lw $t0, -148($sp)
+lw $t1, -152($sp)
+lw $t4, -156($sp)
+lw $t5, -160($sp)
+lw $t6, -164($sp)
+lw $t7, -168($sp)
+lw $t8, -124($sp)
 
 # t656 = RET
 move $t2, $v0
 
 # char_array[t653] = t656
-sw $t0, -124($sp)
+sw $t0, -148($sp)
 addi $t3, $sp, -12
 sll $t0, $t7, 2
 sub $t3, $t3, $t0
 sw $t2, 0($t3)
 
 # t666 = const_int_1
-sw $t1, -128($sp)
-sw $t4, -132($sp)
-la $t4, const_int_1
-lw $t4, 0($t4)
+sw $t1, -152($sp)
+sw $t4, -156($sp)
+lw $t4, -44($sp)
 move $t1, $t4
 
 # t671 = const_int_2 * const_int_4
-sw $t5, -136($sp)
-sw $t6, -140($sp)
-la $t6, const_int_2
-lw $t6, 0($t6)
-sw $t8, -100($sp)
+sw $t5, -160($sp)
+sw $t6, -164($sp)
+lw $t6, -20($sp)
+sw $t8, -124($sp)
 la $t8, const_int_4
 lw $t8, 0($t8)
 mul $t5, $t6, $t8
 
 # SaveEnvironment
 sw $ra, 0($sp)
-sw $t1, -148($sp)
-sw $t2, -152($sp)
-la $v1, const_int_1
-sw $t4, 0($v1)
-sw $t5, -156($sp)
-la $v1, const_int_2
-sw $t6, 0($v1)
-sw $t7, -144($sp)
+sw $t1, -172($sp)
+sw $t2, -176($sp)
+sw $t4, -44($sp)
+sw $t5, -180($sp)
+sw $t6, -20($sp)
+sw $t7, -168($sp)
 la $v1, const_int_4
 sw $t8, 0($v1)
 
@@ -2213,20 +2117,18 @@ sw $t8, 0($v1)
 li $a0, 0
 
 # call testReturnInt
-subi $sp, $sp, 160
+subi $sp, $sp, 184
 jal testReturnInt
 
 # RestoreEnvironment
-addi $sp, $sp, 160
+addi $sp, $sp, 184
 lw $ra, 0($sp)
-lw $t1, -148($sp)
-lw $t2, -152($sp)
-la $v1, const_int_1
-lw $t4, 0($v1)
-lw $t5, -156($sp)
-la $v1, const_int_2
-lw $t6, 0($v1)
-lw $t7, -144($sp)
+lw $t1, -172($sp)
+lw $t2, -176($sp)
+lw $t4, -44($sp)
+lw $t5, -180($sp)
+lw $t6, -20($sp)
+lw $t7, -168($sp)
 la $v1, const_int_4
 lw $t8, 0($v1)
 
@@ -2243,30 +2145,26 @@ add $t3, $t5, $t0
 sub $t1, $t1, $t3
 
 # t688 = int_array[1]
-sw $t2, -152($sp)
-la $v1, const_int_1
-sw $t4, 0($v1)
+sw $t2, -176($sp)
+sw $t4, -44($sp)
 addi $t4, $sp, -4
 lw $t2, -4($t4)
 
 # t686 = t688 + const_int_1
-la $v1, const_int_2
-sw $t6, 0($v1)
-sw $t7, -144($sp)
-la $t7, const_int_1
-lw $t7, 0($t7)
+sw $t6, -20($sp)
+sw $t7, -168($sp)
+lw $t7, -44($sp)
 add $t6, $t2, $t7
 
 # SaveEnvironment
 sw $ra, 0($sp)
-sw $t0, -160($sp)
-sw $t1, -148($sp)
-sw $t2, -164($sp)
-sw $t3, -168($sp)
-sw $t5, -156($sp)
-sw $t6, -172($sp)
-la $v1, const_int_1
-sw $t7, 0($v1)
+sw $t0, -184($sp)
+sw $t1, -172($sp)
+sw $t2, -188($sp)
+sw $t3, -192($sp)
+sw $t5, -180($sp)
+sw $t6, -196($sp)
+sw $t7, -44($sp)
 la $v1, const_int_4
 sw $t8, 0($v1)
 
@@ -2274,20 +2172,19 @@ sw $t8, 0($v1)
 move $a0, $t6
 
 # call testReturnChar
-subi $sp, $sp, 176
+subi $sp, $sp, 200
 jal testReturnChar
 
 # RestoreEnvironment
-addi $sp, $sp, 176
+addi $sp, $sp, 200
 lw $ra, 0($sp)
-lw $t0, -160($sp)
-lw $t1, -148($sp)
-lw $t2, -164($sp)
-lw $t3, -168($sp)
-lw $t5, -156($sp)
-lw $t6, -172($sp)
-la $v1, const_int_1
-lw $t7, 0($v1)
+lw $t0, -184($sp)
+lw $t1, -172($sp)
+lw $t2, -188($sp)
+lw $t3, -192($sp)
+lw $t5, -180($sp)
+lw $t6, -196($sp)
+lw $t7, -44($sp)
 la $v1, const_int_4
 lw $t8, 0($v1)
 
@@ -2295,74 +2192,67 @@ lw $t8, 0($v1)
 move $t4, $v0
 
 # char_array[t666] = t682
-sw $t0, -160($sp)
-sw $t2, -164($sp)
+sw $t0, -184($sp)
+sw $t2, -188($sp)
 addi $t0, $sp, -12
 sll $t2, $t1, 2
 sub $t0, $t0, $t2
 sw $t4, 0($t0)
 
 # t696 = char_array[0]
-sw $t3, -168($sp)
-sw $t5, -156($sp)
+sw $t3, -192($sp)
+sw $t5, -180($sp)
 addi $t5, $sp, -12
 lw $t3, 0($t5)
 
 # char_temp_1 = t696
-sw $t6, -172($sp)
+sw $t6, -196($sp)
 move $t6, $t3
 
 # t703 = const_int_1
-la $v1, const_int_1
-sw $t7, 0($v1)
+sw $t7, -44($sp)
 la $v1, const_int_4
 sw $t8, 0($v1)
-la $t8, const_int_1
-lw $t8, 0($t8)
+lw $t8, -44($sp)
 move $t7, $t8
 
 # t708 = const_int_2 * const_int_4
-sw $t1, -148($sp)
-la $t2, const_int_2
-lw $t2, 0($t2)
-sw $t4, -176($sp)
+sw $t1, -172($sp)
+lw $t2, -20($sp)
+sw $t4, -200($sp)
 la $t4, const_int_4
 lw $t4, 0($t4)
 mul $t1, $t2, $t4
 
 # SaveEnvironment
 sw $ra, 0($sp)
-sw $t1, -180($sp)
-la $v1, const_int_2
-sw $t2, 0($v1)
-sw $t3, -184($sp)
+sw $t1, -204($sp)
+sw $t2, -20($sp)
+sw $t3, -208($sp)
 la $v1, const_int_4
 sw $t4, 0($v1)
-sw $t6, -188($sp)
-sw $t7, -192($sp)
-la $v1, const_int_1
-sw $t8, 0($v1)
+sw $t6, -212($sp)
+sw $t7, -216($sp)
+sw $t8, -44($sp)
 
 # push 0
 li $a0, 0
 
 # call testReturnInt
-subi $sp, $sp, 196
+subi $sp, $sp, 220
 jal testReturnInt
 
 # RestoreEnvironment
-addi $sp, $sp, 196
+addi $sp, $sp, 220
 lw $ra, 0($sp)
-lw $t1, -180($sp)
-la $v1, const_int_2
-lw $t2, 0($v1)
-lw $t3, -184($sp)
+lw $t1, -204($sp)
+lw $t2, -20($sp)
+lw $t3, -208($sp)
 la $v1, const_int_4
 lw $t4, 0($v1)
-lw $t6, -188($sp)
-lw $t7, -192($sp)
-la $v1, const_int_1
-lw $t8, 0($v1)
+lw $t6, -212($sp)
+lw $t7, -216($sp)
+lw $t8, -44($sp)
 
 # t712 = RET
 move $t0, $v0
@@ -2377,25 +2267,23 @@ add $t5, $t1, $t0
 sub $t7, $t7, $t5
 
 # t702 = char_array[t703]
-la $v1, const_int_2
-sw $t2, 0($v1)
-sw $t3, -184($sp)
-sw $t6, -188($sp)
+sw $t2, -20($sp)
+sw $t3, -208($sp)
+sw $t6, -212($sp)
 addi $t3, $sp, -12
 sll $t6, $t7, 2
 sub $t3, $t3, $t6
 lw $t2, 0($t3)
 
 # char_temp_2 = t702
-la $v1, const_int_1
-sw $t8, 0($v1)
+sw $t8, -44($sp)
 move $t8, $t2
 
 # printf int_temp_1
 li $v0, 1
 la $v1, const_int_4
 sw $t4, 0($v1)
-lw $t4, -52($sp)
+lw $t4, -76($sp)
 move $a0, $t4
 syscall
 li $v0, 11
@@ -2404,8 +2292,8 @@ syscall
 
 # printf int_temp_2
 li $v0, 1
-sw $t1, -180($sp)
-lw $t1, -64($sp)
+sw $t1, -204($sp)
+lw $t1, -88($sp)
 move $a0, $t1
 syscall
 li $v0, 11
@@ -2414,8 +2302,8 @@ syscall
 
 # printf int_temp_3
 li $v0, 1
-sw $t0, -196($sp)
-lw $t0, -128($sp)
+sw $t0, -220($sp)
+lw $t0, -152($sp)
 move $a0, $t0
 syscall
 li $v0, 11
@@ -2423,10 +2311,9 @@ li $a0, 10
 syscall
 
 # t730 = int_array[const_int_3]
-sw $t5, -200($sp)
-la $t5, const_int_3
-lw $t5, 0($t5)
-sw $t7, -192($sp)
+sw $t5, -224($sp)
+lw $t5, -24($sp)
+sw $t7, -216($sp)
 addi $t6, $sp, -4
 sll $t3, $t5, 2
 sub $t6, $t6, $t3
@@ -2441,18 +2328,16 @@ li $a0, 10
 syscall
 
 # t737 = const_int_1
-sw $t8, -204($sp)
-sw $t2, -208($sp)
-la $t2, const_int_1
-lw $t2, 0($t2)
+sw $t8, -228($sp)
+sw $t2, -232($sp)
+lw $t2, -44($sp)
 move $t8, $t2
 
 # t742 = const_int_2 * const_int_4
-sw $t4, -52($sp)
-sw $t1, -64($sp)
-la $t1, const_int_2
-lw $t1, 0($t1)
-sw $t0, -128($sp)
+sw $t4, -76($sp)
+sw $t1, -88($sp)
+lw $t1, -20($sp)
+sw $t0, -152($sp)
 la $t0, const_int_4
 lw $t0, 0($t0)
 mul $t4, $t1, $t0
@@ -2461,37 +2346,31 @@ mul $t4, $t1, $t0
 sw $ra, 0($sp)
 la $v1, const_int_4
 sw $t0, 0($v1)
-la $v1, const_int_2
-sw $t1, 0($v1)
-la $v1, const_int_1
-sw $t2, 0($v1)
-sw $t4, -212($sp)
-la $v1, const_int_3
-sw $t5, 0($v1)
-sw $t7, -216($sp)
-sw $t8, -220($sp)
+sw $t1, -20($sp)
+sw $t2, -44($sp)
+sw $t4, -236($sp)
+sw $t5, -24($sp)
+sw $t7, -240($sp)
+sw $t8, -244($sp)
 
 # push 0
 li $a0, 0
 
 # call testReturnInt
-subi $sp, $sp, 224
+subi $sp, $sp, 248
 jal testReturnInt
 
 # RestoreEnvironment
-addi $sp, $sp, 224
+addi $sp, $sp, 248
 lw $ra, 0($sp)
 la $v1, const_int_4
 lw $t0, 0($v1)
-la $v1, const_int_2
-lw $t1, 0($v1)
-la $v1, const_int_1
-lw $t2, 0($v1)
-lw $t4, -212($sp)
-la $v1, const_int_3
-lw $t5, 0($v1)
-lw $t7, -216($sp)
-lw $t8, -220($sp)
+lw $t1, -20($sp)
+lw $t2, -44($sp)
+lw $t4, -236($sp)
+lw $t5, -24($sp)
+lw $t7, -240($sp)
+lw $t8, -244($sp)
 
 # t746 = RET
 move $t3, $v0
@@ -2506,12 +2385,9 @@ add $t6, $t4, $t3
 sub $t8, $t8, $t6
 
 # t736 = int_array[t737]
-la $v1, const_int_2
-sw $t1, 0($v1)
-la $v1, const_int_1
-sw $t2, 0($v1)
-la $v1, const_int_3
-sw $t5, 0($v1)
+sw $t1, -20($sp)
+sw $t2, -44($sp)
+sw $t5, -24($sp)
 addi $t2, $sp, -4
 sll $t5, $t8, 2
 sub $t2, $t2, $t5
@@ -2527,8 +2403,8 @@ syscall
 
 # printf char_temp_1
 li $v0, 11
-sw $t7, -216($sp)
-lw $t7, -188($sp)
+sw $t7, -240($sp)
+lw $t7, -212($sp)
 move $a0, $t7
 syscall
 li $v0, 11
@@ -2539,7 +2415,7 @@ syscall
 li $v0, 11
 la $v1, const_int_4
 sw $t0, 0($v1)
-lw $t0, -204($sp)
+lw $t0, -228($sp)
 move $a0, $t0
 syscall
 li $v0, 11
@@ -2547,8 +2423,8 @@ li $a0, 10
 syscall
 
 # t761 = char_array[0]
-sw $t4, -212($sp)
-sw $t3, -224($sp)
+sw $t4, -236($sp)
+sw $t3, -248($sp)
 addi $t3, $sp, -12
 lw $t4, 0($t3)
 
@@ -2561,10 +2437,9 @@ li $a0, 10
 syscall
 
 # t767 = char_array[const_int_1]
-sw $t6, -228($sp)
-la $t6, const_int_1
-lw $t6, 0($t6)
-sw $t8, -220($sp)
+sw $t6, -252($sp)
+lw $t6, -44($sp)
+sw $t8, -244($sp)
 addi $t5, $sp, -12
 sll $t2, $t6, 2
 sub $t5, $t5, $t2
@@ -2579,29 +2454,28 @@ li $a0, 10
 syscall
 
 # t777 = char_array[0]
-sw $t1, -232($sp)
-sw $t7, -188($sp)
+sw $t1, -256($sp)
+sw $t7, -212($sp)
 addi $t7, $sp, -12
 lw $t1, 0($t7)
 
 # t782 = char_array[0]
-sw $t0, -204($sp)
+sw $t0, -228($sp)
 addi $t3, $sp, -12
 lw $t0, 0($t3)
 
 # t781 = t782 * char_temp_2
-sw $t4, -236($sp)
-la $v1, const_int_1
-sw $t6, 0($v1)
-lw $t6, -204($sp)
+sw $t4, -260($sp)
+sw $t6, -44($sp)
+lw $t6, -228($sp)
 mul $t4, $t0, $t6
 
 # t774 = t777 + t781
 add $t2, $t1, $t4
 
 # t771 = char_temp_1 * t774
-sw $t8, -240($sp)
-lw $t8, -188($sp)
+sw $t8, -264($sp)
+lw $t8, -212($sp)
 mul $t5, $t8, $t2
 
 # printf t771

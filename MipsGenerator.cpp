@@ -476,20 +476,20 @@ void MipsGenerator::dealSaveEnv() {
     for (const auto &pair : functionFile->registerRecords) {    // include $a0-$a3, $t_
         const Register &r = pair.first;
         const string &varName = pair.second;
-        const auto &iter = functionFile->memoryRecords.find(varName);
-        if (iter != functionFile->memoryRecords.end()) {
+        if (functionFile->memoryRecords.count(varName) > 0) {
+            const auto &iter = functionFile->memoryRecords.find(varName);
             // variable has been saved in memory
             // can be optimized: don't write back to memory if not change
-
             // sw $t, offset($sp)
             MipsCmd mipsCmd{sw};
             mipsCmd.addRegister(r);
             mipsCmd.addInteger(iter->second);
             mipsCmd.addRegister(Register{sp});
             mipsCodes->push_back(mipsCmd);
+
         } else {
             const auto &iter1 = globalNameTypeRecords.find(varName);
-            if (iter1 != globalNameTypeRecords.end()) {
+            if (functionFile->variableTypeRecords.count(varName) == 0 && iter1 != globalNameTypeRecords.end()) {
                 // la $v1, varName
                 MipsCmd mipsCmd{la};
                 mipsCmd.addRegister(Register{v1});
@@ -1722,7 +1722,10 @@ void MipsGenerator::dealConstDef(const IntermediateCmd &midCode) {
     const string constName = midCode.getOperands().at(1);
 
     if (functionFile != nullptr) {
-        const Register r = getRegisters(vector<string>{constName}).at(0);
+        //const Register r = getRegisters(vector<string>{constName}).at(0);
+        // avoid global variable's name is the same as constName
+        const Register r = getRegisters(vector<string>{}, 1).at(0);
+        functionFile->registerRecords[r] = constName;
         MipsCmd liCmd{li};
         liCmd.addRegister(r);
         liCmd.addInteger(num);
@@ -1730,7 +1733,6 @@ void MipsGenerator::dealConstDef(const IntermediateCmd &midCode) {
         // functionFile->registerRecords[r] = constName;
         functionFile->variableTypeRecords[constName] = constType;
     } else {
-        // global, handle later
         MipsCmd dotWordCmd{dot_word};
         dotWordCmd.addLabel(constName);
         dotWordCmd.addInteger(num);
@@ -1770,6 +1772,10 @@ void MipsGenerator::dealFunRetInDef(const IntermediateCmd &midCode) {
         const Register &reg = pair.first;
         const string &varName = pair.second;
         if (!functionFile->variableTypeRecords.count(varName) && globalNameTypeRecords.count(varName)) {
+            VariableType variableType = globalNameTypeRecords[varName];
+            if (variableType == constInt || variableType == constChar) {
+                continue;
+            }
             // la $v1, varName
             MipsCmd laCmd{la};
             laCmd.addRegister(Register(v1));
@@ -1906,7 +1912,7 @@ void MipsGenerator::dealRestoreRegStatus() {
      */
     while (true) {
         bool reachEnd = true;
-        for (auto & registerRecord : functionFile->registerRecords) {
+        for (auto &registerRecord : functionFile->registerRecords) {
             const Register &r = registerRecord.first;
             const string &curVarName = registerRecord.second;
             if (storedSavedRegisterRecords.top().count(r) == 0) {
