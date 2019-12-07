@@ -91,7 +91,7 @@ hanoi:
 
 # n > 0
 
-# 
+# IfBegin
 
 # BZ Label_0
 ble $a0, 0, Label_0
@@ -230,18 +230,14 @@ lw $a3, -12($sp)
 lw $t0, -20($sp)
 lw $t1, -24($sp)
 
-# GOTO Label_1
-j Label_1
+# IfRestoreRegs
+sw $t0, -20($sp)
+sw $t1, -24($sp)
 
 # Label_0:
 Label_0:
 
 # IfEnd
-sw $t0, -20($sp)
-sw $t1, -24($sp)
-
-# Label_1:
-Label_1:
 
 # ret 
 jr $ra
@@ -253,7 +249,7 @@ Fibonacci:
 
 # n == 0
 
-# 
+# IfBegin
 
 # BZ Label_2
 bne $a0, 0, Label_2
@@ -262,20 +258,16 @@ bne $a0, 0, Label_2
 li $v0, 0
 jr $ra
 
-# GOTO Label_3
-j Label_3
+# IfRestoreRegs
 
 # Label_2:
 Label_2:
 
 # IfEnd
 
-# Label_3:
-Label_3:
-
 # n == 1
 
-# 
+# IfBegin
 
 # BZ Label_4
 bne $a0, 1, Label_4
@@ -284,16 +276,12 @@ bne $a0, 1, Label_4
 li $v0, 1
 jr $ra
 
-# GOTO Label_5
-j Label_5
+# IfRestoreRegs
 
 # Label_4:
 Label_4:
 
 # IfEnd
-
-# Label_5:
-Label_5:
 
 # t65 = n - 1
 subi $t2, $a0, 1
@@ -361,7 +349,7 @@ fac:
 
 # n == 1
 
-# 
+# IfBegin
 
 # BZ Label_6
 bne $a0, 1, Label_6
@@ -370,16 +358,12 @@ bne $a0, 1, Label_6
 li $v0, 1
 jr $ra
 
-# GOTO Label_7
-j Label_7
+# IfRestoreRegs
 
 # Label_6:
 Label_6:
 
 # IfEnd
-
-# Label_7:
-Label_7:
 
 # t88 = n
 move $t6, $a0
@@ -1178,7 +1162,7 @@ testReturnChar:
 
 # a == 1
 
-# 
+# IfBegin
 
 # BZ Label_8
 bne $a0, 1, Label_8
@@ -1187,20 +1171,16 @@ bne $a0, 1, Label_8
 li $v0, 97
 jr $ra
 
-# GOTO Label_9
-j Label_9
+# IfRestoreRegs
 
 # Label_8:
 Label_8:
 
 # IfEnd
 
-# Label_9:
-Label_9:
-
 # a == 2
 
-# 
+# IfBegin
 
 # BZ Label_10
 bne $a0, 2, Label_10
@@ -1209,20 +1189,16 @@ bne $a0, 2, Label_10
 li $v0, 98
 jr $ra
 
-# GOTO Label_11
-j Label_11
+# IfRestoreRegs
 
 # Label_10:
 Label_10:
 
 # IfEnd
 
-# Label_11:
-Label_11:
-
 # a == 3
 
-# 
+# IfBegin
 
 # BZ Label_12
 bne $a0, 3, Label_12
@@ -1231,16 +1207,12 @@ bne $a0, 3, Label_12
 li $v0, 99
 jr $ra
 
-# GOTO Label_13
-j Label_13
+# IfRestoreRegs
 
 # Label_12:
 Label_12:
 
 # IfEnd
-
-# Label_13:
-Label_13:
 
 # ret '_'
 li $v0, 95
@@ -2779,14 +2751,14 @@ li $t8, 47
 
 # k > 0
 
-# 
+# IfBegin
 
 # BZ Label_14
 ble $t0, 0, Label_14
 
 # k <= 10
 
-# 
+# IfBegin
 
 # BZ Label_16
 bgt $t0, 10, Label_16
@@ -2819,7 +2791,7 @@ sub $t6, $t2, $t7
 
 # t842 == 0
 
-# 
+# IfBegin
 
 # BZ Label_20
 bne $t6, 0, Label_20
@@ -2834,18 +2806,16 @@ sll $t8, $t2, 2
 add $t4, $t4, $t8
 sw $t1, 0($t4)
 
-# GOTO Label_21
-j Label_21
+# IfRestoreRegs
+sw $t1, -4($sp)
+lw $t1, -8($sp)
+lw $t4, -12($sp)
+lw $t8, -16($sp)
 
 # Label_20:
 Label_20:
 
 # IfEnd
-sw $t1, -4($sp)
-lw $t1, -8($sp)
-
-# Label_21:
-Label_21:
 
 # t873 = i / 2
 sw $t0, -20($sp)
@@ -2861,7 +2831,7 @@ sub $t3, $t2, $t5
 
 # t864 == 1
 
-# 
+# IfBegin
 
 # BZ Label_22
 bne $t3, 1, Label_22
@@ -2874,29 +2844,27 @@ sll $t6, $t2, 2
 add $t7, $t7, $t6
 sw $t1, 0($t7)
 
-# GOTO Label_23
-j Label_23
+# IfRestoreRegs
+lw $t6, -36($sp)
+lw $t7, -32($sp)
 
 # Label_22:
 Label_22:
 
 # IfEnd
 
-# Label_23:
-Label_23:
-
 # t888 = global_char_array_3[i]
-sw $t8, -16($sp)
 sw $t4, -12($sp)
+sw $t8, -16($sp)
 sw $t0, -40($sp)
-la $t4, global_char_array_3
+la $t8, global_char_array_3
 sll $t0, $t2, 2
-add $t4, $t4, $t0
-lw $t8, 0($t4)
+add $t8, $t8, $t0
+lw $t4, 0($t8)
 
 # printf t888
 li $v0, 11
-move $a0, $t8
+move $a0, $t4
 syscall
 li $v0, 11
 li $a0, 10
@@ -2907,11 +2875,13 @@ addi $t2, $t2, 1
 
 # LoopRestoreRegStatus
 sw $t3, -44($sp)
-sw $t5, -48($sp)
+sw $t4, -48($sp)
+lw $t4, -12($sp)
+sw $t5, -52($sp)
 sw $t6, -36($sp)
 lw $t6, -4($sp)
 sw $t7, -32($sp)
-sw $t8, -52($sp)
+lw $t0, -20($sp)
 lw $t8, -16($sp)
 
 # GOTO Label_18
@@ -2937,18 +2907,18 @@ sw $t1, -8($sp)
 div $t1, $t2, 2
 
 # t909 = t912 * 2
-sw $t4, -12($sp)
-mulo $t4, $t1, 2
+mulo $t3, $t1, 2
 
 # t903 = i - t909
-sub $t3, $t2, $t4
+sw $t4, -12($sp)
+sub $t4, $t2, $t3
 
 # t903 == 0
 
-# 
+# IfBegin
 
 # BZ Label_26
-bne $t3, 0, Label_26
+bne $t4, 0, Label_26
 
 # global_char_array_3[i] = c
 lw $t5, -12($sp)
@@ -2976,21 +2946,24 @@ sw $t8, 0($t0)
 
 # ElseEnd
 sw $t6, -4($sp)
+lw $t0, -20($sp)
+lw $t1, -56($sp)
+lw $t5, -12($sp)
 
 # Label_27:
 Label_27:
 
 # t933 = global_char_array_3[i]
-sw $t4, -60($sp)
-sw $t3, -64($sp)
-la $t3, global_char_array_3
+sw $t3, -60($sp)
+sw $t4, -64($sp)
+la $t4, global_char_array_3
 sll $t7, $t2, 2
-add $t3, $t3, $t7
-lw $t4, 0($t3)
+add $t4, $t4, $t7
+lw $t3, 0($t4)
 
 # printf t933
 li $v0, 11
-move $a0, $t4
+move $a0, $t3
 syscall
 li $v0, 11
 li $a0, 10
@@ -3002,10 +2975,10 @@ addi $t2, $t2, 1
 # LoopRestoreRegStatus
 sw $t1, -56($sp)
 lw $t1, -8($sp)
-sw $t4, -68($sp)
-move $t4, $t5
-sw $a0, -12($sp)
+sw $t3, -68($sp)
 sw $t5, -12($sp)
+lw $t4, -12($sp)
+lw $t6, -4($sp)
 
 # GOTO Label_24
 j Label_24
@@ -3015,28 +2988,20 @@ Label_25:
 
 # LoopEnd
 
-# GOTO Label_17
-j Label_17
+# IfRestoreRegs
+sw $t2, -72($sp)
 
 # Label_16:
 Label_16:
 
 # IfEnd
-sw $t2, -72($sp)
 
-# Label_17:
-Label_17:
-
-# GOTO Label_15
-j Label_15
+# IfRestoreRegs
 
 # Label_14:
 Label_14:
 
 # IfEnd
-
-# Label_15:
-Label_15:
 
 # ret 
 jr $ra
@@ -3057,7 +3022,7 @@ li $t8, 3
 li $t0, 0
 
 # int_1 = 0
-li $t6, 0
+li $t7, 0
 
 # LoopSaveRegStatus
 
@@ -3071,17 +3036,17 @@ bge $t0, $t8, Label_29
 
 # int_1 == 0
 
-# 
+# IfBegin
 
 # BZ Label_30
-bne $t6, 0, Label_30
+bne $t7, 0, Label_30
 
 # char_1 = 'a'
-li $t7, 97
+li $t1, 97
 
 # printf char_1
 li $v0, 11
-move $a0, $t7
+move $a0, $t1
 syscall
 li $v0, 11
 li $a0, 10
@@ -3097,10 +3062,10 @@ Label_30:
 
 # int_1 == 1
 
-# 
+# IfBegin
 
 # BZ Label_32
-bne $t6, 1, Label_32
+bne $t7, 1, Label_32
 
 # char_1 = 'b'
 li $t3, 98
@@ -3124,93 +3089,87 @@ Label_32:
 # char_1 = const_char_2
 la $t4, const_char_2
 lw $t4, 0($t4)
-move $t1, $t4
+move $t5, $t4
 
 # printf char_1
 li $v0, 11
-move $a0, $t1
+move $a0, $t5
 syscall
 li $v0, 11
 li $a0, 10
 syscall
 
 # ElseEnd
-sw $t1, -4($sp)
 la $v1, const_char_2
 sw $t4, 0($v1)
+sw $t5, -4($sp)
+lw $t3, -4($sp)
 
 # Label_33:
 Label_33:
 
 # ElseEnd
 sw $t3, -4($sp)
+lw $t1, -4($sp)
 
 # Label_31:
 Label_31:
 
 # char_1 == 'a'
 
-# 
+# IfBegin
 
 # BZ Label_34
-bne $t7, 97, Label_34
+bne $t1, 97, Label_34
 
 # int_1 = i + 1
-addi $t6, $t0, 1
+addi $t7, $t0, 1
 
 # printf int_1
 li $v0, 1
-move $a0, $t6
+move $a0, $t7
 syscall
 li $v0, 11
 li $a0, 10
 syscall
 
-# GOTO Label_35
-j Label_35
+# IfRestoreRegs
 
 # Label_34:
 Label_34:
 
 # IfEnd
 
-# Label_35:
-Label_35:
-
 # char_1 == 'b'
 
-# 
+# IfBegin
 
 # BZ Label_36
-bne $t7, 98, Label_36
+bne $t1, 98, Label_36
 
 # int_1 = sum
-move $t6, $t8
+move $t7, $t8
 
 # printf int_1
 li $v0, 1
-move $a0, $t6
+move $a0, $t7
 syscall
 li $v0, 11
 li $a0, 10
 syscall
 
-# GOTO Label_37
-j Label_37
+# IfRestoreRegs
 
 # Label_36:
 Label_36:
 
 # IfEnd
 
-# Label_37:
-Label_37:
-
 # i = i + 1
 addi $t0, $t0, 1
 
 # LoopRestoreRegStatus
-sw $t7, -4($sp)
+sw $t1, -4($sp)
 
 # GOTO Label_28
 j Label_28
@@ -3357,9 +3316,9 @@ testPara:
 sw $ra, 0($sp)
 
 # push const_int_1
-la $t5, const_int_1
-lw $t5, 0($t5)
-move $a0, $t5
+la $t6, const_int_1
+lw $t6, 0($t6)
+move $a0, $t6
 
 # push const_int_4
 la $t2, const_int_4
@@ -3381,11 +3340,11 @@ addi $sp, $sp, 4
 lw $ra, 0($sp)
 
 # t1084 = RET
-move $t1, $v0
+move $t4, $v0
 
 # printf t1084
 li $v0, 1
-move $a0, $t1
+move $a0, $t4
 syscall
 li $v0, 11
 li $a0, 10
@@ -3412,11 +3371,11 @@ addi $sp, $sp, 4
 lw $ra, 0($sp)
 
 # t1108 = RET
-move $t4, $v0
+move $t5, $v0
 
 # SaveEnvironment
 sw $ra, 0($sp)
-sw $t4, -4($sp)
+sw $t5, -4($sp)
 
 # push 3
 li $a0, 3
@@ -3428,18 +3387,18 @@ jal fac
 # RestoreEnvironment
 addi $sp, $sp, 8
 lw $ra, 0($sp)
-lw $t4, -4($sp)
+lw $t5, -4($sp)
 
 # t1114 = RET
 move $t3, $v0
 
 # t1107 = t1108 * t1114
-mul $t8, $t4, $t3
+mul $t8, $t5, $t3
 
 # SaveEnvironment
 sw $ra, 0($sp)
 sw $t3, -8($sp)
-sw $t4, -4($sp)
+sw $t5, -4($sp)
 sw $t8, -12($sp)
 
 # push t1107
@@ -3453,17 +3412,17 @@ jal Fibonacci
 addi $sp, $sp, 16
 lw $ra, 0($sp)
 lw $t3, -8($sp)
-lw $t4, -4($sp)
+lw $t5, -4($sp)
 lw $t8, -12($sp)
 
 # t1103 = RET
-move $t6, $v0
+move $t7, $v0
 
 # SaveEnvironment
 sw $ra, 0($sp)
 sw $t3, -8($sp)
-sw $t4, -4($sp)
-sw $t6, -16($sp)
+sw $t5, -4($sp)
+sw $t7, -16($sp)
 sw $t8, -12($sp)
 
 # push 3
@@ -3477,8 +3436,8 @@ jal Fibonacci
 addi $sp, $sp, 20
 lw $ra, 0($sp)
 lw $t3, -8($sp)
-lw $t4, -4($sp)
-lw $t6, -16($sp)
+lw $t5, -4($sp)
+lw $t7, -16($sp)
 lw $t8, -12($sp)
 
 # t1122 = RET
@@ -3488,8 +3447,8 @@ move $t0, $v0
 sw $ra, 0($sp)
 sw $t0, -20($sp)
 sw $t3, -8($sp)
-sw $t4, -4($sp)
-sw $t6, -16($sp)
+sw $t5, -4($sp)
+sw $t7, -16($sp)
 sw $t8, -12($sp)
 
 # push 4
@@ -3504,23 +3463,23 @@ addi $sp, $sp, 24
 lw $ra, 0($sp)
 lw $t0, -20($sp)
 lw $t3, -8($sp)
-lw $t4, -4($sp)
-lw $t6, -16($sp)
+lw $t5, -4($sp)
+lw $t7, -16($sp)
 lw $t8, -12($sp)
 
 # t1129 = RET
-move $t7, $v0
+move $t1, $v0
 
 # t1122 = t1122 + t1129
-add $t0, $t0, $t7
+add $t0, $t0, $t1
 
 # SaveEnvironment
 sw $ra, 0($sp)
 sw $t0, -20($sp)
+sw $t1, -24($sp)
 sw $t3, -8($sp)
-sw $t4, -4($sp)
-sw $t6, -16($sp)
-sw $t7, -24($sp)
+sw $t5, -4($sp)
+sw $t7, -16($sp)
 sw $t8, -12($sp)
 
 # push t1122
@@ -3534,27 +3493,27 @@ jal fac
 addi $sp, $sp, 28
 lw $ra, 0($sp)
 lw $t0, -20($sp)
+lw $t1, -24($sp)
 lw $t3, -8($sp)
-lw $t4, -4($sp)
-lw $t6, -16($sp)
-lw $t7, -24($sp)
+lw $t5, -4($sp)
+lw $t7, -16($sp)
 lw $t8, -12($sp)
 
 # t1119 = RET
-move $t5, $v0
+move $t6, $v0
 
 # t1101 = t1103 - t1119
-sub $t2, $t6, $t5
+sub $t2, $t7, $t6
 
 # SaveEnvironment
 sw $ra, 0($sp)
 sw $t0, -20($sp)
+sw $t1, -24($sp)
 sw $t2, -28($sp)
 sw $t3, -8($sp)
-sw $t4, -4($sp)
-sw $t5, -32($sp)
-sw $t6, -16($sp)
-sw $t7, -24($sp)
+sw $t5, -4($sp)
+sw $t6, -32($sp)
+sw $t7, -16($sp)
 sw $t8, -12($sp)
 
 # push 2
@@ -3568,27 +3527,27 @@ jal Fibonacci
 addi $sp, $sp, 36
 lw $ra, 0($sp)
 lw $t0, -20($sp)
+lw $t1, -24($sp)
 lw $t2, -28($sp)
 lw $t3, -8($sp)
-lw $t4, -4($sp)
-lw $t5, -32($sp)
-lw $t6, -16($sp)
-lw $t7, -24($sp)
+lw $t5, -4($sp)
+lw $t6, -32($sp)
+lw $t7, -16($sp)
 lw $t8, -12($sp)
 
 # t1137 = RET
-move $t1, $v0
+move $t4, $v0
 
 # SaveEnvironment
 sw $ra, 0($sp)
 sw $t0, -20($sp)
-sw $t1, -36($sp)
+sw $t1, -24($sp)
 sw $t2, -28($sp)
 sw $t3, -8($sp)
-sw $t4, -4($sp)
-sw $t5, -32($sp)
-sw $t6, -16($sp)
-sw $t7, -24($sp)
+sw $t4, -36($sp)
+sw $t5, -4($sp)
+sw $t6, -32($sp)
+sw $t7, -16($sp)
 sw $t8, -12($sp)
 
 # push 3
@@ -3602,13 +3561,13 @@ jal Fibonacci
 addi $sp, $sp, 40
 lw $ra, 0($sp)
 lw $t0, -20($sp)
-lw $t1, -36($sp)
+lw $t1, -24($sp)
 lw $t2, -28($sp)
 lw $t3, -8($sp)
-lw $t4, -4($sp)
-lw $t5, -32($sp)
-lw $t6, -16($sp)
-lw $t7, -24($sp)
+lw $t4, -36($sp)
+lw $t5, -4($sp)
+lw $t6, -32($sp)
+lw $t7, -16($sp)
 lw $t8, -12($sp)
 
 # t1144 = RET
@@ -3616,22 +3575,22 @@ sw $t0, -20($sp)
 move $t0, $v0
 
 # t1137 = t1137 + t1144
-add $t1, $t1, $t0
+add $t4, $t4, $t0
 
 # SaveEnvironment
 sw $ra, 0($sp)
 sw $t0, -40($sp)
-sw $t1, -36($sp)
+sw $t1, -24($sp)
 sw $t2, -28($sp)
 sw $t3, -8($sp)
-sw $t4, -4($sp)
-sw $t5, -32($sp)
-sw $t6, -16($sp)
-sw $t7, -24($sp)
+sw $t4, -36($sp)
+sw $t5, -4($sp)
+sw $t6, -32($sp)
+sw $t7, -16($sp)
 sw $t8, -12($sp)
 
 # push t1137
-move $a0, $t1
+move $a0, $t4
 
 # call fac
 subi $sp, $sp, 44
@@ -3641,13 +3600,13 @@ jal fac
 addi $sp, $sp, 44
 lw $ra, 0($sp)
 lw $t0, -40($sp)
-lw $t1, -36($sp)
+lw $t1, -24($sp)
 lw $t2, -28($sp)
 lw $t3, -8($sp)
-lw $t4, -4($sp)
-lw $t5, -32($sp)
-lw $t6, -16($sp)
-lw $t7, -24($sp)
+lw $t4, -36($sp)
+lw $t5, -4($sp)
+lw $t6, -32($sp)
+lw $t7, -16($sp)
 lw $t8, -12($sp)
 
 # t1135 = RET
@@ -3655,7 +3614,7 @@ sw $t0, -40($sp)
 move $t0, $v0
 
 # t1100 = t1101 / t1135
-sw $t1, -36($sp)
+sw $t1, -24($sp)
 div $t2, $t0
 mflo $t1
 
@@ -3665,10 +3624,10 @@ sw $t0, -44($sp)
 sw $t1, -48($sp)
 sw $t2, -28($sp)
 sw $t3, -8($sp)
-sw $t4, -4($sp)
-sw $t5, -32($sp)
-sw $t6, -16($sp)
-sw $t7, -24($sp)
+sw $t4, -36($sp)
+sw $t5, -4($sp)
+sw $t6, -32($sp)
+sw $t7, -16($sp)
 sw $t8, -12($sp)
 
 # push t1100
@@ -3694,10 +3653,10 @@ lw $t0, -44($sp)
 lw $t1, -48($sp)
 lw $t2, -28($sp)
 lw $t3, -8($sp)
-lw $t4, -4($sp)
-lw $t5, -32($sp)
-lw $t6, -16($sp)
-lw $t7, -24($sp)
+lw $t4, -36($sp)
+lw $t5, -4($sp)
+lw $t6, -32($sp)
+lw $t7, -16($sp)
 lw $t8, -12($sp)
 
 # ret 

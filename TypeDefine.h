@@ -85,7 +85,8 @@ enum OperatorType {
     DoWhileBNZ,      // special BNZ for do-while
     LoopEnd,
     IfBegin,
-    IfEnd,
+    IfEnd,  // change regs to if begin in Cpp
+    IfRestoreRegs,
     ElseBegin,
     ElseEnd
 };
@@ -265,6 +266,10 @@ public:
             cmd += "ElseBegin";
         } else if (operatorType == ElseEnd) {
             cmd += "ElseEnd";
+        } else if (operatorType == IfBegin) {
+            cmd += "IfBegin";
+        } else if (operatorType == IfRestoreRegs) {
+            cmd += "IfRestoreRegs";
         }
         return cmd;
     };

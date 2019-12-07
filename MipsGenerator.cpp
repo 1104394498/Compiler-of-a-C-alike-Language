@@ -1929,4 +1929,28 @@ void MipsGenerator::dealRestoreRegStatus() {
             break;
     }
 
+    while (true) {
+        bool reachEnd = true;
+        for (const auto &pair : storedSavedRegisterRecords.top()) {
+            const Register r = pair.first;
+            const string oldVarName = pair.second;
+            if (functionFile->registerRecords.count(r) > 0) {
+                if (functionFile->registerRecords[r] != oldVarName) {
+                    writeRegValueBack(&r);
+                    loadValueInReg(oldVarName, &r);
+                    reachEnd = false;
+                    break;
+                }
+            } else {
+                loadValueInReg(oldVarName, &r);
+                reachEnd = false;
+                break;
+            }
+        }
+        if (reachEnd)
+            break;
+    }
+
+    // assert(storedSavedRegisterRecords.top() == functionFile->registerRecords);
+
 }

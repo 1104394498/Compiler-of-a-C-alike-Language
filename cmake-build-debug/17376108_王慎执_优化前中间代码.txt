@@ -27,7 +27,7 @@ t5 = 0
 t4 = t5
 t3 = t4
 t0 > t3
-
+IfBegin
 BZ Label_0
 t8 = n
 t7 = t8
@@ -88,10 +88,9 @@ push t40
 SaveEnvironment
 call hanoi
 RestoreEnvironment
-GOTO Label_1
+IfRestoreRegs
 Label_0:
 IfEnd
-Label_1:
 ret 
 int Fibonacci()
 para int n
@@ -102,16 +101,15 @@ t48 = 0
 t47 = t48
 t46 = t47
 t43 == t46
-
+IfBegin
 BZ Label_2
 t51 = 0
 t50 = t51
 t49 = t50
 ret t49
-GOTO Label_3
+IfRestoreRegs
 Label_2:
 IfEnd
-Label_3:
 t54 = n
 t53 = t54
 t52 = t53
@@ -119,16 +117,15 @@ t57 = 1
 t56 = t57
 t55 = t56
 t52 == t55
-
+IfBegin
 BZ Label_4
 t60 = 1
 t59 = t60
 t58 = t59
 ret t58
-GOTO Label_5
+IfRestoreRegs
 Label_4:
 IfEnd
-Label_5:
 t67 = n
 t66 = t67
 t65 = t66
@@ -167,16 +164,15 @@ t83 = 1
 t82 = t83
 t81 = t82
 t78 == t81
-
+IfBegin
 BZ Label_6
 t86 = 1
 t85 = t86
 t84 = t85
 ret t84
-GOTO Label_7
+IfRestoreRegs
 Label_6:
 IfEnd
-Label_7:
 t89 = n
 t88 = t89
 t94 = n
@@ -665,16 +661,15 @@ t462 = 1
 t461 = t462
 t460 = t461
 t457 == t460
-
+IfBegin
 BZ Label_8
 t465 = 'a'
 t464 = t465
 t463 = t464
 ret t463
-GOTO Label_9
+IfRestoreRegs
 Label_8:
 IfEnd
-Label_9:
 t468 = a
 t467 = t468
 t466 = t467
@@ -682,16 +677,15 @@ t471 = 2
 t470 = t471
 t469 = t470
 t466 == t469
-
+IfBegin
 BZ Label_10
 t474 = 'b'
 t473 = t474
 t472 = t473
 ret t472
-GOTO Label_11
+IfRestoreRegs
 Label_10:
 IfEnd
-Label_11:
 t477 = a
 t476 = t477
 t475 = t476
@@ -699,16 +693,15 @@ t480 = 3
 t479 = t480
 t478 = t479
 t475 == t478
-
+IfBegin
 BZ Label_12
 t483 = 'c'
 t482 = t483
 t481 = t482
 ret t481
-GOTO Label_13
+IfRestoreRegs
 Label_12:
 IfEnd
-Label_13:
 t486 = '_'
 t485 = t486
 t484 = t485
@@ -1251,7 +1244,7 @@ t825 = 0
 t824 = t825
 t823 = t824
 t820 > t823
-
+IfBegin
 BZ Label_14
 t828 = k
 t827 = t828
@@ -1260,7 +1253,7 @@ t831 = 10
 t830 = t831
 t829 = t830
 t826 <= t829
-
+IfBegin
 BZ Label_16
 t834 = 0
 t833 = t834
@@ -1298,7 +1291,7 @@ t857 = 0
 t856 = t857
 t855 = t856
 t842 == t855
-
+IfBegin
 BZ Label_20
 t860 = i
 t859 = t860
@@ -1307,10 +1300,9 @@ t863 = a
 t862 = t863
 t861 = t862
 global_char_array_3[t858] = t861
-GOTO Label_21
+IfRestoreRegs
 Label_20:
 IfEnd
-Label_21:
 t869 = i
 t868 = t869
 t867 = t868
@@ -1331,7 +1323,7 @@ t879 = 1
 t878 = t879
 t877 = t878
 t864 == t877
-
+IfBegin
 BZ Label_22
 t882 = i
 t881 = t882
@@ -1340,10 +1332,9 @@ t885 = b
 t884 = t885
 t883 = t884
 global_char_array_3[t880] = t883
-GOTO Label_23
+IfRestoreRegs
 Label_22:
 IfEnd
-Label_23:
 t891 = i
 t890 = t891
 t889 = t890
@@ -1392,7 +1383,7 @@ t918 = 0
 t917 = t918
 t916 = t917
 t903 == t916
-
+IfBegin
 BZ Label_26
 t921 = i
 t920 = t921
@@ -1431,14 +1422,12 @@ LoopRestoreRegStatus
 GOTO Label_24
 Label_25:
 LoopEnd
-GOTO Label_17
+IfRestoreRegs
 Label_16:
 IfEnd
-Label_17:
-GOTO Label_15
+IfRestoreRegs
 Label_14:
 IfEnd
-Label_15:
 ret 
 void testSwitch()
 const int sum = 3
@@ -1470,7 +1459,7 @@ t959 = 0
 t958 = t959
 t957 = t958
 t954 == t957
-
+IfBegin
 BZ Label_30
 t962 = 'a'
 t961 = t962
@@ -1490,7 +1479,7 @@ t971 = 1
 t970 = t971
 t969 = t970
 t966 == t969
-
+IfBegin
 BZ Label_32
 t974 = 'b'
 t973 = t974
@@ -1528,7 +1517,7 @@ t992 = t993
 t991 = t992
 t990 = t991
 t984 == t990
-
+IfBegin
 BZ Label_34
 t998 = i
 t997 = t998
@@ -1541,10 +1530,9 @@ t1003 = int_1
 t1002 = t1003
 t1001 = t1002
 printf t1001
-GOTO Label_35
+IfRestoreRegs
 Label_34:
 IfEnd
-Label_35:
 t1009 = char_1
 t1008 = t1009
 t1007 = t1008
@@ -1558,7 +1546,7 @@ t1012 = t1013
 t1011 = t1012
 t1010 = t1011
 t1004 == t1010
-
+IfBegin
 BZ Label_36
 t1018 = sum
 t1017 = t1018
@@ -1568,10 +1556,9 @@ t1021 = int_1
 t1020 = t1021
 t1019 = t1020
 printf t1019
-GOTO Label_37
+IfRestoreRegs
 Label_36:
 IfEnd
-Label_37:
 t1024 = i
 t1023 = t1024
 t1022 = t1023

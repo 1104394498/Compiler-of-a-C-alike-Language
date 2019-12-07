@@ -260,10 +260,11 @@ private:
                 // change the register status to the same as if end
                 functionFile->registerRecords = ifEndRegStatus;
             } else if (operatorType == IfEnd) {
-                dealRestoreRegStatus();
                 //
-                //functionFile->registerRecords = storedSavedRegisterRecords.top();
+                functionFile->registerRecords = storedSavedRegisterRecords.top();
                 storedSavedRegisterRecords.pop();
+            } else if (operatorType == IfRestoreRegs) {
+                dealRestoreRegStatus();
             } else {
                 // debug
                 exit(1);

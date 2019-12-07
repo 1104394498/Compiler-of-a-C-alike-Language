@@ -698,15 +698,18 @@ void GrammarAnalyzer::conditional_statement(VariableType &returnType) {
     output_current_sym();
     statement(returnType);
 
-    IntermediateCmd jumpCmd{Goto};
-    jumpCmd.addOperands(endLabel);
-    intermediateCodes->push_back(jumpCmd);
-
-    IntermediateCmd labelCmd{Label};
-    labelCmd.addOperands(label);
-    intermediateCodes->push_back(labelCmd);
-
+    bool hasElse = false;
     if (sym_type == "ELSETK") {
+        hasElse = true;
+
+        IntermediateCmd jumpCmd{Goto};
+        jumpCmd.addOperands(endLabel);
+        intermediateCodes->push_back(jumpCmd);
+
+        IntermediateCmd labelCmd{Label};
+        labelCmd.addOperands(label);
+        intermediateCodes->push_back(labelCmd);
+
         intermediateCodes->emplace_back(ElseBegin);
 
         getsym();
@@ -714,13 +717,22 @@ void GrammarAnalyzer::conditional_statement(VariableType &returnType) {
         statement(returnType);
 
         intermediateCodes->emplace_back(ElseEnd);
+
+        IntermediateCmd endLabelCmd{Label};
+        endLabelCmd.addOperands(endLabel);
+        intermediateCodes->push_back(endLabelCmd);
     } else {
-        intermediateCodes->emplace_back(IfEnd);
+        IntermediateCmd ifRestoreRegsCmd{IfRestoreRegs};
+        intermediateCodes->push_back(ifRestoreRegsCmd);
+
+        IntermediateCmd endLabelCmd{Label};
+        endLabelCmd.addOperands(label);
+        intermediateCodes->push_back(endLabelCmd);
     }
 
-    IntermediateCmd endLabelCmd{Label};
-    endLabelCmd.addOperands(endLabel);
-    intermediateCodes->push_back(endLabelCmd);
+    if (!hasElse) {
+        intermediateCodes->emplace_back(IfEnd);
+    }
 
     result.insert(result.end() - 1, "<条件语句>");
 
