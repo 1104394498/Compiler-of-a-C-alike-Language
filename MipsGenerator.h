@@ -153,6 +153,8 @@ private:
 
     stack<map<Register, string>> storedSavedRegisterRecords;
 
+    vector<string> printfTypes; // record the printf types in PrintfTypeDef
+
     // get register
     // Register getRegister(const string &varName);
 
@@ -229,6 +231,11 @@ private:
                 dealGetArrayValue(midCode);     // 这里还需要改，让全局变量也不出bug
             } else if (operatorType == ArrayElemAssign) {
                 dealArrayElemAssign(midCode);   // 这里还需要改，让全局变量也不出bug
+            } else if (operatorType == PrintfTypeDef) {
+                printfTypes.clear();
+                for (const string &type : midCode.getOperands()) {
+                    printfTypes.push_back(type);
+                }
             } else if (operatorType == Printf) {
                 dealPrintf(midCode);
             } else if (operatorType == Scanf) {

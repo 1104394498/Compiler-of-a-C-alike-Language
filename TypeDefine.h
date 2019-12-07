@@ -88,7 +88,8 @@ enum OperatorType {
     IfEnd,  // change regs to if begin in Cpp
     IfRestoreRegs,
     ElseBegin,
-    ElseEnd
+    ElseEnd,
+    PrintfTypeDef
 };
 
 class IntermediateCmd {
@@ -270,6 +271,12 @@ public:
             cmd += "IfBegin";
         } else if (operatorType == IfRestoreRegs) {
             cmd += "IfRestoreRegs";
+        } else if (operatorType == PrintfTypeDef) {
+            cmd += "PrintfTypeDef ";
+            for (const string & s : operands) {
+                cmd += s;
+                cmd += " ";
+            }
         }
         return cmd;
     };

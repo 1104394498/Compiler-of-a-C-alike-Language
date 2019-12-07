@@ -1469,6 +1469,7 @@ void MipsGenerator::dealPrintf(const IntermediateCmd &midCode) {
         mipsCodes->push_back(movCmd);
     }
 
+    int operandNO = 0;
     for (string op : midCode.getOperands()) {
         if (op[0] == '\"') {
             /*
@@ -1564,7 +1565,24 @@ void MipsGenerator::dealPrintf(const IntermediateCmd &midCode) {
             else
                 variableType = globalNameTypeRecords[op];
 
+            /*
             if (variableType == intType) {
+                // an int variable
+                // li $v0, 1
+                MipsCmd liCmd{li};
+                liCmd.addRegister(Register{v0});
+                liCmd.addInteger(1);
+                mipsCodes->push_back(liCmd);
+            } else {
+                // a char variable
+                // li $v0, 11
+                MipsCmd liCmd{li};
+                liCmd.addRegister(Register{v0});
+                liCmd.addInteger(11);
+                mipsCodes->push_back(liCmd);
+            }
+             */
+            if (printfTypes.at(operandNO) == "intType") {
                 // an int variable
                 // li $v0, 1
                 MipsCmd liCmd{li};
@@ -1591,6 +1609,7 @@ void MipsGenerator::dealPrintf(const IntermediateCmd &midCode) {
             // syscall
             mipsCodes->push_back(MipsCmd{syscall});
         }
+        operandNO++;
     }
 
     // print \n

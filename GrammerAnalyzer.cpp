@@ -1251,29 +1251,43 @@ void GrammarAnalyzer::print_statement() {
     output_current_sym();
     SYMTYPE_ASSERT("LPARENT")
 
+    IntermediateCmd printfTypeDefCmd{PrintfTypeDef};
+
     IntermediateCmd cmd{Printf};
 
     getsym();
     output_current_sym();
     if (sym_type == "STRCON") {
+        printfTypeDefCmd.addOperands("strType");
         cmd.addOperands("\"" + sym + "\"");
         mystring();
         if (sym_type == "COMMA") {
             getsym();
             output_current_sym();
-            VariableType uselessType;
+            VariableType expressionType;
             string tempVarName = tempVarGenerator.getTempVar();
-            expression(uselessType, tempVarName);
+            expression(expressionType, tempVarName);
+            if (expressionType == constInt || expressionType == intType) {
+                printfTypeDefCmd.addOperands("intType");
+            } else {
+                printfTypeDefCmd.addOperands("charType");
+            }
             cmd.addOperands(tempVarName);
         }
     } else {
-        VariableType uselessType;
+        VariableType expressionType;
         string tempVarName = tempVarGenerator.getTempVar();
-        expression(uselessType, tempVarName);
+        expression(expressionType, tempVarName);
+        if (expressionType == constInt || expressionType == intType) {
+            printfTypeDefCmd.addOperands("intType");
+        } else {
+            printfTypeDefCmd.addOperands("charType");
+        }
         cmd.addOperands(tempVarName);
     }
     // ASSERT_THROW("RPARENT", ShouldHaveRPARENT)
-
+    intermediateCodes->emplace_back(printfTypeDefCmd);
+    
     intermediateCodes->emplace_back(cmd);
 
     result.emplace_back("<写语句>");
