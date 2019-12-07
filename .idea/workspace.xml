@@ -12,20 +12,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7c89e8cf-e84f-479e-8418-ae89c16d8757" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrammerAnalyzer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/GrammerAnalyzer.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrammerAnalyzer.h" beforeDir="false" afterPath="$PROJECT_DIR$/GrammerAnalyzer.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MipsGenerator.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/MipsGenerator.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/17376108_王慎执_优化前中间代码.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/17376108_王慎执_优化前中间代码.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/17376108_王慎执_优化后中间代码.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/17376108_王慎执_优化后中间代码.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/MIPScode.dir/CXX.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/MIPScode.dir/CXX.includecache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/MIPScode.dir/GrammerAnalyzer.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/MIPScode.dir/GrammerAnalyzer.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/MIPScode.dir/MipsGenerator.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/MIPScode.dir/MipsGenerator.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/MIPScode.dir/main.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/MIPScode.dir/main.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/MIPScode" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/MIPScode" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/mips.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/mips.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/output.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/output.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/testfile.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/testfile.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/归档.zip" beforeDir="false" afterPath="$PROJECT_DIR$/归档.zip" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -103,7 +89,7 @@
       <workItem from="1575532879551" duration="3171000" />
       <workItem from="1575547317331" duration="12869000" />
       <workItem from="1575568499944" duration="17393000" />
-      <workItem from="1575644981251" duration="22499000" />
+      <workItem from="1575644981251" duration="22839000" />
     </task>
     <servers />
   </component>
