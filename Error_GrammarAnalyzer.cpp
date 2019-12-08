@@ -38,7 +38,8 @@ using namespace std;
         handle_errors(exception);\
     }
 
-Error_GrammarAnalyzer::Error_GrammarAnalyzer(const string &fin_name, vector<Error> *_allErrors) : allErrors{_allErrors} {
+Error_GrammarAnalyzer::Error_GrammarAnalyzer(const string &fin_name, vector<Error> *_allErrors) : allErrors{
+        _allErrors} {
     ptr_lexicalAnalyzer = new Error_LexicalAnalyzer{fin_name, _allErrors};
 
     // start recursive descent
@@ -920,7 +921,24 @@ void Error_GrammarAnalyzer::call_with_returnValue(VariableType &returnType) {
                 auto iter1 = call_parameters_type->cbegin();
                 auto iter2 = funcInputTypes.cbegin();
                 while (iter1 != call_parameters_type->cend()) {
-                    if (*iter1 != *iter2) {
+                    VariableType type1, type2;
+                    if (*iter1 == constInt || *iter1 == intType) {
+                        type1 = intType;
+                    } else if (*iter1 == constChar || *iter1 == charType) {
+                        type1 = charType;
+                    } else {
+                        type1 = *iter1;
+                    }
+
+                    if (*iter2 == constInt || *iter2 == intType) {
+                        type2 = intType;
+                    } else if (*iter2 == constChar || *iter2 == charType) {
+                        type2 = charType;
+                    } else {
+                        type2 = *iter2;
+                    }
+                    
+                    if (type1 != type2) {
                         throw WrongFuncVariableType{};
                     }
                     iter1++;
@@ -979,7 +997,24 @@ void Error_GrammarAnalyzer::call_without_returnValue() {
                 auto iter1 = call_parameters_type->cbegin();
                 auto iter2 = funcInputTypes.cbegin();
                 while (iter1 != call_parameters_type->cend()) {
-                    if (*iter1 != *iter2) {
+                    VariableType type1, type2;
+                    if (*iter1 == constInt || *iter1 == intType) {
+                        type1 = intType;
+                    } else if (*iter1 == constChar || *iter1 == charType) {
+                        type1 = charType;
+                    } else {
+                        type1 = *iter1;
+                    }
+
+                    if (*iter2 == constInt || *iter2 == intType) {
+                        type2 = intType;
+                    } else if (*iter2 == constChar || *iter2 == charType) {
+                        type2 = charType;
+                    } else {
+                        type2 = *iter2;
+                    }
+
+                    if (type1 != type2) {
                         throw WrongFuncVariableType{};
                     }
                     iter1++;

@@ -12,10 +12,14 @@
     <list default="true" id="de302eba-1f59-498c-b12d-fc464e3394a2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Error_GrammarAnalyzer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../Error_GrammarAnalyzer.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cmake-build-debug/17376108_王慎执_优化前中间代码.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../cmake-build-debug/17376108_王慎执_优化前中间代码.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cmake-build-debug/17376108_王慎执_优化后中间代码.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../cmake-build-debug/17376108_王慎执_优化后中间代码.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../cmake-build-debug/CMakeFiles/MIPScode.dir/CXX.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/../cmake-build-debug/CMakeFiles/MIPScode.dir/CXX.includecache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cmake-build-debug/CMakeFiles/MIPScode.dir/main.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/../cmake-build-debug/CMakeFiles/MIPScode.dir/main.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cmake-build-debug/CMakeFiles/MIPScode.dir/Error_GrammarAnalyzer.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/../cmake-build-debug/CMakeFiles/MIPScode.dir/Error_GrammarAnalyzer.cpp.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../cmake-build-debug/MIPScode" beforeDir="false" afterPath="$PROJECT_DIR$/../cmake-build-debug/MIPScode" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../cmake-build-debug/error.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../cmake-build-debug/error.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cmake-build-debug/mips.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../cmake-build-debug/mips.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cmake-build-debug/output.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../cmake-build-debug/output.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../cmake-build-debug/testfile.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../cmake-build-debug/testfile.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>

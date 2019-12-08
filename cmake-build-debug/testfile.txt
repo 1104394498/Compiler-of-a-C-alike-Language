@@ -1,217 +1,325 @@
-const char test_cover_a='a',test_if='+';
-const int test_cover_1=1;
-const char test_while_a='0',test_while_z='z';
-const int a = 2;
-int b, e, c, d[5], i;
-char g;
-int test_cover_2,test_cover_3[5];
-char test_cover_b,test_cover_c[10];
-char test_function_1;
-int test_while,test_function_2;
+const int const_int_1 = 12345679, const_int_2 = 0;
+const int const_int_3 = -0, const_int_4 = -12345679;
+const char const_char_1 = '9', const_char_2 = '_', const_char_3 = '+', const_char_4 = '*';
 
-int Test_Function_1(int n){
-    return(n+n*n);
-}
+int global_int_array_1[5], global_int_1;
+char global_char_array_1[5], global_char_1;
+int global_int_2, global_int_array_2[5];
+char global_char_2, global_char_array_2[5], global_char_array_3[10];
 
-int Test_Function_2(int n){
-    if(n<=0) return(-1);
-    if(n==1) return(1);
-    if(n==2) return(1);
-    return(Test_Function_2(n-1)+Test_Function_2(n-2));
-}
-
-void test_cover(){
-    const char test_cover_a='A';
-    const int test_cover_1=-1;
-    int test_cover_2,test_cover_3[6];
-    char test_cover_b,test_cover_c[5];
-    test_cover_2=-2;
-    test_cover_3[3]=-3;
-    test_cover_b='B';
-    test_cover_c[3]='C';
-    printf(test_cover_a);
-    printf(test_cover_1);
-}
-
-int f(int z) {
-  int b;
-  b = 3 * -1;
-  b = b + z;
-  return (b);
-}
-
-void h(int y, char x) {
-  e = x + y * y;
-  return;
-}
-
-char l() {
-  return ('l');
-}
-
-void Test_IF(char test_if){
-    if((test_if)<=('0')){
-        printf("test_if_error_1");
+void hanoi(int n, char from, char tmp, char to)
+{
+    if (n > 0) {
+        hanoi(n - 1, from, to, tmp);
+        printf("take");
+        printf(n);
+        printf("from");
+        printf(from);
+        printf("to");
+        printf(to);
+        hanoi(n - 1, tmp, from, to);
     }
-    else {
-        if((test_if)>=('A')){
-            if((test_if)>('a')){
-                printf("test_if_error_3");
-                return;
+    return;
+}
+
+int Fibonacci(int n) {
+    if (n == 0)
+        return (0);
+    if (n == 1)
+        return (1);
+    return (Fibonacci(n - 1) + Fibonacci(n - 2));
+}
+
+int fac(int n) {
+    if (n == 1)
+        return (1);
+       return (n * fac(n - 1));
+}
+
+void initGlobalArray() {
+    global_int_array_1[0] = 0;
+    global_int_array_1[1] = 1;
+    global_int_array_1[2] = global_int_array_1[0] + global_int_array_1[1];
+    global_int_array_1[3] = global_int_array_1[2] + global_int_array_1[1];
+    global_int_array_1[4] = global_int_array_1[3] + global_int_array_1[2];
+    global_int_array_2[0] = global_int_array_1[1];
+    global_int_array_2[1] = global_int_array_2[0] * global_int_array_1[2];
+    global_int_array_2[2] = global_int_array_2[1] * global_int_array_1[3];
+    global_int_array_2[3] = global_int_array_2[2] * global_int_array_1[4];
+    global_int_array_2[4] = global_int_array_2[3] / global_int_array_1[4];
+    global_char_array_1[0] = 'a';
+    global_char_array_1[1] = 'A';
+    global_char_array_1[2] = 'z';
+    global_char_array_1[3] = 'Z';
+    global_char_array_1[4] = '_';
+    global_char_array_2[0] = '+';
+    global_char_array_2[1] = '-';
+    global_char_array_2[2] = '*';
+    global_char_array_2[3] = '/';
+    global_char_array_2[4] = '6';
+    return;
+}
+
+void assignGlobal(int a, char b, int c, char d) {
+    global_int_1 = a;
+    global_char_1 = b;
+    global_int_2 = c;
+    global_char_2 = d;
+    return;
+}
+
+void printGlobalConst() {
+    printf(const_int_1);
+    printf(const_int_2);
+    printf(const_int_3);
+    printf(const_int_4);
+    printf(const_char_1);
+    printf(const_char_2);
+    printf(const_char_3);
+    printf(const_char_4);
+    return;
+}
+
+void printGlobalVar() {
+    printf(global_int_1);
+    printf(global_int_2);
+    printf(global_char_1);
+    printf(global_char_2);
+    return;
+}
+void printGlobalArray() {
+    printf(global_int_array_1[0]);
+    printf(global_int_array_1[1]);
+    printf(global_int_array_1[2]);
+    printf(global_int_array_1[3]);
+    printf(global_int_array_1[4]);
+    printf(global_int_array_2[0]);
+    printf(global_int_array_2[1]);
+    printf(global_int_array_2[2]);
+    printf(global_int_array_2[3]);
+    printf(global_int_array_2[4]);
+    printf(global_char_array_1[0]);
+    printf(global_char_array_1[1]);
+    printf(global_char_array_1[2]);
+    printf(global_char_array_1[3]);
+    printf(global_char_array_1[4]);
+    printf(global_char_array_2[0]);
+    printf(global_char_array_2[1]);
+    printf(global_char_array_2[2]);
+    printf(global_char_array_2[3]);
+    printf(global_char_array_2[4]);
+    return;
+}
+
+void testGlobal() {
+    initGlobalArray();
+    assignGlobal(const_int_1, const_char_1, const_int_4, const_char_4);
+    printGlobalConst();
+    printGlobalVar();
+    printGlobalArray();
+    return;
+}
+
+int testReturnInt(int a) {
+    return (a + 1);
+}
+
+char testReturnChar(int a) {
+    if (a == 1)
+        return ('a');
+    if(a == 2)
+        return ('b');
+    if(a == 3)
+        return ('c');
+    return ('_');
+}
+
+void testReturn() {
+    printf(testReturnInt(Fibonacci(fac(3) + fac(2))));
+    printf(testReturnChar(1));
+    printf(testReturnChar(2));
+    printf(testReturnChar(3));
+    printf(testReturnChar(4));
+    return;
+}
+
+void testAssignAndExp() {
+   const int const_int_1 = 1, const_int_2 = -1, const_int_3 = 0;
+    const char const_char_1 = 'a', const_char_2 = 'A', const_char_3 = 'b';
+
+    int int_temp_1, int_temp_2, int_array[2], int_temp_3;
+    char char_temp_1, char_array[2], char_temp_2;
+
+    int_temp_1 = const_int_1 + (Fibonacci(Fibonacci(Fibonacci(5))) + const_int_1 / (const_int_2 * const_int_4)) / fac(3);
+    int_temp_2 = fac(fac(3) + fac(2));
+    int_array[const_int_3] = testReturnInt(0);
+    int_array[const_int_1 - (const_int_2 * const_int_4 + testReturnInt(0) * const_int_4)] = const_int_1 + testReturnInt(const_int_1);
+    int_temp_3 = int_array[const_int_3] - (int_array[const_int_1 - (const_int_2 * const_int_4 + testReturnInt(0) * const_int_4)] * ('b' - 'a'));
+    char_array[0] = testReturnChar(int_array[0]);
+    char_array[const_int_1 - (const_int_2 * const_int_4 + testReturnInt(0) * const_int_4)] = testReturnChar(int_array[1] + const_int_1);
+    char_temp_1 = char_array[0];
+    char_temp_2 = char_array[const_int_1 - (const_int_2 * const_int_4 + testReturnInt(0) * const_int_4)];
+    printf(int_temp_1);
+    printf(int_temp_2);
+    printf(int_temp_3);
+    printf(int_array[const_int_3]);
+    printf(int_array[const_int_1 - (const_int_2 * const_int_4 + testReturnInt(0) * const_int_4)]);
+    printf(char_temp_1);
+    printf(char_temp_2);
+    printf(char_array[0]);
+    printf(char_array[const_int_1]);
+    printf(char_temp_1 * (char_array[0] + char_array[0] * char_temp_2));
+    return;
+}
+
+void testIO() {
+    scanf(global_int_1);
+    scanf(global_char_1);
+    printf("!@\n#$^&*()Qqaa123[];',./");
+    printf(global_int_1);
+    printf(global_char_1);
+    scanf(global_int_1, global_char_1);
+    printf("!@\n#$^&*()Qqaa123[];',./", global_int_1);
+    printf(global_char_1);
+    scanf(global_char_1, global_int_1);
+    printf("!@\n#$^&*()Qqaa123[];',./", global_char_1);
+    printf(global_int_1);
+    return;
+}
+
+void testIfWhile()
+{
+    int i, j, k;
+    char a, b, c, d;
+    k = 10;
+    a = '+';
+    b = '-';
+    c = '*';
+    d = '/';
+    if (k > 0)
+    {
+        if (k <= 10)
+        {
+            i = 0;
+            while (i < k / 2)
+            {
+                if((i - (i / 2 * 2)) == 0)
+                    global_char_array_3[i] = a;
+                if((i - (i / 2 * 2)) == 1)
+                    global_char_array_3[i] = b;
+                printf(global_char_array_3[i]);
+                i = i + 1;
             }
-            if((test_if)==('_')){
-                printf("test_if_right,the char is ",test_if);
-                return;
-            } 
-            else {
-                printf("test_if_error_4");
-                return;
+            while (i < k)
+            {
+                if((i - (i / 2 * 2)) == 0)
+                    global_char_array_3[i] = c;
+                else
+                    global_char_array_3[i] = d;
+                printf(global_char_array_3[i]);
+                i = i + 1;
             }
-        } 
-        else {
-            printf("test_if_error_2");
-            return;
         }
     }
-    
+    return;
 }
-
-void Test_While(int test_while){
-    int count1;
-    int count2;
-    int count3;
-    count1=0;
-    count2=0;
-    count3=0;
-    while(test_while<('z')){
-        while(test_while<=('Z')){
-            while(test_while<('A')){
-                count1=count1+1;
-                test_while=test_while+1;
-            }
-            count2=count2+2;
-            test_while=test_while+1;
+void testSwitch() {
+    const int sum = 3;
+    int int_1, i;
+    char char_1;
+    i = 0;
+    int_1 = 0;
+    while (i < sum) {
+       if(int_1 == 0) {
+            char_1 = 'a';
+            printf(char_1);
         }
-        count3=count3+3;
-        test_while=test_while+1;
+        else if(int_1 == 1) {
+            char_1 = 'b';
+            printf(char_1);
+        }
+        else{
+            char_1 = const_char_2;
+            printf(char_1);
+        }
+        if((char_1) == ('a')) {
+            int_1 = i + 1;
+            printf(int_1);
+        }
+        if((char_1) == ('b')) {
+            int_1 = sum;
+            printf(int_1);
+        }
+        i = i + 1;
     }
-    printf("the count1 is ",count1);
-    printf("the count2 is ",count2);
-    printf("the count3 is ",count3);
-    printf("the test_while is ",test_while);
+    return;
 }
 
-void Test_Do_While(int test_while) {
-  int count1, count2, count3;
-  count1 = 0;
-  count2 = 0;
-  count3 = 0;
-  do {
-    do {
-      do {
-        count1 = count1 + 1;
-        test_while = test_while + 1;
-      } while(test_while < ('A'))
-      count2 = count2 + 1;
-      test_while = test_while + 1;
-    } while(test_while <= ('Z'))
-    count3 = count3 + 1;
-    test_while = test_while + 1;
-  } while(test_while < ('z'))
-  printf("the count1 is ", count1);
-  printf("the count2 is ", count2);
-  printf("the count3 is ", count3);
-  printf("test_while is ", test_while);
+int func_ret_int_1(int i_1, int i_2, char c_1, char c_2) {
+    int i_temp;
+    char c_temp;
+    printf("INPUT of func_ret_int_1:");
+    printf(i_1);
+    printf(i_2);
+    printf(c_1);
+    printf(c_2);
+    i_temp = i_1;
+    i_1 = i_2;
+    i_2 = i_temp;
+    c_temp = c_1;
+    c_1 = c_2;
+    c_2 = c_temp;
+    printf("OPERATE of func_ret_int_1:");
+    printf(i_1);
+    printf(i_2);
+    printf(c_1);
+    printf(c_2);
+    return (i_1);
+
 }
 
-int test_array(){
-    int array_int[5],i,result;
-    char array_char[5];
-    array_char[0]='1';array_char[1]='1';array_char[2]='/';
-    array_char[3]='-';array_char[4]='K';
-    i=0;
-    while(i<5){
-        array_int[i]=i*5+1;
-        i=i+1;
-    }
-    i=0;
-    result=0;
-    while(i<5){
-        result=result+array_int[i]*array_char[i];
-        i=i+1;
-    }
-    return(result);
+void testPara() {
+    int i, j;
+    char c, d;
+    i = const_int_1;
+    j = const_int_4;
+    c = 'A';
+    d = 'Z';
+    printf(func_ret_int_1(i, j, c, d));
+    return;
 }
 
-char test_expression(){
-    if( 'A'+'d'*Test_Function_1(Test_Function_1(Test_Function_1(2))) !=180665 ) return('a');
-    if( -'+'*-3+-0--100*('a'-'b') !=29 ) return('b');
-    if( -test_cover_3[3]+(1000-+0--2)/2 != 498) return('c');
-    if( +6/10-+6/(6+-1)*7*test_cover_c[3] !=-693 ) return('d');
-    if( (((+6-3)*7+5)*8+9)*-10+11!=-2159 ) return('e');
-    return('R');
+void testRecursion() {
+    hanoi((Fibonacci(fac(2) * fac(3)) - fac(Fibonacci(3) + Fibonacci(4))) / fac(Fibonacci(2) + Fibonacci(3)), 'a', 'b', 'c');
+    return;
 }
 
 void main()
 {
-    int test_function_2;    
-
-    scanf(test_function_1,test_function_2);
-    scanf(test_cover_2,test_cover_b);
-    scanf(test_while);  
-    
-    printf(Test_Function_1(Test_Function_1(Test_Function_1(Test_Function_1(test_function_1-'a')))));
-
-    printf(Test_Function_2(test_function_2));
-
-    test_cover_3[3]=3;
-    test_cover_c[3]='c';
-    test_cover();
-    printf(test_cover_2);
-    printf(test_cover_b);
-    printf(test_cover_3[3]);    
-    printf(test_cover_c[3]);
-    
-  printf("assign to int and char");
-  scanf(c, g);
-  d[2] = 1;
-  
-  if(d[2]) b = c + d[2];
-  else b = f(d[2]);
-  printf("if_else", b);
-  
-  if (a > 0) b = c;
-  printf("only if", b);
-
-  i = 0;
-  while ( i < 5) {
-    c = c + d[2];
-    i = i + 1;
-  }
-  printf("while", c);
-
-  do {i = i - 1;}while ( i >= 0) 
-  printf("do_while", i);
- printf("d[2] before h",d[2]);
-  h(c, d[2]);
-printf("d[2] after h",d[2]);
-  for (i = 0; i < 5; i = i + 1) {
-    c = d[2] + 1;
-    d[2] = e + l();
-  }
-  printf("call_for", d[2]);
-  
-  printf("Constant and parameter have the same name");
-  Test_IF('_');
-
-  Test_While(('0'));
-  Test_Do_While(('0'));
-  
-
-  printf("test_array is ",test_array());
-  printf(test_expression());
-  printf("");
-  printf(-100);
-  printf('L');
-  printf(" !#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~");
+    printf("************************************************");
+    printf("Start testing recursion:");
+    testRecursion();
+    printf("************************************************");
+    printf("Start testing global:");
+    testGlobal();
+    printf("************************************************");
+    printf("Start testing return:");
+    testReturn();
+    printf("************************************************");
+    printf("Start testing I/O:");
+    testIO();
+    printf("************************************************");
+    printf("Start testing assign & exp:");
+    testAssignAndExp();
+    printf("************************************************");
+    printf("Start testing if & while:");
+    testIfWhile();
+    printf("************************************************");
+    printf("Start testing switch:");
+	testSwitch();
+    printf("************************************************");
+    printf("Start testing parameter:");
+    testPara();
+    printf("************************************************");
+    return;
 }
