@@ -1261,6 +1261,7 @@ void Error_GrammarAnalyzer::factor(VariableType &factorType) {
         ASSERT_THROW("RPARENT", ShouldHaveRPARENT)
         getsym();
         output_current_sym();
+        factorType = intType;   // previous bug
     } else if (sym_type == "CHARCON") {
         factorType = charType;
         getsym();

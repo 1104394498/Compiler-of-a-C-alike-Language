@@ -1595,6 +1595,7 @@ void GrammarAnalyzer::factor(VariableType &factorType, const string &assignVarNa
         intermediateCodes->back().addOperands(tempVarName);
 
         // ASSERT_THROW("RPARENT", ShouldHaveRPARENT)
+        factorType = intType;
         getsym();
         output_current_sym();
     } else if (sym_type == "CHARCON") {
