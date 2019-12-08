@@ -447,46 +447,48 @@ printf "while" c
 LoopSaveRegStatus
 Label_43:
 i = i - 1
+PrintfTypeDef strType intType 
+printf "i = " i
 i >= 0
 BNZ Label_43
 LoopEnd
 PrintfTypeDef strType intType 
 printf "do_while" i
-t652 = d[2]
+t655 = d[2]
 PrintfTypeDef strType intType 
-printf "d[2] before h" t652
-t661 = d[2]
+printf "d[2] before h" t655
+t664 = d[2]
 push c
-push t661
+push t664
 SaveEnvironment
 call h
 RestoreEnvironment
-t667 = d[2]
+t670 = d[2]
 PrintfTypeDef strType intType 
-printf "d[2] after h" t667
+printf "d[2] after h" t670
 i = 0
 LoopSaveRegStatus
 Label_44:
 i < 5
 BZ Label_45
-t681 = d[2]
-c = t681 + 1
-t687 = 2
-t690 = e
+t684 = d[2]
+c = t684 + 1
+t690 = 2
+t693 = e
 SaveEnvironment
 call l
 RestoreEnvironment
-t693 = RET
-t690 = t690 + t693
-d[t687] = t690
+t696 = RET
+t693 = t693 + t696
+d[t690] = t693
 i = i + 1
 LoopRestoreRegStatus
 GOTO Label_44
 Label_45:
 LoopEnd
-t698 = d[2]
+t701 = d[2]
 PrintfTypeDef strType intType 
-printf "call_for" t698
+printf "call_for" t701
 PrintfTypeDef strType 
 printf "Constant and parameter have the same name"
 push '_'
@@ -504,20 +506,20 @@ RestoreEnvironment
 SaveEnvironment
 call test_array
 RestoreEnvironment
-t717 = RET
+t720 = RET
 PrintfTypeDef strType intType 
-printf "test_array is " t717
+printf "test_array is " t720
 SaveEnvironment
 call test_expression
 RestoreEnvironment
-t721 = RET
+t724 = RET
 PrintfTypeDef charType 
-printf t721
+printf t724
 PrintfTypeDef strType 
 printf ""
-t725 = -100
+t728 = -100
 PrintfTypeDef intType 
-printf t725
+printf t728
 PrintfTypeDef charType 
 printf 'L'
 PrintfTypeDef strType 

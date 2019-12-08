@@ -1084,156 +1084,161 @@ i = t636
 t643 = i
 t642 = t643
 t641 = t642
-t646 = 0
+PrintfTypeDef strType intType 
+printf "i = " t641
+t646 = i
 t645 = t646
 t644 = t645
-t641 >= t644
-BNZ Label_43
-LoopEnd
-t649 = i
+t649 = 0
 t648 = t649
 t647 = t648
-PrintfTypeDef strType intType 
-printf "do_while" t647
-t655 = 2
-t654 = t655
-t653 = t654
-t652 = d[t653]
+t644 >= t647
+BNZ Label_43
+LoopEnd
+t652 = i
 t651 = t652
 t650 = t651
 PrintfTypeDef strType intType 
-printf "d[2] before h" t650
-t658 = c
+printf "do_while" t650
+t658 = 2
 t657 = t658
 t656 = t657
-t664 = 2
-t663 = t664
-t662 = t663
-t661 = d[t662]
+t655 = d[t656]
+t654 = t655
+t653 = t654
+PrintfTypeDef strType intType 
+printf "d[2] before h" t653
+t661 = c
 t660 = t661
 t659 = t660
-push t656
+t667 = 2
+t666 = t667
+t665 = t666
+t664 = d[t665]
+t663 = t664
+t662 = t663
 push t659
+push t662
 SaveEnvironment
 call h
 RestoreEnvironment
-t670 = 2
+t673 = 2
+t672 = t673
+t671 = t672
+t670 = d[t671]
 t669 = t670
 t668 = t669
-t667 = d[t668]
-t666 = t667
-t665 = t666
 PrintfTypeDef strType intType 
-printf "d[2] after h" t665
-t672 = 0
-t671 = t672
-i = t671
+printf "d[2] after h" t668
+t675 = 0
+t674 = t675
+i = t674
 LoopSaveRegStatus
 Label_44:
-t675 = i
-t674 = t675
-t673 = t674
-t678 = 5
+t678 = i
 t677 = t678
 t676 = t677
-t673 < t676
-BZ Label_45
-t684 = 2
-t683 = t684
-t682 = t683
-t681 = d[t682]
+t681 = 5
 t680 = t681
 t679 = t680
-t686 = 1
+t676 < t679
+BZ Label_45
+t687 = 2
+t686 = t687
 t685 = t686
-t679 = t679 + t685
-c = t679
-t689 = 2
+t684 = d[t685]
+t683 = t684
+t682 = t683
+t689 = 1
 t688 = t689
-t687 = t688
-t692 = e
+t682 = t682 + t688
+c = t682
+t692 = 2
 t691 = t692
 t690 = t691
+t695 = e
+t694 = t695
+t693 = t694
 SaveEnvironment
 call l
 RestoreEnvironment
-t695 = RET
-t694 = t695
-t693 = t694
-t690 = t690 + t693
-d[t687] = t690
+t698 = RET
+t697 = t698
+t696 = t697
+t693 = t693 + t696
+d[t690] = t693
 i = i + 1
 LoopRestoreRegStatus
 GOTO Label_44
 Label_45:
 LoopEnd
-t701 = 2
-t700 = t701
-t699 = t700
-t698 = d[t699]
-t697 = t698
-t696 = t697
-PrintfTypeDef strType intType 
-printf "call_for" t696
-PrintfTypeDef strType 
-printf "Constant and parameter have the same name"
-t704 = '_'
+t704 = 2
 t703 = t704
 t702 = t703
-push t702
-SaveEnvironment
-call Test_IF
-RestoreEnvironment
-t710 = '0'
-t709 = t710
-t708 = t709
-t707 = t708
+t701 = d[t702]
+t700 = t701
+t699 = t700
+PrintfTypeDef strType intType 
+printf "call_for" t699
+PrintfTypeDef strType 
+printf "Constant and parameter have the same name"
+t707 = '_'
 t706 = t707
 t705 = t706
 push t705
 SaveEnvironment
-call Test_While
+call Test_IF
 RestoreEnvironment
-t716 = '0'
-t715 = t716
-t714 = t715
-t713 = t714
+t713 = '0'
 t712 = t713
 t711 = t712
-push t711
+t710 = t711
+t709 = t710
+t708 = t709
+push t708
+SaveEnvironment
+call Test_While
+RestoreEnvironment
+t719 = '0'
+t718 = t719
+t717 = t718
+t716 = t717
+t715 = t716
+t714 = t715
+push t714
 SaveEnvironment
 call Test_Do_While
 RestoreEnvironment
 SaveEnvironment
 call test_array
 RestoreEnvironment
-t720 = RET
-t719 = t720
-t718 = t719
-t717 = t718
+t723 = RET
+t722 = t723
+t721 = t722
+t720 = t721
 PrintfTypeDef strType intType 
-printf "test_array is " t717
+printf "test_array is " t720
 SaveEnvironment
 call test_expression
 RestoreEnvironment
-t724 = RET
-t723 = t724
-t722 = t723
-t721 = t722
+t727 = RET
+t726 = t727
+t725 = t726
+t724 = t725
 PrintfTypeDef charType 
-printf t721
+printf t724
 PrintfTypeDef strType 
 printf ""
-t727 = 100
-t726 = t727
-t725 = -t726
-PrintfTypeDef intType 
-printf t725
-t730 = 'L'
+t730 = 100
 t729 = t730
-t728 = t729
-PrintfTypeDef charType 
+t728 = -t729
+PrintfTypeDef intType 
 printf t728
+t733 = 'L'
+t732 = t733
+t731 = t732
+PrintfTypeDef charType 
+printf t731
 PrintfTypeDef strType 
 printf " !#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~"
 Exit

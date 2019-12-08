@@ -1047,6 +1047,90 @@ void MipsGenerator::dealDoWhileBNZ(IntermediateCmd *lastMidCode, const Intermedi
     else    // lastCodeType == IsLess
         branch = new MipsCmd{blt};
 
+
+    string op0 = lastMidCode->getOperands().at(0);
+    string op1 = lastMidCode->getOperands().at(1);
+    vector<Register> regs;
+    if (isdigit(op1[0]) || op1[0] == '-') {
+        if (isdigit(op0[0]) || op0[0] == '-') {
+            // regs = getRegisters(vector<string>{}, 1);
+            MipsCmd liCmd{li};
+            liCmd.addRegister(Register(k0));
+            liCmd.addInteger(stoi(op0));
+            mipsCodes->push_back(liCmd);
+        } else if (op0[0] == '\'') {
+            // regs = getRegisters(vector<string>{}, 1);
+            MipsCmd liCmd{li};
+            liCmd.addRegister(Register(k0));
+            liCmd.addInteger(op0[1]);
+            mipsCodes->push_back(liCmd);
+        } else {
+            regs = getRegisters(vector<string>{op0});
+            // move $k0, $reg
+            MipsCmd moveCmd{mov};
+            moveCmd.addRegister(Register(k0));
+            moveCmd.addRegister(regs[0]);
+            mipsCodes->push_back(moveCmd);
+        }
+        branch->addRegister(Register(k0));
+        branch->addInteger(stoi(op1));
+    } else if (op1[0] == '\'') {
+        if (isdigit(op0[0]) || op0[0] == '-') {
+            // regs = getRegisters(vector<string>{}, 1);
+            MipsCmd liCmd{li};
+            liCmd.addRegister(Register(k0));
+            liCmd.addInteger(stoi(op0));
+            mipsCodes->push_back(liCmd);
+        } else if (op0[0] == '\'') {
+            // regs = getRegisters(vector<string>{}, 1);
+            MipsCmd liCmd{li};
+            liCmd.addRegister(Register(k0));
+            liCmd.addInteger(op0[1]);
+            mipsCodes->push_back(liCmd);
+        } else {
+            regs = getRegisters(vector<string>{op0});
+            // move $k0, $reg
+            MipsCmd moveCmd{mov};
+            moveCmd.addRegister(Register(k0));
+            moveCmd.addRegister(regs[0]);
+            mipsCodes->push_back(moveCmd);
+        }
+        branch->addRegister(Register(k0));
+        branch->addInteger(op1[1]);
+    } else {
+        if (isdigit(op0[0]) || op0[0] == '-') {
+            regs = getRegisters(vector<string>{op1});
+            MipsCmd liCmd{li};
+            liCmd.addRegister(Register(k0));
+            liCmd.addInteger(stoi(op0));
+            mipsCodes->push_back(liCmd);
+            branch->addRegister(Register(k0));
+        } else if (op0[0] == '\'') {
+            regs = getRegisters(vector<string>{op1});
+            MipsCmd liCmd{li};
+            liCmd.addRegister(Register(k0));
+            liCmd.addInteger(op0[1]);
+            mipsCodes->push_back(liCmd);
+            branch->addRegister(Register(k0));
+        } else {
+            regs = getRegisters(vector<string>{op1, op0});
+            // move $k0, $reg_op0
+            MipsCmd moveCmd{mov};
+            moveCmd.addRegister(Register(k0));
+            moveCmd.addRegister(regs[1]);
+            mipsCodes->push_back(moveCmd);
+
+            branch->addRegister(Register(k0));
+        }
+        // move $k0, $reg_op1
+        MipsCmd moveCmd{mov};
+        moveCmd.addRegister(Register(k1));
+        moveCmd.addRegister(regs[0]);
+        mipsCodes->push_back(moveCmd);
+        branch->addRegister(Register(k1));
+    }
+
+    /*
     const vector<Register> regs = getRegisters(
             vector<string>{lastMidCode->getOperands().at(0), lastMidCode->getOperands().at(1)});
 
@@ -1061,12 +1145,13 @@ void MipsGenerator::dealDoWhileBNZ(IntermediateCmd *lastMidCode, const Intermedi
     moveCmd2.addRegister(Register{k1});
     moveCmd2.addRegister(Register{regs.at(1)});
     mipsCodes->push_back(moveCmd2);
+    */
 
     // deal restore reg
     dealRestoreRegStatus();
 
-    branch->addRegister(Register{k0});
-    branch->addRegister(Register{k1});
+    //branch->addRegister(Register{k0});
+    //branch->addRegister(Register{k1});
     branch->addLabel(midCode.getOperands().at(0));
     mipsCodes->push_back(*branch);
     delete branch;

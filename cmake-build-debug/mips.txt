@@ -1,12 +1,13 @@
 .data
-PrintString24: .asciiz " !#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~"
-PrintString23: .asciiz ""
-PrintString22: .asciiz "test_array is "
-PrintString21: .asciiz "Constant and parameter have the same name"
-PrintString20: .asciiz "call_for"
-PrintString19: .asciiz "d[2] after h"
-PrintString18: .asciiz "d[2] before h"
-PrintString17: .asciiz "do_while"
+PrintString25: .asciiz " !#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~"
+PrintString24: .asciiz ""
+PrintString23: .asciiz "test_array is "
+PrintString22: .asciiz "Constant and parameter have the same name"
+PrintString21: .asciiz "call_for"
+PrintString20: .asciiz "d[2] after h"
+PrintString19: .asciiz "d[2] before h"
+PrintString18: .asciiz "do_while"
+PrintString17: .asciiz "i = "
 PrintString16: .asciiz "while"
 PrintString15: .asciiz "only if"
 PrintString14: .asciiz "if_else"
@@ -696,9 +697,7 @@ addi $a0, $a0, 1
 
 # BNZ Label_22
 move $k0, $a0
-move $k1, $t4
-sw $t4, -8($sp)
-blt $k0, $k1, Label_22
+blt $k0, 65, Label_22
 
 # LoopEnd
 
@@ -712,9 +711,7 @@ addi $a0, $a0, 1
 
 # BNZ Label_21
 move $k0, $a0
-move $k1, $t0
-sw $t0, -12($sp)
-ble $k0, $k1, Label_21
+ble $k0, 90, Label_21
 
 # LoopEnd
 
@@ -728,9 +725,7 @@ addi $a0, $a0, 1
 
 # BNZ Label_20
 move $k0, $a0
-move $k1, $t1
-sw $t1, -16($sp)
-blt $k0, $k1, Label_20
+blt $k0, 122, Label_20
 
 # LoopEnd
 
@@ -809,34 +804,34 @@ test_array:
 # var char array_char[5]
 
 # array_char[0] = '1'
-addi $t2, $sp, -24
+addi $t4, $sp, -24
 li $v1, 49
-sw $v1, 0($t2)
+sw $v1, 0($t4)
 
 # array_char[1] = '1'
-addi $t3, $sp, -24
+addi $t0, $sp, -24
 li $v1, 49
-sw $v1, -4($t3)
+sw $v1, -4($t0)
 
 # array_char[2] = '/'
-addi $t5, $sp, -24
+addi $t1, $sp, -24
 li $v1, 47
-sw $v1, -8($t5)
+sw $v1, -8($t1)
 
 # array_char[3] = '-'
-addi $t4, $sp, -24
+addi $t2, $sp, -24
 li $v1, 45
-sw $v1, -12($t4)
+sw $v1, -12($t2)
 
 # array_char[4] = 'K'
-addi $t0, $sp, -24
+addi $t3, $sp, -24
 li $v1, 75
-sw $v1, -16($t0)
+sw $v1, -16($t3)
 
 # i = 0
-la $t1, i
-lw $t1, 0($t1)
-li $t1, 0
+la $t5, i
+lw $t5, 0($t5)
+li $t5, 0
 
 # LoopSaveRegStatus
 
@@ -846,22 +841,22 @@ Label_23:
 # i < 5
 
 # BZ Label_24
-bge $t1, 5, Label_24
+bge $t5, 5, Label_24
 
 # t344 = i * 5
-mul $t6, $t1, 5
+mul $t6, $t5, 5
 
 # t344 = t344 + 1
 addi $t6, $t6, 1
 
 # array_int[i] = t344
 addi $t7, $sp, -4
-sll $t8, $t1, 2
+sll $t8, $t5, 2
 sub $t7, $t7, $t8
 sw $t6, 0($t7)
 
 # i = i + 1
-addi $t1, $t1, 1
+addi $t5, $t5, 1
 
 # LoopRestoreRegStatus
 sw $t6, -44($sp)
@@ -875,10 +870,10 @@ Label_24:
 # LoopEnd
 
 # i = 0
-li $t1, 0
+li $t5, 0
 
 # result = 0
-li $t2, 0
+li $t4, 0
 
 # LoopSaveRegStatus
 
@@ -888,28 +883,28 @@ Label_25:
 # i < 5
 
 # BZ Label_26
-bge $t1, 5, Label_26
+bge $t5, 5, Label_26
 
 # t371 = array_int[i]
-addi $t5, $sp, -4
-sll $t4, $t1, 2
-sub $t5, $t5, $t4
-lw $t3, 0($t5)
+addi $t1, $sp, -4
+sll $t2, $t5, 2
+sub $t1, $t1, $t2
+lw $t0, 0($t1)
 
 # t375 = array_char[i]
 addi $t8, $sp, -24
-sll $t7, $t1, 2
+sll $t7, $t5, 2
 sub $t8, $t8, $t7
-lw $t0, 0($t8)
+lw $t3, 0($t8)
 
 # t370 = t371 * t375
-mul $t6, $t3, $t0
+mul $t6, $t0, $t3
 
 # result = result + t370
-add $t2, $t2, $t6
+add $t4, $t4, $t6
 
 # i = i + 1
-addi $t1, $t1, 1
+addi $t5, $t5, 1
 
 # LoopRestoreRegStatus
 sw $t0, -48($sp)
@@ -925,22 +920,22 @@ Label_26:
 # LoopEnd
 
 # ret result
-move $v0, $t2
+move $v0, $t4
 jr $ra
 
 # char test_expression()
 test_expression:
 
 # t387 = 'A'
-li $t4, 65
+li $t2, 65
 
 # t390 = 'd'
-li $t5, 100
+li $t1, 100
 
 # SaveEnvironment
 sw $ra, 0($sp)
-sw $t4, -4($sp)
-sw $t5, -8($sp)
+sw $t1, -4($sp)
+sw $t2, -8($sp)
 
 # push 2
 li $a0, 2
@@ -952,16 +947,16 @@ jal Test_Function_1
 # RestoreEnvironment
 addi $sp, $sp, 12
 lw $ra, 0($sp)
-lw $t4, -4($sp)
-lw $t5, -8($sp)
+lw $t1, -4($sp)
+lw $t2, -8($sp)
 
 # t398 = RET
 move $t7, $v0
 
 # SaveEnvironment
 sw $ra, 0($sp)
-sw $t4, -4($sp)
-sw $t5, -8($sp)
+sw $t1, -4($sp)
+sw $t2, -8($sp)
 sw $t7, -12($sp)
 
 # push t398
@@ -974,8 +969,8 @@ jal Test_Function_1
 # RestoreEnvironment
 addi $sp, $sp, 16
 lw $ra, 0($sp)
-lw $t4, -4($sp)
-lw $t5, -8($sp)
+lw $t1, -4($sp)
+lw $t2, -8($sp)
 lw $t7, -12($sp)
 
 # t394 = RET
@@ -983,8 +978,8 @@ move $t8, $v0
 
 # SaveEnvironment
 sw $ra, 0($sp)
-sw $t4, -4($sp)
-sw $t5, -8($sp)
+sw $t1, -4($sp)
+sw $t2, -8($sp)
 sw $t7, -12($sp)
 sw $t8, -16($sp)
 
@@ -998,26 +993,26 @@ jal Test_Function_1
 # RestoreEnvironment
 addi $sp, $sp, 20
 lw $ra, 0($sp)
-lw $t4, -4($sp)
-lw $t5, -8($sp)
+lw $t1, -4($sp)
+lw $t2, -8($sp)
 lw $t7, -12($sp)
 lw $t8, -16($sp)
 
 # t392 = RET
-move $t1, $v0
+move $t5, $v0
 
 # t390 = t390 * t392
-mul $t5, $t5, $t1
+mul $t1, $t1, $t5
 
 # t387 = t387 + t390
-add $t4, $t4, $t5
+add $t2, $t2, $t1
 
 # t387 != 180665
 
 # IfBegin
 
 # BZ Label_27
-beq $t4, 180665, Label_27
+beq $t2, 180665, Label_27
 
 # ret 'a'
 li $v0, 97
@@ -1043,10 +1038,10 @@ addi $t3, $t3, 0
 li $t6, -1
 
 # t417 = -100 * t419
-mul $t2, $t6, -100
+mul $t4, $t6, -100
 
 # t411 = t411 - t417
-sub $t3, $t3, $t2
+sub $t3, $t3, $t4
 
 # t411 != 29
 
@@ -1073,29 +1068,29 @@ la $t8, test_cover_3
 lw $t7, 12($t8)
 
 # t431 = -t433
-sw $t1, -20($sp)
-sub $t1, $0, $t7
+sw $t5, -20($sp)
+sub $t5, $0, $t7
 
 # t439 = 1000 - 0
-sw $t5, -8($sp)
-li $t5, 1000
+sw $t1, -4($sp)
+li $t1, 1000
 
 # t437 = t439 - -2
-sw $t4, -4($sp)
-subi $t4, $t5, -2
+sw $t2, -8($sp)
+subi $t2, $t1, -2
 
 # t437 = t437 / 2
-div $t4, $t4, 2
+div $t2, $t2, 2
 
 # t431 = t431 + t437
-add $t1, $t1, $t4
+add $t5, $t5, $t2
 
 # t431 != 498
 
 # IfBegin
 
 # BZ Label_31
-beq $t1, 498, Label_31
+beq $t5, 498, Label_31
 
 # ret 'c'
 li $v0, 99
@@ -1117,14 +1112,14 @@ sw $t6, -28($sp)
 li $t6, 5
 
 # t457 = 6 / t459
-sw $t2, -32($sp)
+sw $t4, -32($sp)
 sw $t3, -36($sp)
 li $t3, 6
 div $t3, $t6
-mflo $t2
+mflo $t4
 
 # t457 = t457 * 7
-mul $t2, $t2, 7
+mul $t4, $t4, 7
 
 # t466 = test_cover_c[3]
 sw $t7, -40($sp)
@@ -1132,21 +1127,21 @@ la $t7, test_cover_c
 lw $t8, 12($t7)
 
 # t457 = t457 * t466
-mul $t2, $t2, $t8
+mul $t4, $t4, $t8
 
 # t453 = t453 - t457
-sub $t0, $t0, $t2
+sub $t0, $t0, $t4
 
 # t470 = -693
-sw $t5, -44($sp)
-subi $t5, $0, 693
+sw $t1, -44($sp)
+subi $t1, $0, 693
 
 # t453 != t470
 
 # IfBegin
 
 # BZ Label_33
-beq $t0, $t5, Label_33
+beq $t0, $t1, Label_33
 
 # ret 'd'
 li $v0, 100
@@ -1160,15 +1155,15 @@ Label_33:
 # IfEnd
 
 # t483 = 6 - 3
-sw $t4, -48($sp)
-li $t4, 3
+sw $t2, -48($sp)
+li $t2, 3
 
 # t482 = t483 * 7
-sw $t1, -52($sp)
-mul $t1, $t4, 7
+sw $t5, -52($sp)
+mul $t5, $t2, 7
 
 # t480 = t482 + 5
-addi $t3, $t1, 5
+addi $t3, $t5, 5
 
 # t479 = t480 * 8
 sw $t6, -56($sp)
@@ -1185,15 +1180,15 @@ mul $t8, $t7, -10
 addi $t8, $t8, 11
 
 # t499 = -2159
-sw $t2, -64($sp)
-subi $t2, $0, 2159
+sw $t4, -64($sp)
+subi $t4, $0, 2159
 
 # t476 != t499
 
 # IfBegin
 
 # BZ Label_35
-beq $t8, $t2, Label_35
+beq $t8, $t4, Label_35
 
 # ret 'e'
 li $v0, 101
@@ -1223,21 +1218,21 @@ lw $t0, 0($t0)
 move $t0, $v0
 li $v0, 5
 syscall
-la $t5, test_function_2
-lw $t5, 0($t5)
-move $t5, $v0
+la $t1, test_function_2
+lw $t1, 0($t1)
+move $t1, $v0
 
 # scanf test_cover_2 test_cover_b
 li $v0, 5
 syscall
-la $t4, test_cover_2
-lw $t4, 0($t4)
-move $t4, $v0
+la $t2, test_cover_2
+lw $t2, 0($t2)
+move $t2, $v0
 li $v0, 12
 syscall
-la $t1, test_cover_b
-lw $t1, 0($t1)
-move $t1, $v0
+la $t5, test_cover_b
+lw $t5, 0($t5)
+move $t5, $v0
 
 # scanf test_while
 li $v0, 5
@@ -1253,13 +1248,13 @@ subi $t6, $t0, 97
 sw $ra, 0($sp)
 la $v1, test_function_1
 sw $t0, 0($v1)
-la $v1, test_cover_b
-sw $t1, 0($v1)
+sw $t1, -4($sp)
+la $v1, test_cover_2
+sw $t2, 0($v1)
 la $v1, test_while
 sw $t3, 0($v1)
-la $v1, test_cover_2
-sw $t4, 0($v1)
-sw $t5, -4($sp)
+la $v1, test_cover_b
+sw $t5, 0($v1)
 sw $t6, -8($sp)
 
 # push t524
@@ -1274,13 +1269,13 @@ addi $sp, $sp, 12
 lw $ra, 0($sp)
 la $v1, test_function_1
 lw $t0, 0($v1)
-la $v1, test_cover_b
-lw $t1, 0($v1)
+lw $t1, -4($sp)
+la $v1, test_cover_2
+lw $t2, 0($v1)
 la $v1, test_while
 lw $t3, 0($v1)
-la $v1, test_cover_2
-lw $t4, 0($v1)
-lw $t5, -4($sp)
+la $v1, test_cover_b
+lw $t5, 0($v1)
 lw $t6, -8($sp)
 
 # t520 = RET
@@ -1290,13 +1285,13 @@ move $t7, $v0
 sw $ra, 0($sp)
 la $v1, test_function_1
 sw $t0, 0($v1)
-la $v1, test_cover_b
-sw $t1, 0($v1)
+sw $t1, -4($sp)
+la $v1, test_cover_2
+sw $t2, 0($v1)
 la $v1, test_while
 sw $t3, 0($v1)
-la $v1, test_cover_2
-sw $t4, 0($v1)
-sw $t5, -4($sp)
+la $v1, test_cover_b
+sw $t5, 0($v1)
 sw $t6, -8($sp)
 sw $t7, -12($sp)
 
@@ -1312,13 +1307,13 @@ addi $sp, $sp, 16
 lw $ra, 0($sp)
 la $v1, test_function_1
 lw $t0, 0($v1)
-la $v1, test_cover_b
-lw $t1, 0($v1)
+lw $t1, -4($sp)
+la $v1, test_cover_2
+lw $t2, 0($v1)
 la $v1, test_while
 lw $t3, 0($v1)
-la $v1, test_cover_2
-lw $t4, 0($v1)
-lw $t5, -4($sp)
+la $v1, test_cover_b
+lw $t5, 0($v1)
 lw $t6, -8($sp)
 lw $t7, -12($sp)
 
@@ -1329,13 +1324,13 @@ move $t8, $v0
 sw $ra, 0($sp)
 la $v1, test_function_1
 sw $t0, 0($v1)
-la $v1, test_cover_b
-sw $t1, 0($v1)
+sw $t1, -4($sp)
+la $v1, test_cover_2
+sw $t2, 0($v1)
 la $v1, test_while
 sw $t3, 0($v1)
-la $v1, test_cover_2
-sw $t4, 0($v1)
-sw $t5, -4($sp)
+la $v1, test_cover_b
+sw $t5, 0($v1)
 sw $t6, -8($sp)
 sw $t7, -12($sp)
 sw $t8, -16($sp)
@@ -1352,38 +1347,38 @@ addi $sp, $sp, 20
 lw $ra, 0($sp)
 la $v1, test_function_1
 lw $t0, 0($v1)
-la $v1, test_cover_b
-lw $t1, 0($v1)
+lw $t1, -4($sp)
+la $v1, test_cover_2
+lw $t2, 0($v1)
 la $v1, test_while
 lw $t3, 0($v1)
-la $v1, test_cover_2
-lw $t4, 0($v1)
-lw $t5, -4($sp)
+la $v1, test_cover_b
+lw $t5, 0($v1)
 lw $t6, -8($sp)
 lw $t7, -12($sp)
 lw $t8, -16($sp)
 
 # t512 = RET
-move $t2, $v0
+move $t4, $v0
 
 # SaveEnvironment
 sw $ra, 0($sp)
 la $v1, test_function_1
 sw $t0, 0($v1)
-la $v1, test_cover_b
-sw $t1, 0($v1)
-sw $t2, -20($sp)
+sw $t1, -4($sp)
+la $v1, test_cover_2
+sw $t2, 0($v1)
 la $v1, test_while
 sw $t3, 0($v1)
-la $v1, test_cover_2
-sw $t4, 0($v1)
-sw $t5, -4($sp)
+sw $t4, -20($sp)
+la $v1, test_cover_b
+sw $t5, 0($v1)
 sw $t6, -8($sp)
 sw $t7, -12($sp)
 sw $t8, -16($sp)
 
 # push t512
-move $a0, $t2
+move $a0, $t4
 
 # call Test_Function_1
 subi $sp, $sp, 24
@@ -1394,14 +1389,14 @@ addi $sp, $sp, 24
 lw $ra, 0($sp)
 la $v1, test_function_1
 lw $t0, 0($v1)
-la $v1, test_cover_b
-lw $t1, 0($v1)
-lw $t2, -20($sp)
+lw $t1, -4($sp)
+la $v1, test_cover_2
+lw $t2, 0($v1)
 la $v1, test_while
 lw $t3, 0($v1)
-la $v1, test_cover_2
-lw $t4, 0($v1)
-lw $t5, -4($sp)
+lw $t4, -20($sp)
+la $v1, test_cover_b
+lw $t5, 0($v1)
 lw $t6, -8($sp)
 lw $t7, -12($sp)
 lw $t8, -16($sp)
@@ -1424,20 +1419,20 @@ syscall
 # SaveEnvironment
 sw $ra, 0($sp)
 sw $t0, -24($sp)
-la $v1, test_cover_b
-sw $t1, 0($v1)
-sw $t2, -20($sp)
+sw $t1, -4($sp)
+la $v1, test_cover_2
+sw $t2, 0($v1)
 la $v1, test_while
 sw $t3, 0($v1)
-la $v1, test_cover_2
-sw $t4, 0($v1)
-sw $t5, -4($sp)
+sw $t4, -20($sp)
+la $v1, test_cover_b
+sw $t5, 0($v1)
 sw $t6, -8($sp)
 sw $t7, -12($sp)
 sw $t8, -16($sp)
 
 # push test_function_2
-move $a0, $t5
+move $a0, $t1
 
 # call Test_Function_2
 subi $sp, $sp, 28
@@ -1447,14 +1442,14 @@ jal Test_Function_2
 addi $sp, $sp, 28
 lw $ra, 0($sp)
 lw $t0, -24($sp)
-la $v1, test_cover_b
-lw $t1, 0($v1)
-lw $t2, -20($sp)
+lw $t1, -4($sp)
+la $v1, test_cover_2
+lw $t2, 0($v1)
 la $v1, test_while
 lw $t3, 0($v1)
-la $v1, test_cover_2
-lw $t4, 0($v1)
-lw $t5, -4($sp)
+lw $t4, -20($sp)
+la $v1, test_cover_b
+lw $t5, 0($v1)
 lw $t6, -8($sp)
 lw $t7, -12($sp)
 lw $t8, -16($sp)
@@ -1474,14 +1469,14 @@ li $a0, 10
 syscall
 
 # test_cover_3[3] = 3
-la $v1, test_cover_b
-sw $t1, 0($v1)
+sw $t1, -4($sp)
 la $t1, test_cover_3
 li $v1, 3
 sw $v1, 12($t1)
 
 # test_cover_c[3] = 'c'
-sw $t2, -20($sp)
+la $v1, test_cover_2
+sw $t2, 0($v1)
 la $t2, test_cover_c
 li $v1, 99
 sw $v1, 12($t2)
@@ -1491,9 +1486,9 @@ sw $ra, 0($sp)
 sw $t0, -28($sp)
 la $v1, test_while
 sw $t3, 0($v1)
-la $v1, test_cover_2
-sw $t4, 0($v1)
-sw $t5, -4($sp)
+sw $t4, -20($sp)
+la $v1, test_cover_b
+sw $t5, 0($v1)
 sw $t6, -8($sp)
 sw $t7, -12($sp)
 sw $t8, -16($sp)
@@ -1508,9 +1503,9 @@ lw $ra, 0($sp)
 lw $t0, -28($sp)
 la $v1, test_while
 lw $t3, 0($v1)
-la $v1, test_cover_2
-lw $t4, 0($v1)
-lw $t5, -4($sp)
+lw $t4, -20($sp)
+la $v1, test_cover_b
+lw $t5, 0($v1)
 lw $t6, -8($sp)
 lw $t7, -12($sp)
 lw $t8, -16($sp)
@@ -1519,7 +1514,9 @@ lw $t8, -16($sp)
 
 # printf test_cover_2
 li $v0, 1
-move $a0, $t4
+la $t1, test_cover_2
+lw $t1, 0($t1)
+move $a0, $t1
 syscall
 li $v0, 11
 li $a0, 10
@@ -1529,9 +1526,7 @@ syscall
 
 # printf test_cover_b
 li $v0, 11
-la $t1, test_cover_b
-lw $t1, 0($t1)
-move $a0, $t1
+move $a0, $t5
 syscall
 li $v0, 11
 li $a0, 10
@@ -1555,9 +1550,9 @@ syscall
 # t562 = test_cover_c[3]
 la $v1, test_while
 sw $t3, 0($v1)
-sw $t5, -4($sp)
-la $t5, test_cover_c
-lw $t3, 12($t5)
+sw $t4, -20($sp)
+la $t4, test_cover_c
+lw $t3, 12($t4)
 
 # PrintfTypeDef charType 
 
@@ -1601,18 +1596,18 @@ sw $v1, 8($t8)
 
 # t574 = d[2]
 la $v1, test_cover_2
-sw $t4, 0($v1)
-la $v1, test_cover_b
 sw $t1, 0($v1)
-la $t1, d
-lw $t4, 8($t1)
+la $v1, test_cover_b
+sw $t5, 0($v1)
+la $t5, d
+lw $t1, 8($t5)
 
 # t574 != 0
 
 # IfBegin
 
 # BZ Label_37
-beq $t4, 0, Label_37
+beq $t1, 0, Label_37
 
 # t582 = d[2]
 sw $t2, -32($sp)
@@ -1620,9 +1615,9 @@ la $t2, d
 lw $t0, 8($t2)
 
 # b = c + t582
-la $t5, b
-lw $t5, 0($t5)
-add $t5, $t6, $t0
+la $t4, b
+lw $t4, 0($t4)
+add $t4, $t6, $t0
 
 # GOTO Label_38
 j Label_38
@@ -1641,9 +1636,9 @@ lw $t3, 8($t7)
 
 # SaveEnvironment
 sw $ra, 0($sp)
+sw $t1, -40($sp)
 sw $t2, -32($sp)
-sw $t3, -40($sp)
-sw $t4, -44($sp)
+sw $t3, -44($sp)
 la $v1, c
 sw $t6, 0($v1)
 
@@ -1657,9 +1652,9 @@ jal f
 # RestoreEnvironment
 addi $sp, $sp, 48
 lw $ra, 0($sp)
+lw $t1, -40($sp)
 lw $t2, -32($sp)
-lw $t3, -40($sp)
-lw $t4, -44($sp)
+lw $t3, -44($sp)
 la $v1, c
 lw $t6, 0($v1)
 
@@ -1670,12 +1665,12 @@ move $t8, $v0
 
 # ElseEnd
 sw $t2, -32($sp)
-sw $t3, -40($sp)
+sw $t3, -44($sp)
 lw $t3, -36($sp)
 la $v1, b
 sw $t8, 0($v1)
-la $t5, b
-lw $t5, 0($t5)
+la $t4, b
+lw $t4, 0($t4)
 la $t7, g
 lw $t7, 0($t7)
 
@@ -1689,7 +1684,7 @@ la $a0, PrintString14
 li $v0, 4
 syscall
 li $v0, 1
-move $a0, $t5
+move $a0, $t4
 syscall
 li $v0, 11
 li $a0, 10
@@ -1700,16 +1695,16 @@ syscall
 # IfBegin
 
 # BZ Label_39
-la $t1, a
-lw $t1, 0($t1)
-ble $t1, 0, Label_39
+la $t5, a
+lw $t5, 0($t5)
+ble $t5, 0, Label_39
 
 # b = c
-move $t5, $t6
+move $t4, $t6
 
 # IfRestoreRegs
 la $v1, a
-sw $t1, 0($v1)
+sw $t5, 0($v1)
 
 # Label_39:
 Label_39:
@@ -1723,17 +1718,17 @@ la $a0, PrintString15
 li $v0, 4
 syscall
 li $v0, 1
-move $a0, $t5
+move $a0, $t4
 syscall
 li $v0, 11
 li $a0, 10
 syscall
 
 # i = 0
-sw $t4, -44($sp)
-la $t4, i
-lw $t4, 0($t4)
-li $t4, 0
+sw $t1, -40($sp)
+la $t1, i
+lw $t1, 0($t1)
+li $t1, 0
 
 # LoopSaveRegStatus
 
@@ -1743,7 +1738,7 @@ Label_41:
 # i < 5
 
 # BZ Label_42
-bge $t4, 5, Label_42
+bge $t1, 5, Label_42
 
 # t624 = d[2]
 sw $t3, -36($sp)
@@ -1754,7 +1749,7 @@ lw $t2, 8($t3)
 add $t6, $t6, $t2
 
 # i = i + 1
-addi $t4, $t4, 1
+addi $t1, $t1, 1
 
 # LoopRestoreRegStatus
 sw $t2, -48($sp)
@@ -1787,70 +1782,80 @@ syscall
 Label_43:
 
 # i = i - 1
-subi $t4, $t4, 1
+subi $t1, $t1, 1
+
+# PrintfTypeDef strType intType 
+
+# printf "i = " i
+la $a0, PrintString17
+li $v0, 4
+syscall
+li $v0, 1
+move $a0, $t1
+syscall
+li $v0, 11
+li $a0, 10
+syscall
 
 # i >= 0
 
 # BNZ Label_43
-move $k0, $t4
-move $k1, $t8
-sw $t8, -52($sp)
-bge $k0, $k1, Label_43
+move $k0, $t1
+bge $k0, 0, Label_43
 
 # LoopEnd
 
 # PrintfTypeDef strType intType 
 
 # printf "do_while" i
-la $a0, PrintString17
-li $v0, 4
-syscall
-li $v0, 1
-move $a0, $t4
-syscall
-li $v0, 11
-li $a0, 10
-syscall
-
-# t652 = d[2]
-sw $t0, -56($sp)
-la $v1, g
-sw $t7, 0($v1)
-la $t7, d
-lw $t0, 8($t7)
-
-# PrintfTypeDef strType intType 
-
-# printf "d[2] before h" t652
 la $a0, PrintString18
 li $v0, 4
 syscall
 li $v0, 1
-move $a0, $t0
+move $a0, $t1
 syscall
 li $v0, 11
 li $a0, 10
 syscall
 
-# t661 = d[2]
-la $v1, b
-sw $t5, 0($v1)
+# t655 = d[2]
+sw $t0, -52($sp)
+la $t0, d
+lw $t8, 8($t0)
+
+# PrintfTypeDef strType intType 
+
+# printf "d[2] before h" t655
+la $a0, PrintString19
+li $v0, 4
+syscall
+li $v0, 1
+move $a0, $t8
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+
+# t664 = d[2]
+la $v1, g
+sw $t7, 0($v1)
 la $t5, d
-lw $t1, 8($t5)
+lw $t7, 8($t5)
 
 # SaveEnvironment
 sw $ra, 0($sp)
-sw $t0, -60($sp)
-sw $t1, -64($sp)
+sw $t1, -56($sp)
 sw $t3, -36($sp)
-sw $t4, -68($sp)
-sw $t6, -72($sp)
+sw $t4, -60($sp)
+sw $t6, -64($sp)
+sw $t7, -68($sp)
+sw $t8, -72($sp)
 
 # push c
 move $a0, $t6
 
-# push t661
-move $a1, $t1
+# push t664
+move $a1, $t7
 
 # call h
 subi $sp, $sp, 76
@@ -1859,20 +1864,21 @@ jal h
 # RestoreEnvironment
 addi $sp, $sp, 76
 lw $ra, 0($sp)
-lw $t0, -60($sp)
-lw $t1, -64($sp)
+lw $t1, -56($sp)
 lw $t3, -36($sp)
-lw $t4, -68($sp)
-lw $t6, -72($sp)
+lw $t4, -60($sp)
+lw $t6, -64($sp)
+lw $t7, -68($sp)
+lw $t8, -72($sp)
 
-# t667 = d[2]
-la $t8, d
-lw $t2, 8($t8)
+# t670 = d[2]
+la $t0, d
+lw $t2, 8($t0)
 
 # PrintfTypeDef strType intType 
 
-# printf "d[2] after h" t667
-la $a0, PrintString19
+# printf "d[2] after h" t670
+la $a0, PrintString20
 li $v0, 4
 syscall
 li $v0, 1
@@ -1883,7 +1889,7 @@ li $a0, 10
 syscall
 
 # i = 0
-li $t4, 0
+li $t1, 0
 
 # LoopSaveRegStatus
 
@@ -1893,36 +1899,37 @@ Label_44:
 # i < 5
 
 # BZ Label_45
-bge $t4, 5, Label_45
+bge $t1, 5, Label_45
 
-# t681 = d[2]
-la $t5, d
-lw $t7, 8($t5)
-
-# c = t681 + 1
-addi $t6, $t7, 1
-
-# t687 = 2
-sw $t0, -60($sp)
-li $t0, 2
-
-# t690 = e
-sw $t1, -64($sp)
+# t684 = d[2]
 sw $t3, -36($sp)
-la $t3, e
-lw $t3, 0($t3)
-move $t1, $t3
+la $t3, d
+lw $t5, 8($t3)
+
+# c = t684 + 1
+addi $t6, $t5, 1
+
+# t690 = 2
+sw $t4, -60($sp)
+li $t4, 2
+
+# t693 = e
+sw $t7, -68($sp)
+sw $t8, -72($sp)
+la $t8, e
+lw $t8, 0($t8)
+move $t7, $t8
 
 # SaveEnvironment
 sw $ra, 0($sp)
-sw $t0, -76($sp)
-sw $t1, -80($sp)
-sw $t2, -84($sp)
-la $v1, e
-sw $t3, 0($v1)
-sw $t4, -68($sp)
-sw $t6, -72($sp)
+sw $t1, -56($sp)
+sw $t2, -76($sp)
+sw $t4, -80($sp)
+sw $t5, -84($sp)
+sw $t6, -64($sp)
 sw $t7, -88($sp)
+la $v1, e
+sw $t8, 0($v1)
 
 # call l
 subi $sp, $sp, 92
@@ -1931,42 +1938,47 @@ jal l
 # RestoreEnvironment
 addi $sp, $sp, 92
 lw $ra, 0($sp)
-lw $t0, -76($sp)
-lw $t1, -80($sp)
-lw $t2, -84($sp)
-la $v1, e
-lw $t3, 0($v1)
-lw $t4, -68($sp)
-lw $t6, -72($sp)
+lw $t1, -56($sp)
+lw $t2, -76($sp)
+lw $t4, -80($sp)
+lw $t5, -84($sp)
+lw $t6, -64($sp)
 lw $t7, -88($sp)
+la $v1, e
+lw $t8, 0($v1)
 
-# t693 = RET
-move $t8, $v0
+# t696 = RET
+move $t0, $v0
 
-# t690 = t690 + t693
-add $t1, $t1, $t8
+# t693 = t693 + t696
+add $t7, $t7, $t0
 
-# d[t687] = t690
-sw $t2, -84($sp)
-la $t5, d
-sll $t2, $t0, 2
-add $t5, $t5, $t2
-sw $t1, 0($t5)
+# d[t690] = t693
+sw $t1, -56($sp)
+la $t3, d
+sll $t1, $t4, 2
+add $t3, $t3, $t1
+sw $t7, 0($t3)
 
 # i = i + 1
-addi $t4, $t4, 1
+sw $t2, -76($sp)
+lw $t2, -56($sp)
+addi $t2, $t2, 1
 
 # LoopRestoreRegStatus
-sw $t0, -76($sp)
-lw $t0, -60($sp)
-sw $t1, -80($sp)
-lw $t1, -64($sp)
-la $v1, e
-sw $t3, 0($v1)
-lw $t3, -36($sp)
+sw $t0, -92($sp)
+sw $t2, -56($sp)
+lw $t2, -76($sp)
+sw $t4, -80($sp)
+lw $t4, -60($sp)
+sw $t5, -84($sp)
 sw $t7, -88($sp)
-sw $t8, -92($sp)
-lw $t2, -84($sp)
+lw $t7, -68($sp)
+la $v1, e
+sw $t8, 0($v1)
+lw $t8, -72($sp)
+lw $t1, -56($sp)
+lw $t3, -36($sp)
 
 # GOTO Label_44
 j Label_44
@@ -1976,15 +1988,15 @@ Label_45:
 
 # LoopEnd
 
-# t698 = d[2]
-sw $t6, -72($sp)
-la $t5, d
-lw $t6, 8($t5)
+# t701 = d[2]
+sw $t6, -64($sp)
+la $t0, d
+lw $t6, 8($t0)
 
 # PrintfTypeDef strType intType 
 
-# printf "call_for" t698
-la $a0, PrintString20
+# printf "call_for" t701
+la $a0, PrintString21
 li $v0, 4
 syscall
 li $v0, 1
@@ -1997,7 +2009,7 @@ syscall
 # PrintfTypeDef strType 
 
 # printf "Constant and parameter have the same name"
-la $a0, PrintString21
+la $a0, PrintString22
 li $v0, 4
 syscall
 li $v0, 11
@@ -2006,12 +2018,13 @@ syscall
 
 # SaveEnvironment
 sw $ra, 0($sp)
-sw $t0, -60($sp)
-sw $t1, -64($sp)
-sw $t2, -84($sp)
+sw $t1, -56($sp)
+sw $t2, -76($sp)
 sw $t3, -36($sp)
-sw $t4, -68($sp)
+sw $t4, -60($sp)
 sw $t6, -96($sp)
+sw $t7, -68($sp)
+sw $t8, -72($sp)
 
 # push '_'
 li $a0, 95
@@ -2023,21 +2036,23 @@ jal Test_IF
 # RestoreEnvironment
 addi $sp, $sp, 100
 lw $ra, 0($sp)
-lw $t0, -60($sp)
-lw $t1, -64($sp)
-lw $t2, -84($sp)
+lw $t1, -56($sp)
+lw $t2, -76($sp)
 lw $t3, -36($sp)
-lw $t4, -68($sp)
+lw $t4, -60($sp)
 lw $t6, -96($sp)
+lw $t7, -68($sp)
+lw $t8, -72($sp)
 
 # SaveEnvironment
 sw $ra, 0($sp)
-sw $t0, -60($sp)
-sw $t1, -64($sp)
-sw $t2, -84($sp)
+sw $t1, -56($sp)
+sw $t2, -76($sp)
 sw $t3, -36($sp)
-sw $t4, -68($sp)
+sw $t4, -60($sp)
 sw $t6, -96($sp)
+sw $t7, -68($sp)
+sw $t8, -72($sp)
 
 # push '0'
 li $a0, 48
@@ -2049,21 +2064,23 @@ jal Test_While
 # RestoreEnvironment
 addi $sp, $sp, 100
 lw $ra, 0($sp)
-lw $t0, -60($sp)
-lw $t1, -64($sp)
-lw $t2, -84($sp)
+lw $t1, -56($sp)
+lw $t2, -76($sp)
 lw $t3, -36($sp)
-lw $t4, -68($sp)
+lw $t4, -60($sp)
 lw $t6, -96($sp)
+lw $t7, -68($sp)
+lw $t8, -72($sp)
 
 # SaveEnvironment
 sw $ra, 0($sp)
-sw $t0, -60($sp)
-sw $t1, -64($sp)
-sw $t2, -84($sp)
+sw $t1, -56($sp)
+sw $t2, -76($sp)
 sw $t3, -36($sp)
-sw $t4, -68($sp)
+sw $t4, -60($sp)
 sw $t6, -96($sp)
+sw $t7, -68($sp)
+sw $t8, -72($sp)
 
 # push '0'
 li $a0, 48
@@ -2075,21 +2092,23 @@ jal Test_Do_While
 # RestoreEnvironment
 addi $sp, $sp, 100
 lw $ra, 0($sp)
-lw $t0, -60($sp)
-lw $t1, -64($sp)
-lw $t2, -84($sp)
+lw $t1, -56($sp)
+lw $t2, -76($sp)
 lw $t3, -36($sp)
-lw $t4, -68($sp)
+lw $t4, -60($sp)
 lw $t6, -96($sp)
+lw $t7, -68($sp)
+lw $t8, -72($sp)
 
 # SaveEnvironment
 sw $ra, 0($sp)
-sw $t0, -60($sp)
-sw $t1, -64($sp)
-sw $t2, -84($sp)
+sw $t1, -56($sp)
+sw $t2, -76($sp)
 sw $t3, -36($sp)
-sw $t4, -68($sp)
+sw $t4, -60($sp)
 sw $t6, -96($sp)
+sw $t7, -68($sp)
+sw $t8, -72($sp)
 
 # call test_array
 subi $sp, $sp, 100
@@ -2098,24 +2117,25 @@ jal test_array
 # RestoreEnvironment
 addi $sp, $sp, 100
 lw $ra, 0($sp)
-lw $t0, -60($sp)
-lw $t1, -64($sp)
-lw $t2, -84($sp)
+lw $t1, -56($sp)
+lw $t2, -76($sp)
 lw $t3, -36($sp)
-lw $t4, -68($sp)
+lw $t4, -60($sp)
 lw $t6, -96($sp)
+lw $t7, -68($sp)
+lw $t8, -72($sp)
 
-# t717 = RET
-move $t7, $v0
+# t720 = RET
+move $t5, $v0
 
 # PrintfTypeDef strType intType 
 
-# printf "test_array is " t717
-la $a0, PrintString22
+# printf "test_array is " t720
+la $a0, PrintString23
 li $v0, 4
 syscall
 li $v0, 1
-move $a0, $t7
+move $a0, $t5
 syscall
 li $v0, 11
 li $a0, 10
@@ -2123,13 +2143,14 @@ syscall
 
 # SaveEnvironment
 sw $ra, 0($sp)
-sw $t0, -60($sp)
-sw $t1, -64($sp)
-sw $t2, -84($sp)
+sw $t1, -56($sp)
+sw $t2, -76($sp)
 sw $t3, -36($sp)
-sw $t4, -68($sp)
+sw $t4, -60($sp)
+sw $t5, -100($sp)
 sw $t6, -96($sp)
-sw $t7, -100($sp)
+sw $t7, -68($sp)
+sw $t8, -72($sp)
 
 # call test_expression
 subi $sp, $sp, 104
@@ -2138,22 +2159,23 @@ jal test_expression
 # RestoreEnvironment
 addi $sp, $sp, 104
 lw $ra, 0($sp)
-lw $t0, -60($sp)
-lw $t1, -64($sp)
-lw $t2, -84($sp)
+lw $t1, -56($sp)
+lw $t2, -76($sp)
 lw $t3, -36($sp)
-lw $t4, -68($sp)
+lw $t4, -60($sp)
+lw $t5, -100($sp)
 lw $t6, -96($sp)
-lw $t7, -100($sp)
+lw $t7, -68($sp)
+lw $t8, -72($sp)
 
-# t721 = RET
-move $t8, $v0
+# t724 = RET
+move $t0, $v0
 
 # PrintfTypeDef charType 
 
-# printf t721
+# printf t724
 li $v0, 11
-move $a0, $t8
+move $a0, $t0
 syscall
 li $v0, 11
 li $a0, 10
@@ -2162,21 +2184,22 @@ syscall
 # PrintfTypeDef strType 
 
 # printf ""
-la $a0, PrintString23
+la $a0, PrintString24
 li $v0, 4
 syscall
 li $v0, 11
 li $a0, 10
 syscall
 
-# t725 = -100
-subi $t5, $0, 100
+# t728 = -100
+sw $t1, -56($sp)
+subi $t1, $0, 100
 
 # PrintfTypeDef intType 
 
-# printf t725
+# printf t728
 li $v0, 1
-move $a0, $t5
+move $a0, $t1
 syscall
 li $v0, 11
 li $a0, 10
@@ -2195,7 +2218,7 @@ syscall
 # PrintfTypeDef strType 
 
 # printf " !#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~"
-la $a0, PrintString24
+la $a0, PrintString25
 li $v0, 4
 syscall
 li $v0, 11
