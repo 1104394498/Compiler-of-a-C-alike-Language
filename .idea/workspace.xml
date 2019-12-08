@@ -12,21 +12,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7c89e8cf-e84f-479e-8418-ae89c16d8757" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Error_GrammarAnalyzer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Error_GrammarAnalyzer.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error_GrammarAnalyzer.h" beforeDir="false" afterPath="$PROJECT_DIR$/Error_GrammarAnalyzer.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Error_LexicalAnalyzer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Error_LexicalAnalyzer.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/17376108_王慎执_优化前中间代码.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/17376108_王慎执_优化前中间代码.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/17376108_王慎执_优化后中间代码.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/17376108_王慎执_优化后中间代码.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/MIPScode.dir/CXX.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/MIPScode.dir/CXX.includecache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/MIPScode.dir/Error_LexicalAnalyzer.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/MIPScode.dir/Error_LexicalAnalyzer.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/MIPScode" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/MIPScode" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/mips.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/mips.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/output.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/output.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/testfile.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/testfile.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/归档.zip" beforeDir="false" afterPath="$PROJECT_DIR$/归档.zip" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/归档2.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/错误处理/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/错误处理/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -134,31 +120,31 @@
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="741" y="285" key="#xdebugger.XInspectDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1575774706966" />
-    <state width="1638" height="188" key="GridCell.Tab.0.bottom" timestamp="1575783683293">
+    <state width="1638" height="188" key="GridCell.Tab.0.bottom" timestamp="1575783901924">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="188" key="GridCell.Tab.0.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1575783683293" />
+    <state width="1638" height="188" key="GridCell.Tab.0.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1575783901924" />
     <state width="1638" height="188" key="GridCell.Tab.0.bottom/0.23.1680.967@0.23.1680.967" timestamp="1575460716324" />
     <state width="1638" height="412" key="GridCell.Tab.0.bottom/0.23.1680.972@0.23.1680.972" timestamp="1575483213895" />
     <state width="1638" height="412" key="GridCell.Tab.0.bottom/0.23.1680.977@0.23.1680.977" timestamp="1575373808270" />
-    <state width="1638" height="188" key="GridCell.Tab.0.center" timestamp="1575783683292">
+    <state width="1638" height="188" key="GridCell.Tab.0.center" timestamp="1575783901923">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="188" key="GridCell.Tab.0.center/0.0.1680.1050@0.0.1680.1050" timestamp="1575783683292" />
+    <state width="1638" height="188" key="GridCell.Tab.0.center/0.0.1680.1050@0.0.1680.1050" timestamp="1575783901923" />
     <state width="1638" height="188" key="GridCell.Tab.0.center/0.23.1680.967@0.23.1680.967" timestamp="1575460716322" />
     <state width="1638" height="412" key="GridCell.Tab.0.center/0.23.1680.972@0.23.1680.972" timestamp="1575483213894" />
     <state width="1638" height="412" key="GridCell.Tab.0.center/0.23.1680.977@0.23.1680.977" timestamp="1575373808268" />
-    <state width="1638" height="188" key="GridCell.Tab.0.left" timestamp="1575783683291">
+    <state width="1638" height="188" key="GridCell.Tab.0.left" timestamp="1575783901922">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="188" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1575783683291" />
+    <state width="1638" height="188" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1575783901922" />
     <state width="1638" height="188" key="GridCell.Tab.0.left/0.23.1680.967@0.23.1680.967" timestamp="1575460716321" />
     <state width="1638" height="412" key="GridCell.Tab.0.left/0.23.1680.972@0.23.1680.972" timestamp="1575483213893" />
     <state width="1638" height="412" key="GridCell.Tab.0.left/0.23.1680.977@0.23.1680.977" timestamp="1575373808267" />
-    <state width="1638" height="188" key="GridCell.Tab.0.right" timestamp="1575783683293">
+    <state width="1638" height="188" key="GridCell.Tab.0.right" timestamp="1575783901924">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="188" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1575783683293" />
+    <state width="1638" height="188" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1575783901924" />
     <state width="1638" height="188" key="GridCell.Tab.0.right/0.23.1680.967@0.23.1680.967" timestamp="1575460716323" />
     <state width="1638" height="412" key="GridCell.Tab.0.right/0.23.1680.972@0.23.1680.972" timestamp="1575483213894" />
     <state width="1638" height="412" key="GridCell.Tab.0.right/0.23.1680.977@0.23.1680.977" timestamp="1575373808268" />
@@ -196,7 +182,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/Error_GrammarAnalyzer.cpp</url>
-          <line>1017</line>
+          <line>1035</line>
           <option name="timeStamp" value="166" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
@@ -206,7 +192,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/Error_GrammarAnalyzer.cpp</url>
-          <line>430</line>
+          <line>448</line>
           <option name="timeStamp" value="170" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">

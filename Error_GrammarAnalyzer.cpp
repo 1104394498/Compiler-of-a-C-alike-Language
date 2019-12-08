@@ -427,7 +427,25 @@ void Error_GrammarAnalyzer::function_with_return_value() {
     VariableType actualReturnType;
     compound_statement(actualReturnType);
     try {
-        if (actualReturnType != returnType) {
+        VariableType type1, type2;
+
+        if (actualReturnType == intType || actualReturnType == constInt) {
+            type1 = intType;
+        } else if (actualReturnType == charType || actualReturnType == constChar) {
+            type1 = charType;
+        } else {
+            type1 = actualReturnType;
+        }
+
+        if (returnType == intType || returnType == constInt) {
+            type2 = intType;
+        } else if (returnType == charType || returnType == constChar) {
+            type2 = charType;
+        } else {
+            type2 = returnType;
+        }
+
+        if (type1 != type2) {
             throw LackReturn{curLine - 1};  // revise here, assume that return statement is always the last statement
         }
     } catch (LackReturn &exception) {
