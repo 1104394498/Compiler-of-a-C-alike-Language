@@ -190,10 +190,7 @@ void main()
   }
   printf("while", c);
 
-  do {
-    i = i - 1;
-    printf("i = ", i);
-    }while ( i >= 0) 
+  do {i = i - 1;}while ( i >= 0) 
   printf("do_while", i);
  printf("d[2] before h",d[2]);
   h(c, d[2]);

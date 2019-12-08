@@ -875,7 +875,11 @@ void MipsGenerator::dealArithmetic(OperatorType operatorType, const Intermediate
         mipsCodes->push_back(*mipsCmd);
         delete mipsCmd;
     }
-    functionFile->variableTypeRecords[operands.at(0)] = intType;
+    if (functionFile->variableTypeRecords.count(operands.at(0)) > 0 ||
+        globalNameTypeRecords.count(operands.at(0)) == 0) {
+        functionFile->variableTypeRecords[operands.at(0)] = intType;
+    }
+
 }
 
 void MipsGenerator::dealNeg(const IntermediateCmd &midCode) {
@@ -889,11 +893,13 @@ void MipsGenerator::dealNeg(const IntermediateCmd &midCode) {
     if (isdigit(varName2[0]) || varName2[0] == '-') {
         isConst2 = true;
         num2 = stoi(varName2);
-        functionFile->variableTypeRecords[varName1] = intType;
+        if (globalNameTypeRecords.count(varName1) == 0)
+            functionFile->variableTypeRecords[varName1] = intType;
     } else if (varName2[0] == '\'') {
         isConst2 = true;
         num2 = varName2[1];
-        functionFile->variableTypeRecords[varName1] = charType;
+        if (globalNameTypeRecords.count(varName1) == 0)
+            functionFile->variableTypeRecords[varName1] = charType;
     }
 
     if (isConst2) {
@@ -914,8 +920,8 @@ void MipsGenerator::dealNeg(const IntermediateCmd &midCode) {
         subCmd.addRegister(Register{zero});
         subCmd.addRegister(r2);
         mipsCodes->push_back(subCmd);
-        if (globalNameTypeRecords.count(varName1) ==
-            0) {   // if varName1 is a global variable, we needn't update its value
+        if (globalNameTypeRecords.count(varName1) == 0) {
+            // if varName1 is a global variable, we needn't update its value
             if (functionFile->variableTypeRecords.count(varName2) > 0) {
                 functionFile->variableTypeRecords[varName1] = functionFile->variableTypeRecords[varName2];
             } else if (globalNameTypeRecords.count(varName2) > 0) {
