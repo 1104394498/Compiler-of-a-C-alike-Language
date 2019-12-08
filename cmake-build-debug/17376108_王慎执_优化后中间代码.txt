@@ -1,15 +1,98 @@
-var int a
-void func()
-a = 1
-PrintfTypeDef intType 
-printf a
+var char arr[10]
+void arrange()
+para int n
+para int i
+const int ONE = 1
+var int j
+var char tmp
+t3 = n - 1
+i >= t3
+IfBegin
+BZ Label_0
+j = 0
+LoopSaveRegStatus
+Label_2:
+j < n
+BZ Label_3
+t18 = arr[j]
+PrintfTypeDef charType 
+printf t18
+j = j + 1
+LoopRestoreRegStatus
+GOTO Label_2
+Label_3:
+LoopEnd
+PrintfTypeDef strType 
+printf "\n"
+ret 
+GOTO Label_1
+Label_0:
+ElseBegin
+t25 = i + 1
+push n
+push t25
+SaveEnvironment
+call arrange
+RestoreEnvironment
+j = i
+j = j + ONE
+LoopSaveRegStatus
+Label_4:
+j < n
+BZ Label_5
+t45 = arr[i]
+t54 = arr[j]
+t45 != t54
+IfBegin
+BZ Label_6
+t60 = arr[i]
+t69 = arr[j]
+arr[i] = t69
+arr[j] = t60
+t82 = i + 1
+push n
+push t82
+SaveEnvironment
+call arrange
+RestoreEnvironment
+IfRestoreRegs
+Label_6:
+IfEnd
+j = j + 1
+LoopRestoreRegStatus
+GOTO Label_4
+Label_5:
+LoopEnd
+j = i
+j = j + 1
+LoopSaveRegStatus
+Label_8:
+n > j
+BZ Label_9
+t100 = j - 1
+t99 = arr[t100]
+t105 = j + -1
+t112 = arr[j]
+arr[t105] = t112
+arr[j] = t99
+j = j + 1
+LoopRestoreRegStatus
+GOTO Label_8
+Label_9:
+LoopEnd
+ElseEnd
+Label_1:
 ret 
 void main()
-var int b[4]
-b[3] = 1
+arr[0] = 'a'
+arr[1] = 'b'
+arr[2] = 'c'
+arr[3] = 'd'
+arr[4] = 'e'
+arr[5] = 'f'
+push 5
+push 0
 SaveEnvironment
-call func
+call arrange
 RestoreEnvironment
-PrintfTypeDef intType 
-printf a
 Exit

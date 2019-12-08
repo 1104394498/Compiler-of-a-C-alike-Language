@@ -148,7 +148,7 @@ string MipsCmd::print() const {
             ret += operands.at(2);
             break;
         case divide:
-            if (isdigit(operands.at(2).at(0))) {
+            if (isdigit(operands.at(2).at(0)) || operands.at(2).at(0) == '-') {
                 ret += "div ";
                 ret += operands.at(0);
                 ret += ", ";
@@ -543,7 +543,7 @@ void MipsGenerator::dealSaveEnv() {
                 mipsCmd.addInteger(c);
                 mipsCodes->push_back(mipsCmd);
                 revised_a_regs.emplace(a, para_num);
-            } else if (isdigit(operand[0])) {
+            } else if (isdigit(operand[0]) || operand[0] == '-') {
                 // a integer
                 int num = stoi(operand);
                 MipsCmd mipsCmd{li};
@@ -590,7 +590,7 @@ void MipsGenerator::dealSaveEnv() {
                 mipsCmd1.addInteger(offset);
                 mipsCmd1.addRegister(Register{sp});
                 mipsCodes->push_back(mipsCmd1);
-            } else if (isdigit(operand[0])) {
+            } else if (isdigit(operand[0]) || operand[0] == '-') {
                 // a integer
                 int num = stoi(operand);
                 // li r, num
@@ -693,7 +693,7 @@ void MipsGenerator::dealAssign(const IntermediateCmd &midCode) {
     const auto &operands = midCode.getOperands();
 
     const string addNum = operands.at(1);
-    if (isdigit(addNum[0])) {
+    if (isdigit(addNum[0]) || addNum[0] == '-') {
         const Register r1 = getRegisters(vector<string>{operands.at(0)}).at(0);
         int num = stoi(addNum);
         MipsCmd liCmd{li};
@@ -746,7 +746,7 @@ void MipsGenerator::dealArithmetic(OperatorType operatorType, const Intermediate
     // const Register r = getRegister(operands.at(0));
 
     string add1 = operands.at(1);
-    if (isdigit(add1[0])) {
+    if (isdigit(add1[0]) || add1[0] == '-') {
         addNum1 = stoi(add1);
         isConst1 = true;
     } else if (add1[0] == '\'') {
@@ -755,7 +755,7 @@ void MipsGenerator::dealArithmetic(OperatorType operatorType, const Intermediate
     }
 
     string add2 = operands.at(2);
-    if (isdigit(add2[0])) {
+    if (isdigit(add2[0]) || add2[0] == '-') {
         addNum2 = stoi(add2);
         isConst2 = true;
     } else if (add2[0] == '\'') {
@@ -886,7 +886,7 @@ void MipsGenerator::dealNeg(const IntermediateCmd &midCode) {
 
     bool isConst2 = false;
     int num2 = 0;
-    if (isdigit(varName2[0])) {
+    if (isdigit(varName2[0]) || varName2[0] == '-') {
         isConst2 = true;
         num2 = stoi(varName2);
         functionFile->variableTypeRecords[varName1] = intType;
@@ -966,12 +966,12 @@ void MipsGenerator::dealBranch(IntermediateCmd *lastMidCode, const IntermediateC
     const string &op1 = lastMidCode->getOperands().at(1);
 
     vector<Register> regs;
-    if (isdigit(op1[0])) {
-        if (isdigit(op0[0])) {
+    if (isdigit(op1[0]) || op1[0] == '-') {
+        if (isdigit(op0[0]) || op0[0] == '-') {
             regs = getRegisters(vector<string>{}, 1);
             MipsCmd liCmd{li};
             liCmd.addRegister(regs[0]);
-            liCmd.addInteger(atoi(op0.c_str()));
+            liCmd.addInteger(stoi(op0));
             mipsCodes->push_back(liCmd);
         } else if (op0[0] == '\'') {
             regs = getRegisters(vector<string>{}, 1);
@@ -983,13 +983,13 @@ void MipsGenerator::dealBranch(IntermediateCmd *lastMidCode, const IntermediateC
             regs = getRegisters(vector<string>{op0});
         }
         branch->addRegister(regs[0]);
-        branch->addInteger(atoi(op1.c_str()));
+        branch->addInteger(stoi(op1));
     } else if (op1[0] == '\'') {
-        if (isdigit(op0[0])) {
+        if (isdigit(op0[0]) || op0[0] == '-') {
             regs = getRegisters(vector<string>{}, 1);
             MipsCmd liCmd{li};
             liCmd.addRegister(regs[0]);
-            liCmd.addInteger(atoi(op0.c_str()));
+            liCmd.addInteger(stoi(op0));
             mipsCodes->push_back(liCmd);
         } else if (op0[0] == '\'') {
             regs = getRegisters(vector<string>{}, 1);
@@ -1003,7 +1003,7 @@ void MipsGenerator::dealBranch(IntermediateCmd *lastMidCode, const IntermediateC
         branch->addRegister(regs[0]);
         branch->addInteger(op1[1]);
     } else {
-        if (isdigit(op0[0])) {
+        if (isdigit(op0[0]) || op0[0] == '-') {
             regs = getRegisters(vector<string>{op1}, 1);
             MipsCmd liCmd{li};
             liCmd.addRegister(regs[1]);
@@ -1091,7 +1091,7 @@ void MipsGenerator::dealGetArrayValue(const IntermediateCmd &midCode) {
 
     // const Register $addrReg = getRegister();
 
-    if (isdigit(midCode.getOperands().at(2)[0])) {
+    if (isdigit(midCode.getOperands().at(2)[0]) || midCode.getOperands().at(2)[0] == '-') {
         // local array
         vector<Register> regs;
         if (functionFile->variableTypeRecords.count(varName) > 0) {
@@ -1272,10 +1272,10 @@ void MipsGenerator::dealArrayElemAssign(const IntermediateCmd &midCode) {
     const string arrayName = midCode.getOperands().at(0);
     // cout << midCode.getOperands().at(1) << endl;
 
-    if (isdigit(midCode.getOperands().at(1)[0])) {
+    if (isdigit(midCode.getOperands().at(1)[0]) || midCode.getOperands().at(1)[0] == '-') {
         vector<Register> regs;
         int varNum = 0;
-        if (isdigit(varName[0])) {
+        if (isdigit(varName[0]) || varName[0] == '-') {
             // var is an integer
             varNum = stoi(varName);
             regs = getRegisters(vector<string>{}, 1);
@@ -1363,7 +1363,7 @@ void MipsGenerator::dealArrayElemAssign(const IntermediateCmd &midCode) {
         const string posVar = midCode.getOperands().at(1);
         vector<Register> regs;
         int varNum = 0;
-        if (isdigit(varName[0])) {
+        if (isdigit(varName[0]) || varName[0] == '-') {
             // var is an integer
             varNum = stoi(varName);
             regs = getRegisters(vector<string>{posVar}, 2);
@@ -1548,7 +1548,7 @@ void MipsGenerator::dealPrintf(const IntermediateCmd &midCode) {
             mipsCodes->push_back(liCmd1);
             // syscall
             mipsCodes->push_back(MipsCmd{syscall});
-        } else if (isdigit(op[0])) {
+        } else if (isdigit(op[0]) || op[0] == '-') {
             // an int
             int num = stoi(op);
             // li $v0, 1  (print int)
@@ -1770,7 +1770,7 @@ void MipsGenerator::dealConstDef(const IntermediateCmd &midCode) {
 void MipsGenerator::dealFunRetInDef(const IntermediateCmd &midCode) {
     // move $ra, [register of return variable]
     if (!midCode.getOperands().empty()) {
-        if (isdigit(midCode.getOperands().at(0).at(0))) {
+        if (isdigit(midCode.getOperands().at(0).at(0)) || midCode.getOperands().at(0).at(0) == '-') {
             int retNum = stoi(midCode.getOperands().at(0).c_str());
             // li $v0, retNum
             MipsCmd liCmd{li};

@@ -1,65 +1,388 @@
 .data
+PrintString0: .asciiz "\\n"
 
-# var int a
-a: .word 0
+# var char arr[10]
+arr: .word 0:10
 
-# void func()
+# void arrange()
 .text
 j main
-func:
+arrange:
 
-# a = 1
-la $t0, a
-lw $t0, 0($t0)
+# para int n
+
+# para int i
+
+# const int ONE = 1
 li $t0, 1
 
-# PrintfTypeDef intType 
+# var int j
 
-# printf a
-li $v0, 1
-move $a0, $t0
+# var char tmp
+
+# t3 = n - 1
+subi $t1, $a0, 1
+
+# i >= t3
+
+# IfBegin
+
+# BZ Label_0
+blt $a1, $t1, Label_0
+
+# j = 0
+li $t2, 0
+
+# LoopSaveRegStatus
+
+# Label_2:
+Label_2:
+
+# j < n
+
+# BZ Label_3
+bge $t2, $a0, Label_3
+
+# t18 = arr[j]
+la $t4, arr
+sll $t5, $t2, 2
+add $t4, $t4, $t5
+lw $t3, 0($t4)
+
+# PrintfTypeDef charType 
+
+# printf t18
+move $v1, $a0
+li $v0, 11
+move $a0, $t3
 syscall
 li $v0, 11
 li $a0, 10
 syscall
+move $a0, $v1
+
+# j = j + 1
+addi $t2, $t2, 1
+
+# LoopRestoreRegStatus
+sw $t3, -12($sp)
+
+# GOTO Label_2
+j Label_2
+
+# Label_3:
+Label_3:
+
+# LoopEnd
+
+# PrintfTypeDef strType 
+
+# printf "\n"
+move $v1, $a0
+la $a0, PrintString0
+li $v0, 4
+syscall
+li $v0, 11
+li $a0, 10
+syscall
+move $a0, $v1
 
 # ret 
-la $v1, a
-sw $t0, 0($v1)
+jr $ra
+
+# GOTO Label_1
+j Label_1
+
+# Label_0:
+Label_0:
+
+# ElseBegin
+
+# t25 = i + 1
+addi $t6, $a1, 1
+
+# SaveEnvironment
+sw $ra, -8($sp)
+sw $a0, 0($sp)
+sw $a1, -4($sp)
+sw $t0, -16($sp)
+sw $t1, -20($sp)
+sw $t6, -24($sp)
+
+# push n
+move $a0, $a0
+
+# push t25
+move $a1, $t6
+
+# call arrange
+subi $sp, $sp, 28
+jal arrange
+
+# RestoreEnvironment
+addi $sp, $sp, 28
+lw $ra, -8($sp)
+lw $a0, 0($sp)
+lw $a1, -4($sp)
+lw $t0, -16($sp)
+lw $t1, -20($sp)
+lw $t6, -24($sp)
+
+# j = i
+move $t7, $a1
+
+# j = j + ONE
+add $t7, $t7, $t0
+
+# LoopSaveRegStatus
+
+# Label_4:
+Label_4:
+
+# j < n
+
+# BZ Label_5
+bge $t7, $a0, Label_5
+
+# t45 = arr[i]
+la $t5, arr
+sll $t4, $a1, 2
+add $t5, $t5, $t4
+lw $t8, 0($t5)
+
+# t54 = arr[j]
+sw $t1, -20($sp)
+la $t3, arr
+sll $t1, $t7, 2
+add $t3, $t3, $t1
+lw $t2, 0($t3)
+
+# t45 != t54
+
+# IfBegin
+
+# BZ Label_6
+beq $t8, $t2, Label_6
+
+# t60 = arr[i]
+sw $t6, -24($sp)
+sw $t0, -16($sp)
+la $t0, arr
+sll $t4, $a1, 2
+add $t0, $t0, $t4
+lw $t6, 0($t0)
+
+# t69 = arr[j]
+la $t1, arr
+sll $t3, $t7, 2
+add $t1, $t1, $t3
+lw $t5, 0($t1)
+
+# arr[i] = t69
+sw $t8, -28($sp)
+sw $t2, -32($sp)
+la $t8, arr
+sll $t2, $a1, 2
+add $t8, $t8, $t2
+sw $t5, 0($t8)
+
+# arr[j] = t60
+la $t4, arr
+sll $t0, $t7, 2
+add $t4, $t4, $t0
+sw $t6, 0($t4)
+
+# t82 = i + 1
+addi $t3, $a1, 1
+
+# SaveEnvironment
+sw $ra, -8($sp)
+sw $a0, 0($sp)
+sw $a1, -4($sp)
+sw $t3, -36($sp)
+sw $t5, -40($sp)
+sw $t6, -44($sp)
+sw $t7, -48($sp)
+
+# push n
+move $a0, $a0
+
+# push t82
+move $a1, $t3
+
+# call arrange
+subi $sp, $sp, 52
+jal arrange
+
+# RestoreEnvironment
+addi $sp, $sp, 52
+lw $ra, -8($sp)
+lw $a0, 0($sp)
+lw $a1, -4($sp)
+lw $t3, -36($sp)
+lw $t5, -40($sp)
+lw $t6, -44($sp)
+lw $t7, -48($sp)
+
+# IfRestoreRegs
+sw $t3, -36($sp)
+sw $t5, -40($sp)
+sw $t6, -44($sp)
+lw $t6, -24($sp)
+lw $t0, -16($sp)
+lw $t2, -32($sp)
+lw $t8, -28($sp)
+
+# Label_6:
+Label_6:
+
+# IfEnd
+
+# j = j + 1
+addi $t7, $t7, 1
+
+# LoopRestoreRegStatus
+sw $t2, -32($sp)
+sw $t8, -28($sp)
+lw $t1, -20($sp)
+
+# GOTO Label_4
+j Label_4
+
+# Label_5:
+Label_5:
+
+# LoopEnd
+
+# j = i
+move $t7, $a1
+
+# j = j + 1
+addi $t7, $t7, 1
+
+# LoopSaveRegStatus
+
+# Label_8:
+Label_8:
+
+# n > j
+
+# BZ Label_9
+ble $a0, $t7, Label_9
+
+# t100 = j - 1
+subi $t4, $t7, 1
+
+# t99 = arr[t100]
+sw $t6, -24($sp)
+la $t5, arr
+sll $t6, $t4, 2
+add $t5, $t5, $t6
+lw $t3, 0($t5)
+
+# t105 = j + -1
+sw $t0, -16($sp)
+addi $t0, $t7, -1
+
+# t112 = arr[j]
+sw $t1, -20($sp)
+la $t8, arr
+sll $t1, $t7, 2
+add $t8, $t8, $t1
+lw $t2, 0($t8)
+
+# arr[t105] = t112
+sw $t4, -52($sp)
+la $t4, arr
+sll $t6, $t0, 2
+add $t4, $t4, $t6
+sw $t2, 0($t4)
+
+# arr[j] = t99
+la $t5, arr
+sll $t1, $t7, 2
+add $t5, $t5, $t1
+sw $t3, 0($t5)
+
+# j = j + 1
+addi $t7, $t7, 1
+
+# LoopRestoreRegStatus
+sw $t0, -56($sp)
+lw $t0, -16($sp)
+sw $t2, -60($sp)
+sw $t3, -64($sp)
+lw $t1, -20($sp)
+lw $t6, -24($sp)
+
+# GOTO Label_8
+j Label_8
+
+# Label_9:
+Label_9:
+
+# LoopEnd
+
+# ElseEnd
+sw $t6, -24($sp)
+sw $t7, -48($sp)
+lw $t2, -48($sp)
+
+# Label_1:
+Label_1:
+
+# ret 
 jr $ra
 
 # void main()
 main:
 
-# var int b[4]
+# arr[0] = 'a'
+la $t8, arr
+li $v1, 97
+sw $v1, 0($t8)
 
-# b[3] = 1
-addi $t1, $sp, -4
-li $v1, 1
-sw $v1, -12($t1)
+# arr[1] = 'b'
+la $t4, arr
+li $v1, 98
+sw $v1, 4($t4)
+
+# arr[2] = 'c'
+la $t5, arr
+li $v1, 99
+sw $v1, 8($t5)
+
+# arr[3] = 'd'
+la $t0, arr
+li $v1, 100
+sw $v1, 12($t0)
+
+# arr[4] = 'e'
+la $t3, arr
+li $v1, 101
+sw $v1, 16($t3)
+
+# arr[5] = 'f'
+la $t1, arr
+li $v1, 102
+sw $v1, 20($t1)
 
 # SaveEnvironment
 sw $ra, 0($sp)
 
-# call func
-subi $sp, $sp, 20
-jal func
+# push 5
+li $a0, 5
+
+# push 0
+li $a1, 0
+
+# call arrange
+subi $sp, $sp, 4
+jal arrange
 
 # RestoreEnvironment
-addi $sp, $sp, 20
+addi $sp, $sp, 4
 lw $ra, 0($sp)
-
-# PrintfTypeDef intType 
-
-# printf a
-li $v0, 1
-la $t2, a
-lw $t2, 0($t2)
-move $a0, $t2
-syscall
-li $v0, 11
-li $a0, 10
-syscall
 
 # Exit
 li $v0, 10
