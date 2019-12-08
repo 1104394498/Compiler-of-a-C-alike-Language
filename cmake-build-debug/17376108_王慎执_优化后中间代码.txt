@@ -1,98 +1,525 @@
-var char arr[10]
-void arrange()
+const char test_cover_a = 'a'
+const char test_if = '+'
+const int test_cover_1 = 1
+const char test_while_a = '0'
+const char test_while_z = 'z'
+const int a = 2
+var int b
+var int e
+var int c
+var int d[5]
+var int i
+var char g
+var int test_cover_2
+var int test_cover_3[5]
+var char test_cover_b
+var char test_cover_c[10]
+var char test_function_1
+var int test_while
+var int test_function_2
+int Test_Function_1()
 para int n
-para int i
-const int ONE = 1
-var int j
-var char tmp
-t3 = n - 1
-i >= t3
+t3 = n * n
+t0 = n + t3
+ret t0
+int Test_Function_2()
+para int n
+n <= 0
 IfBegin
 BZ Label_0
-j = 0
-LoopSaveRegStatus
-Label_2:
-j < n
-BZ Label_3
-t18 = arr[j]
-PrintfTypeDef charType 
-printf t18
-j = j + 1
-LoopRestoreRegStatus
-GOTO Label_2
-Label_3:
-LoopEnd
-PrintfTypeDef strType 
-printf "\n"
-ret 
-GOTO Label_1
+t12 = -1
+ret t12
+IfRestoreRegs
 Label_0:
-ElseBegin
-t25 = i + 1
-push n
-push t25
-SaveEnvironment
-call arrange
-RestoreEnvironment
-j = i
-j = j + ONE
-LoopSaveRegStatus
+IfEnd
+n == 1
+IfBegin
+BZ Label_2
+ret 1
+IfRestoreRegs
+Label_2:
+IfEnd
+n == 2
+IfBegin
+BZ Label_4
+ret 1
+IfRestoreRegs
 Label_4:
-j < n
-BZ Label_5
-t45 = arr[i]
-t54 = arr[j]
-t45 != t54
+IfEnd
+t37 = n - 1
+push t37
+SaveEnvironment
+call Test_Function_2
+RestoreEnvironment
+t33 = RET
+t45 = n - 2
+push t45
+SaveEnvironment
+call Test_Function_2
+RestoreEnvironment
+t42 = RET
+t33 = t33 + t42
+ret t33
+void test_cover()
+const char test_cover_a = 'A'
+const int test_cover_1 = -1
+var int test_cover_2
+var int test_cover_3[6]
+var char test_cover_b
+var char test_cover_c[5]
+t50 = -2
+test_cover_2 = t50
+t56 = -3
+test_cover_3[3] = t56
+test_cover_b = 'B'
+test_cover_c[3] = 'C'
+PrintfTypeDef charType 
+printf test_cover_a
+PrintfTypeDef intType 
+printf test_cover_1
+ret 
+int f()
+para int z
+var int b
+b = 3 * -1
+b = b + z
+ret b
+void h()
+para int y
+para char x
+t89 = y * y
+e = x + t89
+ret 
+ret 
+char l()
+ret 'l'
+void Test_IF()
+para char test_if
+test_if <= '0'
 IfBegin
 BZ Label_6
-t60 = arr[i]
-t69 = arr[j]
-arr[i] = t69
-arr[j] = t60
-t82 = i + 1
-push n
-push t82
-SaveEnvironment
-call arrange
-RestoreEnvironment
-IfRestoreRegs
+PrintfTypeDef strType 
+printf "test_if_error_1"
+GOTO Label_7
 Label_6:
-IfEnd
-j = j + 1
-LoopRestoreRegStatus
-GOTO Label_4
-Label_5:
-LoopEnd
-j = i
-j = j + 1
-LoopSaveRegStatus
-Label_8:
-n > j
-BZ Label_9
-t100 = j - 1
-t99 = arr[t100]
-t105 = j + -1
-t112 = arr[j]
-arr[t105] = t112
-arr[j] = t99
-j = j + 1
-LoopRestoreRegStatus
-GOTO Label_8
-Label_9:
-LoopEnd
-ElseEnd
-Label_1:
+ElseBegin
+test_if >= 'A'
+IfBegin
+BZ Label_8
+test_if > 'a'
+IfBegin
+BZ Label_10
+PrintfTypeDef strType 
+printf "test_if_error_3"
 ret 
-void main()
-arr[0] = 'a'
-arr[1] = 'b'
-arr[2] = 'c'
-arr[3] = 'd'
-arr[4] = 'e'
-arr[5] = 'f'
-push 5
-push 0
+IfRestoreRegs
+Label_10:
+IfEnd
+test_if == '_'
+IfBegin
+BZ Label_12
+PrintfTypeDef strType charType 
+printf "test_if_right,the char is " test_if
+ret 
+GOTO Label_13
+Label_12:
+ElseBegin
+PrintfTypeDef strType 
+printf "test_if_error_4"
+ret 
+ElseEnd
+Label_13:
+GOTO Label_9
+Label_8:
+ElseBegin
+PrintfTypeDef strType 
+printf "test_if_error_2"
+ret 
+ElseEnd
+Label_9:
+ElseEnd
+Label_7:
+ret 
+void Test_While()
+para int test_while
+var int count1
+var int count2
+var int count3
+count1 = 0
+count2 = 0
+count3 = 0
+LoopSaveRegStatus
+Label_14:
+test_while < 'z'
+BZ Label_15
+LoopSaveRegStatus
+Label_16:
+test_while <= 'Z'
+BZ Label_17
+LoopSaveRegStatus
+Label_18:
+test_while < 'A'
+BZ Label_19
+count1 = count1 + 1
+test_while = test_while + 1
+LoopRestoreRegStatus
+GOTO Label_18
+Label_19:
+LoopEnd
+count2 = count2 + 2
+test_while = test_while + 1
+LoopRestoreRegStatus
+GOTO Label_16
+Label_17:
+LoopEnd
+count3 = count3 + 3
+test_while = test_while + 1
+LoopRestoreRegStatus
+GOTO Label_14
+Label_15:
+LoopEnd
+PrintfTypeDef strType intType 
+printf "the count1 is " count1
+PrintfTypeDef strType intType 
+printf "the count2 is " count2
+PrintfTypeDef strType intType 
+printf "the count3 is " count3
+PrintfTypeDef strType intType 
+printf "the test_while is " test_while
+ret 
+void Test_Do_While()
+para int test_while
+var int count1
+var int count2
+var int count3
+count1 = 0
+count2 = 0
+count3 = 0
+LoopSaveRegStatus
+Label_20:
+LoopSaveRegStatus
+Label_21:
+LoopSaveRegStatus
+Label_22:
+count1 = count1 + 1
+test_while = test_while + 1
+test_while < 'A'
+BNZ Label_22
+LoopEnd
+count2 = count2 + 1
+test_while = test_while + 1
+test_while <= 'Z'
+BNZ Label_21
+LoopEnd
+count3 = count3 + 1
+test_while = test_while + 1
+test_while < 'z'
+BNZ Label_20
+LoopEnd
+PrintfTypeDef strType intType 
+printf "the count1 is " count1
+PrintfTypeDef strType intType 
+printf "the count2 is " count2
+PrintfTypeDef strType intType 
+printf "the count3 is " count3
+PrintfTypeDef strType intType 
+printf "test_while is " test_while
+ret 
+int test_array()
+var int array_int[5]
+var int i
+var int result
+var char array_char[5]
+array_char[0] = '1'
+array_char[1] = '1'
+array_char[2] = '/'
+array_char[3] = '-'
+array_char[4] = 'K'
+i = 0
+LoopSaveRegStatus
+Label_23:
+i < 5
+BZ Label_24
+t344 = i * 5
+t344 = t344 + 1
+array_int[i] = t344
+i = i + 1
+LoopRestoreRegStatus
+GOTO Label_23
+Label_24:
+LoopEnd
+i = 0
+result = 0
+LoopSaveRegStatus
+Label_25:
+i < 5
+BZ Label_26
+t371 = array_int[i]
+t375 = array_char[i]
+t370 = t371 * t375
+result = result + t370
+i = i + 1
+LoopRestoreRegStatus
+GOTO Label_25
+Label_26:
+LoopEnd
+ret result
+char test_expression()
+t387 = 'A'
+t390 = 'd'
+push 2
 SaveEnvironment
-call arrange
+call Test_Function_1
 RestoreEnvironment
+t398 = RET
+push t398
+SaveEnvironment
+call Test_Function_1
+RestoreEnvironment
+t394 = RET
+push t394
+SaveEnvironment
+call Test_Function_1
+RestoreEnvironment
+t392 = RET
+t390 = t390 * t392
+t387 = t387 + t390
+t387 != 180665
+IfBegin
+BZ Label_27
+ret 'a'
+IfRestoreRegs
+Label_27:
+IfEnd
+t412 = '+' * -3
+t411 = -t412
+t411 = t411 + -0
+t419 = 'a' - 'b'
+t417 = -100 * t419
+t411 = t411 - t417
+t411 != 29
+IfBegin
+BZ Label_29
+ret 'b'
+IfRestoreRegs
+Label_29:
+IfEnd
+t433 = test_cover_3[3]
+t431 = -t433
+t439 = 1000 - 0
+t437 = t439 - -2
+t437 = t437 / 2
+t431 = t431 + t437
+t431 != 498
+IfBegin
+BZ Label_31
+ret 'c'
+IfRestoreRegs
+Label_31:
+IfEnd
+t453 = 6 / 10
+t459 = 6 + -1
+t457 = 6 / t459
+t457 = t457 * 7
+t466 = test_cover_c[3]
+t457 = t457 * t466
+t453 = t453 - t457
+t470 = -693
+t453 != t470
+IfBegin
+BZ Label_33
+ret 'd'
+IfRestoreRegs
+Label_33:
+IfEnd
+t483 = 6 - 3
+t482 = t483 * 7
+t480 = t482 + 5
+t479 = t480 * 8
+t477 = t479 + 9
+t476 = t477 * -10
+t476 = t476 + 11
+t499 = -2159
+t476 != t499
+IfBegin
+BZ Label_35
+ret 'e'
+IfRestoreRegs
+Label_35:
+IfEnd
+ret 'R'
+void main()
+var int test_function_2
+scanf test_function_1 test_function_2
+scanf test_cover_2 test_cover_b
+scanf test_while
+t524 = test_function_1 - 'a'
+push t524
+SaveEnvironment
+call Test_Function_1
+RestoreEnvironment
+t520 = RET
+push t520
+SaveEnvironment
+call Test_Function_1
+RestoreEnvironment
+t516 = RET
+push t516
+SaveEnvironment
+call Test_Function_1
+RestoreEnvironment
+t512 = RET
+push t512
+SaveEnvironment
+call Test_Function_1
+RestoreEnvironment
+t508 = RET
+PrintfTypeDef intType 
+printf t508
+push test_function_2
+SaveEnvironment
+call Test_Function_2
+RestoreEnvironment
+t529 = RET
+PrintfTypeDef intType 
+printf t529
+test_cover_3[3] = 3
+test_cover_c[3] = 'c'
+SaveEnvironment
+call test_cover
+RestoreEnvironment
+PrintfTypeDef intType 
+printf test_cover_2
+PrintfTypeDef charType 
+printf test_cover_b
+t556 = test_cover_3[3]
+PrintfTypeDef intType 
+printf t556
+t562 = test_cover_c[3]
+PrintfTypeDef charType 
+printf t562
+PrintfTypeDef strType 
+printf "assign to int and char"
+scanf c g
+d[2] = 1
+t574 = d[2]
+t574 != 0
+IfBegin
+BZ Label_37
+t582 = d[2]
+b = c + t582
+GOTO Label_38
+Label_37:
+ElseBegin
+t592 = d[2]
+push t592
+SaveEnvironment
+call f
+RestoreEnvironment
+b = RET
+ElseEnd
+Label_38:
+PrintfTypeDef strType intType 
+printf "if_else" b
+a > 0
+IfBegin
+BZ Label_39
+b = c
+IfRestoreRegs
+Label_39:
+IfEnd
+PrintfTypeDef strType intType 
+printf "only if" b
+i = 0
+LoopSaveRegStatus
+Label_41:
+i < 5
+BZ Label_42
+t624 = d[2]
+c = c + t624
+i = i + 1
+LoopRestoreRegStatus
+GOTO Label_41
+Label_42:
+LoopEnd
+PrintfTypeDef strType intType 
+printf "while" c
+LoopSaveRegStatus
+Label_43:
+i = i - 1
+i >= 0
+BNZ Label_43
+LoopEnd
+PrintfTypeDef strType intType 
+printf "do_while" i
+t652 = d[2]
+PrintfTypeDef strType intType 
+printf "d[2] before h" t652
+t661 = d[2]
+push c
+push t661
+SaveEnvironment
+call h
+RestoreEnvironment
+t667 = d[2]
+PrintfTypeDef strType intType 
+printf "d[2] after h" t667
+i = 0
+LoopSaveRegStatus
+Label_44:
+i < 5
+BZ Label_45
+t681 = d[2]
+c = t681 + 1
+t687 = 2
+t690 = e
+SaveEnvironment
+call l
+RestoreEnvironment
+t693 = RET
+t690 = t690 + t693
+d[t687] = t690
+i = i + 1
+LoopRestoreRegStatus
+GOTO Label_44
+Label_45:
+LoopEnd
+t698 = d[2]
+PrintfTypeDef strType intType 
+printf "call_for" t698
+PrintfTypeDef strType 
+printf "Constant and parameter have the same name"
+push '_'
+SaveEnvironment
+call Test_IF
+RestoreEnvironment
+push '0'
+SaveEnvironment
+call Test_While
+RestoreEnvironment
+push '0'
+SaveEnvironment
+call Test_Do_While
+RestoreEnvironment
+SaveEnvironment
+call test_array
+RestoreEnvironment
+t717 = RET
+PrintfTypeDef strType intType 
+printf "test_array is " t717
+SaveEnvironment
+call test_expression
+RestoreEnvironment
+t721 = RET
+PrintfTypeDef charType 
+printf t721
+PrintfTypeDef strType 
+printf ""
+t725 = -100
+PrintfTypeDef intType 
+printf t725
+PrintfTypeDef charType 
+printf 'L'
+PrintfTypeDef strType 
+printf " !#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~"
 Exit
