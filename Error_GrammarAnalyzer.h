@@ -75,7 +75,7 @@ private:
 
     void statement(VariableType &returnType);   // undefined name
 
-    void conditional_statement();
+    void conditional_statement(VariableType &returnType);
 
     void condition();   // wrong type in condition
 

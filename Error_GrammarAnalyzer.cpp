@@ -532,7 +532,7 @@ void Error_GrammarAnalyzer::statement(VariableType &returnType) {
     returnType = voidType;
     if (sym_type == "IFTK") {
         // conditional statement
-        conditional_statement();
+        conditional_statement(returnType);
     } else if (sym_type == "WHILETK" || sym_type == "DOTK" || sym_type == "FORTK") {
         // loop statement
         loop_statement();
@@ -636,7 +636,7 @@ void Error_GrammarAnalyzer::statement(VariableType &returnType) {
     result.insert(result.end() - 1, "<语句>");
 }
 
-void Error_GrammarAnalyzer::conditional_statement() {
+void Error_GrammarAnalyzer::conditional_statement(VariableType &returnType) {
     SYMTYPE_ASSERT("IFTK");
 
     getsym();
@@ -653,13 +653,13 @@ void Error_GrammarAnalyzer::conditional_statement() {
 
     getsym();
     output_current_sym();
-    VariableType uselessType;   // useless
-    statement(uselessType);
+
+    statement(returnType);
 
     if (sym_type == "ELSETK") {
         getsym();
         output_current_sym();
-        statement(uselessType);
+        statement(returnType);
     }
 
     result.insert(result.end() - 1, "<条件语句>");
@@ -937,7 +937,7 @@ void Error_GrammarAnalyzer::call_with_returnValue(VariableType &returnType) {
                     } else {
                         type2 = *iter2;
                     }
-                    
+
                     if (type1 != type2) {
                         throw WrongFuncVariableType{};
                     }

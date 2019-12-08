@@ -21,7 +21,8 @@ using namespace std;
 #define LASTCHAR curString[curString.length()-1]
 
 // Input the file name
-Error_LexicalAnalyzer::Error_LexicalAnalyzer(const string &fin_name, vector<Error>* _allErrors) : allErrors(_allErrors) {
+Error_LexicalAnalyzer::Error_LexicalAnalyzer(const string &fin_name, vector<Error> *_allErrors) : allErrors(
+        _allErrors) {
     const char *f = fin_name.c_str();
     fin = fopen(f, "r");
     curPos = 0;
@@ -214,6 +215,10 @@ void Error_LexicalAnalyzer::handle_errors(ErrorTypes errorType) {
 // Get current element
 string Error_LexicalAnalyzer::currentElem(int &line) {
     line = curLine;
+    if (curLine == 1 && result[curLine - 1].empty()) {
+        pointerNext();
+        // printf("%d\n", curLine);
+    }
     return result[curLine - 1][curPos];
 }
 
@@ -296,7 +301,7 @@ int Error_LexicalAnalyzer::pointerLast() {
 
 int Error_LexicalAnalyzer::pointerNext() {
     // if curPos points to the last element of current line, add curLine
-    if (curPos >= result[curLine - 1].size() - 1) {
+    if (curPos >= (int) result[curLine - 1].size() - 1) {
         curLine++;
         if (curLine > result.size()) {
             return 0;
