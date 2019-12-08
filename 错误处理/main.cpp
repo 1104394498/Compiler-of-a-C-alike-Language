@@ -1,4 +1,4 @@
-﻿#include "GrammerAnalyzer.h"
+﻿#include "Error_GrammarAnalyzer.h"
 #include <vector>
 #include <algorithm>
 
@@ -8,7 +8,7 @@ int main() {
     FILE *fp_error = fopen("error.txt", "w");
     vector<Error> allErrors;
 
-    GrammarAnalyzer grammarAnalyzer{"testfile.txt", &allErrors};
+    Error_GrammarAnalyzer grammarAnalyzer{"testfile.txt", &allErrors};
 
     sort(allErrors.begin(), allErrors.end());
     for (auto &e : allErrors) {

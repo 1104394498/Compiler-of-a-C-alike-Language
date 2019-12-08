@@ -20,6 +20,7 @@ enum LexicalAnalysisStatus {
     SYMBOL      // Operators and Other Symbols
 };
 
+/*
 enum ErrorTypes {
     QUOTATION_MARK_NOT_MATCH,
     INVALID_CHAR
@@ -45,6 +46,7 @@ private:
     int lineNO;
     char errorType;
 };
+ */
 
 /***** intermediate code ***********/
 enum OperatorType {

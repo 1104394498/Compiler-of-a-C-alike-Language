@@ -1,18 +1,19 @@
-﻿#pragma once
-#ifndef INC_3___LEXICALANALYZER_H
-#define INC_3___LEXICALANALYZER_H
+#pragma once
+#ifndef INC_3___Error_LEXICALANALYZER_H
+#define INC_3___Error_LEXICALANALYZER_H
 
 //#include <cstdlib>
 #include <string>
 #include <vector>
+#include "Error_TypeDefine.h"
 #include "TypeDefine.h"
 
 using namespace std;
 
-class LexicalAnalyzer {
+class Error_LexicalAnalyzer {
 public:
     // Input the file name
-    LexicalAnalyzer(const string &fname, vector<Error> *_allErrors);
+    Error_LexicalAnalyzer(const string &fname, vector<Error> *_allErrors);
 
     // Get current element
     string currentElem(int &line);
@@ -73,4 +74,4 @@ private:
 };
 
 
-#endif //INC_3___LEXICALANALYZER_H
+#endif //INC_3___Error_LEXICALANALYZER_H

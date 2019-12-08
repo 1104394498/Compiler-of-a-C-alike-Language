@@ -1,6 +1,6 @@
-#include "LexicalAnalyzer.h"
+#include "Error_LexicalAnalyzer.h"
 #include <string>
-#include "TypeDefine.h"
+#include "Error_TypeDefine.h"
 
 using namespace std;
 
@@ -20,7 +20,7 @@ using namespace std;
 #define LASTCHAR curString[curString.length()-1]
 
 // Input the file name
-LexicalAnalyzer::LexicalAnalyzer(const string &fin_name, vector<Error>* _allErrors) : allErrors(_allErrors) {
+Error_LexicalAnalyzer::Error_LexicalAnalyzer(const string &fin_name, vector<Error>* _allErrors) : allErrors(_allErrors) {
     const char *f = fin_name.c_str();
     fin = fopen(f, "r");
     curPos = 0;
@@ -32,7 +32,7 @@ LexicalAnalyzer::LexicalAnalyzer(const string &fin_name, vector<Error>* _allErro
     fclose(fin);
 }
 
-void LexicalAnalyzer::analyze() {
+void Error_LexicalAnalyzer::analyze() {
     char c = get_char();
     while (true) {
         if (status == BEGIN) {
@@ -110,7 +110,7 @@ void LexicalAnalyzer::analyze() {
     }
 }
 
-void LexicalAnalyzer::output_STRING(string &curString, LexicalAnalysisStatus &status) {
+void Error_LexicalAnalyzer::output_STRING(string &curString, LexicalAnalysisStatus &status) {
     if (COMSTR("const")) {
         OUTPUT("CONSTTK");
     } else if (COMSTR("int")) {
@@ -142,19 +142,19 @@ void LexicalAnalyzer::output_STRING(string &curString, LexicalAnalysisStatus &st
     }
 }
 
-void LexicalAnalyzer::output_NUMSTR(string &curString, LexicalAnalysisStatus &status) {
+void Error_LexicalAnalyzer::output_NUMSTR(string &curString, LexicalAnalysisStatus &status) {
     OUTPUT("INTCON");
 }
 
-void LexicalAnalyzer::output_CHARCONST(string &curString, LexicalAnalysisStatus &status) {
+void Error_LexicalAnalyzer::output_CHARCONST(string &curString, LexicalAnalysisStatus &status) {
     OUTPUT("CHARCON");
 }
 
-void LexicalAnalyzer::output_STRINGCONST(string &curString, LexicalAnalysisStatus &status) {
+void Error_LexicalAnalyzer::output_STRINGCONST(string &curString, LexicalAnalysisStatus &status) {
     OUTPUT("STRCON");
 }
 
-void LexicalAnalyzer::output_SYMBOL(string &curString, LexicalAnalysisStatus &status) {
+void Error_LexicalAnalyzer::output_SYMBOL(string &curString, LexicalAnalysisStatus &status) {
     if (curString.length() == 1) {
         if (COMSTR("+")) {
             OUTPUT("PLUS");
@@ -205,19 +205,19 @@ void LexicalAnalyzer::output_SYMBOL(string &curString, LexicalAnalysisStatus &st
     }
 }
 
-void LexicalAnalyzer::handle_errors(ErrorTypes errorType) {
+void Error_LexicalAnalyzer::handle_errors(ErrorTypes errorType) {
     // exit(1);
     allErrors->emplace_back(lineNO, 'a');
 }
 
 // Get current element
-string LexicalAnalyzer::currentElem(int &line) {
+string Error_LexicalAnalyzer::currentElem(int &line) {
     line = curLine;
     return result[curLine - 1][curPos];
 }
 
 // Get last element
-string LexicalAnalyzer::lastElem(int &line) {
+string Error_LexicalAnalyzer::lastElem(int &line) {
     if (curPos == 0) {
         curLine--;
         if (curLine <= 0) {
@@ -239,7 +239,7 @@ string LexicalAnalyzer::lastElem(int &line) {
 }
 
 // Get next element
-string LexicalAnalyzer::nextElem(int &line) {
+string Error_LexicalAnalyzer::nextElem(int &line) {
     // if curPos points to the last element of current line, add curLine
     if (curPos >= result[curLine - 1].size() - 1) {
         curLine++;
@@ -262,17 +262,17 @@ string LexicalAnalyzer::nextElem(int &line) {
     return result[curLine - 1][curPos];
 }
 
-int LexicalAnalyzer::isLetter(char c) {
+int Error_LexicalAnalyzer::isLetter(char c) {
     return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || c == '_';
 }
 
-int LexicalAnalyzer::isSymbol(char c) {
+int Error_LexicalAnalyzer::isSymbol(char c) {
     return c == '+' || c == '-' || c == '*' || c == '/' || c == '<' || c == '='
            || c == '>' || c == '!' || c == ';' || c == ',' || c == '(' || c == ')'
            || c == '[' || c == ']' || c == '{' || c == '}';
 }
 
-int LexicalAnalyzer::pointerLast() {
+int Error_LexicalAnalyzer::pointerLast() {
     if (curPos == 0) {
         curLine--;
         if (curLine <= 0) {
@@ -293,7 +293,7 @@ int LexicalAnalyzer::pointerLast() {
     return 1;
 }
 
-int LexicalAnalyzer::pointerNext() {
+int Error_LexicalAnalyzer::pointerNext() {
     // if curPos points to the last element of current line, add curLine
     if (curPos >= result[curLine - 1].size() - 1) {
         curLine++;
@@ -315,7 +315,7 @@ int LexicalAnalyzer::pointerNext() {
     return 1;
 }
 
-char LexicalAnalyzer::get_char() {
+char Error_LexicalAnalyzer::get_char() {
     char c = (char) getc(fin);
     if (c == '\r') {
         // 判断是否为\r\n

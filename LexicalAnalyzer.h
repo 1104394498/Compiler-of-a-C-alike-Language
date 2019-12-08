@@ -6,6 +6,7 @@
 #include <string>
 #include <vector>
 #include "TypeDefine.h"
+#include "Error_TypeDefine.h"
 
 using namespace std;
 

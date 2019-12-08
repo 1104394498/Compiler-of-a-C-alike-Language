@@ -135,6 +135,32 @@ CMakeFiles/MIPScode.dir/MipsGenerator.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/MIPScode.dir/MipsGenerator.cpp.s"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Users/wsz/Library/Mobile Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/MipsGenerator.cpp" -o CMakeFiles/MIPScode.dir/MipsGenerator.cpp.s
 
+CMakeFiles/MIPScode.dir/Error_GrammarAnalyzer.cpp.o: CMakeFiles/MIPScode.dir/flags.make
+CMakeFiles/MIPScode.dir/Error_GrammarAnalyzer.cpp.o: ../Error_GrammarAnalyzer.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/Users/wsz/Library/Mobile Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/MIPScode.dir/Error_GrammarAnalyzer.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MIPScode.dir/Error_GrammarAnalyzer.cpp.o -c "/Users/wsz/Library/Mobile Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/Error_GrammarAnalyzer.cpp"
+
+CMakeFiles/MIPScode.dir/Error_GrammarAnalyzer.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/MIPScode.dir/Error_GrammarAnalyzer.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/Users/wsz/Library/Mobile Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/Error_GrammarAnalyzer.cpp" > CMakeFiles/MIPScode.dir/Error_GrammarAnalyzer.cpp.i
+
+CMakeFiles/MIPScode.dir/Error_GrammarAnalyzer.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/MIPScode.dir/Error_GrammarAnalyzer.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Users/wsz/Library/Mobile Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/Error_GrammarAnalyzer.cpp" -o CMakeFiles/MIPScode.dir/Error_GrammarAnalyzer.cpp.s
+
+CMakeFiles/MIPScode.dir/Error_LexicalAnalyzer.cpp.o: CMakeFiles/MIPScode.dir/flags.make
+CMakeFiles/MIPScode.dir/Error_LexicalAnalyzer.cpp.o: ../Error_LexicalAnalyzer.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/Users/wsz/Library/Mobile Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/MIPScode.dir/Error_LexicalAnalyzer.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/MIPScode.dir/Error_LexicalAnalyzer.cpp.o -c "/Users/wsz/Library/Mobile Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/Error_LexicalAnalyzer.cpp"
+
+CMakeFiles/MIPScode.dir/Error_LexicalAnalyzer.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/MIPScode.dir/Error_LexicalAnalyzer.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/Users/wsz/Library/Mobile Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/Error_LexicalAnalyzer.cpp" > CMakeFiles/MIPScode.dir/Error_LexicalAnalyzer.cpp.i
+
+CMakeFiles/MIPScode.dir/Error_LexicalAnalyzer.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/MIPScode.dir/Error_LexicalAnalyzer.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Users/wsz/Library/Mobile Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/Error_LexicalAnalyzer.cpp" -o CMakeFiles/MIPScode.dir/Error_LexicalAnalyzer.cpp.s
+
 # Object files for target MIPScode
 MIPScode_OBJECTS = \
 "CMakeFiles/MIPScode.dir/GrammerAnalyzer.cpp.o" \
@@ -142,7 +168,9 @@ MIPScode_OBJECTS = \
 "CMakeFiles/MIPScode.dir/main.cpp.o" \
 "CMakeFiles/MIPScode.dir/SymbolTable.cpp.o" \
 "CMakeFiles/MIPScode.dir/Optimizer.cpp.o" \
-"CMakeFiles/MIPScode.dir/MipsGenerator.cpp.o"
+"CMakeFiles/MIPScode.dir/MipsGenerator.cpp.o" \
+"CMakeFiles/MIPScode.dir/Error_GrammarAnalyzer.cpp.o" \
+"CMakeFiles/MIPScode.dir/Error_LexicalAnalyzer.cpp.o"
 
 # External object files for target MIPScode
 MIPScode_EXTERNAL_OBJECTS =
@@ -153,9 +181,11 @@ MIPScode: CMakeFiles/MIPScode.dir/main.cpp.o
 MIPScode: CMakeFiles/MIPScode.dir/SymbolTable.cpp.o
 MIPScode: CMakeFiles/MIPScode.dir/Optimizer.cpp.o
 MIPScode: CMakeFiles/MIPScode.dir/MipsGenerator.cpp.o
+MIPScode: CMakeFiles/MIPScode.dir/Error_GrammarAnalyzer.cpp.o
+MIPScode: CMakeFiles/MIPScode.dir/Error_LexicalAnalyzer.cpp.o
 MIPScode: CMakeFiles/MIPScode.dir/build.make
 MIPScode: CMakeFiles/MIPScode.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="/Users/wsz/Library/Mobile Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable MIPScode"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="/Users/wsz/Library/Mobile Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX executable MIPScode"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/MIPScode.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

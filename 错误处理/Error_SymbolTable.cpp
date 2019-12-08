@@ -1,10 +1,10 @@
-#include "SymbolTable.h"
+#include "Error_SymbolTable.h"
 
-void SymbolTable::pushStack() {
+void Error_SymbolTable::pushStack() {
     table.push_back(new vector<Item *>);
 }
 
-void SymbolTable::pushStack(vector<Item *> *stack) {
+void Error_SymbolTable::pushStack(vector<Item *> *stack) {
     // only used for parameter table of functions
     bool nameDuplicate = false;
     for (auto iter1 = stack->begin(); iter1 != stack->end(); iter1++) {
@@ -38,7 +38,7 @@ void SymbolTable::pushStack(vector<Item *> *stack) {
     }
 }
 
-void SymbolTable::popStack() {
+void Error_SymbolTable::popStack() {
     vector<Item *> *p = table.back();
     table.pop_back();
     if (!p->empty()) {
@@ -59,7 +59,7 @@ void SymbolTable::popStack() {
     delete (p);
 }
 
-const Item* SymbolTable::searchName(const string &name) {
+const Item* Error_SymbolTable::searchName(const string &name) {
     auto iterator1 = table.rbegin();
     while (iterator1 != table.rend()) {
         auto iterator2 = (*iterator1)->begin();
@@ -74,7 +74,7 @@ const Item* SymbolTable::searchName(const string &name) {
     return nullptr;
 }
 
-void SymbolTable::addName(const string &name, VariableType type, void *info) {
+void Error_SymbolTable::addName(const string &name, VariableType type, void *info) {
     for (Item *&item : *table.back()) {
         // only check current symbol stack
         if (item->name == name) {
@@ -103,13 +103,13 @@ void SymbolTable::addName(const string &name, VariableType type, void *info) {
     table.back()->push_back(new Item{name, type, info});
 }
 
-SymbolTable::~SymbolTable() {   // memory leak
+Error_SymbolTable::~Error_SymbolTable() {   // memory leak
     while (!table.empty()) {
         popStack();
     }
 }
 
-void SymbolTable::checkFuncVariable(const string &name, const FuncInfo &funcInfo) {
+void Error_SymbolTable::checkFuncVariable(const string &name, const FuncInfo &funcInfo) {
     // request: name is a function name existing in symbol table
     auto iterator1 = table.rbegin();
     while (iterator1 != table.rend()) {

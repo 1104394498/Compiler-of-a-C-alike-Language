@@ -123,6 +123,60 @@ MIPScode/fast:
 	$(MAKE) -f CMakeFiles/MIPScode.dir/build.make CMakeFiles/MIPScode.dir/build
 .PHONY : MIPScode/fast
 
+Error_GrammarAnalyzer.o: Error_GrammarAnalyzer.cpp.o
+
+.PHONY : Error_GrammarAnalyzer.o
+
+# target to build an object file
+Error_GrammarAnalyzer.cpp.o:
+	$(MAKE) -f CMakeFiles/MIPScode.dir/build.make CMakeFiles/MIPScode.dir/Error_GrammarAnalyzer.cpp.o
+.PHONY : Error_GrammarAnalyzer.cpp.o
+
+Error_GrammarAnalyzer.i: Error_GrammarAnalyzer.cpp.i
+
+.PHONY : Error_GrammarAnalyzer.i
+
+# target to preprocess a source file
+Error_GrammarAnalyzer.cpp.i:
+	$(MAKE) -f CMakeFiles/MIPScode.dir/build.make CMakeFiles/MIPScode.dir/Error_GrammarAnalyzer.cpp.i
+.PHONY : Error_GrammarAnalyzer.cpp.i
+
+Error_GrammarAnalyzer.s: Error_GrammarAnalyzer.cpp.s
+
+.PHONY : Error_GrammarAnalyzer.s
+
+# target to generate assembly for a file
+Error_GrammarAnalyzer.cpp.s:
+	$(MAKE) -f CMakeFiles/MIPScode.dir/build.make CMakeFiles/MIPScode.dir/Error_GrammarAnalyzer.cpp.s
+.PHONY : Error_GrammarAnalyzer.cpp.s
+
+Error_LexicalAnalyzer.o: Error_LexicalAnalyzer.cpp.o
+
+.PHONY : Error_LexicalAnalyzer.o
+
+# target to build an object file
+Error_LexicalAnalyzer.cpp.o:
+	$(MAKE) -f CMakeFiles/MIPScode.dir/build.make CMakeFiles/MIPScode.dir/Error_LexicalAnalyzer.cpp.o
+.PHONY : Error_LexicalAnalyzer.cpp.o
+
+Error_LexicalAnalyzer.i: Error_LexicalAnalyzer.cpp.i
+
+.PHONY : Error_LexicalAnalyzer.i
+
+# target to preprocess a source file
+Error_LexicalAnalyzer.cpp.i:
+	$(MAKE) -f CMakeFiles/MIPScode.dir/build.make CMakeFiles/MIPScode.dir/Error_LexicalAnalyzer.cpp.i
+.PHONY : Error_LexicalAnalyzer.cpp.i
+
+Error_LexicalAnalyzer.s: Error_LexicalAnalyzer.cpp.s
+
+.PHONY : Error_LexicalAnalyzer.s
+
+# target to generate assembly for a file
+Error_LexicalAnalyzer.cpp.s:
+	$(MAKE) -f CMakeFiles/MIPScode.dir/build.make CMakeFiles/MIPScode.dir/Error_LexicalAnalyzer.cpp.s
+.PHONY : Error_LexicalAnalyzer.cpp.s
+
 GrammerAnalyzer.o: GrammerAnalyzer.cpp.o
 
 .PHONY : GrammerAnalyzer.o
@@ -294,6 +348,12 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... MIPScode"
+	@echo "... Error_GrammarAnalyzer.o"
+	@echo "... Error_GrammarAnalyzer.i"
+	@echo "... Error_GrammarAnalyzer.s"
+	@echo "... Error_LexicalAnalyzer.o"
+	@echo "... Error_LexicalAnalyzer.i"
+	@echo "... Error_LexicalAnalyzer.s"
 	@echo "... GrammerAnalyzer.o"
 	@echo "... GrammerAnalyzer.i"
 	@echo "... GrammerAnalyzer.s"

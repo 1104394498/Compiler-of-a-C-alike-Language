@@ -1,4 +1,5 @@
 ﻿#include "GrammerAnalyzer.h"
+#include "Error_GrammarAnalyzer.h"
 #include <vector>
 #include <algorithm>
 #include "Optimizer.h"
@@ -8,10 +9,28 @@
 
 using namespace std;
 bool runOptimize = true;
+bool error_handle = true;
 
 int main() {
     vector<Error> allErrors;
+    if (error_handle) {
+        // Error Handle
+        FILE *fp_error = fopen("error.txt", "w");
 
+        Error_GrammarAnalyzer error_grammarAnalyzer{"testfile.txt", &allErrors};
+
+        sort(allErrors.begin(), allErrors.end());
+        for (auto &e : allErrors) {
+            fprintf(fp_error, "%d %c\n", e.getLineNO(), e.getErrorType());
+        }
+
+        fclose(fp_error);
+        if (!allErrors.empty())
+            exit(0);
+    }
+
+    allErrors.clear();
+    // Normal Handle
     vector<IntermediateCmd> intermediateCodes;
 
     GrammarAnalyzer grammarAnalyzer{"testfile.txt", &allErrors, &intermediateCodes};

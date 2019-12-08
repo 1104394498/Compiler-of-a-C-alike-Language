@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/MIPScode.dir/Error_GrammarAnalyzer.cpp.o"
+  "CMakeFiles/MIPScode.dir/Error_LexicalAnalyzer.cpp.o"
   "CMakeFiles/MIPScode.dir/GrammerAnalyzer.cpp.o"
   "CMakeFiles/MIPScode.dir/LexicalAnalyzer.cpp.o"
   "CMakeFiles/MIPScode.dir/MipsGenerator.cpp.o"

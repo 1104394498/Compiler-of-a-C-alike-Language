@@ -1,4 +1,4 @@
-﻿#include "GrammerAnalyzer.h"
+#include "Error_GrammarAnalyzer.h"
 #include <fstream>
 #include <string>
 #include <iostream>
@@ -38,8 +38,8 @@ using namespace std;
         handle_errors(exception);\
     }
 
-GrammarAnalyzer::GrammarAnalyzer(const string &fin_name, vector<Error> *_allErrors) : allErrors{_allErrors} {
-    ptr_lexicalAnalyzer = new LexicalAnalyzer{fin_name, _allErrors};
+Error_GrammarAnalyzer::Error_GrammarAnalyzer(const string &fin_name, vector<Error> *_allErrors) : allErrors{_allErrors} {
+    ptr_lexicalAnalyzer = new Error_LexicalAnalyzer{fin_name, _allErrors};
 
     // start recursive descent
     getsym();
@@ -50,7 +50,7 @@ GrammarAnalyzer::GrammarAnalyzer(const string &fin_name, vector<Error> *_allErro
 }
 
 // When ptr of lexicalAnalyzer is at the end of the vector, return 0; else return 1.
-int GrammarAnalyzer::getsym() {
+int Error_GrammarAnalyzer::getsym() {
     static bool reach_end = false;
     if (reach_end) {
         // If try to get the next element while reaching end, go to handle_errors
@@ -67,17 +67,17 @@ int GrammarAnalyzer::getsym() {
     return ret;
 }
 
-void GrammarAnalyzer::output_current_sym() {
+void Error_GrammarAnalyzer::output_current_sym() {
     result.emplace_back(sym_type + ' ' + sym);
 }
 
-void GrammarAnalyzer::pointer_back(int times) {
+void Error_GrammarAnalyzer::pointer_back(int times) {
     for (int i = 0; i < times; i++) {
         ptr_lexicalAnalyzer->pointerLast();
     }
 }
 
-void GrammarAnalyzer::handle_errors(ErrorException &exception) {
+void Error_GrammarAnalyzer::handle_errors(ErrorException &exception) {
     if (exception.getErrorLine() == -1) {
         allErrors->emplace_back(curLine, exception.getErrorType());
     } else {
@@ -92,11 +92,11 @@ void GrammarAnalyzer::handle_errors(ErrorException &exception) {
      */
 }
 
-void GrammarAnalyzer::handle_errors() {
+void Error_GrammarAnalyzer::handle_errors() {
     exit(1);
 }
 
-void GrammarAnalyzer::program() {
+void Error_GrammarAnalyzer::program() {
     // At the beginning of a program, create a new symbol stack
     symbolTable.pushStack();
 
@@ -155,7 +155,7 @@ void GrammarAnalyzer::program() {
     symbolTable.popStack();
 }
 
-void GrammarAnalyzer::constant_statement() {
+void Error_GrammarAnalyzer::constant_statement() {
     while (true) {
         getsym();
         output_current_sym();
@@ -173,7 +173,7 @@ void GrammarAnalyzer::constant_statement() {
     output_current_sym();
 }
 
-void GrammarAnalyzer::constant_definition() {
+void Error_GrammarAnalyzer::constant_definition() {
     if (sym_type == "INTTK") {
         while (true) {
             getsym();
@@ -266,7 +266,7 @@ void GrammarAnalyzer::constant_definition() {
     result.insert(result.end() - 1, "<常量定义>");
 }
 
-void GrammarAnalyzer::variable_statement() {
+void Error_GrammarAnalyzer::variable_statement() {
     while (true) {
         variable_definition();
         ASSERT_THROW("SEMICN", ShouldHaveSemicolon)
@@ -297,7 +297,7 @@ void GrammarAnalyzer::variable_statement() {
     output_current_sym();
 }
 
-void GrammarAnalyzer::variable_definition() {
+void Error_GrammarAnalyzer::variable_definition() {
     SYMTYPE_TWO_ASSERT("INTTK", "CHARTK");
     VariableType variableType = (sym_type == "INTTK") ? intType : charType;
     while (true) {
@@ -332,7 +332,7 @@ void GrammarAnalyzer::variable_definition() {
     result.insert(result.end() - 1, "<变量定义>");
 }
 
-void GrammarAnalyzer::main_function() {
+void Error_GrammarAnalyzer::main_function() {
     auto *mainFuncInfo = new FuncInfo{voidType, vector<VariableType>{}};
     try {
         // the name "main" belongs to the outer stack in symbolTable
@@ -385,7 +385,7 @@ void GrammarAnalyzer::main_function() {
     symbolTable.popStack();
 }
 
-void GrammarAnalyzer::function_with_return_value() {
+void Error_GrammarAnalyzer::function_with_return_value() {
     // funcInfo will be filled later
     VariableType returnType;
     string funcName;
@@ -444,7 +444,7 @@ void GrammarAnalyzer::function_with_return_value() {
     symbolTable.popStack();
 }
 
-void GrammarAnalyzer::statement_head(VariableType &returnType, string &funcName) {
+void Error_GrammarAnalyzer::statement_head(VariableType &returnType, string &funcName) {
     SYMTYPE_TWO_ASSERT("INTTK", "CHARTK")
     returnType = (sym_type == "INTTK") ? intType : charType;
 
@@ -460,7 +460,7 @@ void GrammarAnalyzer::statement_head(VariableType &returnType, string &funcName)
     output_current_sym();
 }
 
-void GrammarAnalyzer::parameter_table(vector<VariableType> &inputTypes, vector<Item *> *newStack) {
+void Error_GrammarAnalyzer::parameter_table(vector<VariableType> &inputTypes, vector<Item *> *newStack) {
     if (sym_type == "RPARENT") {
         // parameter table is empty
         result.insert(result.end() - 1, "<参数表>");
@@ -499,7 +499,7 @@ void GrammarAnalyzer::parameter_table(vector<VariableType> &inputTypes, vector<I
     output_current_sym();
 }
 
-void GrammarAnalyzer::compound_statement(VariableType &returnType) {
+void Error_GrammarAnalyzer::compound_statement(VariableType &returnType) {
     returnType = voidType;
     if (sym_type == "CONSTTK") {
         constant_statement();
@@ -513,7 +513,7 @@ void GrammarAnalyzer::compound_statement(VariableType &returnType) {
     result.insert(result.end() - 1, "<复合语句>");
 }
 
-void GrammarAnalyzer::statement_array(VariableType &returnType) {
+void Error_GrammarAnalyzer::statement_array(VariableType &returnType) {
     returnType = voidType;
     while (sym_type == "IFTK" || sym_type == "WHILETK" || sym_type == "DOTK" || sym_type == "FORTK"
            || sym_type == "LBRACE" || sym_type == "IDENFR" || sym_type == "SCANFTK" || sym_type == "PRINTFTK" ||
@@ -527,7 +527,7 @@ void GrammarAnalyzer::statement_array(VariableType &returnType) {
     result.insert(result.end() - 1, "<语句列>");
 }
 
-void GrammarAnalyzer::statement(VariableType &returnType) {
+void Error_GrammarAnalyzer::statement(VariableType &returnType) {
     returnType = voidType;
     if (sym_type == "IFTK") {
         // conditional statement
@@ -635,7 +635,7 @@ void GrammarAnalyzer::statement(VariableType &returnType) {
     result.insert(result.end() - 1, "<语句>");
 }
 
-void GrammarAnalyzer::conditional_statement() {
+void Error_GrammarAnalyzer::conditional_statement() {
     SYMTYPE_ASSERT("IFTK");
 
     getsym();
@@ -665,7 +665,7 @@ void GrammarAnalyzer::conditional_statement() {
 
 }
 
-void GrammarAnalyzer::loop_statement() {
+void Error_GrammarAnalyzer::loop_statement() {
     if (sym_type == "WHILETK") {
         getsym();
         output_current_sym();
@@ -764,7 +764,7 @@ void GrammarAnalyzer::loop_statement() {
     result.insert(result.end() - 1, "<循环语句>");
 }
 
-void GrammarAnalyzer::condition() {
+void Error_GrammarAnalyzer::condition() {
     VariableType conditionType = intType;
     VariableType expressionType;
     expression(expressionType);
@@ -794,7 +794,7 @@ void GrammarAnalyzer::condition() {
     result.insert(result.end() - 1, "<条件>");
 }
 
-void GrammarAnalyzer::function_without_return_value() {
+void Error_GrammarAnalyzer::function_without_return_value() {
     // funcInfo will be filled later
     string funcName;
     vector<VariableType> inputTypes;
@@ -859,7 +859,7 @@ void GrammarAnalyzer::function_without_return_value() {
     symbolTable.popStack();
 }
 
-void GrammarAnalyzer::integer() {
+void Error_GrammarAnalyzer::integer() {
     if (sym_type == "MINU" || sym_type == "PLUS") {
         getsym();
         output_current_sym();
@@ -870,7 +870,7 @@ void GrammarAnalyzer::integer() {
     result.insert(result.end() - 1, "<整数>");
 }
 
-void GrammarAnalyzer::unsigned_integer() {
+void Error_GrammarAnalyzer::unsigned_integer() {
     SYMTYPE_ASSERT("INTCON")
     if (sym.length() > 1 && !(sym[0] >= '1' && sym[0] <= '9')) {
         handle_errors();
@@ -881,7 +881,7 @@ void GrammarAnalyzer::unsigned_integer() {
     output_current_sym();
 }
 
-void GrammarAnalyzer::call_with_returnValue(VariableType &returnType) {
+void Error_GrammarAnalyzer::call_with_returnValue(VariableType &returnType) {
     SYMTYPE_ASSERT("IDENFR")
     const Item *find_result = symbolTable.searchName(sym);
     try {
@@ -943,7 +943,7 @@ void GrammarAnalyzer::call_with_returnValue(VariableType &returnType) {
     output_current_sym();
 }
 
-void GrammarAnalyzer::call_without_returnValue() {
+void Error_GrammarAnalyzer::call_without_returnValue() {
     SYMTYPE_ASSERT("IDENFR")
 
     const Item *find_result = symbolTable.searchName(sym);
@@ -1002,7 +1002,7 @@ void GrammarAnalyzer::call_without_returnValue() {
     output_current_sym();
 }
 
-void GrammarAnalyzer::read_statement() {
+void Error_GrammarAnalyzer::read_statement() {
     SYMTYPE_ASSERT("SCANFTK")
 
     getsym();
@@ -1031,7 +1031,7 @@ void GrammarAnalyzer::read_statement() {
     output_current_sym();
 }
 
-void GrammarAnalyzer::print_statement() {
+void Error_GrammarAnalyzer::print_statement() {
     SYMTYPE_ASSERT("PRINTFTK")
 
     getsym();
@@ -1059,7 +1059,7 @@ void GrammarAnalyzer::print_statement() {
     output_current_sym();
 }
 
-void GrammarAnalyzer::return_statement(VariableType &returnType) {
+void Error_GrammarAnalyzer::return_statement(VariableType &returnType) {
     SYMTYPE_ASSERT("RETURNTK")
 
     getsym();
@@ -1077,7 +1077,7 @@ void GrammarAnalyzer::return_statement(VariableType &returnType) {
     output_current_sym();
 }
 
-void GrammarAnalyzer::mystring() {
+void Error_GrammarAnalyzer::mystring() {
     SYMTYPE_ASSERT("STRCON")
     result.emplace_back("<字符串>");
 
@@ -1085,7 +1085,7 @@ void GrammarAnalyzer::mystring() {
     output_current_sym();
 }
 
-void GrammarAnalyzer::expression(VariableType &expressionType) {
+void Error_GrammarAnalyzer::expression(VariableType &expressionType) {
     if (sym_type == "PLUS" || sym_type == "MINU") {
         getsym();
         output_current_sym();
@@ -1103,12 +1103,12 @@ void GrammarAnalyzer::expression(VariableType &expressionType) {
     result.insert(result.end() - 1, "<表达式>");
 }
 
-void GrammarAnalyzer::step() {
+void Error_GrammarAnalyzer::step() {
     unsigned_integer();
     result.insert(result.end() - 1, "<步长>");
 }
 
-void GrammarAnalyzer::assign_statement() {
+void Error_GrammarAnalyzer::assign_statement() {
     SYMTYPE_ASSERT("IDENFR")
 
     CHECK_IDENFR_DEFINE
@@ -1156,7 +1156,7 @@ void GrammarAnalyzer::assign_statement() {
     result.insert(result.end() - 1, "<赋值语句>");
 }
 
-void GrammarAnalyzer::value_parameter_table(vector<VariableType> *call_parameters_type) {
+void Error_GrammarAnalyzer::value_parameter_table(vector<VariableType> *call_parameters_type) {
     if (sym_type != "RPARENT") {
         while (true) {
             VariableType expressionType;
@@ -1174,7 +1174,7 @@ void GrammarAnalyzer::value_parameter_table(vector<VariableType> *call_parameter
     result.insert(result.end() - 1, "<值参数表>");
 }
 
-void GrammarAnalyzer::relational_operator() {
+void Error_GrammarAnalyzer::relational_operator() {
     if (sym_type == "LSS" || sym_type == "LEQ" || sym_type == "GRE"
         || sym_type == "GEQ" || sym_type == "EQL" || sym_type == "NEQ") {
         getsym();
@@ -1184,7 +1184,7 @@ void GrammarAnalyzer::relational_operator() {
     }
 }
 
-void GrammarAnalyzer::item(VariableType &itemType) {
+void Error_GrammarAnalyzer::item(VariableType &itemType) {
     int iterTimes = 1;
     while (true) {
         factor(itemType);
@@ -1203,7 +1203,7 @@ void GrammarAnalyzer::item(VariableType &itemType) {
     result.insert(result.end() - 1, "<项>");
 }
 
-void GrammarAnalyzer::factor(VariableType &factorType) {
+void Error_GrammarAnalyzer::factor(VariableType &factorType) {
     if (sym_type == "IDENFR") {
         const Item *searched_item = symbolTable.searchName(sym);
         try {
@@ -1275,7 +1275,7 @@ void GrammarAnalyzer::factor(VariableType &factorType) {
     result.insert(result.end() - 1, "<因子>");
 }
 
-void GrammarAnalyzer::print(const string &fout_name) {
+void Error_GrammarAnalyzer::print(const string &fout_name) {
     ofstream fout{fout_name};
 
     for (const string &s : result) {

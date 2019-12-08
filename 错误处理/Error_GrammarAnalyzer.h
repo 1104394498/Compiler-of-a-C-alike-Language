@@ -6,14 +6,14 @@
 #include  <string>
 #include <vector>
 #include <set>
-#include "LexicalAnalyzer.h"
-#include "SymbolTable.h"
+#include "Error_LexicalAnalyzer.h"
+#include "Error_SymbolTable.h"
 
 using namespace std;
 
-class GrammarAnalyzer {
+class Error_GrammarAnalyzer {
 public:
-    explicit GrammarAnalyzer(const string &fin_name, vector<Error> *allErrors);
+    explicit Error_GrammarAnalyzer(const string &fin_name, vector<Error> *allErrors);
 
     void print(const string &fout_name);
 
@@ -28,7 +28,7 @@ private:
 
     int getsym();
 
-    LexicalAnalyzer *ptr_lexicalAnalyzer;
+    Error_LexicalAnalyzer *ptr_lexicalAnalyzer;
 
     vector<string> result;
 
@@ -41,7 +41,7 @@ private:
     // set<string> functionName_without_returnValue;
 
     // Symbol Table
-    SymbolTable symbolTable{};
+    Error_SymbolTable symbolTable{};
 
     void output_current_sym();
 

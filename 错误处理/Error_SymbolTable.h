@@ -1,5 +1,5 @@
-#ifndef PROJECT2__3__SYMBOLTABLE_H
-#define PROJECT2__3__SYMBOLTABLE_H
+#ifndef PROJECT2__3__ERROR_SYMBOLTABLE_H
+#define PROJECT2__3__ERROR_SYMBOLTABLE_H
 
 #include <string>
 #include <utility>
@@ -206,7 +206,7 @@ struct Item {
     }
 };
 
-class SymbolTable {
+class Error_SymbolTable {
 public:
     void pushStack();
 
@@ -219,7 +219,7 @@ public:
 
     void checkFuncVariable(const string &name, const FuncInfo &funcInfo);
 
-    ~SymbolTable();
+    ~Error_SymbolTable();
 
 private:
     vector<vector<Item *> *> table;
@@ -227,4 +227,4 @@ private:
 };
 
 
-#endif //PROJECT2__3__SYMBOLTABLE_H
+#endif //PROJECT2__3__ERROR_SYMBOLTABLE_H
