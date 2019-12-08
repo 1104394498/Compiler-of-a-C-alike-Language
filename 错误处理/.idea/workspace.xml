@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
-    <generated>
-      <config projectName="Project2__3_" targetName="Project2__3_" />
-    </generated>
+    <generated />
   </component>
   <component name="CMakeSettings">
     <configurations>
@@ -12,52 +10,74 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="de302eba-1f59-498c-b12d-fc464e3394a2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../Error_GrammarAnalyzer.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Error_GrammarAnalyzer.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Error_LexicalAnalyzer.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Error_LexicalAnalyzer.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Error_TypeDefine.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../LexicalAnalyzer.h" beforeDir="false" afterPath="$PROJECT_DIR$/../LexicalAnalyzer.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SymbolTable.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../SymbolTable.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SymbolTable.h" beforeDir="false" afterPath="$PROJECT_DIR$/../SymbolTable.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../TypeDefine.h" beforeDir="false" afterPath="$PROJECT_DIR$/../TypeDefine.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cmake-build-debug/CMakeFiles/MIPScode.dir/CXX.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/../cmake-build-debug/CMakeFiles/MIPScode.dir/CXX.includecache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cmake-build-debug/CMakeFiles/MIPScode.dir/DependInfo.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../cmake-build-debug/CMakeFiles/MIPScode.dir/DependInfo.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cmake-build-debug/CMakeFiles/MIPScode.dir/GrammerAnalyzer.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/../cmake-build-debug/CMakeFiles/MIPScode.dir/GrammerAnalyzer.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cmake-build-debug/CMakeFiles/MIPScode.dir/LexicalAnalyzer.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/../cmake-build-debug/CMakeFiles/MIPScode.dir/LexicalAnalyzer.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cmake-build-debug/CMakeFiles/MIPScode.dir/MipsGenerator.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/../cmake-build-debug/CMakeFiles/MIPScode.dir/MipsGenerator.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cmake-build-debug/CMakeFiles/MIPScode.dir/Optimizer.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/../cmake-build-debug/CMakeFiles/MIPScode.dir/Optimizer.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cmake-build-debug/CMakeFiles/MIPScode.dir/SymbolTable.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/../cmake-build-debug/CMakeFiles/MIPScode.dir/SymbolTable.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cmake-build-debug/CMakeFiles/MIPScode.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/../cmake-build-debug/CMakeFiles/MIPScode.dir/build.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cmake-build-debug/CMakeFiles/MIPScode.dir/cmake_clean.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../cmake-build-debug/CMakeFiles/MIPScode.dir/cmake_clean.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cmake-build-debug/CMakeFiles/MIPScode.dir/depend.internal" beforeDir="false" afterPath="$PROJECT_DIR$/../cmake-build-debug/CMakeFiles/MIPScode.dir/depend.internal" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cmake-build-debug/CMakeFiles/MIPScode.dir/depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/../cmake-build-debug/CMakeFiles/MIPScode.dir/depend.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cmake-build-debug/CMakeFiles/MIPScode.dir/link.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../cmake-build-debug/CMakeFiles/MIPScode.dir/link.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cmake-build-debug/CMakeFiles/MIPScode.dir/main.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/../cmake-build-debug/CMakeFiles/MIPScode.dir/main.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cmake-build-debug/CMakeFiles/MIPScode.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/../cmake-build-debug/CMakeFiles/MIPScode.dir/progress.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cmake-build-debug/CMakeFiles/Makefile2" beforeDir="false" afterPath="$PROJECT_DIR$/../cmake-build-debug/CMakeFiles/Makefile2" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cmake-build-debug/CMakeFiles/progress.marks" beforeDir="false" afterPath="$PROJECT_DIR$/../cmake-build-debug/CMakeFiles/progress.marks" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cmake-build-debug/MIPScode" beforeDir="false" afterPath="$PROJECT_DIR$/../cmake-build-debug/MIPScode" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cmake-build-debug/MIPScode.cbp" beforeDir="false" afterPath="$PROJECT_DIR$/../cmake-build-debug/MIPScode.cbp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cmake-build-debug/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/../cmake-build-debug/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cmake-build-debug/error.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../cmake-build-debug/error.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cmake-build-debug/testfile.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../cmake-build-debug/testfile.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../__/GrammerAnalyzer.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../__/GrammerAnalyzer.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../__/LexicalAnalyzer.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../__/LexicalAnalyzer.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../__/MipsGenerator.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../__/MipsGenerator.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../__/Optimizer.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../__/Optimizer.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../__/SymbolTable.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../__/SymbolTable.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../__/TypeDefine.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../__/main.cpp" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../归档.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrammerAnalyzer.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GrammerAnalyzer.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LexicalAnalyzer.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LexicalAnalyzer.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SymbolTable.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SymbolTable.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TypeDefine.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../归档2.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../错误处理.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/错误处理.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error_GrammarAnalyzer.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error_GrammarAnalyzer.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error_LexicalAnalyzer.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error_LexicalAnalyzer.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error_SymbolTable.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error_SymbolTable.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Error_TypeDefine.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.15.3/CMakeCCompiler.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.15.3/CMakeCXXCompiler.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.15.3/CMakeDetermineCompilerABI_C.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.15.3/CMakeDetermineCompilerABI_CXX.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.15.3/CMakeSystem.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.15.3/CompilerIdC/CMakeCCompilerId.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.15.3/CompilerIdC/a.out" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.15.3/CompilerIdCXX/CMakeCXXCompilerId.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.15.3/CompilerIdCXX/a.out" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeDirectoryInformation.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeOutput.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Project2__3_.dir/CXX.includecache" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Project2__3_.dir/DependInfo.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Project2__3_.dir/Error_GrammerAnalyzer.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Project2__3_.dir/Error_LexicalAnalyzer.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Project2__3_.dir/Error_SymbolTable.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Project2__3_.dir/build.make" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Project2__3_.dir/cmake_clean.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Project2__3_.dir/depend.internal" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Project2__3_.dir/depend.make" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Project2__3_.dir/flags.make" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Project2__3_.dir/link.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Project2__3_.dir/main.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Project2__3_.dir/progress.make" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TargetDirectories.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-environment.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-log.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/cmake.check_cache" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/progress.marks" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Makefile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Project2__3_" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Project2__3_.cbp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/cmake_install.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/error.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,7 +87,6 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
@@ -81,13 +100,6 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-  </component>
-  <component name="RunManager">
-    <configuration name="Project2__3_" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Project2__3_" TARGET_NAME="Project2__3_" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Project2__3_" RUN_TARGET_NAME="Project2__3_">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
   </component>
   <component name="ServiceViewManager">
     <option name="viewStates">
@@ -119,21 +131,21 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1638" height="295" key="GridCell.Tab.0.bottom" timestamp="1575776292043">
+    <state width="1638" height="295" key="GridCell.Tab.0.bottom" timestamp="1575778617174">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="295" key="GridCell.Tab.0.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1575776292043" />
-    <state width="1638" height="295" key="GridCell.Tab.0.center" timestamp="1575776292041">
+    <state width="1638" height="295" key="GridCell.Tab.0.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1575778617174" />
+    <state width="1638" height="295" key="GridCell.Tab.0.center" timestamp="1575778617173">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="295" key="GridCell.Tab.0.center/0.0.1680.1050@0.0.1680.1050" timestamp="1575776292041" />
-    <state width="1638" height="295" key="GridCell.Tab.0.left" timestamp="1575776292039">
+    <state width="1638" height="295" key="GridCell.Tab.0.center/0.0.1680.1050@0.0.1680.1050" timestamp="1575778617173" />
+    <state width="1638" height="295" key="GridCell.Tab.0.left" timestamp="1575778617172">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="295" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1575776292039" />
-    <state width="1638" height="295" key="GridCell.Tab.0.right" timestamp="1575776292042">
+    <state width="1638" height="295" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1575778617172" />
+    <state width="1638" height="295" key="GridCell.Tab.0.right" timestamp="1575778617174">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="295" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1575776292042" />
+    <state width="1638" height="295" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1575778617174" />
   </component>
 </project>

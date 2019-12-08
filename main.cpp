@@ -25,8 +25,10 @@ int main() {
         }
 
         fclose(fp_error);
+        /*
         if (!allErrors.empty())
             exit(0);
+        */
     }
 
     allErrors.clear();

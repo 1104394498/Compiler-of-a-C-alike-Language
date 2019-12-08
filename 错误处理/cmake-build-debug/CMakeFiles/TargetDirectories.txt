@@ -1,3 +1,0 @@
-/Users/wsz/Library/Mobile Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/错误处理/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/Users/wsz/Library/Mobile Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/错误处理/cmake-build-debug/CMakeFiles/edit_cache.dir
-/Users/wsz/Library/Mobile Documents/com~apple~CloudDocs/我的文档/大三上/编译课/实验课作业/5. 生成MIPS代码/MIPScode/错误处理/cmake-build-debug/CMakeFiles/Project2__3_.dir
